@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.empathetech.smoke_signal">
    <application
-        android:label="smoke_signal"
+        android:label="Smoke Signal"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
