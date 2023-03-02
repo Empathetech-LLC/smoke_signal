@@ -151,25 +151,11 @@ class _ValueSettingState extends State<ValueSetting> {
 
   // Build the list of widgets to draw based on the value type
   List<Widget> buildList() {
-    List<Widget> edits = [
-      // Title
-      Text(widget.title, style: getTextStyle(subTitleStyle)),
-      Container(height: buttonSpacer),
+    List<Widget> toReturn = [Text(widget.title, style: getTextStyle(subTitleStyle))];
 
-      // Reset button
-      ezIconButton(
-        () {
-          AppUser.preferences.remove(widget.prefsKey);
-          setState(() {
-            currValue = appDefaults[widget.prefsKey];
-          });
-        },
-        () {},
-        Icon(Icons.restore),
-        Text('Reset: ' + appDefaults[widget.prefsKey].toString()),
-      ),
-      Container(height: buttonSpacer),
+    toReturn.addAll(preview());
 
+    toReturn.addAll([
       // Value slider
       Slider(
         value: currValue,
@@ -192,13 +178,25 @@ class _ValueSettingState extends State<ValueSetting> {
           }
         },
       ),
-    ];
+      Container(height: buttonSpacer),
 
-    // Add the preview widgets
-    edits.addAll(preview());
+      // Reset button
+      ezIconButton(
+        () {
+          AppUser.preferences.remove(widget.prefsKey);
+          setState(() {
+            currValue = appDefaults[widget.prefsKey];
+          });
+        },
+        () {},
+        Icon(Icons.restore),
+        Text('Reset: ' + appDefaults[widget.prefsKey].toString()),
+      ),
+      Container(height: buttonSpacer),
+    ]);
 
     // Build time!
-    return edits;
+    return toReturn;
   }
 
   @override
