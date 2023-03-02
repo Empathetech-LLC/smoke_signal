@@ -388,16 +388,15 @@ void editAvatar(BuildContext context) {
                 return;
               }
 
-              // Update firestore and the firebase user config
-              await AppUser.account.updatePhotoURL(_urlController.text.trim());
-              await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
-                {
-                  avatarURLPath: _urlController.text.trim(),
-                },
-              );
-
-              // Close dialog
+              // Save text & close dialog
+              String photoURL = _urlController.text.trim();
               Navigator.of(context).pop();
+
+              // Update firestore and the firebase user config
+              await AppUser.account.updatePhotoURL(photoURL);
+              await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
+                {avatarURLPath: photoURL},
+              );
             },
             () {},
             Text('Submit'),
@@ -467,16 +466,15 @@ void editName(BuildContext context) {
                 return;
               }
 
-              // Update firestore and the firebase user config
-              await AppUser.account.updateDisplayName(_nameController.text.trim());
-              await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
-                {
-                  displayNamePath: _nameController.text.trim(),
-                },
-              );
-
-              // Close dialog
+              // Save text & close dialog
+              String newName = _nameController.text.trim();
               Navigator.of(context).pop();
+
+              // Update firestore and the firebase user config
+              await AppUser.account.updateDisplayName(newName);
+              await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
+                {displayNamePath: newName},
+              );
             },
             () {},
             Icon(Icons.check),
