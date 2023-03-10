@@ -34,16 +34,8 @@ class _SignalSettingsState extends State<SignalSettings> {
           //// Images
 
           ezList(
-            'Images',
-            [
-              // Background
-              ImageSetting(prefsKey: signalsImageKey, message: 'Background'),
-              Container(height: buttonSpacer),
-
-              // Active signal
-              ImageSetting(prefsKey: activeImageKey, message: 'Signal'),
-              Container(height: buttonSpacer),
-            ],
+            'Image',
+            [ImageSetting(prefsKey: signalImageKey, message: 'Signal')],
           ),
 
           //// Colors
@@ -159,7 +151,7 @@ class _SignalSettingsState extends State<SignalSettings> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[signalsImageKey]),
+      buildDecoration(AppUser.prefs[backImageKey]),
 
       // Fallback background color
       Color(AppUser.prefs[signalsBackgroundColorKey]),

@@ -150,10 +150,10 @@ class _ImageSettingState extends State<ImageSetting> {
         children: [
           Text(widget.message, style: getTextStyle(imageSettingStyle)),
           SizedBox(
-            height: widget.prefsKey == activeImageKey
+            height: widget.prefsKey == signalImageKey
                 ? AppUser.prefs[signalCountHeightKey]
                 : 160,
-            width: widget.prefsKey == activeImageKey
+            width: widget.prefsKey == signalImageKey
                 ? AppUser.prefs[signalCountHeightKey]
                 : 90,
             child: buildImage(AppUser.prefs[widget.prefsKey], BoxFit.fill),

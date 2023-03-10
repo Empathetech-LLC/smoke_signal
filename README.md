@@ -58,8 +58,6 @@ None, yet.
 
 [pimen](https://pimen.itch.io/) for making the art for the default active image (Smoke Signal)
 
-[ansimuz](https://ansimuz.itch.io/) for making the art for the "Dusk Mountain" background
-
 [edermunizz](https://edermunizz.itch.io/) for making the art for the "Dark Forest" background
 
 [brullov](https://brullov.itch.io/) for making the art for the "Oak Forest" background

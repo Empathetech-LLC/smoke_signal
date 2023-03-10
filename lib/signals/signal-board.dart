@@ -101,7 +101,7 @@ class _SignalBoardState extends State<SignalBoard> {
       }),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[signalsImageKey]),
+      buildDecoration(AppUser.prefs[backImageKey]),
 
       // Fallback background color
       Color(AppUser.prefs[signalsBackgroundColorKey]),

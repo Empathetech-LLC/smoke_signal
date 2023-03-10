@@ -127,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[appImageKey]),
+      buildDecoration(AppUser.prefs[backImageKey]),
 
       // Fallback background color
       Color(AppUser.prefs[appBackgroundColorKey]),

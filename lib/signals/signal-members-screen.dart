@@ -209,7 +209,7 @@ class _SignalMembersState extends State<SignalMembers> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[signalsImageKey]),
+      buildDecoration(AppUser.prefs[backImageKey]),
 
       // Fallback background color
       Color(AppUser.prefs[signalsBackgroundColorKey]),

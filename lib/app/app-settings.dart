@@ -36,7 +36,7 @@ class _AppSettingsState extends State<AppSettings> {
 
           ezList(
             'Image',
-            [ImageSetting(prefsKey: appImageKey, message: 'Background')],
+            [ImageSetting(prefsKey: backImageKey, message: 'Background')],
           ),
 
           //// Theme settings
@@ -163,7 +163,7 @@ class _AppSettingsState extends State<AppSettings> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[appImageKey]),
+      buildDecoration(AppUser.prefs[backImageKey]),
 
       // Fallback background color
       Color(AppUser.prefs[appBackgroundColorKey]),

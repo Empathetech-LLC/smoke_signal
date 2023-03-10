@@ -67,7 +67,6 @@ bool isAssetImage(String? path) {
     appIconPath,
     noneIconPath,
     darkForestPath,
-    duskMountainPath,
     loadingGifPath,
     smokeSignalPath,
   ];

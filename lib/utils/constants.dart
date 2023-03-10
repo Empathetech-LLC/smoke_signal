@@ -12,7 +12,6 @@ final Map<String, String> credits = {
   noneIconPath: 'https://www.freepik.com/\n\n\'Forbidden\'',
   loadingGifPath: 'https://www.freepik.com/\n\n\'Loading\'',
   smokeSignalPath: 'https://pimen.itch.io/\n\n\'Smoke Effect\'',
-  duskMountainPath: 'https://ansimuz.itch.io/\n\n\'Dusk Mountain\'',
   darkForestPath: 'https://edermunizz.itch.io/\n\n\'Dark Forest\'',
 };
 
@@ -32,7 +31,6 @@ const String createSignalRoute = '/signals/create-signal-screen';
 const String appIconPath = 'assets/app-icon.png';
 const String noneIconPath = 'assets/none.png';
 const String darkForestPath = 'assets/dark-forest.png';
-const String duskMountainPath = 'assets/dusk-mountain.png';
 const String loadingGifPath = 'assets/loading.gif';
 const String smokeSignalPath = 'assets/smoke-signal.gif';
 
@@ -58,13 +56,12 @@ const String themeColorKey = 'themeColor';
 const String themeTextColorKey = 'themeTextColor';
 
 // Base
-const String appImageKey = 'appImage';
+const String backImageKey = 'backImage';
 const String appBackgroundColorKey = 'appBackgroundColor';
 
 // Signals
-const String signalsImageKey = 'signalsImage';
 const String signalsBackgroundColorKey = 'signalsBackgroundColor';
-const String activeImageKey = 'activeImage';
+const String signalImageKey = 'signalImage';
 const String signalSpacingKey = 'signalSpacing';
 const String signalHeightKey = 'signalHeight';
 const String signalCountHeightKey = 'signalCountHeight';
@@ -82,11 +79,10 @@ final Map<String, dynamic> appDefaults = {
   buttonTextColorKey: 0xFF000000,
   themeColorKey: 0xFF141414,
   themeTextColorKey: 0xFFFFFFFF,
-  appImageKey: duskMountainPath,
+  backImageKey: darkForestPath,
   appBackgroundColorKey: 0xE6A520DA,
-  signalsImageKey: darkForestPath,
   signalsBackgroundColorKey: 0xE6A520DA,
-  activeImageKey: smokeSignalPath,
+  signalImageKey: smokeSignalPath,
   signalSpacingKey: 50.0,
   signalHeightKey: 125.0,
   signalCountHeightKey: 75.0,
