@@ -4,6 +4,7 @@ import '../user/user-api.dart';
 import '../utils/text.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class FontFamilySetting extends StatefulWidget {
   const FontFamilySetting({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
                     Navigator.of(context).pop();
                   },
                   () {},
-                  Text(
+                  PlatformText(
                     font,
                     textAlign: TextAlign.center,
                     style: googleStyleAlias(font),
@@ -76,7 +77,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
         ezButton(
           chooseGoogleFont,
           () {},
-          Text(
+          PlatformText(
             'Choose font:\n$currFontFamily',
             textAlign: TextAlign.center,
             maxLines: 2,
@@ -98,7 +99,7 @@ class _FontFamilySettingState extends State<FontFamilySetting> {
             });
           },
           () {},
-          Text(
+          PlatformText(
             'Reset font\n($defaultFontFamily)',
             textAlign: TextAlign.center,
             maxLines: 2,

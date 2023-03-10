@@ -5,6 +5,7 @@ import '../utils/helpers.dart';
 import '../user/user-api.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 //// General styling
 
@@ -49,10 +50,10 @@ ButtonStyle circleButton() {
 
 // Standard text box
 // Non-interactive and unstyled, wrap in something else for style
-Widget paddedText(String text, String textStyle, [TextAlign? alignment]) {
+Widget paddedPlatformText(String text, String textStyle, [TextAlign? alignment]) {
   return Container(
     padding: EdgeInsets.all(padding),
-    child: Text(
+    child: PlatformText(
       text,
       style: getTextStyle(textStyle),
       textAlign: alignment,
@@ -64,7 +65,7 @@ Widget paddedText(String text, String textStyle, [TextAlign? alignment]) {
 Widget titleCard(String title, [String? style]) {
   return Card(
     color: Color(AppUser.prefs[themeColorKey]),
-    child: paddedText(title, style ?? titleStyle),
+    child: paddedPlatformText(title, style ?? titleStyle),
   );
 }
 
@@ -85,11 +86,11 @@ Widget loadingMessage(BuildContext context) {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text('Loading ', style: getTextStyle(titleStyle)),
+          PlatformText('Loading ', style: getTextStyle(titleStyle)),
           elipsis,
-          Text(' ', style: getTextStyle(titleStyle)),
+          PlatformText(' ', style: getTextStyle(titleStyle)),
           elipsis,
-          Text(' ', style: getTextStyle(titleStyle)),
+          PlatformText(' ', style: getTextStyle(titleStyle)),
           elipsis,
         ],
       ),
@@ -114,12 +115,12 @@ Widget changesWarning(BuildContext context) {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Icon(Icons.warning, color: Colors.amber),
-              Text('WARNING', style: getTextStyle(dialogTitleStyle)),
+              PlatformText('WARNING', style: getTextStyle(dialogTitleStyle)),
               Icon(Icons.warning, color: Colors.amber),
             ],
           ),
           Container(height: padding),
-          Text(
+          PlatformText(
             'Changes won\'t take effect until restart',
             style: getTextStyle(dialogContentStyle),
             textAlign: TextAlign.center,
@@ -163,7 +164,7 @@ void ezDialog(BuildContext context, String? title, List<Widget> build) {
     context: context,
     builder: (context) => SimpleDialog(
       insetPadding: EdgeInsets.all(padding),
-      title: title == null ? null : Text(title, textAlign: TextAlign.center),
+      title: title == null ? null : PlatformText(title, textAlign: TextAlign.center),
       titlePadding: title == null
           ? EdgeInsets.zero
           : EdgeInsets.only(
@@ -242,7 +243,7 @@ Widget ezList(String title, List<Widget> body, [bool open = false]) {
     backgroundColor: themeColor,
     textColor: themeTextColor,
     iconColor: themeTextColor,
-    title: Text(title, style: getTextStyle(titleStyle)),
+    title: PlatformText(title, style: getTextStyle(titleStyle)),
     children: body,
     initiallyExpanded: open,
     onExpansionChanged: (bool open) => AppUser.focus.primaryFocus?.unfocus(),

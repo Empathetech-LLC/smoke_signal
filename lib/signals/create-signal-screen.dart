@@ -10,6 +10,7 @@ import '../signals/signal-api.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class CreateSignalScreen extends StatefulWidget {
   const CreateSignalScreen({Key? key}) : super(key: key);
@@ -86,7 +87,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 ),
 
                 // Display name
-                paddedText(profile.name, dialogTitleStyle, TextAlign.start),
+                paddedPlatformText(profile.name, dialogTitleStyle, TextAlign.start),
               ],
             ),
             Container(height: dialogSpacer),
@@ -160,7 +161,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
+              PlatformText(
                 'Currently active?',
                 style: getTextStyle(dialogTitleStyle),
               ),
@@ -237,7 +238,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             },
             () {},
             Icon(Icons.upload),
-            Text('Done'),
+            PlatformText('Done'),
           ),
           Container(height: buttonSpacer),
         ],

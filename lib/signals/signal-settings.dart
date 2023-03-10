@@ -9,6 +9,7 @@ import '../user/user-api.dart';
 import '../utils/constants.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SignalSettings extends StatefulWidget {
   const SignalSettings({Key? key}) : super(key: key);
@@ -44,7 +45,7 @@ class _SignalSettingsState extends State<SignalSettings> {
             'Color',
             [
               // User hint: hold the buttons to reset the color
-              Text('Hold to reset', style: getTextStyle(dialogContentStyle)),
+              PlatformText('Hold to reset', style: getTextStyle(dialogContentStyle)),
               Container(height: padding),
 
               // Background color
@@ -91,7 +92,7 @@ class _SignalSettingsState extends State<SignalSettings> {
                             },
                             () {},
                             Icon(Icons.check),
-                            Text('Yes'),
+                            PlatformText('Yes'),
                           ),
 
                           // No
@@ -99,14 +100,14 @@ class _SignalSettingsState extends State<SignalSettings> {
                             () => Navigator.of(context).pop(),
                             () {},
                             Icon(Icons.cancel),
-                            Text('No'),
+                            PlatformText('No'),
                           ),
                         ],
                       ),
                     ],
                   );
                 },
-                child: Text('Reset all', style: getTextStyle(subTitleStyle)),
+                child: PlatformText('Reset all', style: getTextStyle(subTitleStyle)),
               ),
               Container(height: buttonSpacer),
             ],

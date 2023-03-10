@@ -6,6 +6,7 @@ import '../utils/storage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ImageSetting extends StatefulWidget {
   const ImageSetting({
@@ -64,7 +65,7 @@ class _ImageSettingState extends State<ImageSetting> {
               },
               () {},
               Icon(Icons.file_open),
-              Text('File'),
+              PlatformText('File'),
             ),
             Container(height: buttonSpacer),
 
@@ -86,7 +87,7 @@ class _ImageSettingState extends State<ImageSetting> {
               },
               () {},
               Icon(Icons.camera_alt),
-              Text('Camera'),
+              PlatformText('Camera'),
             ),
             Container(height: buttonSpacer),
 
@@ -101,7 +102,7 @@ class _ImageSettingState extends State<ImageSetting> {
               },
               () {},
               Icon(Icons.restore),
-              Text('Reset'),
+              PlatformText('Reset'),
             ),
             Container(height: buttonSpacer),
 
@@ -116,7 +117,7 @@ class _ImageSettingState extends State<ImageSetting> {
               },
               () {},
               Icon(Icons.clear),
-              Text('Clear'),
+              PlatformText('Clear'),
             ),
             Container(height: buttonSpacer),
           ],
@@ -148,7 +149,7 @@ class _ImageSettingState extends State<ImageSetting> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(widget.message, style: getTextStyle(imageSettingStyle)),
+          PlatformText(widget.message, style: getTextStyle(imageSettingStyle)),
           SizedBox(
             height: widget.prefsKey == signalImageKey
                 ? AppUser.prefs[signalCountHeightKey]

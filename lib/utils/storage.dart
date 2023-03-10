@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 ////// Colors //////
 
@@ -39,7 +40,7 @@ void colorPicker(
             apply,
             () {},
             Icon(Icons.check),
-            Text('Done'),
+            PlatformText('Done'),
           ),
           Container(height: dialogSpacer),
 
@@ -48,7 +49,7 @@ void colorPicker(
             cancel,
             () {},
             Icon(Icons.cancel),
-            Text('Cancel'),
+            PlatformText('Cancel'),
           ),
           Container(height: dialogSpacer),
         ],

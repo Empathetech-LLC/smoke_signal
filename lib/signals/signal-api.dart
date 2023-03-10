@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 ////// These (can) cost money!! //////
 
@@ -207,7 +208,7 @@ void updateMessage(BuildContext context, String title) {
             },
             () {},
             Icon(Icons.check),
-            Text('Submit'),
+            PlatformText('Submit'),
           ),
           Container(height: AppUser.prefs[dialogSpacingKey]),
 
@@ -216,7 +217,7 @@ void updateMessage(BuildContext context, String title) {
             () => Navigator.of(context).pop(),
             () {},
             Icon(Icons.cancel),
-            Text('Cancel'),
+            PlatformText('Cancel'),
           ),
         ],
       )
@@ -279,7 +280,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
               ),
 
               // Display name
-              paddedText(profile.name, dialogTitleStyle, TextAlign.start),
+              paddedPlatformText(profile.name, dialogTitleStyle, TextAlign.start),
             ],
           ),
         ),
@@ -313,7 +314,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
                 default:
                   if (snapshot.hasError) {
                     return Center(
-                      child: Text(
+                      child: PlatformText(
                         snapshot.error.toString(),
                         style: getTextStyle(errorStyle),
                       ),
@@ -330,7 +331,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
             () => Navigator.of(context).pop(),
             () {},
             Icon(Icons.cancel),
-            Text('Cancel'),
+            PlatformText('Cancel'),
           ),
         ],
       ),
@@ -366,7 +367,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
             },
             () {},
             Icon(Icons.check),
-            Text('Yes'),
+            PlatformText('Yes'),
           ),
           Container(height: AppUser.prefs[dialogSpacingKey]),
 
@@ -375,7 +376,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
             () => Navigator.of(context).pop(),
             () {},
             Icon(Icons.cancel),
-            Text('No'),
+            PlatformText('No'),
           ),
         ],
       ),
@@ -415,7 +416,7 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
             },
             () {},
             Icon(Icons.check),
-            Text('Yes'),
+            PlatformText('Yes'),
           ),
           Container(height: AppUser.prefs[dialogSpacingKey]),
 
@@ -424,7 +425,7 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
             () => Navigator.of(context).pop(),
             () {},
             Icon(Icons.cancel),
-            Text('No'),
+            PlatformText('No'),
           ),
         ],
       ),

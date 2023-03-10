@@ -7,6 +7,7 @@ import '../utils/scaffolds.dart';
 import '../utils/text.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ResetScreen extends StatefulWidget {
   const ResetScreen({super.key});
@@ -91,7 +92,7 @@ class _ResetScreenState extends State<ResetScreen> {
               },
               () {},
               Icon(Icons.email),
-              Text('Send link'),
+              PlatformText('Send link'),
             ),
             Container(height: buttonSpacer),
           ],

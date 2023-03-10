@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class Signal extends StatefulWidget {
   const Signal({
@@ -102,7 +103,7 @@ class _SignalState extends State<Signal> {
               },
               () {},
               Icon(Icons.file_open),
-              Text('File'),
+              PlatformText('File'),
             ),
             Container(height: dialogSpacer),
 
@@ -114,7 +115,7 @@ class _SignalState extends State<Signal> {
               },
               () {},
               Icon(Icons.camera_alt),
-              Text('Camera'),
+              PlatformText('Camera'),
             ),
             Container(height: dialogSpacer),
 
@@ -139,7 +140,7 @@ class _SignalState extends State<Signal> {
                 Navigator.of(context).pop();
               },
               () {},
-              Text('Reset'),
+              PlatformText('Reset'),
             ),
             Container(height: dialogSpacer),
           ],
@@ -193,16 +194,16 @@ class _SignalState extends State<Signal> {
                 },
               ),
               () {},
-              Text('Members'),
+              PlatformText('Members'),
             ),
             Container(height: dialogSpacer),
 
             // Set icon
-            ezButton(setIcon, () {}, Text('Set icon')),
+            ezButton(setIcon, () {}, PlatformText('Set icon')),
             Container(height: dialogSpacer),
 
             // Show/hide icon
-            ezButton(toggleIcon, () {}, Text('Toggle icon')),
+            ezButton(toggleIcon, () {}, PlatformText('Toggle icon')),
             Container(height: dialogSpacer),
 
             // Owner: Reset count, update message, transfer signal, or delete signal
@@ -218,13 +219,13 @@ class _SignalState extends State<Signal> {
                           Navigator.of(context).pop();
                         },
                         () {},
-                        Text('Reset signal'),
+                        PlatformText('Reset signal'),
                       ),
                       Container(height: dialogSpacer),
                       ezButton(
                         () => updateMessage(context, signalTitle),
                         () {},
-                        Text('Update message'),
+                        PlatformText('Update message'),
                       ),
                       Container(height: dialogSpacer),
                       ezButton(
@@ -234,7 +235,7 @@ class _SignalState extends State<Signal> {
                           widget.members,
                         ),
                         () {},
-                        Text('Transfer signal'),
+                        PlatformText('Transfer signal'),
                       ),
                       Container(height: dialogSpacer),
                       ezButton(
@@ -244,7 +245,7 @@ class _SignalState extends State<Signal> {
                           [showIconPref, iconPathPref],
                         ),
                         () {},
-                        Text('Delete signal'),
+                        PlatformText('Delete signal'),
                       ),
                       Container(height: dialogSpacer),
                     ]
@@ -256,7 +257,7 @@ class _SignalState extends State<Signal> {
                           [showIconPref, iconPathPref],
                         ),
                         () {},
-                        Text('Leave signal'),
+                        PlatformText('Leave signal'),
                       ),
                       Container(height: dialogSpacer),
                     ],
@@ -320,7 +321,7 @@ class _SignalState extends State<Signal> {
         widget.message,
       ),
       showEdits,
-      Text(
+      PlatformText(
         signalTitle,
         style: joined ? getTextStyle(joinedStyle) : getTextStyle(watchingStyle),
         textAlign: TextAlign.center,
@@ -359,7 +360,7 @@ class _SignalState extends State<Signal> {
               child: Card(
                 color: joined ? joinedColor : watchingColor,
                 child: Center(
-                  child: Text(
+                  child: PlatformText(
                     signalTitle,
                     style:
                         joined ? getTextStyle(joinedStyle) : getTextStyle(watchingStyle),
@@ -399,7 +400,7 @@ class _SignalState extends State<Signal> {
                     ? [
                         // Show the current count surrounded by smoke signals
                         buildImage(smokeSignalPath),
-                        Text(
+                        PlatformText(
                           widget.activeMembers.length.toString(),
                           style: getTextStyle(joinedStyle),
                         ),
@@ -407,7 +408,7 @@ class _SignalState extends State<Signal> {
                       ]
                     : [
                         // Only show the current count
-                        Text(
+                        PlatformText(
                           widget.activeMembers.length.toString(),
                           style: getTextStyle(watchingStyle),
                         ),
@@ -431,7 +432,7 @@ class _SignalState extends State<Signal> {
           ezButton(
             () {},
             () {},
-            Text(
+            PlatformText(
               'Join:\n$signalTitle?',
               style: getTextStyle(watchingStyle),
               textAlign: TextAlign.center,
@@ -455,7 +456,7 @@ class _SignalState extends State<Signal> {
                   },
                   () {},
                   Icon(Icons.check),
-                  Text('Yes'),
+                  PlatformText('Yes'),
                 ),
 
                 // No
@@ -466,7 +467,7 @@ class _SignalState extends State<Signal> {
                   },
                   () {},
                   Icon(Icons.cancel),
-                  Text('No'),
+                  PlatformText('No'),
                 ),
               ],
             ),

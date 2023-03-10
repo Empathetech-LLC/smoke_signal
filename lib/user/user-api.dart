@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 ////// Wrapper classes //////
 
@@ -157,7 +158,7 @@ void logout(BuildContext context) {
             },
             () {},
             Icon(Icons.check),
-            Text('Yes'),
+            PlatformText('Yes'),
           ),
           Container(height: dialogSpacer),
 
@@ -166,7 +167,7 @@ void logout(BuildContext context) {
             () => Navigator.of(context).pop(),
             () {},
             Icon(Icons.cancel),
-            Text('No'),
+            PlatformText('No'),
           ),
           Container(height: dialogSpacer),
         ],
@@ -256,7 +257,7 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
           onLongPress: () => ezDialog(
             context,
             null,
-            [paddedText(profile.name, dialogTitleStyle, TextAlign.center)],
+            [paddedPlatformText(profile.name, dialogTitleStyle, TextAlign.center)],
           ),
           child: CircleAvatar(
             backgroundImage: AssetImage(loadingGifPath),
@@ -316,7 +317,7 @@ Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
           ),
 
           // Display name
-          paddedText(profile.name, dialogTitleStyle, TextAlign.start),
+          paddedPlatformText(profile.name, dialogTitleStyle, TextAlign.start),
         ],
       ),
       Container(height: dialogSpacer),
@@ -363,7 +364,7 @@ void editAvatar(BuildContext context) {
       Container(height: dialogSpacer),
 
       // Explanation for not using image files
-      Text(
+      PlatformText(
         'Images are expensive to store!\nPaste an image link and that will be used',
         maxLines: 2,
         style: getTextStyle(dialogContentStyle),
@@ -399,7 +400,7 @@ void editAvatar(BuildContext context) {
               );
             },
             () {},
-            Text('Submit'),
+            PlatformText('Submit'),
           ),
 
           // Cancel
@@ -407,7 +408,7 @@ void editAvatar(BuildContext context) {
             () => Navigator.of(context).pop(),
             () {},
             Icon(Icons.cancel),
-            Text('Cancel'),
+            PlatformText('Cancel'),
           ),
         ],
       ),
@@ -478,7 +479,7 @@ void editName(BuildContext context) {
             },
             () {},
             Icon(Icons.check),
-            Text('Submit'),
+            PlatformText('Submit'),
           ),
 
           // Cancel
@@ -486,7 +487,7 @@ void editName(BuildContext context) {
             () => Navigator.of(context).pop(),
             () {},
             Icon(Icons.cancel),
-            Text('Cancel'),
+            PlatformText('Cancel'),
           )
         ],
       ),

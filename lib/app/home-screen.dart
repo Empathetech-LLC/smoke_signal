@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -82,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       () => Navigator.of(context).pushNamed(loginRoute),
                       () {},
                       Icon(Icons.email),
-                      Text('Login'),
+                      PlatformText('Login'),
                     ),
                     Container(height: buttonSpacer),
 
@@ -91,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       () => Navigator.of(context).pushNamed(signupRoute),
                       () {},
                       Icon(Icons.email),
-                      Text('Sign up'),
+                      PlatformText('Sign up'),
                     ),
                   ],
                 ),

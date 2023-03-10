@@ -6,6 +6,7 @@ import '../user/user-api.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 //// Full screens
 
@@ -16,7 +17,7 @@ Widget standardScaffold(BuildContext context, String title, Widget body,
   return GestureDetector(
     onTap: () => AppUser.focus.primaryFocus?.unfocus(),
     child: Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: PlatformText(title)),
       body: Container(
         width: screenWidth(context),
         height: screenHeight(context),
@@ -46,7 +47,7 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
   return GestureDetector(
     onTap: () => AppUser.focus.primaryFocus?.unfocus(),
     child: Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: PlatformText(title)),
       body: Container(
         width: screenWidth(context),
         height: screenHeight(context),
@@ -95,7 +96,7 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
                       ),
 
                       // Profile name
-                      Text(
+                      PlatformText(
                         AppUser.account.displayName ?? defaultDisplayName,
                         style: getTextStyle(dialogTitleStyle),
                       ),
@@ -134,7 +135,7 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
               () => Navigator.of(context).popAndPushNamed(createSignalRoute),
               () {},
               Icon(Icons.add),
-              Text('New'),
+              PlatformText('New'),
             ),
             Container(height: buttonSpacer),
 
@@ -146,7 +147,7 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
               ),
               () {},
               Icon(Icons.settings),
-              Text('Settings'),
+              PlatformText('Settings'),
             ),
             Container(height: buttonSpacer),
 
@@ -156,7 +157,7 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
                 context,
                 'Input rules',
                 [
-                  Text(
+                  PlatformText(
                     validatorRule,
                     style: getTextStyle(dialogContentStyle),
                     textAlign: TextAlign.center,
@@ -164,7 +165,7 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
                 ],
               ),
               () {},
-              Text('Input rules'),
+              PlatformText('Input rules'),
             ),
             Container(height: buttonSpacer),
           ],
@@ -183,7 +184,7 @@ Widget navScaffold(BuildContext context, String title, Widget body, Drawer? hamb
   return GestureDetector(
     onTap: () => AppUser.focus.primaryFocus?.unfocus(),
     child: Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: PlatformText(title)),
       body: body,
       endDrawer: hamburger,
       bottomNavigationBar: navBar,
@@ -238,7 +239,7 @@ Drawer settingsDrawer(BuildContext context) {
           ),
           () {},
           Icon(Icons.edit),
-          Text('Settings'),
+          PlatformText('Settings'),
         ),
         Container(height: buttonSpacer),
 
@@ -248,7 +249,7 @@ Drawer settingsDrawer(BuildContext context) {
             context,
             'Input rules',
             [
-              Text(
+              PlatformText(
                 validatorRule,
                 style: getTextStyle(dialogContentStyle),
                 textAlign: TextAlign.center,
@@ -256,7 +257,7 @@ Drawer settingsDrawer(BuildContext context) {
             ],
           ),
           () {},
-          Text('Input rules'),
+          PlatformText('Input rules'),
         ),
         Container(height: buttonSpacer),
       ],

@@ -7,6 +7,7 @@ import '../utils/text.dart';
 import '../utils/scaffolds.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -120,7 +121,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 );
               },
               () {},
-              Text('Sign up'),
+              PlatformText('Sign up'),
             ),
           ],
         ),

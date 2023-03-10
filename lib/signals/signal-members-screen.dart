@@ -9,6 +9,7 @@ import '../utils/text.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SignalMemberScreen extends StatelessWidget {
   const SignalMemberScreen({super.key});
@@ -107,7 +108,7 @@ class _SignalMembersState extends State<SignalMembers> {
                 ),
 
                 // Display name
-                paddedText(profile.name, dialogTitleStyle, TextAlign.start),
+                paddedPlatformText(profile.name, dialogTitleStyle, TextAlign.start),
               ],
             ),
             Container(height: dialogSpacer),
@@ -124,7 +125,7 @@ class _SignalMembersState extends State<SignalMembers> {
             Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
           },
           () {},
-          Text('Send requests'),
+          PlatformText('Send requests'),
         ),
         Container(height: dialogSpacer),
       ],
@@ -156,12 +157,12 @@ class _SignalMembersState extends State<SignalMembers> {
     return ezScrollView(
       [
         // Available members - show all pictures
-        paddedText('Available', titleStyle),
+        paddedPlatformText('Available', titleStyle),
         showUserPics(context, memberProfiles),
         Container(height: buttonSpacer),
 
         // Active members - show all pictures
-        paddedText('Active', titleStyle),
+        paddedPlatformText('Active', titleStyle),
         showUserPics(context, activeProfiles),
         Container(height: buttonSpacer),
 
@@ -196,7 +197,7 @@ class _SignalMembersState extends State<SignalMembers> {
             default:
               if (snapshot.hasError) {
                 return Center(
-                  child: Text(
+                  child: PlatformText(
                     snapshot.error.toString(),
                     style: getTextStyle(errorStyle),
                   ),

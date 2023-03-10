@@ -6,6 +6,7 @@ import '../user/user-api.dart';
 import '../utils/text.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ColorSetting extends StatefulWidget {
   const ColorSetting({
@@ -105,7 +106,7 @@ class _ColorSettingState extends State<ColorSetting> {
                   },
                   () {},
                   Icon(Icons.check),
-                  Text('Yes'),
+                  PlatformText('Yes'),
                 ),
 
                 // No
@@ -113,7 +114,7 @@ class _ColorSettingState extends State<ColorSetting> {
                   () => Navigator.of(context).pop(),
                   () {},
                   Icon(Icons.cancel),
-                  Text('No'),
+                  PlatformText('No'),
                 ),
               ],
             ),
@@ -138,7 +139,7 @@ class _ColorSettingState extends State<ColorSetting> {
             padding: EdgeInsets.all(padding),
           ),
           onPressed: () {},
-          child: Text(
+          child: PlatformText(
             widget.message,
             style: getTextStyle(colorSettingStyle),
             textAlign: TextAlign.center,
@@ -157,7 +158,7 @@ class _ColorSettingState extends State<ColorSetting> {
           onLongPress: reset,
           child: Icon(
             Icons.edit,
-            color: getContrastText(currColor),
+            color: getContrastPlatformText(currColor),
             size: 37.5,
           ),
         ),

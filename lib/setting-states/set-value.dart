@@ -5,6 +5,7 @@ import '../utils/helpers.dart';
 import '../user/user-api.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ValueSetting extends StatefulWidget {
   const ValueSetting({
@@ -45,7 +46,7 @@ class _ValueSettingState extends State<ValueSetting> {
           ezButton(
             () {},
             () {},
-            Text(
+            PlatformText(
               'Preview: $currValue',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: currValue),
@@ -61,9 +62,9 @@ class _ValueSettingState extends State<ValueSetting> {
           ezCenterScroll(
             [
               SizedBox(height: currValue),
-              ezButton(() {}, () {}, Text('Preview $currValue')),
+              ezButton(() {}, () {}, PlatformText('Preview $currValue')),
               SizedBox(height: currValue),
-              ezButton(() {}, () {}, Text('Preview $currValue')),
+              ezButton(() {}, () {}, PlatformText('Preview $currValue')),
               SizedBox(height: currValue),
             ],
           ),
@@ -83,18 +84,18 @@ class _ValueSettingState extends State<ValueSetting> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     // Button 1
-                    ezButton(() {}, () {}, Text('Preview: $currValue')),
+                    ezButton(() {}, () {}, PlatformText('Preview: $currValue')),
                     Container(height: currValue),
 
                     // Button 2
-                    ezButton(() {}, () {}, Text('Preview: $currValue')),
+                    ezButton(() {}, () {}, PlatformText('Preview: $currValue')),
                     Container(height: currValue),
                   ],
                 ),
               ],
             ),
             () {},
-            Text('Press me'),
+            PlatformText('Press me'),
           ),
           Container(height: buttonSpacer),
         ];
@@ -106,7 +107,7 @@ class _ValueSettingState extends State<ValueSetting> {
           ezButton(
             () {},
             () {},
-            Text(
+            PlatformText(
               'Preview: $currValue',
               style: getTextStyle(watchingStyle),
               textAlign: TextAlign.center,
@@ -128,7 +129,7 @@ class _ValueSettingState extends State<ValueSetting> {
           ezButton(
             () {},
             () {},
-            Text(
+            PlatformText(
               'Preview: $currValue',
               style: getTextStyle(watchingStyle),
               textAlign: TextAlign.center,
@@ -151,7 +152,9 @@ class _ValueSettingState extends State<ValueSetting> {
 
   // Build the list of widgets to draw based on the value type
   List<Widget> buildList() {
-    List<Widget> toReturn = [Text(widget.title, style: getTextStyle(subTitleStyle))];
+    List<Widget> toReturn = [
+      PlatformText(widget.title, style: getTextStyle(subTitleStyle))
+    ];
 
     toReturn.addAll(preview());
 
@@ -190,7 +193,7 @@ class _ValueSettingState extends State<ValueSetting> {
         },
         () {},
         Icon(Icons.restore),
-        Text('Reset: ' + appDefaults[widget.prefsKey].toString()),
+        PlatformText('Reset: ' + appDefaults[widget.prefsKey].toString()),
       ),
       Container(height: buttonSpacer),
     ]);

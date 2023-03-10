@@ -7,6 +7,7 @@ import '../utils/constants.dart';
 import '../utils/text.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -103,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // Forgot password option
             GestureDetector(
               onTap: () => Navigator.of(context).pushNamed(resetPasswordRoute),
-              child: Text(
+              child: PlatformText(
                 'Forgot your password?',
                 style: TextStyle(
                   color: contents.color,
@@ -134,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               },
               () {},
-              Text('Login'),
+              PlatformText('Login'),
             ),
           ],
         ),

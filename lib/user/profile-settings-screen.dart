@@ -7,6 +7,7 @@ import '../user/user-api.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ProfileSettingsScreen extends StatefulWidget {
   const ProfileSettingsScreen({super.key});
@@ -54,13 +55,13 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               },
               () {},
               Icon(Icons.camera),
-              Text('New pic'),
+              PlatformText('New pic'),
             ),
 
             Container(height: 1.5 * buttonSpacer),
 
             // Display name
-            Text(
+            PlatformText(
               AppUser.account.displayName ?? defaultDisplayName,
               style: getTextStyle(titleStyle),
             ),
@@ -74,7 +75,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               },
               () {},
               Icon(Icons.draw),
-              Text('New name'),
+              PlatformText('New name'),
             ),
 
             Container(height: buttonSpacer),

@@ -4,6 +4,7 @@ import '../utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 // Get screen width
 double screenWidth(BuildContext context) {
@@ -25,7 +26,7 @@ Color invertColor(Color toInvert) {
 }
 
 // Returns whether text with a background of the passed color should be black or white
-Color getContrastText(Color background) {
+Color getContrastPlatformText(Color background) {
   final r = background.red;
   final g = background.green;
   final b = background.blue;
@@ -73,7 +74,7 @@ void popNLog(BuildContext context, String message, [int seconds = 3]) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       duration: Duration(seconds: seconds),
-      content: Text(
+      content: PlatformText(
         message,
         textAlign: TextAlign.center,
         style: getTextStyle(dialogContentStyle),
