@@ -34,6 +34,7 @@ dependencies:
   email_validator: ^2.1.17
   flutter_local_notifications: ^13.0.0
   cached_network_image: ^3.2.3
+  flutter_platform_widgets: ^3.0.0
 
 dev_dependencies:
   flutter_test:
