@@ -136,49 +136,51 @@ Widget changesWarning(BuildContext context) {
 // Returns an standard elevated button wrapped in a container
 Widget ezButton(void Function() action, void Function() longAction, Widget body,
     [ButtonStyle? buttonStyle]) {
-  return ElevatedButton(
-    style: buttonStyle == null ? defaultButton() : buttonStyle,
-    onPressed: action,
+  return GestureDetector(
+    child: PlatformElevatedButton(
+      material: (_, __) => MaterialElevatedButtonData(
+        style: buttonStyle == null ? defaultButton() : buttonStyle,
+      ),
+      onPressed: action,
+      child: body,
+    ),
     onLongPress: longAction,
-    child: body,
   );
 }
 
 // Ditto but with an icon button
 Widget ezIconButton(
-    void Function() action, void Function() longAction, Icon icon, Widget body,
+    void Function() action, void Function() longAction, Icon mIcon, cIcon, Widget body,
     [ButtonStyle? buttonStyle]) {
-  return ElevatedButton.icon(
-    style: buttonStyle == null ? defaultButton() : buttonStyle,
-    onPressed: action,
+  return GestureDetector(
+    child: PlatformIconButton(
+      material: (_, __) => MaterialIconButtonData(
+        style: buttonStyle == null ? defaultButton() : buttonStyle,
+      ),
+      onPressed: action,
+      materialIcon: mIcon,
+      cupertinoIcon: cIcon,
+      label: body,
+    ),
     onLongPress: longAction,
-    icon: icon,
-    label: body,
   );
 }
 
 // Saves time on standardizing the dialog's padding
 void ezDialog(BuildContext context, String? title, List<Widget> build) {
   double dialogSpacer = AppUser.prefs[dialogSpacingKey];
-  showDialog(
+  showPlatformDialog(
     context: context,
-    builder: (context) => SimpleDialog(
-      insetPadding: EdgeInsets.all(padding),
-      title: title == null ? null : PlatformText(title, textAlign: TextAlign.center),
-      titlePadding: title == null
-          ? EdgeInsets.zero
-          : EdgeInsets.only(
-              top: dialogSpacer,
-              left: padding,
-              right: padding,
-            ),
-      contentPadding: EdgeInsets.only(
-        top: dialogSpacer,
-        bottom: dialogSpacer,
-        left: padding,
-        right: padding,
+    builder: (context) => PlatformAlertDialog(
+      material: (_, __) => MaterialAlertDialogData(
+        insetPadding: EdgeInsets.all(padding),
+        titlePadding: title == null
+            ? EdgeInsets.zero
+            : EdgeInsets.only(top: dialogSpacer, left: padding, right: padding),
+        contentPadding: EdgeInsets.symmetric(vertical: dialogSpacer, horizontal: padding),
       ),
-      children: build,
+      title: title == null ? null : PlatformText(title, textAlign: TextAlign.center),
+      actions: build,
     ),
   );
 }
