@@ -50,7 +50,7 @@ ButtonStyle circleButton() {
 
 // Standard text box
 // Non-interactive and unstyled, wrap in something else for style
-Widget paddedPlatformText(String text, String textStyle, [TextAlign? alignment]) {
+Widget paddedText(String text, String textStyle, [TextAlign? alignment]) {
   return Container(
     padding: EdgeInsets.all(padding),
     child: PlatformText(
@@ -65,7 +65,7 @@ Widget paddedPlatformText(String text, String textStyle, [TextAlign? alignment])
 Widget titleCard(String title, [String? style]) {
   return Card(
     color: Color(AppUser.prefs[themeColorKey]),
-    child: paddedPlatformText(title, style ?? titleStyle),
+    child: paddedText(title, style ?? titleStyle),
   );
 }
 

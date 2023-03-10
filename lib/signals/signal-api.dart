@@ -280,7 +280,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
               ),
 
               // Display name
-              paddedPlatformText(profile.name, dialogTitleStyle, TextAlign.start),
+              paddedText(profile.name, dialogTitleStyle, TextAlign.start),
             ],
           ),
         ),

@@ -108,7 +108,7 @@ class _SignalMembersState extends State<SignalMembers> {
                 ),
 
                 // Display name
-                paddedPlatformText(profile.name, dialogTitleStyle, TextAlign.start),
+                paddedText(profile.name, dialogTitleStyle, TextAlign.start),
               ],
             ),
             Container(height: dialogSpacer),
@@ -157,12 +157,12 @@ class _SignalMembersState extends State<SignalMembers> {
     return ezScrollView(
       [
         // Available members - show all pictures
-        paddedPlatformText('Available', titleStyle),
+        paddedText('Available', titleStyle),
         showUserPics(context, memberProfiles),
         Container(height: buttonSpacer),
 
         // Active members - show all pictures
-        paddedPlatformText('Active', titleStyle),
+        paddedText('Active', titleStyle),
         showUserPics(context, activeProfiles),
         Container(height: buttonSpacer),
 

@@ -87,7 +87,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 ),
 
                 // Display name
-                paddedPlatformText(profile.name, dialogTitleStyle, TextAlign.start),
+                paddedText(profile.name, dialogTitleStyle, TextAlign.start),
               ],
             ),
             Container(height: dialogSpacer),

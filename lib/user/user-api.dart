@@ -257,7 +257,7 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
           onLongPress: () => ezDialog(
             context,
             null,
-            [paddedPlatformText(profile.name, dialogTitleStyle, TextAlign.center)],
+            [paddedText(profile.name, dialogTitleStyle, TextAlign.center)],
           ),
           child: CircleAvatar(
             backgroundImage: AssetImage(loadingGifPath),
@@ -317,7 +317,7 @@ Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
           ),
 
           // Display name
-          paddedPlatformText(profile.name, dialogTitleStyle, TextAlign.start),
+          paddedText(profile.name, dialogTitleStyle, TextAlign.start),
         ],
       ),
       Container(height: dialogSpacer),
