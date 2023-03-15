@@ -1,11 +1,10 @@
-import '../utils/storage.dart';
-import '../utils/scaffolds.dart';
-import '../utils/custom-widgets.dart';
 import '../utils/constants.dart';
 import '../utils/helpers.dart';
-import '../utils/text.dart';
+import '../utils/validate.dart';
 import '../user/user-api.dart';
 import '../signals/signal-api.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -40,12 +39,12 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
   late TextEditingController _messageController = TextEditingController();
 
   // Gather theme data
-  late double buttonSpacer = AppUser.prefs[buttonSpacingKey];
-  late double dialogSpacer = AppUser.prefs[dialogSpacingKey];
+  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+  late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
-  late Color themeTextColor = Color(AppUser.prefs[themeTextColorKey]);
-  late Color buttonColor = Color(AppUser.prefs[buttonColorKey]);
-  late Color buttonTextColor = Color(AppUser.prefs[buttonTextColorKey]);
+  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  late Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
 
   // Creates the widgets for the toggle list from the gathered profiles
   List<Widget> buildSwitches(List<UserProfile> profiles) {
@@ -80,14 +79,17 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
                 // Profile image/avatar
                 CircleAvatar(
-                  backgroundImage: AssetImage(loadingGifPath),
                   foregroundImage: CachedNetworkImageProvider(profile.avatarURL),
                   minRadius: 35,
                   maxRadius: 35,
                 ),
 
                 // Display name
-                paddedText(profile.name, dialogTitleStyle, TextAlign.start),
+                paddedText(
+                  profile.name,
+                  getTextStyle(dialogTitleStyleKey),
+                  TextAlign.start,
+                ),
               ],
             ),
             Container(height: dialogSpacer),
@@ -115,17 +117,14 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
           Form(
             key: titleFormKey,
             child: OutlinedButton(
-              style: textFieldStyle(),
               onPressed: () {},
               child: TextFormField(
                 cursorColor: themeTextColor,
                 controller: _titleController,
                 textAlign: TextAlign.center,
-                style: getTextStyle(dialogContentStyle),
+                style: getTextStyle(dialogContentStyleKey),
                 decoration: InputDecoration(
                   hintText: 'Signal title',
-                  border: blankBorder(),
-                  focusedBorder: blankBorder(),
                 ),
                 validator: signalTitleValidator,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -138,17 +137,14 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
           Form(
             key: messageFormKey,
             child: OutlinedButton(
-              style: textFieldStyle(),
               onPressed: () {},
               child: TextFormField(
                 cursorColor: themeTextColor,
                 controller: _messageController,
                 textAlign: TextAlign.center,
-                style: getTextStyle(dialogContentStyle),
+                style: getTextStyle(dialogContentStyleKey),
                 decoration: InputDecoration(
                   hintText: 'Notification message',
-                  border: blankBorder(),
-                  focusedBorder: blankBorder(),
                 ),
                 validator: signalMessageValidator,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -163,7 +159,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             children: [
               PlatformText(
                 'Currently active?',
-                style: getTextStyle(dialogTitleStyle),
+                style: getTextStyle(dialogTitleStyleKey),
               ),
               Checkbox(
                 value: isActive,
@@ -192,7 +188,13 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting:
-                      return loadingMessage(context);
+                      return loadingMessage(
+                        context,
+                        buildImage(
+                          AppConfig.prefs[signalImageKey],
+                          isAssetImage(AppConfig.prefs[signalImageKey]),
+                        ),
+                      );
                     case ConnectionState.done:
                     default:
                       if (snapshot.hasError) {
@@ -238,6 +240,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             },
             () {},
             Icon(Icons.upload),
+            Icon(Icons.upload),
             PlatformText('Done'),
           ),
           Container(height: buttonSpacer),
@@ -245,12 +248,15 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[backImageKey]),
+      buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppUser.prefs[signalsBackgroundColorKey]),
+      Color(AppConfig.prefs[signalsBackgroundColorKey]),
 
-      // Drawer aka settings hamburger
+      // Android drawer aka settings hamburger
+      null,
+
+      // iOS nav (top) bar
       null,
     );
   }
