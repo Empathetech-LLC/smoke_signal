@@ -1,11 +1,10 @@
-# App info
 name: smoke_signal
 
-description: All the basic social media apps wrapped into one, built for users not investors.
+description: Purposely simple/manual live activity social media app. Ping your friends when you start a potential group activity, so they know vibes are afoot!
 
 publish_to: none
 
-version: 1.0.0+1
+version: 1.0.0
 
 environment:
   sdk: ">=2.17.5 <3.0.0"
@@ -17,6 +16,7 @@ dependencies:
   # Flutter (Google)
   cupertino_icons: ^1.0.2
   flutter_native_splash: ^2.2.7
+  path: ^1.8.2
   path_provider: ^2.0.11
   shared_preferences: ^2.0.15
   google_fonts: ^4.0.3
@@ -45,8 +45,6 @@ dev_dependencies:
 
 # App configuration
 flutter:
-  uses-material-design: true
-
   assets:
     - assets/
     - assets/app-icon.png
