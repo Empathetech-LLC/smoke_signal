@@ -3,12 +3,13 @@ import '../user/login-screen.dart';
 import '../user/reset-password-screen.dart';
 import '../user/sign-up-screen.dart';
 import '../utils/constants.dart';
-import '../utils/notifications.dart';
 import '../signals/signal-members-screen.dart';
 import '../signals/create-signal-screen.dart';
 import '../app/home-screen.dart';
 import '../app/settings-screen.dart';
 import '../user/user-api.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +31,9 @@ void main() async {
   // Lock app to portait
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
+  // Initialize app config
+  AppConfig.init(customDefaults);
+
   // Setup notification service
   await NotificationService().init();
 
@@ -38,7 +42,7 @@ void main() async {
 
   // Initialize app user
   AppUser.focus = FocusManager.instance;
-  AppUser.preferences = await SharedPreferences.getInstance();
+  AppConfig.preferences = await SharedPreferences.getInstance();
 
   AppUser.messager = FirebaseMessaging.instance;
   AppUser.auth = FirebaseAuth.instance;
@@ -63,7 +67,7 @@ class SmokeSignal extends StatelessWidget {
       // Theme data
       debugShowCheckedModeBanner: false,
       title: appTitle,
-      theme: ThemeData(primaryColor: Color(AppUser.prefs[themeColorKey])),
+      theme: ThemeData(primaryColor: Color(AppConfig.prefs[themeColorKey])),
 
       // Route data
       initialRoute: homeRoute,
