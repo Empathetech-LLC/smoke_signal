@@ -34,9 +34,9 @@ class _AppSettingsState extends State<AppSettings> {
             [
               ImageSetting(
                 prefsKey: backImageKey,
+                isAssetImage: isAssetImage(AppConfig.prefs[backImageKey]),
                 title: 'Background',
-                isAssetImage: isAssetImage(backImageKey),
-                credits: credits[backImageKey] ?? 'Wherever you got it!',
+                credits: credits[AppConfig.prefs[backImageKey]] ?? 'Wherever you got it!',
               )
             ],
           ),

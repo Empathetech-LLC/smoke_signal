@@ -1,50 +1,23 @@
-import '../utils/custom-widgets.dart';
 import '../utils/constants.dart';
-import '../utils/helpers.dart';
-import '../utils/text.dart';
+import '../utils/validate.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 ////// Wrapper classes //////
 
 class AppUser {
-  static Map<String, dynamic> prefs = new Map<String, dynamic>.from(appDefaults);
-
-  static late FocusManager focus;
-  static late SharedPreferences preferences;
-
   static late FirebaseMessaging messager;
   static late FirebaseAuth auth;
   static late User account;
   static late FirebaseFirestore db;
-
-  // Populate prefs
-  // Overwrite defaults whenever a user value is found
-  static void init() {
-    appDefaults.forEach((key, value) {
-      dynamic userPref;
-
-      if (value is int) {
-        userPref = preferences.getInt(key);
-      } else if (value is bool) {
-        userPref = preferences.getBool(key);
-      } else if (value is double) {
-        userPref = preferences.getDouble(key);
-      } else if (value is String) {
-        userPref = preferences.getString(key);
-      } else if (value is List<String>) {
-        userPref = preferences.getStringList(key);
-      }
-
-      if (userPref != null) prefs[key] = userPref;
-    });
-  }
 }
 
 class UserProfile {
@@ -98,7 +71,7 @@ Future<void> attemptAccountCreation(
 
     // Weak password
     else if (e.code == 'weak-password') {
-      popNLog(context, 'The provided password is too weak', 5);
+      popNLog(context, 'The provided password is too weak');
     }
 
     // etc
@@ -133,14 +106,14 @@ Future<void> attemptLogin(BuildContext context, String email, String password) a
     // etc
     else {
       String message = 'Error logging in\n' + e.code;
-      popNLog(context, message, 5);
+      popNLog(context, message);
     }
   }
 }
 
 // Logout current user
 void logout(BuildContext context) {
-  double dialogSpacer = AppUser.prefs[dialogSpacingKey];
+  double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
   ezDialog(
     context,
@@ -158,6 +131,7 @@ void logout(BuildContext context) {
             },
             () {},
             Icon(Icons.check),
+            Icon(Icons.check),
             PlatformText('Yes'),
           ),
           Container(height: dialogSpacer),
@@ -166,6 +140,7 @@ void logout(BuildContext context) {
           ezIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            Icon(Icons.cancel),
             Icon(Icons.cancel),
             PlatformText('No'),
           ),
@@ -241,7 +216,6 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
   if (profiles.isEmpty)
     return CircleAvatar(
       backgroundColor: Colors.white,
-      foregroundImage: AssetImage(noneIconPath),
       minRadius: 35,
       maxRadius: 35,
     );
@@ -257,16 +231,18 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
           onLongPress: () => ezDialog(
             context,
             null,
-            [paddedText(profile.name, dialogTitleStyle, TextAlign.center)],
+            [
+              paddedText(
+                  profile.name, getTextStyle(dialogTitleStyleKey), TextAlign.center),
+            ],
           ),
           child: CircleAvatar(
-            backgroundImage: AssetImage(loadingGifPath),
             foregroundImage: CachedNetworkImageProvider(profile.avatarURL),
             minRadius: 35,
             maxRadius: 35,
           ),
         ),
-        Container(width: padding),
+        Container(width: AppConfig.prefs[paddingKey]),
       ],
     );
   });
@@ -281,7 +257,7 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
 
 // Displays list of user profile pics alongside their display names
 Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
-  double dialogSpacer = AppUser.prefs[dialogSpacingKey];
+  double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
   // Return an "avatar" with the none icon when the list is empty
   if (profiles.isEmpty)
@@ -291,7 +267,6 @@ Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
       children: [
         CircleAvatar(
           backgroundColor: Colors.white,
-          foregroundImage: AssetImage(noneIconPath),
           minRadius: 35,
           maxRadius: 35,
         ),
@@ -310,14 +285,13 @@ Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
         children: [
           // Profile image/avatar
           CircleAvatar(
-            backgroundImage: AssetImage(loadingGifPath),
             foregroundImage: CachedNetworkImageProvider(profile.avatarURL),
             minRadius: 35,
             maxRadius: 35,
           ),
 
           // Display name
-          paddedText(profile.name, dialogTitleStyle, TextAlign.start),
+          paddedText(profile.name, getTextStyle(dialogTitleStyleKey), TextAlign.start),
         ],
       ),
       Container(height: dialogSpacer),
@@ -334,7 +308,7 @@ void editAvatar(BuildContext context) {
   final urlFormKey = GlobalKey<FormState>();
   TextEditingController _urlController = TextEditingController();
 
-  double dialogSpacer = AppUser.prefs[dialogSpacingKey];
+  double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
   ezDialog(
     context,
@@ -344,17 +318,14 @@ void editAvatar(BuildContext context) {
       Form(
         key: urlFormKey,
         child: OutlinedButton(
-          style: textFieldStyle(),
           onPressed: () {},
           child: TextFormField(
-            cursorColor: Color(AppUser.prefs[themeColorKey]),
+            cursorColor: Color(AppConfig.prefs[themeColorKey]),
             controller: _urlController,
             textAlign: TextAlign.center,
-            style: getTextStyle(dialogContentStyle),
+            style: getTextStyle(dialogContentStyleKey),
             decoration: InputDecoration(
               hintText: 'Enter URL',
-              border: blankBorder(),
-              focusedBorder: blankBorder(),
             ),
             validator: urlValidator,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -367,7 +338,7 @@ void editAvatar(BuildContext context) {
       PlatformText(
         'Images are expensive to store!\nPaste an image link and that will be used',
         maxLines: 2,
-        style: getTextStyle(dialogContentStyle),
+        style: getTextStyle(dialogContentStyleKey),
         textAlign: TextAlign.center,
       ),
       Container(height: dialogSpacer),
@@ -381,7 +352,7 @@ void editAvatar(BuildContext context) {
           ezButton(
             () async {
               // Close keyboard if open
-              AppUser.focus.primaryFocus?.unfocus();
+              AppConfig.focus.primaryFocus?.unfocus();
 
               // Don't do anything if the url is invalid
               if (!urlFormKey.currentState!.validate()) {
@@ -408,6 +379,7 @@ void editAvatar(BuildContext context) {
             () => Navigator.of(context).pop(),
             () {},
             Icon(Icons.cancel),
+            Icon(Icons.cancel),
             PlatformText('Cancel'),
           ),
         ],
@@ -421,7 +393,7 @@ void editName(BuildContext context) {
   final nameFormKey = GlobalKey<FormState>();
   TextEditingController _nameController = TextEditingController();
 
-  double dialogSpacer = AppUser.prefs[dialogSpacingKey];
+  double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
   ezDialog(
     context,
@@ -431,17 +403,14 @@ void editName(BuildContext context) {
       Form(
         key: nameFormKey,
         child: OutlinedButton(
-          style: textFieldStyle(),
           onPressed: () {},
           child: TextFormField(
-            cursorColor: Color(AppUser.prefs[themeColorKey]),
+            cursorColor: Color(AppConfig.prefs[themeColorKey]),
             controller: _nameController,
             textAlign: TextAlign.center,
-            style: getTextStyle(dialogContentStyle),
+            style: getTextStyle(dialogContentStyleKey),
             decoration: InputDecoration(
               hintText: 'Enter display name',
-              border: blankBorder(),
-              focusedBorder: blankBorder(),
             ),
             validator: displayNameValidator,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -459,7 +428,7 @@ void editName(BuildContext context) {
           ezIconButton(
             () async {
               // Close keyboard if open
-              AppUser.focus.primaryFocus?.unfocus();
+              AppConfig.focus.primaryFocus?.unfocus();
 
               // Don't do anything if the display name is invalid
               if (!nameFormKey.currentState!.validate()) {
@@ -479,6 +448,7 @@ void editName(BuildContext context) {
             },
             () {},
             Icon(Icons.check),
+            Icon(Icons.check),
             PlatformText('Submit'),
           ),
 
@@ -486,6 +456,7 @@ void editName(BuildContext context) {
           ezIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            Icon(Icons.cancel),
             Icon(Icons.cancel),
             PlatformText('Cancel'),
           )

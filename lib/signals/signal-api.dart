@@ -1,8 +1,10 @@
-import '../utils/custom-widgets.dart';
+import 'package:smoke_signal/utils/helpers.dart';
+
 import '../utils/constants.dart';
-import '../utils/helpers.dart';
-import '../utils/text.dart';
+import '../utils/validate.dart';
 import '../user/user-api.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -162,24 +164,21 @@ void updateMessage(BuildContext context, String title) {
       Form(
         key: messageFormKey,
         child: OutlinedButton(
-          style: textFieldStyle(),
           onPressed: () {},
           child: TextFormField(
-            cursorColor: Color(AppUser.prefs[themeTextColorKey]),
+            cursorColor: Color(AppConfig.prefs[themeTextColorKey]),
             controller: _messageController,
             textAlign: TextAlign.center,
-            style: getTextStyle(dialogContentStyle),
+            style: getTextStyle(dialogContentStyleKey),
             decoration: InputDecoration(
               hintText: 'Notification message',
-              border: blankBorder(),
-              focusedBorder: blankBorder(),
             ),
             validator: signalMessageValidator,
             autovalidateMode: AutovalidateMode.onUserInteraction,
           ),
         ),
       ),
-      Container(height: AppUser.prefs[dialogSpacingKey]),
+      Container(height: AppConfig.prefs[dialogSpacingKey]),
 
       // Confirm/cancel buttons
       Row(
@@ -208,14 +207,16 @@ void updateMessage(BuildContext context, String title) {
             },
             () {},
             Icon(Icons.check),
+            Icon(Icons.check),
             PlatformText('Submit'),
           ),
-          Container(height: AppUser.prefs[dialogSpacingKey]),
+          Container(height: AppConfig.prefs[dialogSpacingKey]),
 
           // Cancel
           ezIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            Icon(Icons.cancel),
             Icon(Icons.cancel),
             PlatformText('Cancel'),
           ),
@@ -227,7 +228,7 @@ void updateMessage(BuildContext context, String title) {
 
 // Optionally transfer the signal to a new owner in firestore
 void confirmTransfer(BuildContext context, String title, List<String> members) {
-  double dialogSpacer = AppUser.prefs[dialogSpacingKey];
+  double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
   List<String> others = new List.from(members);
   others.remove(AppUser.account.uid);
@@ -242,7 +243,6 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
         children: [
           CircleAvatar(
             backgroundColor: Colors.white,
-            foregroundImage: AssetImage(noneIconPath),
             minRadius: 35,
             maxRadius: 35,
           ),
@@ -273,14 +273,17 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
             children: [
               // Profile image/avatar
               CircleAvatar(
-                backgroundImage: AssetImage(loadingGifPath),
                 foregroundImage: CachedNetworkImageProvider(profile.avatarURL),
                 minRadius: 35,
                 maxRadius: 35,
               ),
 
               // Display name
-              paddedText(profile.name, dialogTitleStyle, TextAlign.start),
+              paddedText(
+                profile.name,
+                getTextStyle(dialogTitleStyleKey),
+                TextAlign.start,
+              ),
             ],
           ),
         ),
@@ -309,14 +312,20 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
-                  return loadingMessage(context);
+                  return loadingMessage(
+                    context,
+                    buildImage(
+                      AppConfig.prefs[signalImageKey],
+                      isAssetImage(signalImageKey),
+                    ),
+                  );
                 case ConnectionState.done:
                 default:
                   if (snapshot.hasError) {
                     return Center(
                       child: PlatformText(
                         snapshot.error.toString(),
-                        style: getTextStyle(errorStyle),
+                        style: getTextStyle(errorStyleKey),
                       ),
                     );
                   }
@@ -330,6 +339,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
           ezIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            Icon(Icons.cancel),
             Icon(Icons.cancel),
             PlatformText('Cancel'),
           ),
@@ -356,7 +366,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
               try {
                 // Clear local prefs for the signal
                 prefKeys.forEach((key) {
-                  AppUser.preferences.remove(key);
+                  AppConfig.preferences.remove(key);
                 });
 
                 // Delete the signal from the db
@@ -367,14 +377,16 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
             },
             () {},
             Icon(Icons.check),
+            Icon(Icons.check),
             PlatformText('Yes'),
           ),
-          Container(height: AppUser.prefs[dialogSpacingKey]),
+          Container(height: AppConfig.prefs[dialogSpacingKey]),
 
           // Cancel
           ezIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            Icon(Icons.cancel),
             Icon(Icons.cancel),
             PlatformText('No'),
           ),
@@ -401,7 +413,7 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
               try {
                 // Clear local prefs for the signal
                 prefKeys.forEach((key) {
-                  AppUser.preferences.remove(key);
+                  AppConfig.preferences.remove(key);
                 });
 
                 // Remove the current user from the list of members
@@ -416,14 +428,16 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
             },
             () {},
             Icon(Icons.check),
+            Icon(Icons.check),
             PlatformText('Yes'),
           ),
-          Container(height: AppUser.prefs[dialogSpacingKey]),
+          Container(height: AppConfig.prefs[dialogSpacingKey]),
 
           // Cancel
           ezIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            Icon(Icons.cancel),
             Icon(Icons.cancel),
             PlatformText('No'),
           ),

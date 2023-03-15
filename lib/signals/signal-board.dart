@@ -1,11 +1,10 @@
-import '../utils/storage.dart';
 import '../utils/scaffolds.dart';
-import '../user/user-api.dart';
 import '../utils/helpers.dart';
 import '../utils/constants.dart';
-import '../utils/custom-widgets.dart';
 import '../signals/signal.dart';
 import '../signals/signal-api.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -45,7 +44,13 @@ class _SignalBoardState extends State<SignalBoard> {
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
-                    return loadingMessage(context);
+                    return loadingMessage(
+                      context,
+                      buildImage(
+                        AppConfig.prefs[signalImageKey],
+                        isAssetImage(AppConfig.prefs[signalImageKey]),
+                      ),
+                    );
                   case ConnectionState.done:
                   default:
                     if (snapshot.hasError) {
@@ -101,10 +106,10 @@ class _SignalBoardState extends State<SignalBoard> {
       }),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[backImageKey]),
+      buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppUser.prefs[signalsBackgroundColorKey]),
+      Color(AppConfig.prefs[signalsBackgroundColorKey]),
     );
   }
 }

@@ -1,12 +1,7 @@
-import '../setting-states/set-color.dart';
-import '../setting-states/set-image.dart';
-import '../utils/scaffolds.dart';
-import '../setting-states/set-value.dart';
-import '../utils/storage.dart';
-import '../utils/text.dart';
-import '../utils/custom-widgets.dart';
-import '../user/user-api.dart';
+import '../utils/helpers.dart';
 import '../utils/constants.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -21,7 +16,7 @@ class SignalSettings extends StatefulWidget {
 class _SignalSettingsState extends State<SignalSettings> {
   @override
   Widget build(BuildContext context) {
-    double buttonSpacer = AppUser.prefs[buttonSpacingKey];
+    double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
     return navWindow(
       context,
@@ -29,14 +24,22 @@ class _SignalSettingsState extends State<SignalSettings> {
       // Body
       ezCenterScroll(
         [
-          changesWarning(context),
+          warningCard(context, 'Changes won\'t take effect until restart'),
           Container(height: buttonSpacer),
 
           //// Images
 
           ezList(
             'Image',
-            [ImageSetting(prefsKey: signalImageKey, message: 'Signal')],
+            [
+              ImageSetting(
+                prefsKey: signalImageKey,
+                isAssetImage: isAssetImage(AppConfig.prefs[signalImageKey]),
+                title: 'Signal',
+                credits:
+                    credits[AppConfig.prefs[signalImageKey]] ?? 'Wherever you got it!',
+              )
+            ],
           ),
 
           //// Colors
@@ -45,8 +48,8 @@ class _SignalSettingsState extends State<SignalSettings> {
             'Color',
             [
               // User hint: hold the buttons to reset the color
-              PlatformText('Hold to reset', style: getTextStyle(dialogContentStyle)),
-              Container(height: padding),
+              PlatformText('Hold to reset', style: getTextStyle(dialogContentStyleKey)),
+              Container(height: AppConfig.prefs[paddingKey]),
 
               // Background color
               ColorSetting(
@@ -82,15 +85,16 @@ class _SignalSettingsState extends State<SignalSettings> {
                           ezIconButton(
                             // Remove all color settings
                             () {
-                              AppUser.preferences.remove(signalsBackgroundColorKey);
-                              AppUser.preferences.remove(watchingColorKey);
-                              AppUser.preferences.remove(watchingTextColorKey);
-                              AppUser.preferences.remove(joinedColorKey);
-                              AppUser.preferences.remove(joinedTextColorKey);
+                              AppConfig.preferences.remove(signalsBackgroundColorKey);
+                              AppConfig.preferences.remove(watchingColorKey);
+                              AppConfig.preferences.remove(watchingTextColorKey);
+                              AppConfig.preferences.remove(joinedColorKey);
+                              AppConfig.preferences.remove(joinedTextColorKey);
 
                               Navigator.of(context).pop();
                             },
                             () {},
+                            Icon(Icons.check),
                             Icon(Icons.check),
                             PlatformText('Yes'),
                           ),
@@ -100,6 +104,7 @@ class _SignalSettingsState extends State<SignalSettings> {
                             () => Navigator.of(context).pop(),
                             () {},
                             Icon(Icons.cancel),
+                            Icon(Icons.cancel),
                             PlatformText('No'),
                           ),
                         ],
@@ -107,7 +112,7 @@ class _SignalSettingsState extends State<SignalSettings> {
                     ],
                   );
                 },
-                child: PlatformText('Reset all', style: getTextStyle(subTitleStyle)),
+                child: PlatformText('Reset all', style: getTextStyle(subTitleStyleKey)),
               ),
               Container(height: buttonSpacer),
             ],
@@ -152,10 +157,10 @@ class _SignalSettingsState extends State<SignalSettings> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[backImageKey]),
+      buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppUser.prefs[signalsBackgroundColorKey]),
+      Color(AppConfig.prefs[signalsBackgroundColorKey]),
     );
   }
 }

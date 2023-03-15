@@ -165,7 +165,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 value: isActive,
                 onChanged: (bool? value) {
                   // Flip state and close keyboard if open
-                  AppUser.focus.primaryFocus?.unfocus();
+                  AppConfig.focus.primaryFocus?.unfocus();
 
                   setState(() {
                     isActive = value!;
@@ -216,7 +216,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
           ezIconButton(
             () async {
               // Close keyboard if open
-              AppUser.focus.primaryFocus?.unfocus();
+              AppConfig.focus.primaryFocus?.unfocus();
 
               // Don't do anything if the input is invalid
               if (!titleFormKey.currentState!.validate()) {

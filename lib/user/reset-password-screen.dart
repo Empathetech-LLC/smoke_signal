@@ -1,10 +1,9 @@
-import '../utils/constants.dart';
-import '../utils/custom-widgets.dart';
-import '../utils/storage.dart';
 import '../utils/helpers.dart';
+import '../utils/validate.dart';
 import '../user/user-api.dart';
 import '../utils/scaffolds.dart';
-import '../utils/text.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -23,11 +22,11 @@ class _ResetScreenState extends State<ResetScreen> {
   late TextEditingController _emailController = TextEditingController();
 
   // Gather theme data
-  late Color themeTextColor = Color(AppUser.prefs[themeTextColorKey]);
+  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
-  late TextStyle contents = getTextStyle(dialogContentStyle);
+  late TextStyle contents = getTextStyle(dialogContentStyleKey);
 
-  late double buttonSpacer = AppUser.prefs[buttonSpacingKey];
+  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,6 @@ class _ResetScreenState extends State<ResetScreen> {
               child: Form(
                 key: emailFormKey,
                 child: OutlinedButton(
-                  style: textFieldStyle(),
                   onPressed: () {},
                   child: TextFormField(
                     cursorColor: themeTextColor,
@@ -57,8 +55,6 @@ class _ResetScreenState extends State<ResetScreen> {
                     style: contents,
                     decoration: InputDecoration(
                       hintText: 'Enter email',
-                      border: blankBorder(),
-                      focusedBorder: blankBorder(),
                     ),
                     autofillHints: [AutofillHints.email],
                     validator: emailValidator,
@@ -73,7 +69,7 @@ class _ResetScreenState extends State<ResetScreen> {
             ezIconButton(
               () async {
                 // Close keyboard if open
-                AppUser.focus.primaryFocus?.unfocus();
+                AppConfig.focus.primaryFocus?.unfocus();
 
                 // Don't do anything if the email is invalid
                 if (!emailFormKey.currentState!.validate()) {
@@ -92,6 +88,7 @@ class _ResetScreenState extends State<ResetScreen> {
               },
               () {},
               Icon(Icons.email),
+              Icon(Icons.email),
               PlatformText('Send link'),
             ),
             Container(height: buttonSpacer),
@@ -100,13 +97,16 @@ class _ResetScreenState extends State<ResetScreen> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[backImageKey]),
+      buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppUser.prefs[appBackgroundColorKey]),
+      Color(AppConfig.prefs[backColorKey]),
 
-      // Drawer aka settings hamburger
+      // Android drawer aka settings hamburger
       settingsDrawer(context),
+
+      // iOS nav (top) bar
+      null,
     );
   }
 }

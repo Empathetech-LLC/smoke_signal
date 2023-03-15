@@ -1,10 +1,9 @@
-import '../utils/constants.dart';
-import '../utils/storage.dart';
-import '../utils/custom-widgets.dart';
 import '../user/user-api.dart';
 import '../utils/helpers.dart';
-import '../utils/text.dart';
+import '../utils/validate.dart';
 import '../utils/scaffolds.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -26,11 +25,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController _passwdController = TextEditingController();
 
   // Gather theme data
-  late Color themeTextColor = Color(AppUser.prefs[themeTextColorKey]);
+  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
-  late TextStyle contents = getTextStyle(dialogContentStyle);
+  late TextStyle contents = getTextStyle(dialogContentStyleKey);
 
-  late double buttonSpacer = AppUser.prefs[buttonSpacingKey];
+  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
   //// Draw state
 
@@ -56,7 +55,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Form(
                     key: emailFormKey,
                     child: OutlinedButton(
-                      style: textFieldStyle(),
                       onPressed: () {},
                       child: TextFormField(
                         cursorColor: themeTextColor,
@@ -65,8 +63,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: contents,
                         decoration: InputDecoration(
                           hintText: 'Enter email',
-                          border: blankBorder(),
-                          focusedBorder: blankBorder(),
                         ),
                         autofillHints: [AutofillHints.email],
                         validator: emailValidator,
@@ -80,7 +76,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Form(
                     key: passwordFormKey,
                     child: OutlinedButton(
-                      style: textFieldStyle(),
                       onPressed: () {},
                       child: TextFormField(
                         controller: _passwdController,
@@ -89,8 +84,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         obscureText: true,
                         decoration: InputDecoration(
                           hintText: 'Enter password',
-                          border: blankBorder(),
-                          focusedBorder: blankBorder(),
                         ),
                         autofillHints: [AutofillHints.password],
                       ),
@@ -105,7 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ezButton(
               () async {
                 // Close keyboard if open
-                AppUser.focus.primaryFocus?.unfocus();
+                AppConfig.focus.primaryFocus?.unfocus();
 
                 // Don't do anything if the input is invalid
                 if (!emailFormKey.currentState!.validate()) {
@@ -128,13 +121,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[backImageKey]),
+      buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppUser.prefs[appBackgroundColorKey]),
+      Color(AppConfig.prefs[backColorKey]),
 
-      // Drawer aka settings hamburger
+      // Android drawer aka settings hamburger
       settingsDrawer(context),
+
+      // iOS nav (top) bar
+      null,
     );
   }
 }

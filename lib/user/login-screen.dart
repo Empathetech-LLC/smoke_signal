@@ -1,10 +1,10 @@
-import '../utils/storage.dart';
-import '../utils/custom-widgets.dart';
 import '../utils/helpers.dart';
 import '../user/user-api.dart';
 import '../utils/scaffolds.dart';
 import '../utils/constants.dart';
-import '../utils/text.dart';
+import '../utils/validate.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -26,11 +26,11 @@ class _LoginScreenState extends State<LoginScreen> {
   late TextEditingController _passwdController = TextEditingController();
 
   // Gather theme data
-  late Color themeTextColor = Color(AppUser.prefs[themeTextColorKey]);
+  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
-  late double buttonSpacer = AppUser.prefs[buttonSpacingKey];
+  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  late TextStyle contents = getTextStyle(dialogContentStyle);
+  late TextStyle contents = getTextStyle(dialogContentStyleKey);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   Form(
                     key: emailFormKey,
                     child: OutlinedButton(
-                      style: textFieldStyle(),
                       onPressed: () {},
                       child: TextFormField(
                         cursorColor: themeTextColor,
@@ -65,8 +64,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: contents,
                         decoration: InputDecoration(
                           hintText: 'Enter email',
-                          border: blankBorder(),
-                          focusedBorder: blankBorder(),
                         ),
                         autofillHints: [AutofillHints.email],
                         validator: emailValidator,
@@ -80,7 +77,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   Form(
                     key: passwordFormKey,
                     child: OutlinedButton(
-                      style: textFieldStyle(),
                       onPressed: () {},
                       child: TextFormField(
                         controller: _passwdController,
@@ -89,8 +85,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         obscureText: true,
                         decoration: InputDecoration(
                           hintText: 'Enter password',
-                          border: blankBorder(),
-                          focusedBorder: blankBorder(),
                         ),
                         autofillHints: [AutofillHints.password],
                       ),
@@ -120,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ezButton(
               () async {
                 // Close keyboard if open
-                AppUser.focus.primaryFocus?.unfocus();
+                AppConfig.focus.primaryFocus?.unfocus();
 
                 // Don't attempt login if we know the input is invalid
                 if (!emailFormKey.currentState!.validate()) {
@@ -142,13 +136,16 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[backImageKey]),
+      buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppUser.prefs[appBackgroundColorKey]),
+      Color(AppConfig.prefs[backColorKey]),
 
-      // Drawer aka settings hamburger
+      // Android drawer aka settings hamburger
       settingsDrawer(context),
+
+      // iOS nav (top) bar
+      null,
     );
   }
 }

@@ -14,7 +14,7 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
 
   // Gesture detector makes it so keyboards close on screen tap
   return GestureDetector(
-    onTap: () => AppUser.focus.primaryFocus?.unfocus(),
+    onTap: () => AppConfig.focus.primaryFocus?.unfocus(),
     child: Scaffold(
       appBar: AppBar(title: PlatformText(title)),
       body: Container(

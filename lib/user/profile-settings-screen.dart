@@ -1,9 +1,8 @@
-import '../utils/custom-widgets.dart';
-import '../utils/storage.dart';
-import '../utils/scaffolds.dart';
 import '../utils/constants.dart';
-import '../utils/text.dart';
+import '../utils/helpers.dart';
 import '../user/user-api.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -18,8 +17,8 @@ class ProfileSettingsScreen extends StatefulWidget {
 
 class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   // Gather theme data
-  late double buttonSpacer = AppUser.prefs[buttonSpacingKey];
-  late Color themeTextColor = Color(AppUser.prefs[themeTextColorKey]);
+  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,6 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
             // Profile image
             CircleAvatar(
-              backgroundImage: AssetImage(loadingGifPath),
               foregroundImage: CachedNetworkImageProvider(
                   AppUser.account.photoURL ?? defaultAvatarURL),
               minRadius: 100,
@@ -55,6 +53,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               },
               () {},
               Icon(Icons.camera),
+              Icon(Icons.camera),
               PlatformText('New pic'),
             ),
 
@@ -63,7 +62,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
             // Display name
             PlatformText(
               AppUser.account.displayName ?? defaultDisplayName,
-              style: getTextStyle(titleStyle),
+              style: getTextStyle(titleStyleKey),
             ),
             Container(height: buttonSpacer),
 
@@ -75,6 +74,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               },
               () {},
               Icon(Icons.draw),
+              Icon(Icons.draw),
               PlatformText('New name'),
             ),
 
@@ -84,12 +84,15 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[backImageKey]),
+      buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppUser.prefs[appBackgroundColorKey]),
+      Color(AppConfig.prefs[backColorKey]),
 
-      // Drawer aka settings hamburger
+      // Android drawer aka settings hamburger
+      null,
+
+      // iOS nav (top) bar
       null,
     );
   }

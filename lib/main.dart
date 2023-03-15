@@ -41,7 +41,7 @@ void main() async {
   await Firebase.initializeApp();
 
   // Initialize app user
-  AppUser.focus = FocusManager.instance;
+  AppConfig.focus = FocusManager.instance;
   AppConfig.preferences = await SharedPreferences.getInstance();
 
   AppUser.messager = FirebaseMessaging.instance;
@@ -59,9 +59,6 @@ class SmokeSignal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize app user
-    AppUser.init();
-
     // Define app theme and routes (pages/screens/etc)
     return MaterialApp(
       // Theme data
