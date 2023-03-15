@@ -1,16 +1,11 @@
-//// UI
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-const double margin = 15.0;
-const double padding = 12.5;
-
-const double defaultSignalHeight = 100.0;
+//// App info
 
 const String appTitle = 'Smoke Signal';
 
 final Map<String, String> credits = {
   appIconPath: 'Empathetech LLC: The Founder\n\nUnnamed',
-  noneIconPath: 'https://www.freepik.com/\n\n\'Forbidden\'',
-  loadingGifPath: 'https://www.freepik.com/\n\n\'Loading\'',
   smokeSignalPath: 'https://pimen.itch.io/\n\n\'Smoke Effect\'',
   darkForestPath: 'https://edermunizz.itch.io/\n\n\'Dark Forest\'',
 };
@@ -18,20 +13,18 @@ final Map<String, String> credits = {
 //// Paths
 
 // Routes
-const String signupRoute = '/user/sign-up-screen';
-const String loginRoute = '/user/login-screen';
-const String resetPasswordRoute = '/user/reset-password-screen';
-const String homeRoute = '/app/home-screen';
-const String settingsRoute = '/app/settings-screen';
-const String profileSettingsRoute = '/user/profile-settings-screen';
-const String signalMembersRoute = '/signals/signal-members-screen';
-const String createSignalRoute = '/signals/create-signal-screen';
+const String signupRoute = 'sign-up-screen';
+const String loginRoute = 'login-screen';
+const String resetPasswordRoute = 'reset-password-screen';
+const String homeRoute = 'home-screen';
+const String settingsRoute = 'settings-screen';
+const String profileSettingsRoute = 'profile-settings-screen';
+const String signalMembersRoute = 'signal-members-screen';
+const String createSignalRoute = 'create-signal-screen';
 
 // Images
 const String appIconPath = 'assets/app-icon.png';
-const String noneIconPath = 'assets/none.png';
 const String darkForestPath = 'assets/dark-forest.png';
-const String loadingGifPath = 'assets/loading.gif';
 const String smokeSignalPath = 'assets/smoke-signal.gif';
 
 // Navigator arguments
@@ -44,20 +37,7 @@ const String unaddedArg = 'unadded';
 const String streamArg = 'stream';
 
 //// Shared Preferences
-
-// Shared
-const String fontFamilyKey = 'fontFamily';
-const String fontSizeKey = 'fontSize';
-const String buttonSpacingKey = 'buttonSpacing';
-const String dialogSpacingKey = 'dialogSpacing';
-const String buttonColorKey = 'buttonColor';
-const String buttonTextColorKey = 'buttonTextColor';
-const String themeColorKey = 'themeColor';
-const String themeTextColorKey = 'themeTextColor';
-
-// Base
-const String backImageKey = 'backImage';
-const String appBackgroundColorKey = 'appBackgroundColor';
+// aka for AppConfig from empathetech_flutter_ui
 
 // Signals
 const String signalsBackgroundColorKey = 'signalsBackgroundColor';
@@ -70,7 +50,7 @@ const String watchingTextColorKey = 'watchingSignalTextColor';
 const String joinedColorKey = 'joinedSignalColor';
 const String joinedTextColorKey = 'joinedSignalTextColor';
 
-final Map<String, dynamic> appDefaults = {
+final Map<String, dynamic> customDefaults = {
   fontFamilyKey: 'Roboto',
   fontSizeKey: 24.0,
   buttonSpacingKey: 35.0,
@@ -80,7 +60,7 @@ final Map<String, dynamic> appDefaults = {
   themeColorKey: 0xFF141414,
   themeTextColorKey: 0xFFFFFFFF,
   backImageKey: darkForestPath,
-  appBackgroundColorKey: 0xE6A520DA,
+  backColorKey: 0xE6A520DA,
   signalsBackgroundColorKey: 0xE6A520DA,
   signalImageKey: smokeSignalPath,
   signalSpacingKey: 50.0,

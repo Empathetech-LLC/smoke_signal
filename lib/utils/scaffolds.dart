@@ -1,47 +1,16 @@
 import '../utils/constants.dart';
-import '../utils/helpers.dart';
-import '../utils/text.dart';
-import '../utils/custom-widgets.dart';
 import '../user/user-api.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-//// Full screens
-
-// Standard full screen scaffold
-Widget standardScaffold(BuildContext context, String title, Widget body,
-    DecorationImage? backgroundImage, Color backgroundColor, Drawer? hamburger) {
-  // Gesture detector makes it so keyboards close on screen tap
-  return GestureDetector(
-    onTap: () => AppUser.focus.primaryFocus?.unfocus(),
-    child: Scaffold(
-      appBar: AppBar(title: PlatformText(title)),
-      body: Container(
-        width: screenWidth(context),
-        height: screenHeight(context),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          image: backgroundImage,
-        ),
-
-        // Wrapping the passed body in a margin'd container means UI code can always...
-        // ...use the full context width && have consistent margins
-        child: Container(
-          child: body,
-          margin: EdgeInsets.all(margin),
-        ),
-      ),
-      endDrawer: hamburger,
-    ),
-  );
-}
-
 // Custom signals board scaffold
 signalBoardScaffold(BuildContext context, String title, Widget body, Function() refresh,
     Function() reload, DecorationImage? backgroundImage, Color backgroundColor) {
-  late double buttonSpacer = AppUser.prefs[buttonSpacingKey];
+  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
   // Gesture detector makes it so keyboards close on screen tap
   return GestureDetector(
@@ -60,19 +29,18 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
         // ...use the full context width && have consistent margins
         child: Container(
           child: body,
-          margin: EdgeInsets.all(margin),
+          margin: EdgeInsets.all(AppConfig.prefs[marginKey]),
         ),
       ),
       floatingActionButton: ezButton(
         refresh,
         reload,
         Icon(Icons.refresh),
-        circleButton(),
       ),
 
       // Drawer aka settings hamburger
       endDrawer: Drawer(
-        backgroundColor: Color(AppUser.prefs[themeColorKey]),
+        backgroundColor: Color(AppConfig.prefs[themeColorKey]),
         child: ezScrollView(
           [
             // Header: User profile preview, edit button, logout button
@@ -88,7 +56,6 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
                     children: [
                       // Profile image
                       CircleAvatar(
-                        backgroundImage: AssetImage(loadingGifPath),
                         foregroundImage: CachedNetworkImageProvider(
                             AppUser.account.photoURL ?? defaultAvatarURL),
                         minRadius: 50,
@@ -98,7 +65,7 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
                       // Profile name
                       PlatformText(
                         AppUser.account.displayName ?? defaultDisplayName,
-                        style: getTextStyle(dialogTitleStyle),
+                        style: getTextStyle(dialogTitleStyleKey),
                       ),
                     ],
                   ),
@@ -113,7 +80,6 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
                         () => Navigator.of(context).popAndPushNamed(profileSettingsRoute),
                         () {},
                         Icon(Icons.edit),
-                        circleButton(),
                       ),
 
                       // Logout
@@ -121,7 +87,6 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
                         () => logout(context),
                         () {},
                         Icon(Icons.logout),
-                        circleButton(),
                       ),
                     ],
                   ),
@@ -135,6 +100,7 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
               () => Navigator.of(context).popAndPushNamed(createSignalRoute),
               () {},
               Icon(Icons.add),
+              Icon(Icons.add),
               PlatformText('New'),
             ),
             Container(height: buttonSpacer),
@@ -146,6 +112,7 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
                 arguments: {indexArg: 1},
               ),
               () {},
+              Icon(Icons.settings),
               Icon(Icons.settings),
               PlatformText('Settings'),
             ),
@@ -159,7 +126,7 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
                 [
                   PlatformText(
                     validatorRule,
-                    style: getTextStyle(dialogContentStyle),
+                    style: getTextStyle(dialogContentStyleKey),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -175,51 +142,12 @@ signalBoardScaffold(BuildContext context, String title, Widget body, Function() 
   );
 }
 
-//// Navigatable screens
-
-// Outer screen
-Widget navScaffold(BuildContext context, String title, Widget body, Drawer? hamburger,
-    BottomNavigationBar navBar) {
-  // Gesture detector makes it so keyboards close on screen tap
-  return GestureDetector(
-    onTap: () => AppUser.focus.primaryFocus?.unfocus(),
-    child: Scaffold(
-      appBar: AppBar(title: PlatformText(title)),
-      body: body,
-      endDrawer: hamburger,
-      bottomNavigationBar: navBar,
-    ),
-  );
-}
-
-// Inner screen
-Widget navWindow(BuildContext context, Widget body, DecorationImage? backgroundImage,
-    Color backgroundColor) {
-  return Container(
-    height: screenHeight(context),
-    width: screenWidth(context),
-    decoration: BoxDecoration(
-      color: backgroundColor,
-      image: backgroundImage,
-    ),
-
-    // Wrapping the passed body in a margin'd container means UI code can always...
-    // ...use the full context width && have consistent margins
-    child: Container(
-      child: body,
-      margin: EdgeInsets.all(margin),
-    ),
-  );
-}
-
-//// Shared sub-widgets
-
 // End drawer with just a link to app settings
 Drawer settingsDrawer(BuildContext context) {
-  late double buttonSpacer = AppUser.prefs[buttonSpacingKey];
+  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
   return Drawer(
-    backgroundColor: Color(AppUser.prefs[themeColorKey]),
+    backgroundColor: Color(AppConfig.prefs[themeColorKey]),
     child: ezScrollView(
       [
         // App icon
@@ -239,6 +167,7 @@ Drawer settingsDrawer(BuildContext context) {
           ),
           () {},
           Icon(Icons.edit),
+          Icon(Icons.edit),
           PlatformText('Settings'),
         ),
         Container(height: buttonSpacer),
@@ -251,7 +180,7 @@ Drawer settingsDrawer(BuildContext context) {
             [
               PlatformText(
                 validatorRule,
-                style: getTextStyle(dialogContentStyle),
+                style: getTextStyle(dialogContentStyleKey),
                 textAlign: TextAlign.center,
               ),
             ],
