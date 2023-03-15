@@ -1,10 +1,12 @@
 import '../app/app-settings.dart';
 import '../signals/signal-settings.dart';
-import '../utils/scaffolds.dart';
 import '../utils/constants.dart';
-import '../user/user-api.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -42,10 +44,10 @@ class _SettingsState extends State<Settings> {
   ];
 
   // Gather theme data
-  late Color themeColor = Color(AppUser.prefs[themeColorKey]);
-  late Color themeTextColor = Color(AppUser.prefs[themeTextColorKey]);
+  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
-  late Color buttonColor = Color(AppUser.prefs[buttonColorKey]);
+  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
   //// Draw state
 
@@ -63,21 +65,19 @@ class _SettingsState extends State<Settings> {
         children: windows,
       ),
 
-      // Drawer aka settings hamburger
+      // Android drawer aka settings hamburger
       null,
 
-      // Bottom nav bar
-      BottomNavigationBar(
+      // iOS nav (top) bar
+      CupertinoNavigationBar(),
+
+      // Shared bottom nav bar
+      PlatformNavBar(
         currentIndex: navIndex,
-        onTap: (index) => setState(() {
+        itemChanged: (index) => setState(() {
           navIndex = index;
         }),
         backgroundColor: themeColor,
-        selectedItemColor: buttonColor,
-        selectedIconTheme: IconThemeData(color: buttonColor),
-        unselectedItemColor: themeTextColor,
-        unselectedIconTheme: IconThemeData(color: themeTextColor),
-        type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
