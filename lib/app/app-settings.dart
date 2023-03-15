@@ -1,13 +1,7 @@
-import '../setting-states/set-color.dart';
-import '../setting-states/set-font.dart';
-import '../setting-states/set-value.dart';
-import '../setting-states/set-image.dart';
+import '../utils/helpers.dart';
 import '../utils/constants.dart';
-import '../utils/storage.dart';
-import '../utils/scaffolds.dart';
-import '../utils/text.dart';
-import '../utils/custom-widgets.dart';
-import '../user/user-api.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -22,7 +16,7 @@ class AppSettings extends StatefulWidget {
 class _AppSettingsState extends State<AppSettings> {
   @override
   Widget build(BuildContext context) {
-    double buttonSpacer = AppUser.prefs[buttonSpacingKey];
+    double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
     return navWindow(
       context,
@@ -30,14 +24,21 @@ class _AppSettingsState extends State<AppSettings> {
       // Body
       ezCenterScroll(
         [
-          changesWarning(context),
+          warningCard(context, 'Changes won\'t take effect until restart'),
           Container(height: buttonSpacer),
 
           //// Background settings
 
           ezList(
             'Image',
-            [ImageSetting(prefsKey: backImageKey, message: 'Background')],
+            [
+              ImageSetting(
+                prefsKey: backImageKey,
+                title: 'Background',
+                isAssetImage: isAssetImage(backImageKey),
+                credits: credits[backImageKey] ?? 'Wherever you got it!',
+              )
+            ],
           ),
 
           //// Theme settings
@@ -46,12 +47,11 @@ class _AppSettingsState extends State<AppSettings> {
             'Color',
             [
               // User hint: hold the buttons to reset the color
-              PlatformText('Hold to reset', style: getTextStyle(dialogContentStyle)),
-              Container(height: padding),
+              PlatformText('Hold to reset', style: getTextStyle(dialogContentStyleKey)),
+              Container(height: AppConfig.prefs[paddingKey]),
 
               // Background
-              ColorSetting(
-                  toControl: appBackgroundColorKey, message: 'Background\n(no image)'),
+              ColorSetting(toControl: backColorKey, message: 'Background\n(no image)'),
               Container(height: buttonSpacer),
 
               // Theme
@@ -81,15 +81,16 @@ class _AppSettingsState extends State<AppSettings> {
                           // Yes
                           ezIconButton(
                             () {
-                              AppUser.preferences.remove(buttonColorKey);
-                              AppUser.preferences.remove(buttonTextColorKey);
-                              AppUser.preferences.remove(themeColorKey);
-                              AppUser.preferences.remove(buttonColorKey);
-                              AppUser.preferences.remove(appBackgroundColorKey);
+                              AppConfig.preferences.remove(buttonColorKey);
+                              AppConfig.preferences.remove(buttonTextColorKey);
+                              AppConfig.preferences.remove(themeColorKey);
+                              AppConfig.preferences.remove(buttonColorKey);
+                              AppConfig.preferences.remove(backColorKey);
 
                               Navigator.of(context).pop();
                             },
                             () {},
+                            Icon(Icons.check),
                             Icon(Icons.check),
                             PlatformText('Yes'),
                           ),
@@ -99,6 +100,7 @@ class _AppSettingsState extends State<AppSettings> {
                             () => Navigator.of(context).pop(),
                             () {},
                             Icon(Icons.cancel),
+                            Icon(Icons.cancel),
                             PlatformText('No'),
                           ),
                         ],
@@ -106,7 +108,7 @@ class _AppSettingsState extends State<AppSettings> {
                     ],
                   );
                 },
-                child: PlatformText('Reset all', style: getTextStyle(subTitleStyle)),
+                child: PlatformText('Reset all', style: getTextStyle(subTitleStyleKey)),
               ),
               Container(height: buttonSpacer),
             ],
@@ -118,7 +120,7 @@ class _AppSettingsState extends State<AppSettings> {
             'Font',
             [
               // Font family
-              PlatformText('Font family', style: getTextStyle(subTitleStyle)),
+              PlatformText('Font family', style: getTextStyle(subTitleStyleKey)),
               Container(height: buttonSpacer),
 
               FontFamilySetting(),
@@ -164,10 +166,10 @@ class _AppSettingsState extends State<AppSettings> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppUser.prefs[backImageKey]),
+      buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppUser.prefs[appBackgroundColorKey]),
+      Color(AppConfig.prefs[backColorKey]),
     );
   }
 }
