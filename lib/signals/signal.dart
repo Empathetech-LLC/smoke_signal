@@ -1,10 +1,10 @@
-import '../utils/custom-widgets.dart';
+import 'package:smoke_signal/utils/helpers.dart';
+
 import '../user/user-api.dart';
 import '../signals/signal-api.dart';
 import '../utils/constants.dart';
-import '../utils/storage.dart';
-import '../utils/text.dart';
-import '../utils/helpers.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -57,27 +57,41 @@ class _SignalState extends State<Signal> {
   late String showIconPref = signalTitle + 'ShowIcon';
   late String iconPathPref = signalTitle + 'Icon';
 
-  late bool showIcon = AppUser.preferences.getBool(showIconPref) ?? false;
-  late String iconPath = AppUser.preferences.getString(iconPathPref) ?? appIconPath;
+  late bool showIcon = AppConfig.preferences.getBool(showIconPref) ?? false;
+  late String iconPath = AppConfig.preferences.getString(iconPathPref) ?? appIconPath;
 
   // Gather theme data
-  late double dialogSpacer = AppUser.prefs[dialogSpacingKey];
-  late double signalSpacer = AppUser.prefs[signalSpacingKey];
+  late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
+  late double signalSpacer = AppConfig.prefs[signalSpacingKey];
 
-  late double signalHeight = AppUser.prefs[signalHeightKey];
-  late double signalCountHeight = AppUser.prefs[signalCountHeightKey];
+  late double signalHeight = AppConfig.prefs[signalHeightKey];
+  late double signalCountHeight = AppConfig.prefs[signalCountHeightKey];
 
-  late Color themeColor = Color(AppUser.prefs[themeColorKey]);
-  late Color themeTextColor = Color(AppUser.prefs[themeTextColorKey]);
+  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
-  late Color buttonColor = Color(AppUser.prefs[buttonColorKey]);
-  late Color buttonTextColor = Color(AppUser.prefs[buttonTextColorKey]);
+  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  late Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
 
-  late Color joinedColor = Color(AppUser.prefs[joinedColorKey]);
-  late Color joinedTextColor = Color(AppUser.prefs[joinedTextColorKey]);
+  late Color joinedColor = Color(AppConfig.prefs[joinedColorKey]);
+  late Color joinedTextColor = Color(AppConfig.prefs[joinedTextColorKey]);
 
-  late Color watchingColor = Color(AppUser.prefs[watchingColorKey]);
-  late Color watchingTextColor = Color(AppUser.prefs[watchingTextColorKey]);
+  late Color watchingColor = Color(AppConfig.prefs[watchingColorKey]);
+  late Color watchingTextColor = Color(AppConfig.prefs[watchingTextColorKey]);
+
+  late TextStyle titleTextStyle = getTextStyle(titleStyleKey);
+
+  late TextStyle joinedTextStyle = TextStyle(
+    fontFamily: titleTextStyle.fontFamily,
+    fontSize: titleTextStyle.fontSize,
+    color: AppConfig.prefs[joinedTextColorKey],
+  );
+
+  late TextStyle watchingTextStyle = TextStyle(
+    fontFamily: titleTextStyle.fontFamily,
+    fontSize: titleTextStyle.fontSize,
+    color: AppConfig.prefs[watchingTextColorKey],
+  );
 
   //// Interaction methods
 
@@ -103,6 +117,7 @@ class _SignalState extends State<Signal> {
               },
               () {},
               Icon(Icons.file_open),
+              Icon(Icons.file_open),
               PlatformText('File'),
             ),
             Container(height: dialogSpacer),
@@ -114,6 +129,7 @@ class _SignalState extends State<Signal> {
                 Navigator.of(context).pop();
               },
               () {},
+              Icon(Icons.camera_alt),
               Icon(Icons.camera_alt),
               PlatformText('Camera'),
             ),
@@ -136,7 +152,7 @@ class _SignalState extends State<Signal> {
                 }
 
                 // Wipe the shared pref
-                AppUser.preferences.remove(iconPathPref);
+                AppConfig.preferences.remove(iconPathPref);
                 Navigator.of(context).pop();
               },
               () {},
@@ -153,7 +169,7 @@ class _SignalState extends State<Signal> {
   void toggleIcon() {
     // Hide icon
     if (showIcon) {
-      AppUser.preferences.remove(showIconPref);
+      AppConfig.preferences.remove(showIconPref);
       setState(() {
         showIcon = false;
       });
@@ -161,7 +177,7 @@ class _SignalState extends State<Signal> {
 
     // Show icon
     else {
-      AppUser.preferences.setBool(showIconPref, true);
+      AppConfig.preferences.setBool(showIconPref, true);
       setState(() {
         showIcon = true;
       });
@@ -310,6 +326,7 @@ class _SignalState extends State<Signal> {
 
   // Default (no icon) signal styling
   Widget defaultSignal() {
+    TextStyle titleTextStyle = getTextStyle(titleStyleKey);
     bool joined = widget.activeMembers.contains(AppUser.account.uid);
 
     return ezButton(
@@ -323,7 +340,7 @@ class _SignalState extends State<Signal> {
       showEdits,
       PlatformText(
         signalTitle,
-        style: joined ? getTextStyle(joinedStyle) : getTextStyle(watchingStyle),
+        style: joined ? joinedTextStyle : watchingTextStyle,
         textAlign: TextAlign.center,
       ),
       defaultStyle(),
@@ -332,6 +349,7 @@ class _SignalState extends State<Signal> {
 
   // Signal styling when the icon is showing
   Widget iconSignal() {
+    TextStyle titleTextStyle = getTextStyle(titleStyleKey);
     bool joined = widget.activeMembers.contains(AppUser.account.uid);
 
     return ezButton(
@@ -351,7 +369,7 @@ class _SignalState extends State<Signal> {
           Container(
             width: signalHeight,
             height: signalHeight,
-            child: Card(child: buildImage(iconPath)),
+            child: Card(child: buildImage(iconPath, isAssetImage(iconPath))),
           ),
 
           // Title card
@@ -362,8 +380,7 @@ class _SignalState extends State<Signal> {
                 child: Center(
                   child: PlatformText(
                     signalTitle,
-                    style:
-                        joined ? getTextStyle(joinedStyle) : getTextStyle(watchingStyle),
+                    style: joined ? joinedTextStyle : watchingTextStyle,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -399,18 +416,24 @@ class _SignalState extends State<Signal> {
                 children: widget.activeMembers.contains(AppUser.account.uid)
                     ? [
                         // Show the current count surrounded by smoke signals
-                        buildImage(smokeSignalPath),
+                        buildImage(
+                          AppConfig.prefs[signalImageKey],
+                          isAssetImage(signalImageKey),
+                        ),
                         PlatformText(
                           widget.activeMembers.length.toString(),
-                          style: getTextStyle(joinedStyle),
+                          style: joinedTextStyle,
                         ),
-                        buildImage(smokeSignalPath),
+                        buildImage(
+                          AppConfig.prefs[signalImageKey],
+                          isAssetImage(signalImageKey),
+                        ),
                       ]
                     : [
                         // Only show the current count
                         PlatformText(
                           widget.activeMembers.length.toString(),
-                          style: getTextStyle(watchingStyle),
+                          style: watchingTextStyle,
                         ),
                       ],
               ),
@@ -434,7 +457,7 @@ class _SignalState extends State<Signal> {
             () {},
             PlatformText(
               'Join:\n$signalTitle?',
-              style: getTextStyle(watchingStyle),
+              style: watchingTextStyle,
               textAlign: TextAlign.center,
             ),
             defaultStyle(),
@@ -456,6 +479,7 @@ class _SignalState extends State<Signal> {
                   },
                   () {},
                   Icon(Icons.check),
+                  Icon(Icons.check),
                   PlatformText('Yes'),
                 ),
 
@@ -466,6 +490,7 @@ class _SignalState extends State<Signal> {
                     setState(() {});
                   },
                   () {},
+                  Icon(Icons.cancel),
                   Icon(Icons.cancel),
                   PlatformText('No'),
                 ),
