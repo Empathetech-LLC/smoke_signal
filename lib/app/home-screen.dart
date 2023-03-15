@@ -1,12 +1,13 @@
 import '../user/user-api.dart';
 import '../utils/constants.dart';
-import '../utils/notifications.dart';
 import '../utils/scaffolds.dart';
-import '../utils/storage.dart';
-import '../utils/custom-widgets.dart';
+import '../utils/helpers.dart';
 import '../signals/signal-board.dart';
 
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -50,11 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
   final String appBuild = 'appBuild';
 
   // Gather theme data
-  late Color themeColor = Color(AppUser.prefs[themeColorKey]);
-  late Color buttonColor = Color(AppUser.prefs[buttonColorKey]);
-  late Color themeTextColor = Color(AppUser.prefs[themeTextColorKey]);
+  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
-  late double buttonSpacer = AppUser.prefs[buttonSpacingKey];
+  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
   //// Draw state
 
@@ -71,7 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Body
         (type == loadingBuild)
-            ? loadingMessage(context)
+            ? loadingMessage(
+                context, buildImage(smokeSignalPath, isAssetImage(smokeSignalPath)))
             : // Show authBuild
             Center(
                 child: Column(
@@ -83,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       () => Navigator.of(context).pushNamed(loginRoute),
                       () {},
                       Icon(Icons.email),
+                      Icon(Icons.email),
                       PlatformText('Login'),
                     ),
                     Container(height: buttonSpacer),
@@ -92,6 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       () => Navigator.of(context).pushNamed(signupRoute),
                       () {},
                       Icon(Icons.email),
+                      Icon(Icons.email),
                       PlatformText('Sign up'),
                     ),
                   ],
@@ -99,13 +103,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
         // Background image/decoration
-        buildDecoration(AppUser.prefs[backImageKey]),
+        buildDecoration(AppConfig.prefs[backImageKey]),
 
         // Fallback background color
-        Color(AppUser.prefs[appBackgroundColorKey]),
+        Color(AppConfig.prefs[backColorKey]),
 
-        // Drawer aka settings hamburger
+        // Android drawer aka settings hamburger
         settingsDrawer(context),
+
+        // iOS nav (top) bar
+        CupertinoNavigationBar(),
       );
     }
   }
