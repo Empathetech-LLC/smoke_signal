@@ -32,6 +32,8 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   // Initialize app config
+  AppConfig.focus = FocusManager.instance;
+  AppConfig.preferences = await SharedPreferences.getInstance();
   AppConfig.init(customDefaults);
 
   // Setup notification service
@@ -41,9 +43,6 @@ void main() async {
   await Firebase.initializeApp();
 
   // Initialize app user
-  AppConfig.focus = FocusManager.instance;
-  AppConfig.preferences = await SharedPreferences.getInstance();
-
   AppUser.messager = FirebaseMessaging.instance;
   AppUser.auth = FirebaseAuth.instance;
 
