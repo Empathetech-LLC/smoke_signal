@@ -84,13 +84,13 @@ class _SignalState extends State<Signal> {
   late TextStyle joinedTextStyle = TextStyle(
     fontFamily: titleTextStyle.fontFamily,
     fontSize: titleTextStyle.fontSize,
-    color: AppConfig.prefs[joinedTextColorKey],
+    color: Color(AppConfig.prefs[joinedTextColorKey]),
   );
 
   late TextStyle watchingTextStyle = TextStyle(
     fontFamily: titleTextStyle.fontFamily,
     fontSize: titleTextStyle.fontSize,
-    color: AppConfig.prefs[watchingTextColorKey],
+    color: Color(AppConfig.prefs[watchingTextColorKey]),
   );
 
   //// Interaction methods
