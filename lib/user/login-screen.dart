@@ -1,6 +1,6 @@
 import '../utils/helpers.dart';
 import '../user/user-api.dart';
-import '../utils/scaffolds.dart';
+import '../utils/material-ui.dart';
 import '../utils/constants.dart';
 import '../utils/validate.dart';
 
@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Color(AppConfig.prefs[backColorKey]),
 
       // Android drawer aka settings hamburger
-      settingsDrawer(context),
+      standardDrawer(context),
 
       // iOS nav (top) bar
       null,

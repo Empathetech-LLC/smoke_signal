@@ -1,6 +1,6 @@
 import '../user/user-api.dart';
 import '../utils/constants.dart';
-import '../utils/scaffolds.dart';
+import '../utils/material-ui.dart';
 import '../utils/helpers.dart';
 import '../signals/signal-board.dart';
 
@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Color(AppConfig.prefs[backColorKey]),
 
         // Android drawer aka settings hamburger
-        settingsDrawer(context),
+        standardDrawer(context),
 
         // iOS nav (top) bar
         CupertinoNavigationBar(),

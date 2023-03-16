@@ -1,7 +1,7 @@
 import '../utils/helpers.dart';
 import '../utils/validate.dart';
 import '../user/user-api.dart';
-import '../utils/scaffolds.dart';
+import '../utils/material-ui.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -103,7 +103,7 @@ class _ResetScreenState extends State<ResetScreen> {
       Color(AppConfig.prefs[backColorKey]),
 
       // Android drawer aka settings hamburger
-      settingsDrawer(context),
+      standardDrawer(context),
 
       // iOS nav (top) bar
       null,
