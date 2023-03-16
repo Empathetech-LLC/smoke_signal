@@ -1,4 +1,3 @@
-import '../utils/scaffolds.dart';
 import '../utils/helpers.dart';
 import '../utils/constants.dart';
 import '../signals/signal.dart';
@@ -29,7 +28,7 @@ class _SignalBoardState extends State<SignalBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return signalBoardScaffold(
+    return standardScaffold(
       context,
 
       // Title
@@ -96,20 +95,17 @@ class _SignalBoardState extends State<SignalBoard> {
         ],
       ),
 
-      // Floating action tap: refresh
-      () => setState(() {}),
-
-      // Floating action on long press: reload
-      () => setState(() {
-        _signalStream = streamSignals(membersPath);
-        _requestStream = streamSignals(memberReqsPath);
-      }),
-
       // Background image/decoration
       buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
       Color(AppConfig.prefs[signalsBackgroundColorKey]),
+
+      // Android drawer aka settings hamburger
+      null,
+
+      // iOS nav (top) bar
+      null,
     );
   }
 }
