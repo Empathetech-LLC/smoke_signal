@@ -7,10 +7,10 @@ import '../user/user-api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 ////// These (can) cost money!! //////
 
@@ -178,7 +178,7 @@ void updateMessage(BuildContext context, String title) {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Confirm
-          ezIconButton(
+          ezTextIconButton(
             () async {
               // Don't do anything if the message is invalid
               if (!messageFormKey.currentState!.validate()) {
@@ -198,19 +198,19 @@ void updateMessage(BuildContext context, String title) {
               }
             },
             () {},
+            'Submit',
             Icon(Icons.check),
-            Icon(Icons.check),
-            Text('Submit'),
+            Icon(CupertinoIcons.check_mark),
           ),
           Container(height: AppConfig.prefs[dialogSpacingKey]),
 
           // Cancel
-          ezIconButton(
+          ezTextIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            'Cancel',
             Icon(Icons.cancel),
-            Icon(Icons.cancel),
-            Text('Cancel'),
+            Icon(CupertinoIcons.xmark),
           ),
         ],
       )
@@ -328,12 +328,12 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
           ),
 
           // Cancel
-          ezIconButton(
+          ezTextIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            'Cancel',
             Icon(Icons.cancel),
-            Icon(Icons.cancel),
-            Text('Cancel'),
+            Icon(CupertinoIcons.xmark),
           ),
         ],
       ),
@@ -352,7 +352,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Confirm
-          ezIconButton(
+          ezTextIconButton(
             () async {
               Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
               try {
@@ -368,19 +368,19 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
               }
             },
             () {},
+            'Yes',
             Icon(Icons.check),
-            Icon(Icons.check),
-            Text('Yes'),
+            Icon(CupertinoIcons.check_mark),
           ),
           Container(height: AppConfig.prefs[dialogSpacingKey]),
 
           // Cancel
-          ezIconButton(
+          ezTextIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            'No',
             Icon(Icons.cancel),
-            Icon(Icons.cancel),
-            Text('No'),
+            Icon(CupertinoIcons.xmark),
           ),
         ],
       ),
@@ -399,7 +399,7 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Confirm
-          ezIconButton(
+          ezTextIconButton(
             () async {
               Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
               try {
@@ -419,19 +419,19 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
               }
             },
             () {},
+            'Yes',
             Icon(Icons.check),
-            Icon(Icons.check),
-            Text('Yes'),
+            Icon(CupertinoIcons.check_mark),
           ),
           Container(height: AppConfig.prefs[dialogSpacingKey]),
 
           // Cancel
-          ezIconButton(
+          ezTextIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            'No',
             Icon(Icons.cancel),
-            Icon(Icons.cancel),
-            Text('No'),
+            Icon(CupertinoIcons.xmark),
           ),
         ],
       ),

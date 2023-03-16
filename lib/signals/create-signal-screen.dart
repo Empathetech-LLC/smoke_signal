@@ -7,9 +7,9 @@ import '../signals/signal-api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class CreateSignalScreen extends StatefulWidget {
   const CreateSignalScreen({Key? key}) : super(key: key);
@@ -197,7 +197,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
           Container(height: buttonSpacer),
 
           // Add button
-          ezIconButton(
+          ezTextIconButton(
             () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();
@@ -223,9 +223,9 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
               Navigator.of(context).pop();
             },
             () {},
+            'Done',
             Icon(Icons.upload),
-            Icon(Icons.upload),
-            Text('Done'),
+            Icon(CupertinoIcons.upload_circle),
           ),
           Container(height: buttonSpacer),
         ],

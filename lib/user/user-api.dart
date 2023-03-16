@@ -5,6 +5,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -123,25 +124,25 @@ void logout(BuildContext context) {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Yes
-          ezIconButton(
+          ezTextIconButton(
             () async {
               Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
               await AppUser.auth.signOut();
             },
             () {},
+            'Yes',
             Icon(Icons.check),
-            Icon(Icons.check),
-            Text('Yes'),
+            Icon(CupertinoIcons.check_mark),
           ),
           Container(height: dialogSpacer),
 
           // No
-          ezIconButton(
+          ezTextIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            'No',
             Icon(Icons.cancel),
-            Icon(Icons.cancel),
-            Text('No'),
+            Icon(CupertinoIcons.xmark),
           ),
           Container(height: dialogSpacer),
         ],
@@ -340,7 +341,7 @@ void editAvatar(BuildContext context) {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Submit
-          ezTextButton(
+          ezTextIconButton(
             () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();
@@ -363,15 +364,17 @@ void editAvatar(BuildContext context) {
             },
             () {},
             'Submit',
+            Icon(Icons.check),
+            Icon(CupertinoIcons.check_mark),
           ),
 
           // Cancel
-          ezIconButton(
+          ezTextIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            'Cancel',
             Icon(Icons.cancel),
-            Icon(Icons.cancel),
-            Text('Cancel'),
+            Icon(CupertinoIcons.xmark),
           ),
         ],
       ),
@@ -408,7 +411,7 @@ void editName(BuildContext context) {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Submit
-          ezIconButton(
+          ezTextIconButton(
             () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();
@@ -430,18 +433,18 @@ void editName(BuildContext context) {
               );
             },
             () {},
+            'Submit',
             Icon(Icons.check),
-            Icon(Icons.check),
-            Text('Submit'),
+            Icon(CupertinoIcons.check_mark),
           ),
 
           // Cancel
-          ezIconButton(
+          ezTextIconButton(
             () => Navigator.of(context).pop(),
             () {},
+            'Cancel',
             Icon(Icons.cancel),
-            Icon(Icons.cancel),
-            Text('Cancel'),
+            Icon(CupertinoIcons.xmark),
           )
         ],
       ),

@@ -5,8 +5,8 @@ import '../user/user-api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ProfileSettingsScreen extends StatefulWidget {
   const ProfileSettingsScreen({super.key});
@@ -46,15 +46,15 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
             Container(height: buttonSpacer),
 
             // Edit picture
-            ezIconButton(
+            ezTextIconButton(
               () {
                 editAvatar(context);
                 setState(() {});
               },
               () {},
+              'New pic',
               Icon(Icons.camera),
-              Icon(Icons.camera),
-              Text('New pic'),
+              Icon(CupertinoIcons.camera),
             ),
 
             Container(height: 1.5 * buttonSpacer),
@@ -67,15 +67,15 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
             Container(height: buttonSpacer),
 
             // Edit name
-            ezIconButton(
+            ezTextIconButton(
               () {
                 editName(context);
                 setState(() {});
               },
               () {},
+              'New name',
               Icon(Icons.draw),
-              Icon(Icons.draw),
-              Text('New name'),
+              Icon(CupertinoIcons.hand_draw),
             ),
 
             Container(height: buttonSpacer),

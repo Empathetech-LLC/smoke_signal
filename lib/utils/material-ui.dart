@@ -4,6 +4,7 @@ import 'constants.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 Drawer standardDrawer(BuildContext context) {
@@ -23,15 +24,15 @@ Drawer standardDrawer(BuildContext context) {
         ),
 
         // GoTo settings
-        ezIconButton(
+        ezTextIconButton(
           () => Navigator.of(context).popAndPushNamed(
             settingsRoute,
             arguments: {indexArg: 0},
           ),
           () {},
-          Icon(Icons.edit),
-          Icon(Icons.edit),
-          Text('Settings'),
+          'Settings',
+          Icon(Icons.settings),
+          Icon(CupertinoIcons.settings),
         ),
         Container(height: buttonSpacer),
 
@@ -117,25 +118,25 @@ Drawer signalBoardDrawer(BuildContext context) {
         Container(height: buttonSpacer),
 
         // Add new signal
-        ezIconButton(
+        ezTextIconButton(
           () => Navigator.of(context).popAndPushNamed(createSignalRoute),
           () {},
+          'New',
           Icon(Icons.add),
-          Icon(Icons.add),
-          Text('New'),
+          Icon(CupertinoIcons.add),
         ),
         Container(height: buttonSpacer),
 
         // GoTo settings
-        ezIconButton(
+        ezTextIconButton(
           () => Navigator.of(context).popAndPushNamed(
             settingsRoute,
             arguments: {indexArg: 1},
           ),
           () {},
+          'Settings',
           Icon(Icons.settings),
-          Icon(Icons.settings),
-          Text('Settings'),
+          Icon(CupertinoIcons.settings),
         ),
         Container(height: buttonSpacer),
 

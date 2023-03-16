@@ -11,7 +11,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -81,22 +80,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     // Login
-                    ezIconButton(
+                    ezTextIconButton(
                       () => Navigator.of(context).pushNamed(loginRoute),
                       () {},
+                      'Login',
                       Icon(Icons.email),
-                      Icon(Icons.email),
-                      Text('Login'),
+                      Icon(CupertinoIcons.mail),
                     ),
                     Container(height: buttonSpacer),
 
                     // Sign up
-                    ezIconButton(
+                    ezTextIconButton(
                       () => Navigator.of(context).pushNamed(signupRoute),
                       () {},
+                      'Sign up',
                       Icon(Icons.email),
-                      Icon(Icons.email),
-                      Text('Sign up'),
+                      Icon(CupertinoIcons.mail),
                     ),
                   ],
                 ),

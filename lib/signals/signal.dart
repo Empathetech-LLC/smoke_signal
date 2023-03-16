@@ -8,6 +8,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path_provider/path_provider.dart';
@@ -110,28 +111,28 @@ class _SignalState extends State<Signal> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // From file
-            ezIconButton(
+            ezTextIconButton(
               () {
                 changeImage(context, iconPathPref, ImageSource.gallery);
                 Navigator.of(context).pop();
               },
               () {},
+              'File',
               Icon(Icons.file_open),
-              Icon(Icons.file_open),
-              Text('File', style: buttonTextStyle),
+              Icon(CupertinoIcons.folder_open),
             ),
             Container(height: dialogSpacer),
 
             // From camera
-            ezIconButton(
+            ezTextIconButton(
               () {
                 changeImage(context, iconPathPref, ImageSource.camera);
                 Navigator.of(context).pop();
               },
               () {},
+              'Camera',
               Icon(Icons.camera_alt),
-              Icon(Icons.camera_alt),
-              Text('Camera', style: buttonTextStyle),
+              Icon(CupertinoIcons.camera),
             ),
             Container(height: dialogSpacer),
 
@@ -465,27 +466,27 @@ class _SignalState extends State<Signal> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 // Yes
-                ezIconButton(
+                ezTextIconButton(
                   () async {
                     await acceptInvite(context, signalTitle);
                     setState(() {});
                   },
                   () {},
+                  'Yes',
                   Icon(Icons.check),
-                  Icon(Icons.check),
-                  Text('Yes'),
+                  Icon(CupertinoIcons.check_mark),
                 ),
 
                 // No
-                ezIconButton(
+                ezTextIconButton(
                   () async {
                     await declineInvite(context, signalTitle);
                     setState(() {});
                   },
                   () {},
+                  'No',
                   Icon(Icons.cancel),
-                  Icon(Icons.cancel),
-                  Text('No'),
+                  Icon(CupertinoIcons.xmark),
                 ),
               ],
             ),

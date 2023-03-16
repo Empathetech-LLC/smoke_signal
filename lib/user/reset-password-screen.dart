@@ -6,7 +6,7 @@ import '../utils/material-ui.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter/cupertino.dart';
 
 class ResetScreen extends StatefulWidget {
   const ResetScreen({super.key});
@@ -57,7 +57,7 @@ class _ResetScreenState extends State<ResetScreen> {
             Container(height: buttonSpacer),
 
             // Submit button
-            ezIconButton(
+            ezTextIconButton(
               () async {
                 // Close keyboard if open
                 AppConfig.focus.primaryFocus?.unfocus();
@@ -78,9 +78,9 @@ class _ResetScreenState extends State<ResetScreen> {
                 }
               },
               () {},
+              'Send link',
               Icon(Icons.email),
-              Icon(Icons.email),
-              Text('Send link'),
+              Icon(CupertinoIcons.mail),
             ),
             Container(height: buttonSpacer),
           ],
