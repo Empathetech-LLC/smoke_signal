@@ -5,7 +5,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 Drawer standardDrawer(BuildContext context) {
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
