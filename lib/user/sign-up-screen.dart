@@ -6,7 +6,6 @@ import '../utils/material-ui.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -77,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Container(height: buttonSpacer),
 
             // Attempt sign up button
-            ezButton(
+            ezTextButton(
               () async {
                 // Close keyboard if open
                 AppConfig.focus.primaryFocus?.unfocus();
@@ -96,7 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 );
               },
               () {},
-              Text('Sign up'),
+              'Sign up',
             ),
           ],
         ),

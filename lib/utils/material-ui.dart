@@ -36,7 +36,7 @@ Drawer standardDrawer(BuildContext context) {
         Container(height: buttonSpacer),
 
         // Show input rules
-        ezButton(
+        ezTextButton(
           () => ezDialog(
             context,
             'Input rules',
@@ -49,7 +49,7 @@ Drawer standardDrawer(BuildContext context) {
             ],
           ),
           () {},
-          Text('Input rules'),
+          'Input rules',
         ),
         Container(height: buttonSpacer),
       ],
@@ -140,7 +140,7 @@ Drawer signalBoardDrawer(BuildContext context) {
         Container(height: buttonSpacer),
 
         // Show input rules
-        ezButton(
+        ezTextButton(
           () => ezDialog(
             context,
             'Input rules',
@@ -153,7 +153,7 @@ Drawer signalBoardDrawer(BuildContext context) {
             ],
           ),
           () {},
-          Text('Input rules'),
+          'Input rules',
         ),
         Container(height: buttonSpacer),
       ],

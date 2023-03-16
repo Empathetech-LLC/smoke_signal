@@ -78,6 +78,7 @@ class _SignalState extends State<Signal> {
   late Color watchingColor = Color(AppConfig.prefs[watchingColorKey]);
   late Color watchingTextColor = Color(AppConfig.prefs[watchingTextColorKey]);
 
+  late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
   late TextStyle titleTextStyle = getTextStyle(titleStyleKey);
 
   late TextStyle joinedTextStyle = TextStyle(
@@ -117,7 +118,7 @@ class _SignalState extends State<Signal> {
               () {},
               Icon(Icons.file_open),
               Icon(Icons.file_open),
-              Text('File'),
+              Text('File', style: buttonTextStyle),
             ),
             Container(height: dialogSpacer),
 
@@ -130,12 +131,12 @@ class _SignalState extends State<Signal> {
               () {},
               Icon(Icons.camera_alt),
               Icon(Icons.camera_alt),
-              Text('Camera'),
+              Text('Camera', style: buttonTextStyle),
             ),
             Container(height: dialogSpacer),
 
             // Reset
-            ezButton(
+            ezTextButton(
               () async {
                 // Build path
                 Directory currDir = await getApplicationDocumentsDirectory();
@@ -155,7 +156,7 @@ class _SignalState extends State<Signal> {
                 Navigator.of(context).pop();
               },
               () {},
-              Text('Reset'),
+              'Reset',
             ),
             Container(height: dialogSpacer),
           ],
@@ -198,7 +199,7 @@ class _SignalState extends State<Signal> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // Manage members
-            ezButton(
+            ezTextButton(
               () => Navigator.of(context).popAndPushNamed(
                 signalMembersRoute,
                 arguments: {
@@ -209,16 +210,16 @@ class _SignalState extends State<Signal> {
                 },
               ),
               () {},
-              Text('Members'),
+              'Members',
             ),
             Container(height: dialogSpacer),
 
             // Set icon
-            ezButton(setIcon, () {}, Text('Set icon')),
+            ezTextButton(setIcon, () {}, 'Set icon'),
             Container(height: dialogSpacer),
 
             // Show/hide icon
-            ezButton(toggleIcon, () {}, Text('Toggle icon')),
+            ezTextButton(toggleIcon, () {}, 'Toggle icon'),
             Container(height: dialogSpacer),
 
             // Owner: Reset count, update message, transfer signal, or delete signal
@@ -228,51 +229,51 @@ class _SignalState extends State<Signal> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: AppUser.account.uid == widget.owner
                   ? [
-                      ezButton(
+                      ezTextButton(
                         () async {
                           await resetSignal(context, signalTitle);
                           Navigator.of(context).pop();
                         },
                         () {},
-                        Text('Reset signal'),
+                        'Reset signal',
                       ),
                       Container(height: dialogSpacer),
-                      ezButton(
+                      ezTextButton(
                         () => updateMessage(context, signalTitle),
                         () {},
-                        Text('Update message'),
+                        'Update message',
                       ),
                       Container(height: dialogSpacer),
-                      ezButton(
+                      ezTextButton(
                         () => confirmTransfer(
                           context,
                           signalTitle,
                           widget.members,
                         ),
                         () {},
-                        Text('Transfer signal'),
+                        'Transfer signal',
                       ),
                       Container(height: dialogSpacer),
-                      ezButton(
+                      ezTextButton(
                         () => confirmDelete(
                           context,
                           signalTitle,
                           [showIconPref, iconPathPref],
                         ),
                         () {},
-                        Text('Delete signal'),
+                        'Delete signal',
                       ),
                       Container(height: dialogSpacer),
                     ]
                   : [
-                      ezButton(
+                      ezTextButton(
                         () => confirmDeparture(
                           context,
                           signalTitle,
                           [showIconPref, iconPathPref],
                         ),
                         () {},
-                        Text('Leave signal'),
+                        'Leave signal',
                       ),
                       Container(height: dialogSpacer),
                     ],
@@ -327,7 +328,7 @@ class _SignalState extends State<Signal> {
   Widget defaultSignal() {
     bool joined = widget.activeMembers.contains(AppUser.account.uid);
 
-    return ezButton(
+    return ezTextButton(
       () => toggleParticipation(
         context,
         joined,
@@ -336,11 +337,8 @@ class _SignalState extends State<Signal> {
         widget.message,
       ),
       showEdits,
-      Text(
-        signalTitle,
-        style: joined ? joinedTextStyle : watchingTextStyle,
-        textAlign: TextAlign.center,
-      ),
+      signalTitle,
+      joined ? joinedTextStyle : watchingTextStyle,
       defaultStyle(),
     );
   }
@@ -450,14 +448,11 @@ class _SignalState extends State<Signal> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Label
-          ezButton(
+          ezTextButton(
             () {},
             () {},
-            Text(
-              'Join:\n$signalTitle?',
-              style: watchingTextStyle,
-              textAlign: TextAlign.center,
-            ),
+            'Join:\n$signalTitle?',
+            watchingTextStyle,
             defaultStyle(),
           ),
 

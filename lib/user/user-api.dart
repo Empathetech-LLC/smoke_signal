@@ -9,7 +9,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 ////// Wrapper classes //////
 
@@ -341,7 +340,7 @@ void editAvatar(BuildContext context) {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Submit
-          ezButton(
+          ezTextButton(
             () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();
@@ -363,7 +362,7 @@ void editAvatar(BuildContext context) {
               );
             },
             () {},
-            Text('Submit'),
+            'Submit',
           ),
 
           // Cancel

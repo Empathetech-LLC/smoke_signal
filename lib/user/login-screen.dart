@@ -7,7 +7,6 @@ import '../utils/validate.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -93,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(height: buttonSpacer),
 
             // Attempt login button
-            ezButton(
+            ezTextButton(
               () async {
                 // Close keyboard if open
                 AppConfig.focus.primaryFocus?.unfocus();
@@ -111,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               },
               () {},
-              Text('Login'),
+              'Login',
             ),
           ],
         ),
