@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-Widget standardDrawer(BuildContext context) {
+Drawer standardDrawer(BuildContext context) {
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
   return Drawer(
@@ -58,7 +58,7 @@ Widget standardDrawer(BuildContext context) {
   );
 }
 
-Widget signalBoardDrawer(BuildContext context) {
+Drawer signalBoardDrawer(BuildContext context) {
   double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
   return Drawer(
