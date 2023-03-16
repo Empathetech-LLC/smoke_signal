@@ -1,3 +1,4 @@
+import '../utils/material-ui.dart';
 import '../utils/helpers.dart';
 import '../utils/constants.dart';
 import '../signals/signal.dart';
@@ -102,7 +103,7 @@ class _SignalBoardState extends State<SignalBoard> {
       Color(AppConfig.prefs[signalsBackgroundColorKey]),
 
       // Android drawer aka settings hamburger
-      null,
+      signalBoardDrawer(context),
 
       // iOS nav (top) bar
       null,
