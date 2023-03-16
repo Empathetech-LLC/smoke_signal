@@ -417,7 +417,7 @@ class _SignalState extends State<Signal> {
                         // Show the current count surrounded by smoke signals
                         buildImage(
                           AppConfig.prefs[signalImageKey],
-                          isAssetImage(signalImageKey),
+                          isAssetImage(AppConfig.prefs[signalImageKey]),
                         ),
                         PlatformText(
                           widget.activeMembers.length.toString(),
@@ -425,7 +425,7 @@ class _SignalState extends State<Signal> {
                         ),
                         buildImage(
                           AppConfig.prefs[signalImageKey],
-                          isAssetImage(signalImageKey),
+                          isAssetImage(AppConfig.prefs[signalImageKey]),
                         ),
                       ]
                     : [
