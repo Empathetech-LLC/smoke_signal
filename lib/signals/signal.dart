@@ -326,7 +326,6 @@ class _SignalState extends State<Signal> {
 
   // Default (no icon) signal styling
   Widget defaultSignal() {
-    TextStyle titleTextStyle = getTextStyle(titleStyleKey);
     bool joined = widget.activeMembers.contains(AppUser.account.uid);
 
     return ezButton(
