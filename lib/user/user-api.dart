@@ -132,7 +132,7 @@ void logout(BuildContext context) {
             () {},
             Icon(Icons.check),
             Icon(Icons.check),
-            PlatformText('Yes'),
+            Text('Yes'),
           ),
           Container(height: dialogSpacer),
 
@@ -142,7 +142,7 @@ void logout(BuildContext context) {
             () {},
             Icon(Icons.cancel),
             Icon(Icons.cancel),
-            PlatformText('No'),
+            Text('No'),
           ),
           Container(height: dialogSpacer),
         ],
@@ -327,7 +327,7 @@ void editAvatar(BuildContext context) {
       Container(height: dialogSpacer),
 
       // Explanation for not using image files
-      PlatformText(
+      Text(
         'Images are expensive to store!\nPaste an image link and that will be used',
         maxLines: 2,
         style: getTextStyle(dialogContentStyleKey),
@@ -363,7 +363,7 @@ void editAvatar(BuildContext context) {
               );
             },
             () {},
-            PlatformText('Submit'),
+            Text('Submit'),
           ),
 
           // Cancel
@@ -372,7 +372,7 @@ void editAvatar(BuildContext context) {
             () {},
             Icon(Icons.cancel),
             Icon(Icons.cancel),
-            PlatformText('Cancel'),
+            Text('Cancel'),
           ),
         ],
       ),
@@ -433,7 +433,7 @@ void editName(BuildContext context) {
             () {},
             Icon(Icons.check),
             Icon(Icons.check),
-            PlatformText('Submit'),
+            Text('Submit'),
           ),
 
           // Cancel
@@ -442,7 +442,7 @@ void editName(BuildContext context) {
             () {},
             Icon(Icons.cancel),
             Icon(Icons.cancel),
-            PlatformText('Cancel'),
+            Text('Cancel'),
           )
         ],
       ),

@@ -32,7 +32,7 @@ Drawer standardDrawer(BuildContext context) {
           () {},
           Icon(Icons.edit),
           Icon(Icons.edit),
-          PlatformText('Settings'),
+          Text('Settings'),
         ),
         Container(height: buttonSpacer),
 
@@ -42,7 +42,7 @@ Drawer standardDrawer(BuildContext context) {
             context,
             'Input rules',
             [
-              PlatformText(
+              Text(
                 validatorRule,
                 style: getTextStyle(dialogContentStyleKey),
                 textAlign: TextAlign.center,
@@ -50,7 +50,7 @@ Drawer standardDrawer(BuildContext context) {
             ],
           ),
           () {},
-          PlatformText('Input rules'),
+          Text('Input rules'),
         ),
         Container(height: buttonSpacer),
       ],
@@ -85,7 +85,7 @@ Drawer signalBoardDrawer(BuildContext context) {
                   ),
 
                   // Profile name
-                  PlatformText(
+                  Text(
                     AppUser.account.displayName ?? defaultDisplayName,
                     style: getTextStyle(dialogTitleStyleKey),
                   ),
@@ -123,7 +123,7 @@ Drawer signalBoardDrawer(BuildContext context) {
           () {},
           Icon(Icons.add),
           Icon(Icons.add),
-          PlatformText('New'),
+          Text('New'),
         ),
         Container(height: buttonSpacer),
 
@@ -136,7 +136,7 @@ Drawer signalBoardDrawer(BuildContext context) {
           () {},
           Icon(Icons.settings),
           Icon(Icons.settings),
-          PlatformText('Settings'),
+          Text('Settings'),
         ),
         Container(height: buttonSpacer),
 
@@ -146,7 +146,7 @@ Drawer signalBoardDrawer(BuildContext context) {
             context,
             'Input rules',
             [
-              PlatformText(
+              Text(
                 validatorRule,
                 style: getTextStyle(dialogContentStyleKey),
                 textAlign: TextAlign.center,
@@ -154,7 +154,7 @@ Drawer signalBoardDrawer(BuildContext context) {
             ],
           ),
           () {},
-          PlatformText('Input rules'),
+          Text('Input rules'),
         ),
         Container(height: buttonSpacer),
       ],

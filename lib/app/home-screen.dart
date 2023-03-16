@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       () {},
                       Icon(Icons.email),
                       Icon(Icons.email),
-                      PlatformText('Login'),
+                      Text('Login'),
                     ),
                     Container(height: buttonSpacer),
 
@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       () {},
                       Icon(Icons.email),
                       Icon(Icons.email),
-                      PlatformText('Sign up'),
+                      Text('Sign up'),
                     ),
                   ],
                 ),

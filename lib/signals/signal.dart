@@ -118,7 +118,7 @@ class _SignalState extends State<Signal> {
               () {},
               Icon(Icons.file_open),
               Icon(Icons.file_open),
-              PlatformText('File'),
+              Text('File'),
             ),
             Container(height: dialogSpacer),
 
@@ -131,7 +131,7 @@ class _SignalState extends State<Signal> {
               () {},
               Icon(Icons.camera_alt),
               Icon(Icons.camera_alt),
-              PlatformText('Camera'),
+              Text('Camera'),
             ),
             Container(height: dialogSpacer),
 
@@ -156,7 +156,7 @@ class _SignalState extends State<Signal> {
                 Navigator.of(context).pop();
               },
               () {},
-              PlatformText('Reset'),
+              Text('Reset'),
             ),
             Container(height: dialogSpacer),
           ],
@@ -210,16 +210,16 @@ class _SignalState extends State<Signal> {
                 },
               ),
               () {},
-              PlatformText('Members'),
+              Text('Members'),
             ),
             Container(height: dialogSpacer),
 
             // Set icon
-            ezButton(setIcon, () {}, PlatformText('Set icon')),
+            ezButton(setIcon, () {}, Text('Set icon')),
             Container(height: dialogSpacer),
 
             // Show/hide icon
-            ezButton(toggleIcon, () {}, PlatformText('Toggle icon')),
+            ezButton(toggleIcon, () {}, Text('Toggle icon')),
             Container(height: dialogSpacer),
 
             // Owner: Reset count, update message, transfer signal, or delete signal
@@ -235,13 +235,13 @@ class _SignalState extends State<Signal> {
                           Navigator.of(context).pop();
                         },
                         () {},
-                        PlatformText('Reset signal'),
+                        Text('Reset signal'),
                       ),
                       Container(height: dialogSpacer),
                       ezButton(
                         () => updateMessage(context, signalTitle),
                         () {},
-                        PlatformText('Update message'),
+                        Text('Update message'),
                       ),
                       Container(height: dialogSpacer),
                       ezButton(
@@ -251,7 +251,7 @@ class _SignalState extends State<Signal> {
                           widget.members,
                         ),
                         () {},
-                        PlatformText('Transfer signal'),
+                        Text('Transfer signal'),
                       ),
                       Container(height: dialogSpacer),
                       ezButton(
@@ -261,7 +261,7 @@ class _SignalState extends State<Signal> {
                           [showIconPref, iconPathPref],
                         ),
                         () {},
-                        PlatformText('Delete signal'),
+                        Text('Delete signal'),
                       ),
                       Container(height: dialogSpacer),
                     ]
@@ -273,7 +273,7 @@ class _SignalState extends State<Signal> {
                           [showIconPref, iconPathPref],
                         ),
                         () {},
-                        PlatformText('Leave signal'),
+                        Text('Leave signal'),
                       ),
                       Container(height: dialogSpacer),
                     ],
@@ -337,7 +337,7 @@ class _SignalState extends State<Signal> {
         widget.message,
       ),
       showEdits,
-      PlatformText(
+      Text(
         signalTitle,
         style: joined ? joinedTextStyle : watchingTextStyle,
         textAlign: TextAlign.center,
@@ -377,7 +377,7 @@ class _SignalState extends State<Signal> {
               child: Card(
                 color: joined ? joinedColor : watchingColor,
                 child: Center(
-                  child: PlatformText(
+                  child: Text(
                     signalTitle,
                     style: joined ? joinedTextStyle : watchingTextStyle,
                     textAlign: TextAlign.center,
@@ -419,7 +419,7 @@ class _SignalState extends State<Signal> {
                           AppConfig.prefs[signalImageKey],
                           isAssetImage(AppConfig.prefs[signalImageKey]),
                         ),
-                        PlatformText(
+                        Text(
                           widget.activeMembers.length.toString(),
                           style: joinedTextStyle,
                         ),
@@ -430,7 +430,7 @@ class _SignalState extends State<Signal> {
                       ]
                     : [
                         // Only show the current count
-                        PlatformText(
+                        Text(
                           widget.activeMembers.length.toString(),
                           style: watchingTextStyle,
                         ),
@@ -454,7 +454,7 @@ class _SignalState extends State<Signal> {
           ezButton(
             () {},
             () {},
-            PlatformText(
+            Text(
               'Join:\n$signalTitle?',
               style: watchingTextStyle,
               textAlign: TextAlign.center,
@@ -479,7 +479,7 @@ class _SignalState extends State<Signal> {
                   () {},
                   Icon(Icons.check),
                   Icon(Icons.check),
-                  PlatformText('Yes'),
+                  Text('Yes'),
                 ),
 
                 // No
@@ -491,7 +491,7 @@ class _SignalState extends State<Signal> {
                   () {},
                   Icon(Icons.cancel),
                   Icon(Icons.cancel),
-                  PlatformText('No'),
+                  Text('No'),
                 ),
               ],
             ),

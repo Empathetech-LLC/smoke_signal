@@ -141,7 +141,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              PlatformText(
+              Text(
                 'Currently active?',
                 style: getTextStyle(dialogTitleStyleKey),
               ),
@@ -225,7 +225,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             () {},
             Icon(Icons.upload),
             Icon(Icons.upload),
-            PlatformText('Done'),
+            Text('Done'),
           ),
           Container(height: buttonSpacer),
         ],

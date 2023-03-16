@@ -96,7 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 );
               },
               () {},
-              PlatformText('Sign up'),
+              Text('Sign up'),
             ),
           ],
         ),

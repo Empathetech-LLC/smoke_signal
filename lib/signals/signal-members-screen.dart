@@ -127,7 +127,7 @@ class _SignalMembersState extends State<SignalMembers> {
             Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
           },
           () {},
-          PlatformText('Send requests'),
+          Text('Send requests'),
         ),
         Container(height: dialogSpacer),
       ],
@@ -205,7 +205,7 @@ class _SignalMembersState extends State<SignalMembers> {
             default:
               if (snapshot.hasError) {
                 return Center(
-                  child: PlatformText(
+                  child: Text(
                     snapshot.error.toString(),
                     style: getTextStyle(errorStyleKey),
                   ),

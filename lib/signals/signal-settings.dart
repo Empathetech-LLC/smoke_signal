@@ -48,7 +48,7 @@ class _SignalSettingsState extends State<SignalSettings> {
             'Color',
             [
               // User hint: hold the buttons to reset the color
-              PlatformText('Hold to reset', style: getTextStyle(dialogContentStyleKey)),
+              Text('Hold to reset', style: getTextStyle(dialogContentStyleKey)),
               Container(height: AppConfig.prefs[paddingKey]),
 
               // Background color
@@ -96,7 +96,7 @@ class _SignalSettingsState extends State<SignalSettings> {
                             () {},
                             Icon(Icons.check),
                             Icon(Icons.check),
-                            PlatformText('Yes'),
+                            Text('Yes'),
                           ),
 
                           // No
@@ -105,14 +105,14 @@ class _SignalSettingsState extends State<SignalSettings> {
                             () {},
                             Icon(Icons.cancel),
                             Icon(Icons.cancel),
-                            PlatformText('No'),
+                            Text('No'),
                           ),
                         ],
                       ),
                     ],
                   );
                 },
-                child: PlatformText('Reset all', style: getTextStyle(subTitleStyleKey)),
+                child: Text('Reset all', style: getTextStyle(subTitleStyleKey)),
               ),
               Container(height: buttonSpacer),
             ],

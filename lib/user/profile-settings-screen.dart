@@ -54,13 +54,13 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               () {},
               Icon(Icons.camera),
               Icon(Icons.camera),
-              PlatformText('New pic'),
+              Text('New pic'),
             ),
 
             Container(height: 1.5 * buttonSpacer),
 
             // Display name
-            PlatformText(
+            Text(
               AppUser.account.displayName ?? defaultDisplayName,
               style: getTextStyle(titleStyleKey),
             ),
@@ -75,7 +75,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               () {},
               Icon(Icons.draw),
               Icon(Icons.draw),
-              PlatformText('New name'),
+              Text('New name'),
             ),
 
             Container(height: buttonSpacer),

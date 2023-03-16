@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // Forgot password option
             GestureDetector(
               onTap: () => Navigator.of(context).pushNamed(resetPasswordRoute),
-              child: PlatformText(
+              child: Text(
                 'Forgot your password?',
                 style: TextStyle(
                   color: contents.color,
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               },
               () {},
-              PlatformText('Login'),
+              Text('Login'),
             ),
           ],
         ),

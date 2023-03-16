@@ -200,7 +200,7 @@ void updateMessage(BuildContext context, String title) {
             () {},
             Icon(Icons.check),
             Icon(Icons.check),
-            PlatformText('Submit'),
+            Text('Submit'),
           ),
           Container(height: AppConfig.prefs[dialogSpacingKey]),
 
@@ -210,7 +210,7 @@ void updateMessage(BuildContext context, String title) {
             () {},
             Icon(Icons.cancel),
             Icon(Icons.cancel),
-            PlatformText('Cancel'),
+            Text('Cancel'),
           ),
         ],
       )
@@ -315,7 +315,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
                 default:
                   if (snapshot.hasError) {
                     return Center(
-                      child: PlatformText(
+                      child: Text(
                         snapshot.error.toString(),
                         style: getTextStyle(errorStyleKey),
                       ),
@@ -333,7 +333,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
             () {},
             Icon(Icons.cancel),
             Icon(Icons.cancel),
-            PlatformText('Cancel'),
+            Text('Cancel'),
           ),
         ],
       ),
@@ -370,7 +370,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
             () {},
             Icon(Icons.check),
             Icon(Icons.check),
-            PlatformText('Yes'),
+            Text('Yes'),
           ),
           Container(height: AppConfig.prefs[dialogSpacingKey]),
 
@@ -380,7 +380,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
             () {},
             Icon(Icons.cancel),
             Icon(Icons.cancel),
-            PlatformText('No'),
+            Text('No'),
           ),
         ],
       ),
@@ -421,7 +421,7 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
             () {},
             Icon(Icons.check),
             Icon(Icons.check),
-            PlatformText('Yes'),
+            Text('Yes'),
           ),
           Container(height: AppConfig.prefs[dialogSpacingKey]),
 
@@ -431,7 +431,7 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
             () {},
             Icon(Icons.cancel),
             Icon(Icons.cancel),
-            PlatformText('No'),
+            Text('No'),
           ),
         ],
       ),

@@ -47,7 +47,7 @@ class _AppSettingsState extends State<AppSettings> {
             'Color',
             [
               // User hint: hold the buttons to reset the color
-              PlatformText('Hold to reset', style: getTextStyle(dialogContentStyleKey)),
+              Text('Hold to reset', style: getTextStyle(dialogContentStyleKey)),
               Container(height: AppConfig.prefs[paddingKey]),
 
               // Background
@@ -92,7 +92,7 @@ class _AppSettingsState extends State<AppSettings> {
                             () {},
                             Icon(Icons.check),
                             Icon(Icons.check),
-                            PlatformText('Yes'),
+                            Text('Yes'),
                           ),
 
                           // No
@@ -101,14 +101,14 @@ class _AppSettingsState extends State<AppSettings> {
                             () {},
                             Icon(Icons.cancel),
                             Icon(Icons.cancel),
-                            PlatformText('No'),
+                            Text('No'),
                           ),
                         ],
                       ),
                     ],
                   );
                 },
-                child: PlatformText('Reset all', style: getTextStyle(subTitleStyleKey)),
+                child: Text('Reset all', style: getTextStyle(subTitleStyleKey)),
               ),
               Container(height: buttonSpacer),
             ],
@@ -120,7 +120,7 @@ class _AppSettingsState extends State<AppSettings> {
             'Font',
             [
               // Font family
-              PlatformText('Font family', style: getTextStyle(subTitleStyleKey)),
+              Text('Font family', style: getTextStyle(subTitleStyleKey)),
               Container(height: buttonSpacer),
 
               FontFamilySetting(),
