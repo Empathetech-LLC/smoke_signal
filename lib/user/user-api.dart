@@ -315,22 +315,14 @@ void editAvatar(BuildContext context) {
     null,
     [
       // URL text field/form
-      Form(
-        key: urlFormKey,
-        child: OutlinedButton(
-          onPressed: () {},
-          child: TextFormField(
-            cursorColor: Color(AppConfig.prefs[themeColorKey]),
-            controller: _urlController,
-            textAlign: TextAlign.center,
-            style: getTextStyle(dialogContentStyleKey),
-            decoration: InputDecoration(
-              hintText: 'Enter URL',
-            ),
-            validator: urlValidator,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-          ),
-        ),
+      ezForm(
+        urlFormKey,
+        _urlController,
+        'Enter URL',
+        false,
+        null,
+        urlValidator,
+        AutovalidateMode.onUserInteraction,
       ),
       Container(height: dialogSpacer),
 
@@ -400,22 +392,14 @@ void editName(BuildContext context) {
     'Who are you?',
     [
       // Name field
-      Form(
-        key: nameFormKey,
-        child: OutlinedButton(
-          onPressed: () {},
-          child: TextFormField(
-            cursorColor: Color(AppConfig.prefs[themeColorKey]),
-            controller: _nameController,
-            textAlign: TextAlign.center,
-            style: getTextStyle(dialogContentStyleKey),
-            decoration: InputDecoration(
-              hintText: 'Enter display name',
-            ),
-            validator: displayNameValidator,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-          ),
-        ),
+      ezForm(
+        nameFormKey,
+        _nameController,
+        'Enter display name',
+        false,
+        null,
+        displayNameValidator,
+        AutovalidateMode.onUserInteraction,
       ),
       Container(height: dialogSpacer),
 

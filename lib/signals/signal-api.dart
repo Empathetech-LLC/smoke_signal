@@ -161,22 +161,14 @@ void updateMessage(BuildContext context, String title) {
     'New message...',
     [
       // Text field
-      Form(
-        key: messageFormKey,
-        child: OutlinedButton(
-          onPressed: () {},
-          child: TextFormField(
-            cursorColor: Color(AppConfig.prefs[themeTextColorKey]),
-            controller: _messageController,
-            textAlign: TextAlign.center,
-            style: getTextStyle(dialogContentStyleKey),
-            decoration: InputDecoration(
-              hintText: 'Notification message',
-            ),
-            validator: signalMessageValidator,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-          ),
-        ),
+      ezForm(
+        messageFormKey,
+        _messageController,
+        'Notification message',
+        false,
+        null,
+        signalMessageValidator,
+        AutovalidateMode.onUserInteraction,
       ),
       Container(height: AppConfig.prefs[dialogSpacingKey]),
 

@@ -52,42 +52,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 children: [
                   // Email field
-                  Form(
-                    key: emailFormKey,
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: TextFormField(
-                        cursorColor: themeTextColor,
-                        controller: _signupEmailController,
-                        textAlign: TextAlign.center,
-                        style: contents,
-                        decoration: InputDecoration(
-                          hintText: 'Enter email',
-                        ),
-                        autofillHints: [AutofillHints.email],
-                        validator: emailValidator,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                      ),
-                    ),
+                  ezForm(
+                    emailFormKey,
+                    _signupEmailController,
+                    'Enter email',
+                    false,
+                    [AutofillHints.email],
+                    emailValidator,
+                    AutovalidateMode.onUserInteraction,
                   ),
                   Container(height: buttonSpacer),
 
                   // Password field
-                  Form(
-                    key: passwordFormKey,
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: TextFormField(
-                        controller: _passwdController,
-                        textAlign: TextAlign.center,
-                        style: contents,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          hintText: 'Enter password',
-                        ),
-                        autofillHints: [AutofillHints.password],
-                      ),
-                    ),
+                  ezForm(
+                    passwordFormKey,
+                    _passwdController,
+                    'Enter password',
+                    true,
+                    [AutofillHints.password],
                   ),
                 ],
               ),

@@ -44,23 +44,14 @@ class _ResetScreenState extends State<ResetScreen> {
           children: [
             // Email form
             AutofillGroup(
-              child: Form(
-                key: emailFormKey,
-                child: OutlinedButton(
-                  onPressed: () {},
-                  child: TextFormField(
-                    cursorColor: themeTextColor,
-                    controller: _emailController,
-                    textAlign: TextAlign.center,
-                    style: contents,
-                    decoration: InputDecoration(
-                      hintText: 'Enter email',
-                    ),
-                    autofillHints: [AutofillHints.email],
-                    validator: emailValidator,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                  ),
-                ),
+              child: ezForm(
+                emailFormKey,
+                _emailController,
+                'Enter email',
+                false,
+                [AutofillHints.email],
+                emailValidator,
+                AutovalidateMode.onUserInteraction,
               ),
             ),
             Container(height: buttonSpacer),

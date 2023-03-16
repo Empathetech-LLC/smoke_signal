@@ -114,42 +114,26 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
       ezCenterScroll(
         [
           // Title field
-          Form(
-            key: titleFormKey,
-            child: OutlinedButton(
-              onPressed: () {},
-              child: TextFormField(
-                cursorColor: themeTextColor,
-                controller: _titleController,
-                textAlign: TextAlign.center,
-                style: getTextStyle(dialogContentStyleKey),
-                decoration: InputDecoration(
-                  hintText: 'Signal title',
-                ),
-                validator: signalTitleValidator,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-              ),
-            ),
+          ezForm(
+            titleFormKey,
+            _titleController,
+            'Signal title',
+            false,
+            null,
+            signalTitleValidator,
+            AutovalidateMode.onUserInteraction,
           ),
           Container(height: buttonSpacer),
 
           // Message field
-          Form(
-            key: messageFormKey,
-            child: OutlinedButton(
-              onPressed: () {},
-              child: TextFormField(
-                cursorColor: themeTextColor,
-                controller: _messageController,
-                textAlign: TextAlign.center,
-                style: getTextStyle(dialogContentStyleKey),
-                decoration: InputDecoration(
-                  hintText: 'Notification message',
-                ),
-                validator: signalMessageValidator,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-              ),
-            ),
+          ezForm(
+            messageFormKey,
+            _messageController,
+            'Notification message',
+            false,
+            null,
+            signalMessageValidator,
+            AutovalidateMode.onUserInteraction,
           ),
           Container(height: buttonSpacer),
 
