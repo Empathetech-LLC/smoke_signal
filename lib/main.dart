@@ -65,6 +65,12 @@ class SmokeSignal extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: appTitle,
 
+      // Android app data
+      material: (context, platform) => MaterialAppData(),
+
+      // iOS app data
+      cupertino: (context, platform) => CupertinoAppData(),
+
       // Route data
       initialRoute: homeRoute,
       routes: {
