@@ -116,7 +116,12 @@ class _SignalBoardState extends State<SignalBoard> {
             _requestStream = streamSignals(memberReqsPath);
           }),
           Icon(Icons.refresh),
-          ElevatedButton.styleFrom(shape: CircleBorder()),
+          ElevatedButton.styleFrom(
+            backgroundColor: Color(AppConfig.prefs[buttonColorKey]),
+            foregroundColor: Color(AppConfig.prefs[buttonTextColorKey]),
+            padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
+            shape: CircleBorder(),
+          ),
         ),
       ),
 
