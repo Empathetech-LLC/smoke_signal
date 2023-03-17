@@ -284,8 +284,8 @@ class _SignalState extends State<Signal> {
 
   //// Draw state
 
-  // Default (no icon) signal styling
-  ButtonStyle defaultStyle() {
+  // Signal button styling
+  ButtonStyle signalStyle() {
     bool joined = widget.activeMembers.contains(AppUser.account.uid);
 
     return joined
@@ -298,25 +298,6 @@ class _SignalState extends State<Signal> {
         : ElevatedButton.styleFrom(
             backgroundColor: watchingColor,
             shadowColor: watchingColor,
-            foregroundColor: watchingColor,
-            fixedSize: Size(screenWidth(context), signalHeight),
-          );
-  }
-
-  // Signal styling when the icon is showing
-  ButtonStyle iconStyle() {
-    bool joined = widget.activeMembers.contains(AppUser.account.uid);
-
-    return joined
-        ? ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            foregroundColor: joinedColor,
-            fixedSize: Size(screenWidth(context), signalHeight),
-          )
-        : ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
             foregroundColor: watchingColor,
             fixedSize: Size(screenWidth(context), signalHeight),
           );
@@ -337,7 +318,7 @@ class _SignalState extends State<Signal> {
       showEdits,
       signalTitle,
       joined ? joinedTextStyle : watchingTextStyle,
-      defaultStyle(),
+      signalStyle(),
     );
   }
 
@@ -345,44 +326,46 @@ class _SignalState extends State<Signal> {
   Widget iconSignal() {
     bool joined = widget.activeMembers.contains(AppUser.account.uid);
 
-    return ezButton(
-      () => toggleParticipation(
+    return GestureDetector(
+      onTap: () => toggleParticipation(
         context,
         joined,
         widget.title,
         widget.members,
         widget.message,
       ),
-      showEdits,
-      Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // Icon
-          Container(
-            width: signalHeight,
-            height: signalHeight,
-            child: Card(child: buildImage(iconPath, isAssetImage(iconPath))),
-          ),
+      onLongPress: showEdits,
+      child: Container(
+        width: screenWidth(context),
+        height: signalHeight,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Icon
+            Container(
+              width: signalHeight,
+              child: Card(child: buildImage(iconPath, isAssetImage(iconPath))),
+            ),
 
-          // Title card
-          Expanded(
-            child: SizedBox.expand(
-              child: Card(
-                color: joined ? joinedColor : watchingColor,
-                child: Center(
-                  child: Text(
-                    signalTitle,
-                    style: joined ? joinedTextStyle : watchingTextStyle,
-                    textAlign: TextAlign.center,
+            // Title card
+            Expanded(
+              child: SizedBox.expand(
+                child: Card(
+                  color: joined ? joinedColor : watchingColor,
+                  child: Center(
+                    child: Text(
+                      signalTitle,
+                      style: joined ? joinedTextStyle : watchingTextStyle,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-      iconStyle(),
     );
   }
 
@@ -450,7 +433,7 @@ class _SignalState extends State<Signal> {
             () {},
             'Join:\n$signalTitle?',
             watchingTextStyle,
-            defaultStyle(),
+            signalStyle(),
           ),
 
           // Buttons
