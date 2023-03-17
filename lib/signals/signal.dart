@@ -228,8 +228,8 @@ class _SignalState extends State<Signal> {
                 ? [
                     ezTextButton(
                       () async {
-                        await resetSignal(context, signalTitle);
                         Navigator.of(context).pop();
+                        await resetSignal(context, signalTitle);
                       },
                       () {},
                       'Reset signal',
