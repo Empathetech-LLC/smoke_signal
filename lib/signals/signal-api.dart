@@ -158,46 +158,50 @@ void updateMessage(BuildContext context, String title) {
   ezDialog(
     context,
     'New message...',
-    [
-      // Text field
-      ezForm(
-        messageFormKey,
-        _messageController,
-        'Notification message',
-        false,
-        null,
-        signalMessageValidator,
-        AutovalidateMode.onUserInteraction,
-      ),
-      Container(height: AppConfig.prefs[dialogSpacingKey]),
+    Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        // Text field
+        ezForm(
+          messageFormKey,
+          _messageController,
+          'Notification message',
+          false,
+          null,
+          signalMessageValidator,
+          AutovalidateMode.onUserInteraction,
+        ),
+        Container(height: AppConfig.prefs[dialogSpacingKey]),
 
-      // Yes/no buttons
-      ezYesNoRow(
-        context,
-        // On yes
-        () async {
-          // Don't do anything if the message is invalid
-          if (!messageFormKey.currentState!.validate()) {
-            popNLog(context, 'Invalid message!');
-            return;
-          }
+        // Yes/no buttons
+        ezYesNoRow(
+          context,
+          // On yes
+          () async {
+            // Don't do anything if the message is invalid
+            if (!messageFormKey.currentState!.validate()) {
+              popNLog(context, 'Invalid message!');
+              return;
+            }
 
-          Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-          try {
-            // Upload the new message
-            String message = _messageController.text.trim();
-            await AppUser.db.collection(signalsPath).doc(title).update(
-              {messagePath: message},
-            );
-          } catch (e) {
-            popNLog(context, e.toString());
-          }
-        },
+            Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+            try {
+              // Upload the new message
+              String message = _messageController.text.trim();
+              await AppUser.db.collection(signalsPath).doc(title).update(
+                {messagePath: message},
+              );
+            } catch (e) {
+              popNLog(context, e.toString());
+            }
+          },
 
-        // On no
-        () => Navigator.of(context).pop(),
-      ),
-    ],
+          // On no
+          () => Navigator.of(context).pop(),
+        ),
+      ],
+    ),
   );
 }
 
@@ -277,49 +281,48 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
     'Select user',
 
     // Body
-    [
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          StreamBuilder<QuerySnapshot>(
-            stream: streamUsers(others),
-            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return loadingMessage(
-                    context,
-                    buildImage(
-                      AppConfig.prefs[signalImageKey],
-                      isAssetImage(signalImageKey),
+
+    Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        StreamBuilder<QuerySnapshot>(
+          stream: streamUsers(others),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return loadingMessage(
+                  context,
+                  buildImage(
+                    AppConfig.prefs[signalImageKey],
+                    isAssetImage(signalImageKey),
+                  ),
+                );
+              case ConnectionState.done:
+              default:
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text(
+                      snapshot.error.toString(),
+                      style: getTextStyle(errorStyleKey),
                     ),
                   );
-                case ConnectionState.done:
-                default:
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Text(
-                        snapshot.error.toString(),
-                        style: getTextStyle(errorStyleKey),
-                      ),
-                    );
-                  }
+                }
 
-                  return buildSelectors(buildProfiles(snapshot.data!.docs));
-              }
-            },
-          ),
+                return buildSelectors(buildProfiles(snapshot.data!.docs));
+            }
+          },
+        ),
 
-          // Cancel
-          ezTextIconButton(
-            () => Navigator.of(context).pop(),
-            () {},
-            'Cancel',
-            Icon(PlatformIcons(context).clear),
-          ),
-        ],
-      ),
-    ],
+        // Cancel
+        ezTextIconButton(
+          () => Navigator.of(context).pop(),
+          () {},
+          'Cancel',
+          Icon(PlatformIcons(context).clear),
+        ),
+      ],
+    ),
   );
 }
 
@@ -328,29 +331,27 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
   ezDialog(
     context,
     'Delete $title?',
-    [
-      ezYesNoCol(
-        context,
-        // On yes
-        () async {
-          Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-          try {
-            // Clear local prefs for the signal
-            prefKeys.forEach((key) {
-              AppConfig.preferences.remove(key);
-            });
+    ezYesNoCol(
+      context,
+      // On yes
+      () async {
+        Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+        try {
+          // Clear local prefs for the signal
+          prefKeys.forEach((key) {
+            AppConfig.preferences.remove(key);
+          });
 
-            // Delete the signal from the db
-            await AppUser.db.collection(signalsPath).doc(title).delete();
-          } catch (e) {
-            popNLog(context, e.toString());
-          }
-        },
+          // Delete the signal from the db
+          await AppUser.db.collection(signalsPath).doc(title).delete();
+        } catch (e) {
+          popNLog(context, e.toString());
+        }
+      },
 
-        // On no
-        () => Navigator.of(context).pop(),
-      ),
-    ],
+      // On no
+      () => Navigator.of(context).pop(),
+    ),
   );
 }
 
@@ -359,32 +360,30 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
   ezDialog(
     context,
     'Leave $title?',
-    [
-      ezYesNoCol(
-        context,
-        // On yes
-        () async {
-          Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-          try {
-            // Clear local prefs for the signal
-            prefKeys.forEach((key) {
-              AppConfig.preferences.remove(key);
-            });
+    ezYesNoCol(
+      context,
+      // On yes
+      () async {
+        Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+        try {
+          // Clear local prefs for the signal
+          prefKeys.forEach((key) {
+            AppConfig.preferences.remove(key);
+          });
 
-            // Remove the current user from the list of members
-            await AppUser.db.collection(signalsPath).doc(title).update(
-              {
-                membersPath: FieldValue.arrayRemove([AppUser.account.uid])
-              },
-            );
-          } catch (e) {
-            popNLog(context, e.toString());
-          }
-        },
+          // Remove the current user from the list of members
+          await AppUser.db.collection(signalsPath).doc(title).update(
+            {
+              membersPath: FieldValue.arrayRemove([AppUser.account.uid])
+            },
+          );
+        } catch (e) {
+          popNLog(context, e.toString());
+        }
+      },
 
-        // On no
-        () => Navigator.of(context).pop(),
-      ),
-    ],
+      // On no
+      () => Navigator.of(context).pop(),
+    ),
   );
 }

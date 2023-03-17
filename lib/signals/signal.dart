@@ -104,62 +104,61 @@ class _SignalState extends State<Signal> {
       'From where?',
 
       // Body
-      [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // From file
-            ezTextIconButton(
-              () {
-                changeImage(context, iconPathPref, ImageSource.gallery);
-                Navigator.of(context).pop();
-              },
-              () {},
-              'File',
-              Icon(PlatformIcons(context).folder),
-            ),
-            Container(height: dialogSpacer),
 
-            // From camera
-            ezTextIconButton(
-              () {
-                changeImage(context, iconPathPref, ImageSource.camera);
-                Navigator.of(context).pop();
-              },
-              () {},
-              'Camera',
-              Icon(PlatformIcons(context).photoCamera),
-            ),
-            Container(height: dialogSpacer),
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          // From file
+          ezTextIconButton(
+            () {
+              changeImage(context, iconPathPref, ImageSource.gallery);
+              Navigator.of(context).pop();
+            },
+            () {},
+            'File',
+            Icon(PlatformIcons(context).folder),
+          ),
+          Container(height: dialogSpacer),
 
-            // Reset
-            ezTextButton(
-              () async {
-                // Build path
-                Directory currDir = await getApplicationDocumentsDirectory();
-                String imagePath = currDir.path + signalTitle;
+          // From camera
+          ezTextIconButton(
+            () {
+              changeImage(context, iconPathPref, ImageSource.camera);
+              Navigator.of(context).pop();
+            },
+            () {},
+            'Camera',
+            Icon(PlatformIcons(context).photoCamera),
+          ),
+          Container(height: dialogSpacer),
 
-                // Delete any saved files
-                try {
-                  File toDelete = File(imagePath);
-                  await toDelete.delete();
-                } catch (e) {
-                  // Ignore errors thrown
-                  // Delete is called without knowledge of a file existing
-                }
+          // Reset
+          ezTextButton(
+            () async {
+              // Build path
+              Directory currDir = await getApplicationDocumentsDirectory();
+              String imagePath = currDir.path + signalTitle;
 
-                // Wipe the shared pref
-                AppConfig.preferences.remove(iconPathPref);
-                Navigator.of(context).pop();
-              },
-              () {},
-              'Reset',
-            ),
-            Container(height: dialogSpacer),
-          ],
-        )
-      ],
+              // Delete any saved files
+              try {
+                File toDelete = File(imagePath);
+                await toDelete.delete();
+              } catch (e) {
+                // Ignore errors thrown
+                // Delete is called without knowledge of a file existing
+              }
+
+              // Wipe the shared pref
+              AppConfig.preferences.remove(iconPathPref);
+              Navigator.of(context).pop();
+            },
+            () {},
+            'Reset',
+          ),
+          Container(height: dialogSpacer),
+        ],
+      ),
     );
   }
 
@@ -191,94 +190,93 @@ class _SignalState extends State<Signal> {
       'Options',
 
       // Body
-      [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // Manage members
-            ezTextButton(
-              () => Navigator.of(context).popAndPushNamed(
-                signalMembersRoute,
-                arguments: {
-                  titleArg: signalTitle,
-                  membersArg: widget.members,
-                  activeMembersArg: widget.activeMembers,
-                  memberReqsArg: widget.memberReqs,
-                },
-              ),
-              () {},
-              'Members',
+
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          // Manage members
+          ezTextButton(
+            () => Navigator.of(context).popAndPushNamed(
+              signalMembersRoute,
+              arguments: {
+                titleArg: signalTitle,
+                membersArg: widget.members,
+                activeMembersArg: widget.activeMembers,
+                memberReqsArg: widget.memberReqs,
+              },
             ),
-            Container(height: dialogSpacer),
+            () {},
+            'Members',
+          ),
+          Container(height: dialogSpacer),
 
-            // Set icon
-            ezTextButton(setIcon, () {}, 'Set icon'),
-            Container(height: dialogSpacer),
+          // Set icon
+          ezTextButton(setIcon, () {}, 'Set icon'),
+          Container(height: dialogSpacer),
 
-            // Show/hide icon
-            ezTextButton(toggleIcon, () {}, 'Toggle icon'),
-            Container(height: dialogSpacer),
+          // Show/hide icon
+          ezTextButton(toggleIcon, () {}, 'Toggle icon'),
+          Container(height: dialogSpacer),
 
-            // Owner: Reset count, update message, transfer signal, or delete signal
-            // Member: Leave signal
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: AppUser.account.uid == widget.owner
-                  ? [
-                      ezTextButton(
-                        () async {
-                          await resetSignal(context, signalTitle);
-                          Navigator.of(context).pop();
-                        },
-                        () {},
-                        'Reset signal',
+          // Owner: Reset count, update message, transfer signal, or delete signal
+          // Member: Leave signal
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: AppUser.account.uid == widget.owner
+                ? [
+                    ezTextButton(
+                      () async {
+                        await resetSignal(context, signalTitle);
+                        Navigator.of(context).pop();
+                      },
+                      () {},
+                      'Reset signal',
+                    ),
+                    Container(height: dialogSpacer),
+                    ezTextButton(
+                      () => updateMessage(context, signalTitle),
+                      () {},
+                      'Update message',
+                    ),
+                    Container(height: dialogSpacer),
+                    ezTextButton(
+                      () => confirmTransfer(
+                        context,
+                        signalTitle,
+                        widget.members,
                       ),
-                      Container(height: dialogSpacer),
-                      ezTextButton(
-                        () => updateMessage(context, signalTitle),
-                        () {},
-                        'Update message',
+                      () {},
+                      'Transfer signal',
+                    ),
+                    Container(height: dialogSpacer),
+                    ezTextButton(
+                      () => confirmDelete(
+                        context,
+                        signalTitle,
+                        [showIconPref, iconPathPref],
                       ),
-                      Container(height: dialogSpacer),
-                      ezTextButton(
-                        () => confirmTransfer(
-                          context,
-                          signalTitle,
-                          widget.members,
-                        ),
-                        () {},
-                        'Transfer signal',
+                      () {},
+                      'Delete signal',
+                    ),
+                    Container(height: dialogSpacer),
+                  ]
+                : [
+                    ezTextButton(
+                      () => confirmDeparture(
+                        context,
+                        signalTitle,
+                        [showIconPref, iconPathPref],
                       ),
-                      Container(height: dialogSpacer),
-                      ezTextButton(
-                        () => confirmDelete(
-                          context,
-                          signalTitle,
-                          [showIconPref, iconPathPref],
-                        ),
-                        () {},
-                        'Delete signal',
-                      ),
-                      Container(height: dialogSpacer),
-                    ]
-                  : [
-                      ezTextButton(
-                        () => confirmDeparture(
-                          context,
-                          signalTitle,
-                          [showIconPref, iconPathPref],
-                        ),
-                        () {},
-                        'Leave signal',
-                      ),
-                      Container(height: dialogSpacer),
-                    ],
-            ),
-          ],
-        ),
-      ],
+                      () {},
+                      'Leave signal',
+                    ),
+                    Container(height: dialogSpacer),
+                  ],
+          ),
+        ],
+      ),
     );
   }
 

@@ -115,19 +115,17 @@ void logout(BuildContext context) {
   ezDialog(
     context,
     'Logout?',
-    [
-      ezYesNoCol(
-        context,
-        // On yes
-        () async {
-          Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-          await AppUser.auth.signOut();
-        },
+    ezYesNoCol(
+      context,
+      // On yes
+      () async {
+        Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+        await AppUser.auth.signOut();
+      },
 
-        // On no
-        () => Navigator.of(context).pop(),
-      ),
-    ],
+      // On no
+      () => Navigator.of(context).pop(),
+    ),
   );
 }
 
@@ -211,10 +209,7 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
           onLongPress: () => ezDialog(
             context,
             null,
-            [
-              paddedText(
-                  profile.name, getTextStyle(dialogTitleStyleKey), TextAlign.center),
-            ],
+            paddedText(profile.name, getTextStyle(dialogTitleStyleKey), TextAlign.center),
           ),
           child: CircleAvatar(
             foregroundImage: CachedNetworkImageProvider(profile.avatarURL),
@@ -293,61 +288,65 @@ void editAvatar(BuildContext context) {
   ezDialog(
     context,
     null,
-    [
-      // URL text field/form
-      ezForm(
-        urlFormKey,
-        _urlController,
-        'Enter URL',
-        false,
-        null,
-        urlValidator,
-        AutovalidateMode.onUserInteraction,
-      ),
-      Container(height: dialogSpacer),
+    Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        // URL text field/form
+        ezForm(
+          urlFormKey,
+          _urlController,
+          'Enter URL',
+          false,
+          null,
+          urlValidator,
+          AutovalidateMode.onUserInteraction,
+        ),
+        Container(height: dialogSpacer),
 
-      // Explanation for not using image files
-      Text(
-        'Images are expensive to store!\nPaste an image link and that will be used',
-        maxLines: 2,
-        style: getTextStyle(dialogContentStyleKey),
-        textAlign: TextAlign.center,
-      ),
-      Container(height: dialogSpacer),
+        // Explanation for not using image files
+        Text(
+          'Images are expensive to store!\nPaste an image link and that will be used',
+          maxLines: 2,
+          style: getTextStyle(dialogContentStyleKey),
+          textAlign: TextAlign.center,
+        ),
+        Container(height: dialogSpacer),
 
-      // Submit & cancel buttons
-      ezYesNoRow(
-        context,
-        // On yes (submit)
-        () async {
-          // Close keyboard if open
-          AppConfig.focus.primaryFocus?.unfocus();
+        // Submit & cancel buttons
+        ezYesNoRow(
+          context,
+          // On yes (submit)
+          () async {
+            // Close keyboard if open
+            AppConfig.focus.primaryFocus?.unfocus();
 
-          // Don't do anything if the url is invalid
-          if (!urlFormKey.currentState!.validate()) {
-            popNLog(context, 'Invalid URL!');
-            return;
-          }
+            // Don't do anything if the url is invalid
+            if (!urlFormKey.currentState!.validate()) {
+              popNLog(context, 'Invalid URL!');
+              return;
+            }
 
-          // Save text & close dialog
-          String photoURL = _urlController.text.trim();
-          Navigator.of(context).pop();
+            // Save text & close dialog
+            String photoURL = _urlController.text.trim();
+            Navigator.of(context).pop();
 
-          // Update firestore and the firebase user config
-          await AppUser.account.updatePhotoURL(photoURL);
-          await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
-            {avatarURLPath: photoURL},
-          );
-        },
+            // Update firestore and the firebase user config
+            await AppUser.account.updatePhotoURL(photoURL);
+            await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
+              {avatarURLPath: photoURL},
+            );
+          },
 
-        // On no (cancel)
-        () => Navigator.of(context).pop(),
+          // On no (cancel)
+          () => Navigator.of(context).pop(),
 
-        // Modifications
-        'Submit',
-        'Cancel',
-      ),
-    ],
+          // Modifications
+          'Submit',
+          'Cancel',
+        ),
+      ],
+    ),
   );
 }
 
@@ -361,51 +360,55 @@ void editName(BuildContext context) {
   ezDialog(
     context,
     'Who are you?',
-    [
-      // Name field
-      ezForm(
-        nameFormKey,
-        _nameController,
-        'Enter display name',
-        false,
-        null,
-        displayNameValidator,
-        AutovalidateMode.onUserInteraction,
-      ),
-      Container(height: dialogSpacer),
+    Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        // Name field
+        ezForm(
+          nameFormKey,
+          _nameController,
+          'Enter display name',
+          false,
+          null,
+          displayNameValidator,
+          AutovalidateMode.onUserInteraction,
+        ),
+        Container(height: dialogSpacer),
 
-      // Submit & cancel buttons
-      ezYesNoRow(
-        context,
-        // On yes (submit)
-        () async {
-          // Close keyboard if open
-          AppConfig.focus.primaryFocus?.unfocus();
+        // Submit & cancel buttons
+        ezYesNoRow(
+          context,
+          // On yes (submit)
+          () async {
+            // Close keyboard if open
+            AppConfig.focus.primaryFocus?.unfocus();
 
-          // Don't do anything if the display name is invalid
-          if (!nameFormKey.currentState!.validate()) {
-            popNLog(context, 'Invalid display name!');
-            return;
-          }
+            // Don't do anything if the display name is invalid
+            if (!nameFormKey.currentState!.validate()) {
+              popNLog(context, 'Invalid display name!');
+              return;
+            }
 
-          // Save text & close dialog
-          String newName = _nameController.text.trim();
-          Navigator.of(context).pop();
+            // Save text & close dialog
+            String newName = _nameController.text.trim();
+            Navigator.of(context).pop();
 
-          // Update firestore and the firebase user config
-          await AppUser.account.updateDisplayName(newName);
-          await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
-            {displayNamePath: newName},
-          );
-        },
+            // Update firestore and the firebase user config
+            await AppUser.account.updateDisplayName(newName);
+            await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
+              {displayNamePath: newName},
+            );
+          },
 
-        // On no (cancel)
-        () => Navigator.of(context).pop(),
+          // On no (cancel)
+          () => Navigator.of(context).pop(),
 
-        // Modifications
-        'Submit',
-        'Cancel',
-      ),
-    ],
+          // Modifications
+          'Submit',
+          'Cancel',
+        ),
+      ],
+    ),
   );
 }

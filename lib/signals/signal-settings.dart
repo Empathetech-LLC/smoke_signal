@@ -75,24 +75,22 @@ class _SignalSettingsState extends State<SignalSettings> {
                   ezDialog(
                     context,
                     'Reset all colors?',
-                    [
-                      ezYesNoRow(
-                        context,
-                        // On yes, remove all color settings
-                        () {
-                          AppConfig.preferences.remove(signalsBackgroundColorKey);
-                          AppConfig.preferences.remove(watchingColorKey);
-                          AppConfig.preferences.remove(watchingTextColorKey);
-                          AppConfig.preferences.remove(joinedColorKey);
-                          AppConfig.preferences.remove(joinedTextColorKey);
+                    ezYesNoRow(
+                      context,
+                      // On yes, remove all color settings
+                      () {
+                        AppConfig.preferences.remove(signalsBackgroundColorKey);
+                        AppConfig.preferences.remove(watchingColorKey);
+                        AppConfig.preferences.remove(watchingTextColorKey);
+                        AppConfig.preferences.remove(joinedColorKey);
+                        AppConfig.preferences.remove(joinedTextColorKey);
 
-                          Navigator.of(context).pop();
-                        },
+                        Navigator.of(context).pop();
+                      },
 
-                        // On no
-                        () => Navigator.of(context).pop(),
-                      ),
-                    ],
+                      // On no
+                      () => Navigator.of(context).pop(),
+                    ),
                   );
                 },
                 child: Text('Reset all', style: getTextStyle(subTitleStyleKey)),

@@ -40,13 +40,11 @@ Drawer standardDrawer(BuildContext context) {
           () => ezDialog(
             context,
             'Input rules',
-            [
-              Text(
-                validatorRule,
-                style: getTextStyle(dialogContentStyleKey),
-                textAlign: TextAlign.center,
-              ),
-            ],
+            Text(
+              validatorRule,
+              style: getTextStyle(dialogContentStyleKey),
+              textAlign: TextAlign.center,
+            ),
           ),
           () {},
           'Input rules',
@@ -142,13 +140,11 @@ Drawer signalBoardDrawer(BuildContext context) {
           () => ezDialog(
             context,
             'Input rules',
-            [
-              Text(
-                validatorRule,
-                style: getTextStyle(dialogContentStyleKey),
-                textAlign: TextAlign.center,
-              ),
-            ],
+            Text(
+              validatorRule,
+              style: getTextStyle(dialogContentStyleKey),
+              textAlign: TextAlign.center,
+            ),
           ),
           () {},
           'Input rules',

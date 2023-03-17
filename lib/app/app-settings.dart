@@ -71,25 +71,22 @@ class _AppSettingsState extends State<AppSettings> {
                   ezDialog(
                     context,
                     'Reset all colors?',
-                    [
-                      // Yes/no buttons
-                      ezYesNoRow(
-                        context,
-                        // On yes, remove all color settings
-                        () {
-                          AppConfig.preferences.remove(buttonColorKey);
-                          AppConfig.preferences.remove(buttonTextColorKey);
-                          AppConfig.preferences.remove(themeColorKey);
-                          AppConfig.preferences.remove(buttonColorKey);
-                          AppConfig.preferences.remove(backColorKey);
+                    ezYesNoRow(
+                      context,
+                      // On yes, remove all color settings
+                      () {
+                        AppConfig.preferences.remove(buttonColorKey);
+                        AppConfig.preferences.remove(buttonTextColorKey);
+                        AppConfig.preferences.remove(themeColorKey);
+                        AppConfig.preferences.remove(buttonColorKey);
+                        AppConfig.preferences.remove(backColorKey);
 
-                          Navigator.of(context).pop();
-                        },
+                        Navigator.of(context).pop();
+                      },
 
-                        // On no
-                        () => Navigator.of(context).pop(),
-                      ),
-                    ],
+                      // On no
+                      () => Navigator.of(context).pop(),
+                    ),
                   );
                 },
                 child: Text('Reset all', style: getTextStyle(subTitleStyleKey)),
