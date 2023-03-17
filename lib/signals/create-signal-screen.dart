@@ -232,8 +232,8 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
       // Fallback background color
       Color(AppConfig.prefs[signalsBackgroundColorKey]),
 
-      // Android drawer aka settings hamburger
-      null,
+      // Android config
+      MaterialScaffoldData(),
 
       // iOS nav (top) bar
       null,

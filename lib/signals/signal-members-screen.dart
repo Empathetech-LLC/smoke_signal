@@ -1,3 +1,5 @@
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
 import '../signals/signal-api.dart';
 import '../utils/constants.dart';
 import '../utils/helpers.dart';
@@ -220,8 +222,8 @@ class _SignalMembersState extends State<SignalMembers> {
       // Fallback background color
       Color(AppConfig.prefs[signalsBackgroundColorKey]),
 
-      // Android drawer aka settings hamburger
-      null,
+      // Android config
+      MaterialScaffoldData(),
 
       // iOS nav (top) bar
       null,

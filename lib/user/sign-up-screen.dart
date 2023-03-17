@@ -6,6 +6,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -108,7 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Color(AppConfig.prefs[backColorKey]),
 
       // Android drawer aka settings hamburger
-      standardDrawer(context),
+      MaterialScaffoldData(endDrawer: standardDrawer(context)),
 
       // iOS nav (top) bar
       null,

@@ -93,7 +93,7 @@ class _ResetScreenState extends State<ResetScreen> {
       Color(AppConfig.prefs[backColorKey]),
 
       // Android drawer aka settings hamburger
-      standardDrawer(context),
+      MaterialScaffoldData(endDrawer: standardDrawer(context)),
 
       // iOS nav (top) bar
       null,

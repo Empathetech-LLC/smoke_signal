@@ -88,7 +88,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
       Color(AppConfig.prefs[backColorKey]),
 
       // Android drawer aka settings hamburger
-      null,
+      MaterialScaffoldData(),
 
       // iOS nav (top) bar
       null,

@@ -1,3 +1,5 @@
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
 import '../utils/material-ui.dart';
 import '../utils/helpers.dart';
 import '../utils/constants.dart';
@@ -102,8 +104,21 @@ class _SignalBoardState extends State<SignalBoard> {
       // Fallback background color
       Color(AppConfig.prefs[signalsBackgroundColorKey]),
 
-      // Android drawer aka settings hamburger
-      signalBoardDrawer(context),
+      // Android config
+      MaterialScaffoldData(
+        endDrawer: signalBoardDrawer(context),
+        floatingActionButton: ezButton(
+          // Refresh
+          () => setState(() {}),
+          // Reload
+          () => setState(() {
+            _signalStream = streamSignals(membersPath);
+            _requestStream = streamSignals(memberReqsPath);
+          }),
+          Icon(Icons.refresh),
+          ElevatedButton.styleFrom(shape: CircleBorder()),
+        ),
+      ),
 
       // iOS nav (top) bar
       null,
