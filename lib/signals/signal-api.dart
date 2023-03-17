@@ -198,7 +198,7 @@ void updateMessage(BuildContext context, String title) {
           },
 
           // On no
-          () => Navigator.of(context).pop(),
+          () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
         ),
       ],
     ),
@@ -316,7 +316,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
 
         // Cancel
         ezTextIconButton(
-          () => Navigator.of(context).pop(),
+          () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
           () {},
           'Cancel',
           Icon(PlatformIcons(context).clear),
@@ -350,7 +350,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
       },
 
       // On no
-      () => Navigator.of(context).pop(),
+      () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
     ),
   );
 }
@@ -383,7 +383,7 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
       },
 
       // On no
-      () => Navigator.of(context).pop(),
+      () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
     ),
   );
 }
