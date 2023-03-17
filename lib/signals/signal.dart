@@ -236,27 +236,32 @@ class _SignalState extends State<Signal> {
                     ),
                     Container(height: dialogSpacer),
                     ezTextButton(
-                      () => updateMessage(context, signalTitle),
+                      () {
+                        Navigator.of(context).pop();
+                        updateMessage(context, signalTitle);
+                      },
                       () {},
                       'Update message',
                     ),
                     Container(height: dialogSpacer),
                     ezTextButton(
-                      () => confirmTransfer(
-                        context,
-                        signalTitle,
-                        widget.members,
-                      ),
+                      () {
+                        Navigator.of(context).pop();
+                        confirmTransfer(context, signalTitle, widget.members);
+                      },
                       () {},
                       'Transfer signal',
                     ),
                     Container(height: dialogSpacer),
                     ezTextButton(
-                      () => confirmDelete(
-                        context,
-                        signalTitle,
-                        [showIconPref, iconPathPref],
-                      ),
+                      () {
+                        Navigator.of(context).pop();
+                        confirmDelete(
+                          context,
+                          signalTitle,
+                          [showIconPref, iconPathPref],
+                        );
+                      },
                       () {},
                       'Delete signal',
                     ),
