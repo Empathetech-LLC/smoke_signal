@@ -78,10 +78,11 @@ class _SignalMembersState extends State<SignalMembers> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // Check box
-                Checkbox(
-                  value: requestIDs.contains(profile.id),
-                  onChanged: (bool? value) {
+                // Switch
+                ezSwitch(
+                  context,
+                  requestIDs.contains(profile.id),
+                  (bool? value) {
                     if (value == true) {
                       setState(() {
                         requestIDs.add(profile.id);
@@ -92,9 +93,6 @@ class _SignalMembersState extends State<SignalMembers> {
                       });
                     }
                   },
-                  fillColor: MaterialStateProperty.all(buttonColor),
-                  checkColor: buttonTextColor,
-                  activeColor: buttonColor,
                 ),
 
                 // Profile image/avatar
