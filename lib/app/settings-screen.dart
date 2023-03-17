@@ -65,7 +65,7 @@ class _SettingsState extends State<Settings> {
       ),
 
       // Android drawer aka settings hamburger
-      null,
+      MaterialScaffoldData(),
 
       // iOS nav (top) bar
       CupertinoNavigationBar(),
