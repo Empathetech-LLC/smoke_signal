@@ -166,7 +166,7 @@ void updateMessage(BuildContext context, String title) {
         ezForm(
           messageFormKey,
           _messageController,
-          'Notification message',
+          'Notification',
           false,
           null,
           signalMessageValidator,

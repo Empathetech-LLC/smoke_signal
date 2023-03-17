@@ -127,7 +127,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
           ezForm(
             messageFormKey,
             _messageController,
-            'Notification message',
+            'Notification',
             false,
             null,
             signalMessageValidator,
