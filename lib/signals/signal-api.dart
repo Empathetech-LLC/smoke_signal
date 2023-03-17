@@ -220,11 +220,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          CircleAvatar(
-            backgroundColor: Colors.white,
-            minRadius: 35,
-            maxRadius: 35,
-          ),
+          Icon(PlatformIcons(context).clear, size: 35),
           Container(height: dialogSpacer),
         ],
       );
