@@ -1,11 +1,11 @@
-import '../user/user-api.dart';
 import 'constants.dart';
-
+import '../user/user-api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 Drawer standardDrawer(BuildContext context) {
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
@@ -31,8 +31,7 @@ Drawer standardDrawer(BuildContext context) {
           ),
           () {},
           'Settings',
-          Icon(Icons.settings),
-          Icon(CupertinoIcons.settings),
+          Icon(PlatformIcons(context).settings),
         ),
         Container(height: buttonSpacer),
 
@@ -122,8 +121,7 @@ Drawer signalBoardDrawer(BuildContext context) {
           () => Navigator.of(context).popAndPushNamed(createSignalRoute),
           () {},
           'New',
-          Icon(Icons.add),
-          Icon(CupertinoIcons.add),
+          Icon(PlatformIcons(context).add),
         ),
         Container(height: buttonSpacer),
 
@@ -135,8 +133,7 @@ Drawer signalBoardDrawer(BuildContext context) {
           ),
           () {},
           'Settings',
-          Icon(Icons.settings),
-          Icon(CupertinoIcons.settings),
+          Icon(PlatformIcons(context).settings),
         ),
         Container(height: buttonSpacer),
 

@@ -1,9 +1,7 @@
-import 'package:smoke_signal/utils/helpers.dart';
-
+import '../utils/helpers.dart';
 import '../utils/constants.dart';
 import '../utils/validate.dart';
 import '../user/user-api.dart';
-
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -11,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 ////// These (can) cost money!! //////
 
@@ -172,48 +171,32 @@ void updateMessage(BuildContext context, String title) {
       ),
       Container(height: AppConfig.prefs[dialogSpacingKey]),
 
-      // Confirm/cancel buttons
-      Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // Confirm
-          ezTextIconButton(
-            () async {
-              // Don't do anything if the message is invalid
-              if (!messageFormKey.currentState!.validate()) {
-                popNLog(context, 'Invalid message!');
-                return;
-              }
+      // Yes/no buttons
+      ezYesNoRow(
+        context,
+        // On yes
+        () async {
+          // Don't do anything if the message is invalid
+          if (!messageFormKey.currentState!.validate()) {
+            popNLog(context, 'Invalid message!');
+            return;
+          }
 
-              Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-              try {
-                // Upload the new message
-                String message = _messageController.text.trim();
-                await AppUser.db.collection(signalsPath).doc(title).update(
-                  {messagePath: message},
-                );
-              } catch (e) {
-                popNLog(context, e.toString());
-              }
-            },
-            () {},
-            'Submit',
-            Icon(Icons.check),
-            Icon(CupertinoIcons.check_mark),
-          ),
-          Container(height: AppConfig.prefs[dialogSpacingKey]),
+          Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+          try {
+            // Upload the new message
+            String message = _messageController.text.trim();
+            await AppUser.db.collection(signalsPath).doc(title).update(
+              {messagePath: message},
+            );
+          } catch (e) {
+            popNLog(context, e.toString());
+          }
+        },
 
-          // Cancel
-          ezTextIconButton(
-            () => Navigator.of(context).pop(),
-            () {},
-            'Cancel',
-            Icon(Icons.cancel),
-            Icon(CupertinoIcons.xmark),
-          ),
-        ],
-      )
+        // On no
+        () => Navigator.of(context).pop(),
+      ),
     ],
   );
 }
@@ -332,8 +315,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
             () => Navigator.of(context).pop(),
             () {},
             'Cancel',
-            Icon(Icons.cancel),
-            Icon(CupertinoIcons.xmark),
+            Icon(PlatformIcons(context).clear),
           ),
         ],
       ),
@@ -347,42 +329,26 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
     context,
     'Delete $title?',
     [
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // Confirm
-          ezTextIconButton(
-            () async {
-              Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-              try {
-                // Clear local prefs for the signal
-                prefKeys.forEach((key) {
-                  AppConfig.preferences.remove(key);
-                });
+      ezYesNoCol(
+        context,
+        // On yes
+        () async {
+          Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+          try {
+            // Clear local prefs for the signal
+            prefKeys.forEach((key) {
+              AppConfig.preferences.remove(key);
+            });
 
-                // Delete the signal from the db
-                await AppUser.db.collection(signalsPath).doc(title).delete();
-              } catch (e) {
-                popNLog(context, e.toString());
-              }
-            },
-            () {},
-            'Yes',
-            Icon(Icons.check),
-            Icon(CupertinoIcons.check_mark),
-          ),
-          Container(height: AppConfig.prefs[dialogSpacingKey]),
+            // Delete the signal from the db
+            await AppUser.db.collection(signalsPath).doc(title).delete();
+          } catch (e) {
+            popNLog(context, e.toString());
+          }
+        },
 
-          // Cancel
-          ezTextIconButton(
-            () => Navigator.of(context).pop(),
-            () {},
-            'No',
-            Icon(Icons.cancel),
-            Icon(CupertinoIcons.xmark),
-          ),
-        ],
+        // On no
+        () => Navigator.of(context).pop(),
       ),
     ],
   );
@@ -394,46 +360,30 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
     context,
     'Leave $title?',
     [
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // Confirm
-          ezTextIconButton(
-            () async {
-              Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-              try {
-                // Clear local prefs for the signal
-                prefKeys.forEach((key) {
-                  AppConfig.preferences.remove(key);
-                });
+      ezYesNoCol(
+        context,
+        // On yes
+        () async {
+          Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+          try {
+            // Clear local prefs for the signal
+            prefKeys.forEach((key) {
+              AppConfig.preferences.remove(key);
+            });
 
-                // Remove the current user from the list of members
-                await AppUser.db.collection(signalsPath).doc(title).update(
-                  {
-                    membersPath: FieldValue.arrayRemove([AppUser.account.uid])
-                  },
-                );
-              } catch (e) {
-                popNLog(context, e.toString());
-              }
-            },
-            () {},
-            'Yes',
-            Icon(Icons.check),
-            Icon(CupertinoIcons.check_mark),
-          ),
-          Container(height: AppConfig.prefs[dialogSpacingKey]),
+            // Remove the current user from the list of members
+            await AppUser.db.collection(signalsPath).doc(title).update(
+              {
+                membersPath: FieldValue.arrayRemove([AppUser.account.uid])
+              },
+            );
+          } catch (e) {
+            popNLog(context, e.toString());
+          }
+        },
 
-          // Cancel
-          ezTextIconButton(
-            () => Navigator.of(context).pop(),
-            () {},
-            'No',
-            Icon(Icons.cancel),
-            Icon(CupertinoIcons.xmark),
-          ),
-        ],
+        // On no
+        () => Navigator.of(context).pop(),
       ),
     ],
   );

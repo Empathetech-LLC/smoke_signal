@@ -1,15 +1,14 @@
 import '../utils/constants.dart';
 import '../utils/validate.dart';
-
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 ////// Wrapper classes //////
 
@@ -113,40 +112,21 @@ Future<void> attemptLogin(BuildContext context, String email, String password) a
 
 // Logout current user
 void logout(BuildContext context) {
-  double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
-
   ezDialog(
     context,
     'Logout?',
     [
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // Yes
-          ezTextIconButton(
-            () async {
-              Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-              await AppUser.auth.signOut();
-            },
-            () {},
-            'Yes',
-            Icon(Icons.check),
-            Icon(CupertinoIcons.check_mark),
-          ),
-          Container(height: dialogSpacer),
+      ezYesNoCol(
+        context,
+        // On yes
+        () async {
+          Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+          await AppUser.auth.signOut();
+        },
 
-          // No
-          ezTextIconButton(
-            () => Navigator.of(context).pop(),
-            () {},
-            'No',
-            Icon(Icons.cancel),
-            Icon(CupertinoIcons.xmark),
-          ),
-          Container(height: dialogSpacer),
-        ],
-      )
+        // On no
+        () => Navigator.of(context).pop(),
+      ),
     ],
   );
 }
@@ -336,47 +316,36 @@ void editAvatar(BuildContext context) {
       Container(height: dialogSpacer),
 
       // Submit & cancel buttons
-      Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Submit
-          ezTextIconButton(
-            () async {
-              // Close keyboard if open
-              AppConfig.focus.primaryFocus?.unfocus();
+      ezYesNoRow(
+        context,
+        // On yes (submit)
+        () async {
+          // Close keyboard if open
+          AppConfig.focus.primaryFocus?.unfocus();
 
-              // Don't do anything if the url is invalid
-              if (!urlFormKey.currentState!.validate()) {
-                popNLog(context, 'Invalid URL!');
-                return;
-              }
+          // Don't do anything if the url is invalid
+          if (!urlFormKey.currentState!.validate()) {
+            popNLog(context, 'Invalid URL!');
+            return;
+          }
 
-              // Save text & close dialog
-              String photoURL = _urlController.text.trim();
-              Navigator.of(context).pop();
+          // Save text & close dialog
+          String photoURL = _urlController.text.trim();
+          Navigator.of(context).pop();
 
-              // Update firestore and the firebase user config
-              await AppUser.account.updatePhotoURL(photoURL);
-              await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
-                {avatarURLPath: photoURL},
-              );
-            },
-            () {},
-            'Submit',
-            Icon(Icons.check),
-            Icon(CupertinoIcons.check_mark),
-          ),
+          // Update firestore and the firebase user config
+          await AppUser.account.updatePhotoURL(photoURL);
+          await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
+            {avatarURLPath: photoURL},
+          );
+        },
 
-          // Cancel
-          ezTextIconButton(
-            () => Navigator.of(context).pop(),
-            () {},
-            'Cancel',
-            Icon(Icons.cancel),
-            Icon(CupertinoIcons.xmark),
-          ),
-        ],
+        // On no (cancel)
+        () => Navigator.of(context).pop(),
+
+        // Modifications
+        'Submit',
+        'Cancel',
       ),
     ],
   );
@@ -406,47 +375,36 @@ void editName(BuildContext context) {
       Container(height: dialogSpacer),
 
       // Submit & cancel buttons
-      Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // Submit
-          ezTextIconButton(
-            () async {
-              // Close keyboard if open
-              AppConfig.focus.primaryFocus?.unfocus();
+      ezYesNoRow(
+        context,
+        // On yes (submit)
+        () async {
+          // Close keyboard if open
+          AppConfig.focus.primaryFocus?.unfocus();
 
-              // Don't do anything if the display name is invalid
-              if (!nameFormKey.currentState!.validate()) {
-                popNLog(context, 'Invalid display name!');
-                return;
-              }
+          // Don't do anything if the display name is invalid
+          if (!nameFormKey.currentState!.validate()) {
+            popNLog(context, 'Invalid display name!');
+            return;
+          }
 
-              // Save text & close dialog
-              String newName = _nameController.text.trim();
-              Navigator.of(context).pop();
+          // Save text & close dialog
+          String newName = _nameController.text.trim();
+          Navigator.of(context).pop();
 
-              // Update firestore and the firebase user config
-              await AppUser.account.updateDisplayName(newName);
-              await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
-                {displayNamePath: newName},
-              );
-            },
-            () {},
-            'Submit',
-            Icon(Icons.check),
-            Icon(CupertinoIcons.check_mark),
-          ),
+          // Update firestore and the firebase user config
+          await AppUser.account.updateDisplayName(newName);
+          await AppUser.db.collection(usersPath).doc(AppUser.account.uid).update(
+            {displayNamePath: newName},
+          );
+        },
 
-          // Cancel
-          ezTextIconButton(
-            () => Navigator.of(context).pop(),
-            () {},
-            'Cancel',
-            Icon(Icons.cancel),
-            Icon(CupertinoIcons.xmark),
-          )
-        ],
+        // On no (cancel)
+        () => Navigator.of(context).pop(),
+
+        // Modifications
+        'Submit',
+        'Cancel',
       ),
     ],
   );

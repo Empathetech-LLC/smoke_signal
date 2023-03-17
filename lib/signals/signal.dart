@@ -1,9 +1,7 @@
-import 'package:smoke_signal/utils/helpers.dart';
-
+import '../utils/helpers.dart';
 import '../user/user-api.dart';
 import '../signals/signal-api.dart';
 import '../utils/constants.dart';
-
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'dart:io';
@@ -12,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class Signal extends StatefulWidget {
   const Signal({
@@ -118,8 +117,7 @@ class _SignalState extends State<Signal> {
               },
               () {},
               'File',
-              Icon(Icons.file_open),
-              Icon(CupertinoIcons.folder_open),
+              Icon(PlatformIcons(context).folder),
             ),
             Container(height: dialogSpacer),
 
@@ -131,8 +129,7 @@ class _SignalState extends State<Signal> {
               },
               () {},
               'Camera',
-              Icon(Icons.camera_alt),
-              Icon(CupertinoIcons.camera),
+              Icon(PlatformIcons(context).photoCamera),
             ),
             Container(height: dialogSpacer),
 
@@ -346,7 +343,6 @@ class _SignalState extends State<Signal> {
 
   // Signal styling when the icon is showing
   Widget iconSignal() {
-    TextStyle titleTextStyle = getTextStyle(titleStyleKey);
     bool joined = widget.activeMembers.contains(AppUser.account.uid);
 
     return ezButton(
@@ -461,34 +457,19 @@ class _SignalState extends State<Signal> {
           SizedBox(
             width: screenWidth(context) * (2 / 3),
             height: signalCountHeight,
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // Yes
-                ezTextIconButton(
-                  () async {
-                    await acceptInvite(context, signalTitle);
-                    setState(() {});
-                  },
-                  () {},
-                  'Yes',
-                  Icon(Icons.check),
-                  Icon(CupertinoIcons.check_mark),
-                ),
+            child: ezYesNoRow(
+              context,
+              // On yes
+              () async {
+                await acceptInvite(context, signalTitle);
+                setState(() {});
+              },
 
-                // No
-                ezTextIconButton(
-                  () async {
-                    await declineInvite(context, signalTitle);
-                    setState(() {});
-                  },
-                  () {},
-                  'No',
-                  Icon(Icons.cancel),
-                  Icon(CupertinoIcons.xmark),
-                ),
-              ],
+              // On no
+              () async {
+                await declineInvite(context, signalTitle);
+                setState(() {});
+              },
             ),
           ),
         ],

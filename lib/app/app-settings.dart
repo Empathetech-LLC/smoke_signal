@@ -1,6 +1,5 @@
 import '../utils/helpers.dart';
 import '../utils/constants.dart';
-
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -74,36 +73,21 @@ class _AppSettingsState extends State<AppSettings> {
                     'Reset all colors?',
                     [
                       // Yes/no buttons
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          // Yes
-                          ezTextIconButton(
-                            () {
-                              AppConfig.preferences.remove(buttonColorKey);
-                              AppConfig.preferences.remove(buttonTextColorKey);
-                              AppConfig.preferences.remove(themeColorKey);
-                              AppConfig.preferences.remove(buttonColorKey);
-                              AppConfig.preferences.remove(backColorKey);
+                      ezYesNoRow(
+                        context,
+                        // On yes, remove all color settings
+                        () {
+                          AppConfig.preferences.remove(buttonColorKey);
+                          AppConfig.preferences.remove(buttonTextColorKey);
+                          AppConfig.preferences.remove(themeColorKey);
+                          AppConfig.preferences.remove(buttonColorKey);
+                          AppConfig.preferences.remove(backColorKey);
 
-                              Navigator.of(context).pop();
-                            },
-                            () {},
-                            'Yes',
-                            Icon(Icons.check),
-                            Icon(CupertinoIcons.check_mark),
-                          ),
+                          Navigator.of(context).pop();
+                        },
 
-                          // No
-                          ezTextIconButton(
-                            () => Navigator.of(context).pop(),
-                            () {},
-                            'No',
-                            Icon(Icons.cancel),
-                            Icon(CupertinoIcons.xmark),
-                          ),
-                        ],
+                        // On no
+                        () => Navigator.of(context).pop(),
                       ),
                     ],
                   );

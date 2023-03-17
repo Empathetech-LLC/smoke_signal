@@ -1,10 +1,10 @@
 import '../utils/helpers.dart';
 import '../utils/constants.dart';
-
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/Cupertino.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SignalSettings extends StatefulWidget {
   const SignalSettings({Key? key}) : super(key: key);
@@ -76,38 +76,21 @@ class _SignalSettingsState extends State<SignalSettings> {
                     context,
                     'Reset all colors?',
                     [
-                      // Yes/no
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          // Yes
-                          ezTextIconButton(
-                            // Remove all color settings
-                            () {
-                              AppConfig.preferences.remove(signalsBackgroundColorKey);
-                              AppConfig.preferences.remove(watchingColorKey);
-                              AppConfig.preferences.remove(watchingTextColorKey);
-                              AppConfig.preferences.remove(joinedColorKey);
-                              AppConfig.preferences.remove(joinedTextColorKey);
+                      ezYesNoRow(
+                        context,
+                        // On yes, remove all color settings
+                        () {
+                          AppConfig.preferences.remove(signalsBackgroundColorKey);
+                          AppConfig.preferences.remove(watchingColorKey);
+                          AppConfig.preferences.remove(watchingTextColorKey);
+                          AppConfig.preferences.remove(joinedColorKey);
+                          AppConfig.preferences.remove(joinedTextColorKey);
 
-                              Navigator.of(context).pop();
-                            },
-                            () {},
-                            'Yes',
-                            Icon(Icons.check),
-                            Icon(CupertinoIcons.check_mark),
-                          ),
+                          Navigator.of(context).pop();
+                        },
 
-                          // No
-                          ezTextIconButton(
-                            () => Navigator.of(context).pop(),
-                            () {},
-                            'No',
-                            Icon(Icons.cancel),
-                            Icon(CupertinoIcons.xmark),
-                          ),
-                        ],
+                        // On no
+                        () => Navigator.of(context).pop(),
                       ),
                     ],
                   );

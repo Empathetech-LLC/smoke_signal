@@ -3,7 +3,6 @@ import '../utils/constants.dart';
 import '../utils/material-ui.dart';
 import '../utils/helpers.dart';
 import '../signals/signal-board.dart';
-
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -84,8 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       () => Navigator.of(context).pushNamed(loginRoute),
                       () {},
                       'Login',
-                      Icon(Icons.email),
-                      Icon(CupertinoIcons.mail),
+                      Icon(PlatformIcons(context).mail),
                     ),
                     Container(height: buttonSpacer),
 
@@ -94,8 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       () => Navigator.of(context).pushNamed(signupRoute),
                       () {},
                       'Sign up',
-                      Icon(Icons.email),
-                      Icon(CupertinoIcons.mail),
+                      Icon(PlatformIcons(context).mail),
                     ),
                   ],
                 ),
