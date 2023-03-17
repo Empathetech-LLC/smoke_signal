@@ -269,11 +269,14 @@ class _SignalState extends State<Signal> {
                   ]
                 : [
                     ezTextButton(
-                      () => confirmDeparture(
-                        context,
-                        signalTitle,
-                        [showIconPref, iconPathPref],
-                      ),
+                      () {
+                        Navigator.of(context).pop();
+                        confirmDeparture(
+                          context,
+                          signalTitle,
+                          [showIconPref, iconPathPref],
+                        );
+                      },
                       () {},
                       'Leave signal',
                     ),
