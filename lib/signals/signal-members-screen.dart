@@ -225,8 +225,8 @@ class _SignalMembersState extends State<SignalMembers> {
       // Android config
       MaterialScaffoldData(),
 
-      // iOS nav (top) bar
-      null,
+      // iOS config
+      CupertinoPageScaffoldData(),
     );
   }
 }

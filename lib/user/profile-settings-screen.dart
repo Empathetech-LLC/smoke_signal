@@ -90,8 +90,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
       // Android drawer aka settings hamburger
       MaterialScaffoldData(),
 
-      // iOS nav (top) bar
-      null,
+      // iOS config
+      CupertinoPageScaffoldData(),
     );
   }
 }

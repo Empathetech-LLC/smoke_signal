@@ -111,8 +111,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       // Android drawer aka settings hamburger
       MaterialScaffoldData(endDrawer: standardDrawer(context)),
 
-      // iOS nav (top) bar
-      null,
+      // iOS config
+      CupertinoPageScaffoldData(),
     );
   }
 }

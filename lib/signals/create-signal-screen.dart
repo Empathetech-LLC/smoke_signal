@@ -235,8 +235,8 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
       // Android config
       MaterialScaffoldData(),
 
-      // iOS nav (top) bar
-      null,
+      // iOS config
+      CupertinoPageScaffoldData(),
     );
   }
 }

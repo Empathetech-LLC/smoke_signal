@@ -105,11 +105,11 @@ class _HomeScreenState extends State<HomeScreen> {
         // Fallback background color
         Color(AppConfig.prefs[backColorKey]),
 
-        // Android drawer aka settings hamburger
+        // Android config
         MaterialScaffoldData(endDrawer: standardDrawer(context)),
 
-        // iOS nav (top) bar
-        CupertinoNavigationBar(),
+        // iOS config
+        CupertinoPageScaffoldData(),
       );
     }
   }

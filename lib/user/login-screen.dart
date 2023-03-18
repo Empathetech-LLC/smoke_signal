@@ -126,8 +126,8 @@ class _LoginScreenState extends State<LoginScreen> {
       // Android drawer aka settings hamburger
       MaterialScaffoldData(endDrawer: standardDrawer(context)),
 
-      // iOS nav (top) bar
-      null,
+      // iOS config
+      CupertinoPageScaffoldData(),
     );
   }
 }

@@ -96,7 +96,7 @@ class _SettingsState extends State<Settings> {
       MaterialScaffoldData(),
 
       // iOS config
-      CupertinoNavigationBar(),
+      CupertinoPageScaffoldData(),
     );
   }
 }

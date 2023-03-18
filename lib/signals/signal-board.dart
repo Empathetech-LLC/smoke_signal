@@ -125,8 +125,8 @@ class _SignalBoardState extends State<SignalBoard> {
         ),
       ),
 
-      // iOS nav (top) bar
-      null,
+      // iOS config
+      CupertinoPageScaffoldData(),
     );
   }
 }
