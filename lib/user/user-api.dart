@@ -10,7 +10,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-////// Wrapper classes //////
+//// Wrapper classes ////
 
 class AppUser {
   static late FirebaseMessaging messager;
@@ -26,7 +26,7 @@ class UserProfile {
 
   UserProfile(this.id, this.name, this.avatarURL);
 
-  // Build local user profile from firestore user document
+  /// Builds a local UserProfile from a Firestore (user) DocumentSnapshot
   static UserProfile buildFromDoc(DocumentSnapshot userDoc) {
     final data = userDoc.data() as Map<String, dynamic>;
     return UserProfile(userDoc.id, data[displayNamePath], data[avatarURLPath]);
@@ -45,7 +45,7 @@ class UserProfile {
   }
 }
 
-////// Custom functions //////
+//// Custom functions ////
 
 //// These (can) cost money!!
 ////   Writing data free tier == 20k writes/day, 1GB limit
