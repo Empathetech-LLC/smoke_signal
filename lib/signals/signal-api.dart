@@ -291,7 +291,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
                   context,
                   buildImage(
                     AppConfig.prefs[signalImageKey],
-                    isAssetImage(signalImageKey),
+                    isAssetImage(AppConfig.prefs[signalImageKey]),
                   ),
                 );
               case ConnectionState.done:
