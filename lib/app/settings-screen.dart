@@ -64,38 +64,33 @@ class _SettingsState extends State<Settings> {
         children: windows,
       ),
 
-      // Shared bottom nav bar
-      PlatformNavBar(
-        currentIndex: navIndex,
-        itemChanged: (index) => setState(() {
-          navIndex = index;
-        }),
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(PlatformIcons(context).person),
-            label: 'App',
-            tooltip: 'Show app settings',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fireplace),
-            label: 'Signals',
-            tooltip: 'Show signals settings',
-          ),
-        ],
+      //// Bottom nav bar info
+      // Index
+      navIndex,
 
-        backgroundColor: themeColor,
+      // On changed
+      (index) => setState(() {
+        navIndex = index;
+      }),
 
-        // Android config
-        material: (context, platform) => MaterialNavBarData(),
+      // Items
+      [
+        BottomNavigationBarItem(
+          icon: Icon(PlatformIcons(context).person),
+          label: 'App',
+          tooltip: 'Show app settings',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.fireplace),
+          label: 'Signals',
+          tooltip: 'Show signals settings',
+        ),
+      ],
 
-        // iOS config
-        cupertino: (context, platform) => CupertinoTabBarData(),
-      ),
-
-      // Android config
+      // Android scaffold config
       MaterialScaffoldData(),
 
-      // iOS config
+      // iOS scaffold config
       CupertinoPageScaffoldData(),
     );
   }
