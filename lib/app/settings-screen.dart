@@ -64,22 +64,15 @@ class _SettingsState extends State<Settings> {
         children: windows,
       ),
 
-      // Android drawer aka settings hamburger
-      MaterialScaffoldData(),
-
-      // iOS nav (top) bar
-      CupertinoNavigationBar(),
-
       // Shared bottom nav bar
       PlatformNavBar(
         currentIndex: navIndex,
         itemChanged: (index) => setState(() {
           navIndex = index;
         }),
-        backgroundColor: themeColor,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(PlatformIcons(context).person),
             label: 'App',
             tooltip: 'Show app settings',
           ),
@@ -89,7 +82,21 @@ class _SettingsState extends State<Settings> {
             tooltip: 'Show signals settings',
           ),
         ],
+
+        backgroundColor: themeColor,
+
+        // Android config
+        material: (context, platform) => MaterialNavBarData(),
+
+        // iOS config
+        cupertino: (context, platform) => CupertinoTabBarData(),
       ),
+
+      // Android config
+      MaterialScaffoldData(),
+
+      // iOS config
+      CupertinoNavigationBar(),
     );
   }
 }
