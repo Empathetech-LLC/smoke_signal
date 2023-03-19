@@ -22,7 +22,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return standardScaffold(
+    return ezScaffold(
       context,
 
       // Title

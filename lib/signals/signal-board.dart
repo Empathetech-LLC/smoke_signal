@@ -31,7 +31,7 @@ class _SignalBoardState extends State<SignalBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return standardScaffold(
+    return ezScaffold(
       context,
 
       // Title

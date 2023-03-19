@@ -102,7 +102,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return standardScaffold(
+    return ezScaffold(
       context,
 
       // Title

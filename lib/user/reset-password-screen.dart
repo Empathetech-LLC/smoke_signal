@@ -30,7 +30,7 @@ class _ResetScreenState extends State<ResetScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return standardScaffold(
+    return ezScaffold(
       context,
 
       // Title

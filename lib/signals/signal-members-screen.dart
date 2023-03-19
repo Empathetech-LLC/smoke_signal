@@ -181,7 +181,7 @@ class _SignalMembersState extends State<SignalMembers> {
 
   @override
   Widget build(BuildContext context) {
-    return standardScaffold(
+    return ezScaffold(
       context,
 
       // Title

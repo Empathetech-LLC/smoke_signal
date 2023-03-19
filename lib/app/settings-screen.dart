@@ -52,7 +52,7 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    return navScaffold(
+    return ezNavScaffold(
       context,
 
       // Title

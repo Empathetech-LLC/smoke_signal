@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (type == appBuild) {
       return SignalBoard();
     } else {
-      return standardScaffold(
+      return ezScaffold(
         context,
 
         // Title
