@@ -32,7 +32,7 @@ Drawer standardDrawer(BuildContext context) {
           ),
           () {},
           'Settings',
-          Icon(PlatformIcons(context).settings),
+          PlatformIcons(context).settings,
         ),
         Container(height: buttonSpacer),
 
@@ -120,7 +120,7 @@ Drawer signalBoardDrawer(BuildContext context) {
           () => Navigator.of(context).popAndPushNamed(createSignalRoute),
           () {},
           'New',
-          Icon(PlatformIcons(context).add),
+          PlatformIcons(context).add,
         ),
         Container(height: buttonSpacer),
 
@@ -132,7 +132,7 @@ Drawer signalBoardDrawer(BuildContext context) {
           ),
           () {},
           'Settings',
-          Icon(PlatformIcons(context).settings),
+          PlatformIcons(context).settings,
         ),
         Container(height: buttonSpacer),
 

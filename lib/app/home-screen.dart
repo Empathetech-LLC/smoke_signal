@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       () => Navigator.of(context).pushNamed(loginRoute),
                       () {},
                       'Login',
-                      Icon(PlatformIcons(context).mail),
+                      PlatformIcons(context).mail,
                     ),
                     Container(height: buttonSpacer),
 
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       () => Navigator.of(context).pushNamed(signupRoute),
                       () {},
                       'Sign up',
-                      Icon(PlatformIcons(context).mail),
+                      PlatformIcons(context).mail,
                     ),
                   ],
                 ),

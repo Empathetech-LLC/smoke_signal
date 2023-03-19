@@ -117,7 +117,7 @@ class _SignalState extends State<Signal> {
             },
             () {},
             'File',
-            Icon(PlatformIcons(context).folder),
+            PlatformIcons(context).folder,
           ),
           Container(height: dialogSpacer),
 
@@ -129,7 +129,7 @@ class _SignalState extends State<Signal> {
             },
             () {},
             'Camera',
-            Icon(PlatformIcons(context).photoCamera),
+            PlatformIcons(context).photoCamera,
           ),
           Container(height: dialogSpacer),
 

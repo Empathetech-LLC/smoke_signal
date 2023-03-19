@@ -79,7 +79,7 @@ class _ResetScreenState extends State<ResetScreen> {
               },
               () {},
               'Send link',
-              Icon(PlatformIcons(context).mail),
+              PlatformIcons(context).mail,
             ),
             Container(height: buttonSpacer),
           ],

@@ -313,7 +313,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
           () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
           () {},
           'Cancel',
-          Icon(PlatformIcons(context).clear),
+          PlatformIcons(context).clear,
         ),
       ],
     ),

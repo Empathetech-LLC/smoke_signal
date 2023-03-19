@@ -53,7 +53,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               },
               () {},
               'New pic',
-              Icon(PlatformIcons(context).photoCamera),
+              PlatformIcons(context).photoCamera,
             ),
 
             Container(height: 1.5 * buttonSpacer),
@@ -73,7 +73,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               },
               () {},
               'New name',
-              Icon(PlatformIcons(context).edit),
+              PlatformIcons(context).edit,
             ),
 
             Container(height: buttonSpacer),

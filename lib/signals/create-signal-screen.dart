@@ -220,7 +220,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             },
             () {},
             'Done',
-            Icon(PlatformIcons(context).cloudUpload),
+            PlatformIcons(context).cloudUpload,
           ),
           Container(height: buttonSpacer),
         ],
