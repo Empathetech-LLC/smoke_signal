@@ -74,29 +74,25 @@ class _HomeScreenState extends State<HomeScreen> {
             ? loadingMessage(
                 context, buildImage(smokeSignalPath, isAssetImage(smokeSignalPath)))
             : // Show authBuild
-            Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // Login
-                    ezTextIconButton(
-                      () => Navigator.of(context).pushNamed(loginRoute),
-                      () {},
-                      'Login',
-                      PlatformIcons(context).mail,
-                    ),
-                    Container(height: buttonSpacer),
+            ezCenterScroll(
+                [
+                  // Login
+                  ezTextIconButton(
+                    () => Navigator.of(context).pushNamed(loginRoute),
+                    () {},
+                    'Login',
+                    PlatformIcons(context).mail,
+                  ),
+                  Container(height: buttonSpacer),
 
-                    // Sign up
-                    ezTextIconButton(
-                      () => Navigator.of(context).pushNamed(signupRoute),
-                      () {},
-                      'Sign up',
-                      PlatformIcons(context).mail,
-                    ),
-                  ],
-                ),
+                  // Sign up
+                  ezTextIconButton(
+                    () => Navigator.of(context).pushNamed(signupRoute),
+                    () {},
+                    'Sign up',
+                    PlatformIcons(context).mail,
+                  ),
+                ],
               ),
 
         // Background image/decoration
