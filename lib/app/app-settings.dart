@@ -22,7 +22,7 @@ class _AppSettingsState extends State<AppSettings> {
       context,
 
       // Body
-      ezCenterScroll(
+      ezScrollView(
         [
           warningCard(context, 'Changes won\'t take effect until restart'),
           Container(height: buttonSpacer),
