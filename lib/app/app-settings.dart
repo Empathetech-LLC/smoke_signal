@@ -103,6 +103,7 @@ class _AppSettingsState extends State<AppSettings> {
               // Font size
               SliderSetting(
                 prefsKey: fontSizeKey,
+                type: SettingType.fontSize,
                 title: 'Font size',
                 min: 12.0,
                 max: 48.0,
@@ -116,6 +117,7 @@ class _AppSettingsState extends State<AppSettings> {
               // Button spacing
               SliderSetting(
                 prefsKey: buttonSpacingKey,
+                type: SettingType.buttonSpacing,
                 title: 'Button spacing',
                 min: 10.0,
                 max: 100.0,
@@ -126,6 +128,7 @@ class _AppSettingsState extends State<AppSettings> {
               // Dialog spacing
               SliderSetting(
                 prefsKey: dialogSpacingKey,
+                type: SettingType.dialogSpacing,
                 title: 'Dialog spacing',
                 min: 10.0,
                 max: 100.0,

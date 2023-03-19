@@ -108,6 +108,7 @@ class _SignalSettingsState extends State<SignalSettings> {
               // Card height
               SliderSetting(
                 prefsKey: signalHeightKey,
+                type: SettingType.buttonHeight,
                 title: 'Signal card height',
                 min: 75,
                 max: 200,
@@ -118,6 +119,7 @@ class _SignalSettingsState extends State<SignalSettings> {
               // Count height
               SliderSetting(
                 prefsKey: signalCountHeightKey,
+                type: SettingType.buttonHeight,
                 title: 'Signal count height',
                 min: 50,
                 max: 100,
@@ -128,6 +130,7 @@ class _SignalSettingsState extends State<SignalSettings> {
               // Signal spacing
               SliderSetting(
                 prefsKey: signalSpacingKey,
+                type: SettingType.buttonSpacing,
                 title: 'Signal spacing',
                 min: 10.0,
                 max: 100.0,
