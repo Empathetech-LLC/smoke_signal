@@ -5,6 +5,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+/// [navWindow] containing the user's app specific customization options
 class AppSettings extends StatefulWidget {
   const AppSettings({Key? key}) : super(key: key);
 
@@ -99,7 +100,7 @@ class _AppSettingsState extends State<AppSettings> {
               Container(height: buttonSpacer),
 
               // Font size
-              ValueSetting(
+              SliderSetting(
                 prefsKey: fontSizeKey,
                 title: 'Font size',
                 min: 12.0,
@@ -112,7 +113,7 @@ class _AppSettingsState extends State<AppSettings> {
             'Spacing',
             [
               // Button spacing
-              ValueSetting(
+              SliderSetting(
                 prefsKey: buttonSpacingKey,
                 title: 'Button spacing',
                 min: 10.0,
@@ -122,7 +123,7 @@ class _AppSettingsState extends State<AppSettings> {
               Container(height: 0.5 * buttonSpacer),
 
               // Dialog spacing
-              ValueSetting(
+              SliderSetting(
                 prefsKey: dialogSpacingKey,
                 title: 'Dialog spacing',
                 min: 10.0,
