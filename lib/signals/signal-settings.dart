@@ -33,8 +33,9 @@ class _SignalSettingsState extends State<SignalSettings> {
             'Image',
             [
               ImageSetting(
-                prefsKey: signalImageKey,
+                prefsKey: AppConfig.prefs[signalImageKey],
                 isAssetImage: isAssetImage(AppConfig.prefs[signalImageKey]),
+                fullscreen: false,
                 title: 'Signal',
                 credits:
                     credits[AppConfig.prefs[signalImageKey]] ?? 'Wherever you got it!',
