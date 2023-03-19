@@ -42,64 +42,60 @@ class _SignUpScreenState extends State<SignUpScreen> {
       'Welcome!',
 
       // Body
-      Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // Autofill group allows for password manager inputs and such
-            AutofillGroup(
-              child: Column(
-                children: [
-                  // Email field
-                  ezForm(
-                    emailFormKey,
-                    _signupEmailController,
-                    'Enter email',
-                    false,
-                    [AutofillHints.email],
-                    emailValidator,
-                    AutovalidateMode.onUserInteraction,
-                  ),
-                  Container(height: buttonSpacer),
+      ezCenterScroll(
+        [
+          // Autofill group allows for password manager inputs and such
+          AutofillGroup(
+            child: Column(
+              children: [
+                // Email field
+                ezForm(
+                  emailFormKey,
+                  _signupEmailController,
+                  'Enter email',
+                  false,
+                  [AutofillHints.email],
+                  emailValidator,
+                  AutovalidateMode.onUserInteraction,
+                ),
+                Container(height: buttonSpacer),
 
-                  // Password field
-                  ezForm(
-                    passwordFormKey,
-                    _passwdController,
-                    'Enter password',
-                    true,
-                    [AutofillHints.password],
-                  ),
-                ],
-              ),
+                // Password field
+                ezForm(
+                  passwordFormKey,
+                  _passwdController,
+                  'Enter password',
+                  true,
+                  [AutofillHints.password],
+                ),
+              ],
             ),
-            Container(height: buttonSpacer),
+          ),
+          Container(height: buttonSpacer),
 
-            // Attempt sign up button
-            ezTextButton(
-              () async {
-                // Close keyboard if open
-                AppConfig.focus.primaryFocus?.unfocus();
+          // Attempt sign up button
+          ezTextButton(
+            () async {
+              // Close keyboard if open
+              AppConfig.focus.primaryFocus?.unfocus();
 
-                // Don't do anything if the input is invalid
-                if (!emailFormKey.currentState!.validate()) {
-                  popNLog(context, 'Invalid email!');
-                  return;
-                }
+              // Don't do anything if the input is invalid
+              if (!emailFormKey.currentState!.validate()) {
+                popNLog(context, 'Invalid email!');
+                return;
+              }
 
-                // Attempt login
-                await attemptAccountCreation(
-                  context,
-                  _signupEmailController.text.trim(),
-                  _passwdController.text.trim(),
-                );
-              },
-              () {},
-              'Sign up',
-            ),
-          ],
-        ),
+              // Attempt login
+              await attemptAccountCreation(
+                context,
+                _signupEmailController.text.trim(),
+                _passwdController.text.trim(),
+              );
+            },
+            () {},
+            'Sign up',
+          ),
+        ],
       ),
 
       // Background image/decoration

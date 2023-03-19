@@ -29,56 +29,52 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
       'Edit Profile',
 
       // Body
-      Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(height: buttonSpacer),
+      ezCenterScroll(
+        [
+          Container(height: buttonSpacer),
 
-            // Profile image
-            CircleAvatar(
-              foregroundImage: CachedNetworkImageProvider(
-                  AppUser.account.photoURL ?? defaultAvatarURL),
-              minRadius: 100,
-              maxRadius: 100,
-            ),
-            Container(height: buttonSpacer),
+          // Profile image
+          CircleAvatar(
+            foregroundImage:
+                CachedNetworkImageProvider(AppUser.account.photoURL ?? defaultAvatarURL),
+            minRadius: 100,
+            maxRadius: 100,
+          ),
+          Container(height: buttonSpacer),
 
-            // Edit picture
-            ezTextIconButton(
-              () {
-                editAvatar(context);
-                setState(() {});
-              },
-              () {},
-              'New pic',
-              PlatformIcons(context).photoCamera,
-            ),
+          // Edit picture
+          ezTextIconButton(
+            () {
+              editAvatar(context);
+              setState(() {});
+            },
+            () {},
+            'New pic',
+            PlatformIcons(context).photoCamera,
+          ),
 
-            Container(height: 1.5 * buttonSpacer),
+          Container(height: 1.5 * buttonSpacer),
 
-            // Display name
-            Text(
-              AppUser.account.displayName ?? defaultDisplayName,
-              style: getTextStyle(titleStyleKey),
-            ),
-            Container(height: buttonSpacer),
+          // Display name
+          Text(
+            AppUser.account.displayName ?? defaultDisplayName,
+            style: getTextStyle(titleStyleKey),
+          ),
+          Container(height: buttonSpacer),
 
-            // Edit name
-            ezTextIconButton(
-              () {
-                editName(context);
-                setState(() {});
-              },
-              () {},
-              'New name',
-              PlatformIcons(context).edit,
-            ),
+          // Edit name
+          ezTextIconButton(
+            () {
+              editName(context);
+              setState(() {});
+            },
+            () {},
+            'New name',
+            PlatformIcons(context).edit,
+          ),
 
-            Container(height: buttonSpacer),
-          ],
-        ),
+          Container(height: buttonSpacer),
+        ],
       ),
 
       // Background image/decoration

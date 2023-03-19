@@ -37,53 +37,49 @@ class _ResetScreenState extends State<ResetScreen> {
       'No problem!',
 
       // Body
-      Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // Email form
-            AutofillGroup(
-              child: ezForm(
-                emailFormKey,
-                _emailController,
-                'Enter email',
-                false,
-                [AutofillHints.email],
-                emailValidator,
-                AutovalidateMode.onUserInteraction,
-              ),
+      ezCenterScroll(
+        [
+          // Email form
+          AutofillGroup(
+            child: ezForm(
+              emailFormKey,
+              _emailController,
+              'Enter email',
+              false,
+              [AutofillHints.email],
+              emailValidator,
+              AutovalidateMode.onUserInteraction,
             ),
-            Container(height: buttonSpacer),
+          ),
+          Container(height: buttonSpacer),
 
-            // Submit button
-            ezTextIconButton(
-              () async {
-                // Close keyboard if open
-                AppConfig.focus.primaryFocus?.unfocus();
+          // Submit button
+          ezTextIconButton(
+            () async {
+              // Close keyboard if open
+              AppConfig.focus.primaryFocus?.unfocus();
 
-                // Don't do anything if the email is invalid
-                if (!emailFormKey.currentState!.validate()) {
-                  popNLog(context, 'Invalid email!');
-                  return;
-                }
+              // Don't do anything if the email is invalid
+              if (!emailFormKey.currentState!.validate()) {
+                popNLog(context, 'Invalid email!');
+                return;
+              }
 
-                // Attempt reset
-                try {
-                  await AppUser.auth
-                      .sendPasswordResetEmail(email: _emailController.text.trim());
-                  popNLog(context, 'Password reset email has been sent!');
-                } on Exception catch (e) {
-                  popNLog(context, 'Failed to send password reset email:\n$e');
-                }
-              },
-              () {},
-              'Send link',
-              PlatformIcons(context).mail,
-            ),
-            Container(height: buttonSpacer),
-          ],
-        ),
+              // Attempt reset
+              try {
+                await AppUser.auth
+                    .sendPasswordResetEmail(email: _emailController.text.trim());
+                popNLog(context, 'Password reset email has been sent!');
+              } on Exception catch (e) {
+                popNLog(context, 'Failed to send password reset email:\n$e');
+              }
+            },
+            () {},
+            'Send link',
+            PlatformIcons(context).mail,
+          ),
+          Container(height: buttonSpacer),
+        ],
       ),
 
       // Background image/decoration
