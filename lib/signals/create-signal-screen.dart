@@ -19,7 +19,7 @@ class CreateSignalScreen extends StatefulWidget {
 }
 
 class _CreateSignalScreenState extends State<CreateSignalScreen> {
-  //// Initialize state
+  // Initialize state
 
   late Stream<QuerySnapshot<Map<String, dynamic>>> _userStream;
 
@@ -98,7 +98,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
     return children;
   }
 
-  //// Draw state
+  // Draw state
 
   @override
   Widget build(BuildContext context) {

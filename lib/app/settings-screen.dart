@@ -33,7 +33,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  //// Initialize state
+  // Initialize state
 
   late int navIndex = widget.startIndex;
 
@@ -48,7 +48,7 @@ class _SettingsState extends State<Settings> {
 
   late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
-  //// Draw state
+  // Draw state
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,6 @@ class _SettingsState extends State<Settings> {
         children: windows,
       ),
 
-      //// Bottom nav bar info
       // Index
       navIndex,
 

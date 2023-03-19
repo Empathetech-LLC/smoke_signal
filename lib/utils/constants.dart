@@ -1,16 +1,14 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-//// App info
-
+/// Application title
 const String appTitle = 'Smoke Signal';
 
+/// Image path -> image source key -> value pair
 final Map<String, String> credits = {
   appIconPath: 'Empathetech LLC: The Founder\n\nUnnamed',
   smokeSignalPath: 'https://pimen.itch.io/\n\n\'Smoke Effect\'',
   darkForestPath: 'https://edermunizz.itch.io/\n\n\'Dark Forest\'',
 };
-
-//// Paths
 
 // Routes
 const String signupRoute = 'sign-up-screen';
@@ -36,10 +34,8 @@ const String memberReqsArg = 'memberReqs';
 const String unaddedArg = 'unadded';
 const String streamArg = 'stream';
 
-//// Shared Preferences
-// aka for AppConfig from empathetech_flutter_ui
-
-// Signals
+// Shared Preferences
+// aka for [customDefaults] for [AppConfig] from empathetech_flutter_ui
 const String signalsBackgroundColorKey = 'signalsBackgroundColor';
 const String signalImageKey = 'signalImage';
 const String signalSpacingKey = 'signalSpacing';
@@ -72,19 +68,7 @@ final Map<String, dynamic> customDefaults = {
   joinedTextColorKey: 0xFF000000,
 };
 
-//// Firebase
-
-// Validators
-const String validatorRule = """For display names, signal titles, and signal messages...
-
-- Length 3 -> 20
-- Can contain word characters (upper or lowercase)
-- Can contain digits
-- Can contain -_!?^,
-- Can contain whitespace""";
-final RegExp validatorRegex = new RegExp(r'^[\d\w\s-_!,?^]{3,20}$');
-
-// User
+// Firebase users
 const String usersPath = 'users';
 const String fcmTokenPath = 'fcmToken';
 const String displayNamePath = 'displayName';
@@ -93,7 +77,7 @@ const String defaultDisplayName = 'Anon';
 const String defaultAvatarURL =
     'https://raw.githubusercontent.com/Empathetech-LLC/smoke_signal/main/assets/app-icon.png';
 
-// Signals
+// Firebase signals
 const String signalsPath = 'signals';
 const String messagePath = 'message';
 const String activeMembersPath = 'activeMembers';
@@ -101,7 +85,7 @@ const String membersPath = 'members';
 const String ownerPath = 'owner';
 const String memberReqsPath = 'memberReqs';
 
-// Cloud functions
+// Firebase functions
 const String sendPushFunc = 'sendPush';
 const String tokenSeparator = ';me;';
 

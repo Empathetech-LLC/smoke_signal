@@ -16,7 +16,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  //// Initialize state
+  // Initialize state
 
   final emailFormKey = GlobalKey<FormState>();
   final passwordFormKey = GlobalKey<FormState>();
@@ -31,7 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  //// Draw state
+  // Draw state
 
   @override
   Widget build(BuildContext context) {

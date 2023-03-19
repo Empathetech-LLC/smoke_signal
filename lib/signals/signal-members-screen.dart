@@ -49,7 +49,7 @@ class SignalMembers extends StatefulWidget {
 }
 
 class _SignalMembersState extends State<SignalMembers> {
-  //// Initialize state
+  // Initialize state
 
   late Stream<QuerySnapshot<Map<String, dynamic>>> _userStream;
 
@@ -177,7 +177,7 @@ class _SignalMembersState extends State<SignalMembers> {
     );
   }
 
-  //// Draw state
+  // Draw state
 
   @override
   Widget build(BuildContext context) {

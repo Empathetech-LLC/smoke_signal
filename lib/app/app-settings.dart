@@ -25,9 +25,6 @@ class _AppSettingsState extends State<AppSettings> {
         [
           warningCard(context, 'Changes won\'t take effect until restart'),
           Container(height: buttonSpacer),
-
-          //// Background settings
-
           ezList(
             'Image',
             [
@@ -39,9 +36,6 @@ class _AppSettingsState extends State<AppSettings> {
               )
             ],
           ),
-
-          //// Theme settings
-
           ezList(
             'Color',
             [
@@ -94,9 +88,6 @@ class _AppSettingsState extends State<AppSettings> {
               Container(height: buttonSpacer),
             ],
           ),
-
-          //// Font settings
-
           ezList(
             'Font',
             [
@@ -117,9 +108,6 @@ class _AppSettingsState extends State<AppSettings> {
               ),
             ],
           ),
-
-          //// Spacing settings
-
           ezList(
             'Spacing',
             [

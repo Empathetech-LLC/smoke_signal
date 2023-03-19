@@ -17,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  //// Initialize state
+  // Initialize state
 
   final emailFormKey = GlobalKey<FormState>();
   final passwordFormKey = GlobalKey<FormState>();

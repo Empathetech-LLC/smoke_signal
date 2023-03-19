@@ -20,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //// Initialize state
+  // Initialize state
 
   late Stream<User?> _authStream;
 
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  //// Draw state
+  // Draw state
 
   // Returns the current build based on the auth state
   Widget getBuild(String type) {
@@ -133,14 +133,14 @@ class _HomeScreenState extends State<HomeScreen> {
             User? currUser = snapshot.data;
             if (currUser == null) return getBuild(authBuild);
 
-            //// User is found!
+            // User is found!
 
             // Merge them with the user DB and initialize local class
             setToken(currUser);
             AppUser.account = currUser;
             AppUser.db = FirebaseFirestore.instance;
 
-            //// Setup a message listener
+            // Setup a message listener
 
             // Listeners aren't tied to screens!
             // Notifs will be received on any page hereafter
@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             });
 
-            //// Load Smoke Signal!
+            // Load Smoke Signal!
 
             return getBuild(appBuild);
         }

@@ -49,7 +49,7 @@ class Signal extends StatefulWidget {
 }
 
 class _SignalState extends State<Signal> {
-  //// Initialize state
+  // Initialize state
 
   late String signalTitle = widget.title;
 
@@ -93,7 +93,7 @@ class _SignalState extends State<Signal> {
     color: Color(AppConfig.prefs[watchingTextColorKey]),
   );
 
-  //// Interaction methods
+  // Define interactions
 
   // Set a custom icon for the signal
   void setIcon() {
@@ -288,7 +288,7 @@ class _SignalState extends State<Signal> {
     );
   }
 
-  //// Draw state
+  // Draw state
 
   // Signal button styling
   ButtonStyle signalStyle() {
