@@ -11,13 +11,11 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-//// These (can) cost money!! ////
-
-////   Writing data free tier == 20k writes/day, 1GB limit
-////   Reading data free tier == 50k reads/day
-
-// Return documents from the 'signals' collection
-// Filter by the current user's membership in the passed field
+/// Return documents from the 'signals' collection
+/// Filter by the current user's membership in the passed field
+/// This can cost money!
+/// Writing data free tier == 20k writes/day, 1GB limit
+/// Reading data free tier == 50k reads/day
 Stream<QuerySnapshot<Object?>> streamSignals(String filter) {
   try {
     return AppUser.db

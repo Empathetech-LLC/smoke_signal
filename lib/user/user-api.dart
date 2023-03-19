@@ -10,8 +10,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-//// Wrapper classes ////
-
 class AppUser {
   static late FirebaseMessaging messager;
   static late FirebaseAuth auth;
@@ -45,15 +43,11 @@ class UserProfile {
   }
 }
 
-//// Custom functions ////
+/// Attempt creating a new firebase user account
+/// (can) cost money!!
+/// Writing data free tier == 20k writes/day, 1GB limit
+/// Reading data free tier == 50k reads/day
 
-//// These (can) cost money!!
-////   Writing data free tier == 20k writes/day, 1GB limit
-////   Reading data free tier == 50k reads/day
-
-//// Authentication
-
-// Attempt creating a new firebase user account
 Future<void> attemptAccountCreation(
     BuildContext context, String email, String password) async {
   try {
@@ -141,8 +135,6 @@ Future<void> setToken(User currUser) async {
     SetOptions(merge: true),
   );
 }
-
-//// Communication
 
 // Stream user docs from db, optionally filtering by the list of ids we know we want
 Stream<QuerySnapshot<Map<String, dynamic>>> streamUsers([List<String>? ids]) {
@@ -266,8 +258,6 @@ Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
 
   return ezCenterScroll(children);
 }
-
-//// Personalization
 
 // Update the users avatar
 void editAvatar(BuildContext context) {
