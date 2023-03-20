@@ -46,18 +46,11 @@ class _SignalSettingsState extends State<SignalSettings> {
           //// Colors
 
           ezList(
-            'Color',
+            'Colors',
             [
               // User hint: hold the buttons to reset the color
-              Text('Hold to reset', style: getTextStyle(dialogContentStyleKey)),
+              Text('Hold buttons to reset', style: getTextStyle(dialogContentStyleKey)),
               Container(height: AppConfig.prefs[paddingKey]),
-
-              // Background color
-              ColorSetting(
-                toControl: signalsBackgroundColorKey,
-                message: 'Background\n(no image)',
-              ),
-              Container(height: buttonSpacer),
 
               // Signals
               ColorSetting(toControl: watchingColorKey, message: 'Watching'),
@@ -75,12 +68,11 @@ class _SignalSettingsState extends State<SignalSettings> {
                 onTap: () {
                   ezDialog(
                     context,
-                    'Reset all colors?',
+                    'Reset all signal colors?',
                     ezYesNoRow(
                       context,
                       // On yes, remove all color settings
                       () {
-                        AppConfig.preferences.remove(signalsBackgroundColorKey);
                         AppConfig.preferences.remove(watchingColorKey);
                         AppConfig.preferences.remove(watchingTextColorKey);
                         AppConfig.preferences.remove(joinedColorKey);
@@ -145,7 +137,7 @@ class _SignalSettingsState extends State<SignalSettings> {
       buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppConfig.prefs[signalsBackgroundColorKey]),
+      Color(AppConfig.prefs[backColorKey]),
     );
   }
 }
