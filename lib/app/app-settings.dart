@@ -27,27 +27,28 @@ class _AppSettingsState extends State<AppSettings> {
           warningCard(context, 'Changes won\'t take effect until restart'),
           Container(height: buttonSpacer),
           ezList(
-            'Image',
+            'Background',
             [
+              // Background image
               ImageSetting(
                 prefsKey: AppConfig.prefs[backImageKey],
                 isAssetImage: isAssetImage(AppConfig.prefs[backImageKey]),
                 fullscreen: true,
-                title: 'Background',
+                title: 'Image',
                 credits: credits[AppConfig.prefs[backImageKey]] ?? 'Wherever you got it!',
-              )
+              ),
+
+              // Backup color
+              ColorSetting(toControl: backColorKey, message: 'Backup color'),
+              Container(height: buttonSpacer),
             ],
           ),
           ezList(
-            'Color',
+            'Colors',
             [
               // User hint: hold the buttons to reset the color
-              Text('Hold to reset', style: getTextStyle(dialogContentStyleKey)),
+              Text('Hold buttons to reset', style: getTextStyle(dialogContentStyleKey)),
               Container(height: AppConfig.prefs[paddingKey]),
-
-              // Background
-              ColorSetting(toControl: backColorKey, message: 'Background\n(no image)'),
-              Container(height: buttonSpacer),
 
               // Theme
               ColorSetting(toControl: themeColorKey, message: 'Theme'),
@@ -66,7 +67,7 @@ class _AppSettingsState extends State<AppSettings> {
                 onTap: () {
                   ezDialog(
                     context,
-                    'Reset all colors?',
+                    'Reset all theme colors?\n(including background)',
                     ezYesNoRow(
                       context,
                       // On yes, remove all color settings
