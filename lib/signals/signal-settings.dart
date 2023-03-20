@@ -49,7 +49,7 @@ class _SignalSettingsState extends State<SignalSettings> {
             'Colors',
             [
               // User hint: hold the buttons to reset the color
-              Text('Hold buttons to reset', style: getTextStyle(dialogContentStyleKey)),
+              paddedText('Hold buttons to reset', getTextStyle(dialogContentStyleKey)),
               Container(height: AppConfig.prefs[paddingKey]),
 
               // Signals
@@ -86,9 +86,8 @@ class _SignalSettingsState extends State<SignalSettings> {
                     ),
                   );
                 },
-                child: Text('Reset all', style: getTextStyle(subTitleStyleKey)),
+                child: paddedText('Reset all', getTextStyle(subTitleStyleKey)),
               ),
-              Container(height: buttonSpacer),
             ],
           ),
 
