@@ -220,7 +220,7 @@ class _SignalMembersState extends State<SignalMembers> {
       buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppConfig.prefs[signalsBackgroundColorKey]),
+      Color(AppConfig.prefs[backColorKey]),
 
       // Android config
       MaterialScaffoldData(),

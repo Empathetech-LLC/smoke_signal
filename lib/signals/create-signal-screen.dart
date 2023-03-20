@@ -230,7 +230,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
       buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppConfig.prefs[signalsBackgroundColorKey]),
+      Color(AppConfig.prefs[backColorKey]),
 
       // Android config
       MaterialScaffoldData(),
