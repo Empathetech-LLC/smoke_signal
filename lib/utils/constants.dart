@@ -34,9 +34,7 @@ const String memberReqsArg = 'memberReqs';
 const String unaddedArg = 'unadded';
 const String streamArg = 'stream';
 
-// Shared Preferences
-// aka for [customDefaults] for [AppConfig] from empathetech_flutter_ui
-const String signalsBackgroundColorKey = 'signalsBackgroundColor';
+// Shared Preferences keys
 const String signalImageKey = 'signalImage';
 const String signalSpacingKey = 'signalSpacing';
 const String signalHeightKey = 'signalHeight';
@@ -46,26 +44,19 @@ const String watchingTextColorKey = 'watchingSignalTextColor';
 const String joinedColorKey = 'joinedSignalColor';
 const String joinedTextColorKey = 'joinedSignalTextColor';
 
+/// [Map] of default values for all Smoke Signal specific user customizable UI variables
+/// Beyond those already present in [AppConfig] from empathetech_flutter_ui
 final Map<String, dynamic> customDefaults = {
   fontFamilyKey: 'Roboto',
-  fontSizeKey: 24.0,
-  buttonSpacingKey: 35.0,
-  dialogSpacingKey: 20.0,
-  buttonColorKey: 0xE6DAA520,
-  buttonTextColorKey: 0xFF000000,
-  themeColorKey: 0xFF141414,
-  themeTextColorKey: 0xFFFFFFFF,
   backImageKey: darkForestPath,
-  backColorKey: 0xE6A520DA,
-  signalsBackgroundColorKey: 0xE6A520DA,
   signalImageKey: smokeSignalPath,
   signalSpacingKey: 50.0,
   signalHeightKey: 125.0,
   signalCountHeightKey: 75.0,
-  watchingColorKey: 0xE620DAA5,
-  watchingTextColorKey: 0xFF000000,
-  joinedColorKey: 0xE6DAA520,
-  joinedTextColorKey: 0xFF000000,
+  watchingColorKey: 0xE620DAA5, // Empathetech eucalyptus
+  watchingTextColorKey: 0xFF000000, // Black text
+  joinedColorKey: 0xE6A520DA, // Empathetech purple
+  joinedTextColorKey: 0xFFFFFFFF, // White text
 };
 
 // Firebase users
