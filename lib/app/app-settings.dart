@@ -115,6 +115,26 @@ class _AppSettingsState extends State<AppSettings> {
           ezList(
             'Spacing',
             [
+              // Margin
+              SliderSetting(
+                prefsKey: marginKey,
+                type: SettingType.margin,
+                title: 'Margin',
+                min: 5.0,
+                max: 25.0,
+                steps: 8,
+              ),
+
+              // Padding
+              SliderSetting(
+                prefsKey: paddingKey,
+                type: SettingType.padding,
+                title: 'Padding',
+                min: 5.0,
+                max: 25.0,
+                steps: 8,
+              ),
+
               // Button spacing
               SliderSetting(
                 prefsKey: buttonSpacingKey,
