@@ -47,7 +47,7 @@ class _AppSettingsState extends State<AppSettings> {
             'Colors',
             [
               // User hint: hold the buttons to reset the color
-              Text('Hold buttons to reset', style: getTextStyle(dialogContentStyleKey)),
+              paddedText('Hold buttons to reset', getTextStyle(dialogContentStyleKey)),
               Container(height: AppConfig.prefs[paddingKey]),
 
               // Theme
@@ -86,18 +86,14 @@ class _AppSettingsState extends State<AppSettings> {
                     ),
                   );
                 },
-                child: Text('Reset all', style: getTextStyle(subTitleStyleKey)),
+                child: paddedText('Reset all', getTextStyle(subTitleStyleKey)),
               ),
-              Container(height: buttonSpacer),
             ],
           ),
           ezList(
             'Font',
             [
               // Font family
-              Text('Font family', style: getTextStyle(subTitleStyleKey)),
-              Container(height: buttonSpacer),
-
               FontFamilySetting(),
               Container(height: buttonSpacer),
 
