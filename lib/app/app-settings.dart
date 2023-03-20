@@ -37,10 +37,10 @@ class _AppSettingsState extends State<AppSettings> {
                 title: 'Image',
                 credits: credits[AppConfig.prefs[backImageKey]] ?? 'Wherever you got it!',
               ),
+              Container(height: buttonSpacer),
 
               // Backup color
               ColorSetting(toControl: backColorKey, message: 'Backup color'),
-              Container(height: buttonSpacer),
             ],
           ),
           ezList(
