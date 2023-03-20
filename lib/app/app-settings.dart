@@ -72,11 +72,11 @@ class _AppSettingsState extends State<AppSettings> {
                       context,
                       // On yes, remove all color settings
                       () {
+                        AppConfig.preferences.remove(backColorKey);
+                        AppConfig.preferences.remove(themeColorKey);
+                        AppConfig.preferences.remove(themeTextColorKey);
                         AppConfig.preferences.remove(buttonColorKey);
                         AppConfig.preferences.remove(buttonTextColorKey);
-                        AppConfig.preferences.remove(themeColorKey);
-                        AppConfig.preferences.remove(buttonColorKey);
-                        AppConfig.preferences.remove(backColorKey);
 
                         Navigator.of(context).pop();
                       },
