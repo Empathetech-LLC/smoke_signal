@@ -16,7 +16,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 // Required function
 // Handles notifations while the app is in the background/closed
@@ -58,16 +57,7 @@ class SmokeSignal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Define app theme and routes (pages/screens/etc)
-    return PlatformApp(
-      // Theme data
-      debugShowCheckedModeBanner: false,
-      title: appTitle,
-
-      material: (context, platform) => androidAppTheme(),
-      cupertino: (context, platform) => iosAppTheme(),
-
-      // Route data
+    return ezApp(
       initialRoute: homeRoute,
       routes: {
         signupRoute: (context) => SignUpScreen(),
