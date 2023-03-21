@@ -4,7 +4,6 @@ import '../signals/signal-settings.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -53,27 +52,17 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return ezNavScaffold(
-      context,
-
-      // Title
-      'Settings',
-
-      // Body
-      IndexedStack(
+      context: context,
+      title: 'Settings',
+      body: IndexedStack(
         index: navIndex,
         children: windows,
       ),
-
-      // Index
-      navIndex,
-
-      // On changed
-      (index) => setState(() {
+      index: navIndex,
+      onChanged: (index) => setState(() {
         navIndex = index;
       }),
-
-      // Items
-      [
+      items: [
         BottomNavigationBarItem(
           icon: Icon(PlatformIcons(context).person),
           label: 'App',
@@ -85,12 +74,7 @@ class _SettingsState extends State<Settings> {
           tooltip: 'Show signals settings',
         ),
       ],
-
-      // Android scaffold config
-      MaterialScaffoldData(),
-
-      // iOS scaffold config
-      CupertinoPageScaffoldData(),
+      scaffoldConfig: MaterialScaffoldData(),
     );
   }
 }
