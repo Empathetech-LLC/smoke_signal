@@ -33,7 +33,7 @@ class _AppSettingsState extends State<AppSettings> {
             body: [
               // Background image
               ImageSetting(
-                prefsKey: AppConfig.prefs[backImageKey],
+                prefsKey: backImageKey,
                 isAssetImage: isAssetImage(AppConfig.prefs[backImageKey]),
                 fullscreen: true,
                 title: 'Image',
