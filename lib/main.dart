@@ -33,7 +33,7 @@ void main() async {
   // Initialize app config
   AppConfig.focus = FocusManager.instance;
   AppConfig.preferences = await SharedPreferences.getInstance();
-  AppConfig.init(customDefaults);
+  AppConfig.init(assetPaths: assets, customDefaults: customDefaults);
 
   // Setup notification service
   await NotificationService().init();
