@@ -18,7 +18,7 @@ bool isAssetImage(String? path) {
 }
 
 DecorationImage? buildDecoration(String? path) {
-  return (path == null)
+  return (path == null || path == noImageKey)
       ? null
       : DecorationImage(
           image: provideImage(path: path, isAsset: isAssetImage(path)),
