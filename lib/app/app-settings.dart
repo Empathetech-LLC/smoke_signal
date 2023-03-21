@@ -46,13 +46,6 @@ class _AppSettingsState extends State<AppSettings> {
           ezList(
             title: 'Colors',
             body: [
-              // User hint: hold the buttons to reset the color
-              paddedText(
-                'Hold buttons to reset',
-                style: getTextStyle(dialogContentStyleKey),
-              ),
-              Container(height: AppConfig.prefs[paddingKey]),
-
               // Theme
               ColorSetting(toControl: themeColorKey, message: 'Theme'),
               Container(height: buttonSpacer),
@@ -64,6 +57,13 @@ class _AppSettingsState extends State<AppSettings> {
               Container(height: buttonSpacer),
               ColorSetting(toControl: buttonTextColorKey, message: 'Button text'),
               Container(height: buttonSpacer),
+
+              // User hint: hold the buttons to reset the color
+              paddedText(
+                'Hold each to reset',
+                style: getTextStyle(dialogContentStyleKey),
+              ),
+              Container(height: AppConfig.prefs[paddingKey]),
 
               // Reset all app color settings
               GestureDetector(
@@ -88,7 +88,10 @@ class _AppSettingsState extends State<AppSettings> {
                     ),
                   );
                 },
-                child: paddedText('Reset all', style: getTextStyle(subTitleStyleKey)),
+                child: paddedText(
+                  'Reset all',
+                  style: getTextStyle(subTitleStyleKey),
+                ),
               ),
             ],
           ),
@@ -154,6 +157,34 @@ class _AppSettingsState extends State<AppSettings> {
                 steps: 18,
               ),
             ],
+          ),
+          Container(height: buttonSpacer),
+
+          // Reset all signal settings
+          GestureDetector(
+            onTap: () {
+              ezDialog(
+                context: context,
+                title: 'Reset all app settings?',
+                content: ezYesNo(
+                  context: context,
+                  onConfirm: () {
+                    // Remove all color settings
+                    AppConfig.defaults.forEach((key, value) {
+                      AppConfig.preferences.remove(key);
+                    });
+
+                    Navigator.of(context).pop();
+                  },
+                  onDeny: () => Navigator.of(context).pop(),
+                  axis: Axis.horizontal,
+                ),
+              );
+            },
+            child: paddedText(
+              'Reset all',
+              style: getTextStyle(subTitleStyleKey),
+            ),
           ),
         ],
       ),

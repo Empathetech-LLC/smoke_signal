@@ -47,13 +47,6 @@ class _SignalSettingsState extends State<SignalSettings> {
           ezList(
             title: 'Colors',
             body: [
-              // User hint: hold the buttons to reset the color
-              paddedText(
-                'Hold buttons to reset',
-                style: getTextStyle(dialogContentStyleKey),
-              ),
-              Container(height: AppConfig.prefs[paddingKey]),
-
               // Signals
               ColorSetting(toControl: watchingColorKey, message: 'Watching'),
               Container(height: buttonSpacer),
@@ -64,6 +57,13 @@ class _SignalSettingsState extends State<SignalSettings> {
               Container(height: buttonSpacer),
               ColorSetting(toControl: joinedTextColorKey, message: 'Joined text'),
               Container(height: buttonSpacer),
+
+              // User hint: hold the buttons to reset the color
+              paddedText(
+                'Hold each to reset',
+                style: getTextStyle(dialogContentStyleKey),
+              ),
+              Container(height: AppConfig.prefs[paddingKey]),
 
               // Reset all signal color settings
               GestureDetector(
@@ -109,7 +109,7 @@ class _SignalSettingsState extends State<SignalSettings> {
                 max: 200,
                 steps: 5,
               ),
-              Container(height: 0.5 * buttonSpacer),
+              Container(height: buttonSpacer),
 
               // Count height
               SliderSetting(
@@ -120,7 +120,7 @@ class _SignalSettingsState extends State<SignalSettings> {
                 max: 100,
                 steps: 10,
               ),
-              Container(height: 0.5 * buttonSpacer),
+              Container(height: buttonSpacer),
 
               // Signal spacing
               SliderSetting(
@@ -132,6 +132,34 @@ class _SignalSettingsState extends State<SignalSettings> {
                 steps: 18,
               ),
             ],
+          ),
+          Container(height: buttonSpacer),
+
+          // Reset all signal settings
+          GestureDetector(
+            onTap: () {
+              ezDialog(
+                context: context,
+                title: 'Reset all signal settings?',
+                content: ezYesNo(
+                  context: context,
+                  onConfirm: () {
+                    // Remove all color settings
+                    customDefaults.forEach((key, value) {
+                      AppConfig.preferences.remove(key);
+                    });
+
+                    Navigator.of(context).pop();
+                  },
+                  onDeny: () => Navigator.of(context).pop(),
+                  axis: Axis.horizontal,
+                ),
+              );
+            },
+            child: paddedText(
+              'Reset all',
+              style: getTextStyle(subTitleStyleKey),
+            ),
           ),
         ],
       ),
