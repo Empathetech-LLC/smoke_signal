@@ -1,8 +1,5 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
-/// Application title
-const String appTitle = 'Smoke Signal';
-
 /// Image path -> image source key -> value pair
 final Map<String, String> credits = {
   appIconPath: 'Empathetech LLC: The Founder\n\nUnnamed',
@@ -47,6 +44,7 @@ const String joinedTextColorKey = 'joinedSignalTextColor';
 /// [Map] of default values for all Smoke Signal specific user customizable UI variables
 /// Beyond those already present in [AppConfig] from empathetech_flutter_ui
 final Map<String, dynamic> customDefaults = {
+  appTitleKey: 'Smoke Signal',
   fontFamilyKey: 'Roboto',
   backImageKey: darkForestPath,
   signalImageKey: smokeSignalPath,
