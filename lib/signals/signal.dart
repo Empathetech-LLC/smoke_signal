@@ -97,42 +97,45 @@ class _SignalState extends State<Signal> {
   // Set a custom icon for the signal
   void setIcon() {
     ezDialog(
-      context,
-
-      // Title
-      'From where?',
-
-      // Body
-
-      Column(
+      context: context,
+      title: 'From where?',
+      content: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // From file
           ezIconButton(
-            () {
-              changeImage(context, iconPathPref, ImageSource.gallery);
+            action: () {
+              changeImage(
+                context: context,
+                prefsPath: iconPathPref,
+                source: ImageSource.gallery,
+              );
               Navigator.of(context).pop();
             },
-            'File',
-            PlatformIcons(context).folder,
+            body: Text('File'),
+            icon: Icon(PlatformIcons(context).folder),
           ),
           Container(height: dialogSpacer),
 
           // From camera
           ezIconButton(
-            () {
-              changeImage(context, iconPathPref, ImageSource.camera);
+            action: () {
+              changeImage(
+                context: context,
+                prefsPath: iconPathPref,
+                source: ImageSource.camera,
+              );
               Navigator.of(context).pop();
             },
-            'Camera',
-            PlatformIcons(context).photoCamera,
+            body: Text('Camera'),
+            icon: Icon(PlatformIcons(context).photoCamera),
           ),
           Container(height: dialogSpacer),
 
           // Reset
           ezButton(
-            () async {
+            action: () async {
               // Build path
               Directory currDir = await getApplicationDocumentsDirectory();
               String imagePath = currDir.path + signalTitle;
@@ -150,7 +153,7 @@ class _SignalState extends State<Signal> {
               AppConfig.preferences.remove(iconPathPref);
               Navigator.of(context).pop();
             },
-            'Reset',
+            body: Text('Reset'),
           ),
           Container(height: dialogSpacer),
         ],
@@ -180,20 +183,15 @@ class _SignalState extends State<Signal> {
   // Show all edits the user can make
   void showEdits() {
     ezDialog(
-      context,
-
-      // Title
-      'Options',
-
-      // Body
-
-      Column(
+      context: context,
+      title: 'Options',
+      content: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Manage members
           ezButton(
-            () => Navigator.of(context).popAndPushNamed(
+            action: () => Navigator.of(context).popAndPushNamed(
               signalMembersRoute,
               arguments: {
                 titleArg: signalTitle,
@@ -202,16 +200,16 @@ class _SignalState extends State<Signal> {
                 memberReqsArg: widget.memberReqs,
               },
             ),
-            'Members',
+            body: Text('Members'),
           ),
           Container(height: dialogSpacer),
 
           // Set icon
-          ezButton(setIcon, 'Set icon'),
+          ezButton(action: setIcon, body: Text('Set icon')),
           Container(height: dialogSpacer),
 
           // Show/hide icon
-          ezButton(toggleIcon, 'Toggle icon'),
+          ezButton(action: toggleIcon, body: Text('Toggle icon')),
           Container(height: dialogSpacer),
 
           // Owner: Reset count, update message, transfer signal, or delete signal
@@ -226,7 +224,7 @@ class _SignalState extends State<Signal> {
                         Navigator.of(context).pop();
                         await resetSignal(context, signalTitle);
                       },
-                      'Reset signal',
+                      body: Text('Reset signal'),
                     ),
                     Container(height: dialogSpacer),
                     ezButton(
@@ -234,7 +232,7 @@ class _SignalState extends State<Signal> {
                         Navigator.of(context).pop();
                         updateMessage(context, signalTitle);
                       },
-                      'Update message',
+                      body: Text('Update message'),
                     ),
                     Container(height: dialogSpacer),
                     ezButton(
@@ -242,7 +240,7 @@ class _SignalState extends State<Signal> {
                         Navigator.of(context).pop();
                         confirmTransfer(context, signalTitle, widget.members);
                       },
-                      'Transfer signal',
+                      body: Text('Transfer signal'),
                     ),
                     Container(height: dialogSpacer),
                     ezButton(
@@ -254,7 +252,7 @@ class _SignalState extends State<Signal> {
                           [showIconPref, iconPathPref],
                         );
                       },
-                      'Delete signal',
+                      body: Text('Delete signal'),
                     ),
                     Container(height: dialogSpacer),
                   ]
@@ -268,7 +266,7 @@ class _SignalState extends State<Signal> {
                           [showIconPref, iconPathPref],
                         );
                       },
-                      'Leave signal',
+                      body: Text('Leave signal'),
                     ),
                     Container(height: dialogSpacer),
                   ],

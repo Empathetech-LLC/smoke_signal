@@ -4,7 +4,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SignalSettings extends StatefulWidget {
   const SignalSettings({Key? key}) : super(key: key);
@@ -19,19 +18,21 @@ class _SignalSettingsState extends State<SignalSettings> {
     double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
     return navWindow(
-      context,
+      context: context,
 
-      // Body
-      ezScrollView(
-        [
-          warningCard(context, 'Changes won\'t take effect until restart'),
+      body: ezScrollView(
+        children: [
+          warningCard(
+            context: context,
+            content: 'Changes won\'t take effect until restart',
+          ),
           Container(height: buttonSpacer),
 
           //// Images
 
           ezList(
-            'Image',
-            [
+            title: 'Image',
+            body: [
               ImageSetting(
                 prefsKey: AppConfig.prefs[signalImageKey],
                 isAssetImage: isAssetImage(AppConfig.prefs[signalImageKey]),
@@ -46,10 +47,13 @@ class _SignalSettingsState extends State<SignalSettings> {
           //// Colors
 
           ezList(
-            'Colors',
-            [
+            title: 'Colors',
+            body: [
               // User hint: hold the buttons to reset the color
-              paddedText('Hold buttons to reset', getTextStyle(dialogContentStyleKey)),
+              paddedText(
+                'Hold buttons to reset',
+                style: getTextStyle(dialogContentStyleKey),
+              ),
               Container(height: AppConfig.prefs[paddingKey]),
 
               // Signals
@@ -67,12 +71,12 @@ class _SignalSettingsState extends State<SignalSettings> {
               GestureDetector(
                 onTap: () {
                   ezDialog(
-                    context,
-                    'Reset all signal colors?',
-                    ezYesNoRow(
-                      context,
-                      // On yes, remove all color settings
-                      () {
+                    context: context,
+                    title: 'Reset all signal colors?',
+                    content: ezYesNo(
+                      context: context,
+                      onConfirm: () {
+                        // Remove all color settings
                         AppConfig.preferences.remove(watchingColorKey);
                         AppConfig.preferences.remove(watchingTextColorKey);
                         AppConfig.preferences.remove(joinedColorKey);
@@ -80,13 +84,15 @@ class _SignalSettingsState extends State<SignalSettings> {
 
                         Navigator.of(context).pop();
                       },
-
-                      // On no
-                      () => Navigator.of(context).pop(),
+                      onDeny: () => Navigator.of(context).pop(),
+                      axis: Axis.horizontal,
                     ),
                   );
                 },
-                child: paddedText('Reset all', getTextStyle(subTitleStyleKey)),
+                child: paddedText(
+                  'Reset all',
+                  style: getTextStyle(subTitleStyleKey),
+                ),
               ),
             ],
           ),
@@ -94,8 +100,8 @@ class _SignalSettingsState extends State<SignalSettings> {
           //// Spacing
 
           ezList(
-            'Spacing',
-            [
+            title: 'Spacing',
+            body: [
               // Card height
               SliderSetting(
                 prefsKey: signalHeightKey,
@@ -133,10 +139,10 @@ class _SignalSettingsState extends State<SignalSettings> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppConfig.prefs[backColorKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
     );
   }
 }

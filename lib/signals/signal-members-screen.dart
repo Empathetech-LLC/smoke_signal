@@ -81,9 +81,8 @@ class _SignalMembersState extends State<SignalMembers> {
               children: [
                 // Switch
                 ezSwitch(
-                  context,
-                  requestIDs.contains(profile.id),
-                  (bool? value) {
+                  value: requestIDs.contains(profile.id),
+                  onChanged: (bool? value) {
                     if (value == true) {
                       setState(() {
                         requestIDs.add(profile.id);
@@ -106,8 +105,8 @@ class _SignalMembersState extends State<SignalMembers> {
                 // Display name
                 paddedText(
                   profile.name,
-                  getTextStyle(dialogTitleStyleKey),
-                  TextAlign.start,
+                  style: getTextStyle(dialogTitleStyleKey),
+                  alignment: TextAlign.start,
                 ),
               ],
             ),
@@ -120,11 +119,11 @@ class _SignalMembersState extends State<SignalMembers> {
     children.addAll(
       [
         ezButton(
-          () async {
+          action: () async {
             await requestMembers(context, widget.title, requestIDs);
             Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
           },
-          'Send requests',
+          body: Text('Send requests'),
         ),
         Container(height: dialogSpacer),
       ],
@@ -154,22 +153,22 @@ class _SignalMembersState extends State<SignalMembers> {
     });
 
     return ezScrollView(
-      [
+      children: [
         // Available members - show all pictures
-        paddedText('Available', getTextStyle(titleStyleKey)),
+        paddedText('Available', style: getTextStyle(titleStyleKey)),
         showUserPics(context, memberProfiles),
         Container(height: buttonSpacer),
 
         // Active members - show all pictures
-        paddedText('Active', getTextStyle(titleStyleKey)),
+        paddedText('Active', style: getTextStyle(titleStyleKey)),
         showUserPics(context, activeProfiles),
         Container(height: buttonSpacer),
 
         // Pending members - expandable profiles
-        ezList('Pending', [showUserProfiles(context, pendingProfiles)]),
+        ezList(title: 'Pending', body: [showUserProfiles(context, pendingProfiles)]),
 
         // Addable users - exandable, toggle-able, profiles
-        ezList('Add?', buildSwitches(unnaddedProfiles)),
+        ezList(title: 'Add?', body: buildSwitches(unnaddedProfiles)),
         Container(height: buttonSpacer),
       ],
     );
@@ -180,22 +179,18 @@ class _SignalMembersState extends State<SignalMembers> {
   @override
   Widget build(BuildContext context) {
     return ezScaffold(
-      context,
-
-      // Title
-      widget.title + ' members',
-
-      // Body
-      StreamBuilder<QuerySnapshot>(
+      context: context,
+      title: widget.title + ' members',
+      body: StreamBuilder<QuerySnapshot>(
         stream: _userStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return loadingMessage(
-                context,
-                buildImage(
-                  AppConfig.prefs[signalImageKey],
-                  isAssetImage(AppConfig.prefs[signalImageKey]),
+                context: context,
+                image: buildImage(
+                  path: AppConfig.prefs[signalImageKey],
+                  isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                 ),
               );
             case ConnectionState.done:
@@ -213,18 +208,9 @@ class _SignalMembersState extends State<SignalMembers> {
           }
         },
       ),
-
-      // Background image/decoration
-      buildDecoration(AppConfig.prefs[backImageKey]),
-
-      // Fallback background color
-      Color(AppConfig.prefs[backColorKey]),
-
-      // Android config
-      MaterialScaffoldData(),
-
-      // iOS config
-      CupertinoPageScaffoldData(),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
+      scaffoldConfig: MaterialScaffoldData(),
     );
   }
 }
