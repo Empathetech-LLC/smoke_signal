@@ -93,6 +93,7 @@ class _SignalBoardState extends State<SignalBoard> {
                 }
               }),
         ],
+        centered: true,
       ),
 
       // Background image/decoration
