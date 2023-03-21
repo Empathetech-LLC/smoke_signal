@@ -19,16 +19,18 @@ class _AppSettingsState extends State<AppSettings> {
     double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
     return navWindow(
-      context,
+      context: context,
 
-      // Body
-      ezScrollView(
-        [
-          warningCard(context, 'Changes won\'t take effect until restart'),
+      body: ezScrollView(
+        children: [
+          warningCard(
+            context: context,
+            content: 'Changes won\'t take effect until restart',
+          ),
           Container(height: buttonSpacer),
           ezList(
-            'Background',
-            [
+            title: 'Background',
+            body: [
               // Background image
               ImageSetting(
                 prefsKey: AppConfig.prefs[backImageKey],
@@ -44,10 +46,13 @@ class _AppSettingsState extends State<AppSettings> {
             ],
           ),
           ezList(
-            'Colors',
-            [
+            title: 'Colors',
+            body: [
               // User hint: hold the buttons to reset the color
-              paddedText('Hold buttons to reset', getTextStyle(dialogContentStyleKey)),
+              paddedText(
+                'Hold buttons to reset',
+                style: getTextStyle(dialogContentStyleKey),
+              ),
               Container(height: AppConfig.prefs[paddingKey]),
 
               // Theme
@@ -66,12 +71,12 @@ class _AppSettingsState extends State<AppSettings> {
               GestureDetector(
                 onTap: () {
                   ezDialog(
-                    context,
-                    'Reset all theme colors?\n(including background)',
-                    ezYesNoRow(
-                      context,
-                      // On yes, remove all color settings
-                      () {
+                    context: context,
+                    title: 'Reset all theme colors?\n(including background)',
+                    content: ezYesNo(
+                      context: context,
+                      onConfirm: () {
+                        // Remove all color settings
                         AppConfig.preferences.remove(backColorKey);
                         AppConfig.preferences.remove(themeColorKey);
                         AppConfig.preferences.remove(themeTextColorKey);
@@ -80,19 +85,18 @@ class _AppSettingsState extends State<AppSettings> {
 
                         Navigator.of(context).pop();
                       },
-
-                      // On no
-                      () => Navigator.of(context).pop(),
+                      onDeny: () => Navigator.of(context).pop(),
+                      axis: Axis.horizontal,
                     ),
                   );
                 },
-                child: paddedText('Reset all', getTextStyle(subTitleStyleKey)),
+                child: paddedText('Reset all', style: getTextStyle(subTitleStyleKey)),
               ),
             ],
           ),
           ezList(
-            'Font',
-            [
+            title: 'Font',
+            body: [
               // Font family
               FontFamilySetting(),
               Container(height: buttonSpacer),
@@ -109,8 +113,8 @@ class _AppSettingsState extends State<AppSettings> {
             ],
           ),
           ezList(
-            'Spacing',
-            [
+            title: 'Spacing',
+            body: [
               // Margin
               SliderSetting(
                 prefsKey: marginKey,
@@ -157,10 +161,10 @@ class _AppSettingsState extends State<AppSettings> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppConfig.prefs[backColorKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
     );
   }
 }
