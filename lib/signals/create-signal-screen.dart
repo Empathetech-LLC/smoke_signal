@@ -113,7 +113,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             controller: _titleController,
             hintText: 'Signal title',
             validator: signalTitleValidator,
-            autoValidateMode: AutovalidateMode.onUserInteraction,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
           ),
           Container(height: buttonSpacer),
 
@@ -123,7 +123,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             controller: _messageController,
             hintText: 'Notification',
             validator: signalMessageValidator,
-            autoValidateMode: AutovalidateMode.onUserInteraction,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
           ),
           Container(height: buttonSpacer),
 
