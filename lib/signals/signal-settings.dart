@@ -72,19 +72,19 @@ class _SignalSettingsState extends State<SignalSettings> {
                     context: context,
                     title: 'Reset all signal colors?',
                     content: ezYesNo(
-                      context: context,
-                      onConfirm: () {
-                        // Remove all color settings
-                        AppConfig.preferences.remove(watchingColorKey);
-                        AppConfig.preferences.remove(watchingTextColorKey);
-                        AppConfig.preferences.remove(joinedColorKey);
-                        AppConfig.preferences.remove(joinedTextColorKey);
+                        context: context,
+                        onConfirm: () {
+                          // Remove all color settings
+                          AppConfig.preferences.remove(watchingColorKey);
+                          AppConfig.preferences.remove(watchingTextColorKey);
+                          AppConfig.preferences.remove(joinedColorKey);
+                          AppConfig.preferences.remove(joinedTextColorKey);
 
-                        Navigator.of(context).pop();
-                      },
-                      onDeny: () => Navigator.of(context).pop(),
-                      axis: Axis.horizontal,
-                    ),
+                          Navigator.of(context).pop();
+                        },
+                        onDeny: () => Navigator.of(context).pop(),
+                        axis: Axis.vertical,
+                        spacer: AppConfig.prefs[dialogSpacingKey]),
                   );
                 },
                 child: paddedText(
