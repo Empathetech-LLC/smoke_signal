@@ -6,7 +6,6 @@ import '../signals/signal-api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -60,9 +59,8 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
               children: [
                 // Switch
                 ezSwitch(
-                  context,
-                  requestIDs.contains(profile.id),
-                  (bool? value) {
+                  value: requestIDs.contains(profile.id),
+                  onChanged: (bool? value) {
                     if (value == true) {
                       setState(() {
                         requestIDs.add(profile.id);
@@ -85,8 +83,8 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 // Display name
                 paddedText(
                   profile.name,
-                  getTextStyle(dialogTitleStyleKey),
-                  TextAlign.start,
+                  style: getTextStyle(dialogTitleStyleKey),
+                  alignment: TextAlign.start,
                 ),
               ],
             ),
@@ -103,35 +101,29 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
   @override
   Widget build(BuildContext context) {
     return ezScaffold(
-      context,
+      context: context,
 
-      // Title
-      'New signal',
+      title: 'New signal',
 
-      // Body
-      ezCenterScroll(
-        [
+      body: ezScrollView(
+        children: [
           // Title field
           ezForm(
-            titleFormKey,
-            _titleController,
-            'Signal title',
-            false,
-            null,
-            signalTitleValidator,
-            AutovalidateMode.onUserInteraction,
+            key: titleFormKey,
+            controller: _titleController,
+            hintText: 'Signal title',
+            validator: signalTitleValidator,
+            autoValidateMode: AutovalidateMode.onUserInteraction,
           ),
           Container(height: buttonSpacer),
 
           // Message field
           ezForm(
-            messageFormKey,
-            _messageController,
-            'Notification',
-            false,
-            null,
-            signalMessageValidator,
-            AutovalidateMode.onUserInteraction,
+            key: messageFormKey,
+            controller: _messageController,
+            hintText: 'Notification',
+            validator: signalMessageValidator,
+            autoValidateMode: AutovalidateMode.onUserInteraction,
           ),
           Container(height: buttonSpacer),
 
@@ -144,9 +136,8 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 style: getTextStyle(dialogTitleStyleKey),
               ),
               ezSwitch(
-                context,
-                isActive,
-                (bool? value) {
+                value: isActive,
+                onChanged: (bool? value) {
                   // Flip state and close keyboard if open
                   AppConfig.focus.primaryFocus?.unfocus();
 
@@ -161,18 +152,18 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
           // List of toggle-able members to send join requests on creation
           ezList(
-            'Starting members',
-            [
+            title: 'Starting members',
+            body: [
               StreamBuilder<QuerySnapshot>(
                 stream: _userStream,
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting:
                       return loadingMessage(
-                        context,
-                        buildImage(
-                          AppConfig.prefs[signalImageKey],
-                          isAssetImage(AppConfig.prefs[signalImageKey]),
+                        context: context,
+                        image: buildImage(
+                          path: AppConfig.prefs[signalImageKey],
+                          isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                         ),
                       );
                     case ConnectionState.done:
@@ -182,8 +173,9 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                         return Container();
                       }
 
-                      return ezCenterScroll(
-                        buildSwitches(buildProfiles(snapshot.data!.docs)),
+                      return ezScrollView(
+                        children: buildSwitches(buildProfiles(snapshot.data!.docs)),
+                        centered: true,
                       );
                   }
                 },
@@ -194,7 +186,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
           // Add button
           ezIconButton(
-            () async {
+            action: () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();
 
@@ -218,24 +210,22 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
               Navigator.of(context).pop();
             },
-            'Done',
-            PlatformIcons(context).cloudUpload,
+            body: Text('Done'),
+            icon: Icon(PlatformIcons(context).cloudUpload),
           ),
           Container(height: buttonSpacer),
         ],
+        centered: true,
       ),
 
       // Background image/decoration
-      buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppConfig.prefs[backColorKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
-      // Android config
-      MaterialScaffoldData(),
-
-      // iOS config
-      CupertinoPageScaffoldData(),
+      // Scaffold config
+      scaffoldConfig: MaterialScaffoldData(),
     );
   }
 }

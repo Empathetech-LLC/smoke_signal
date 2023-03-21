@@ -8,7 +8,6 @@ import '../signals/signal-api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignalBoard extends StatefulWidget {
@@ -32,14 +31,12 @@ class _SignalBoardState extends State<SignalBoard> {
   @override
   Widget build(BuildContext context) {
     return ezScaffold(
-      context,
+      context: context,
 
-      // Title
-      'Signals',
+      title: 'Signals',
 
-      // Body
-      ezCenterScroll(
-        [
+      body: ezScrollView(
+        children: [
           // Signals the user is a member of
           StreamBuilder<QuerySnapshot>(
               stream: _signalStream,
@@ -47,10 +44,10 @@ class _SignalBoardState extends State<SignalBoard> {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
                     return loadingMessage(
-                      context,
-                      buildImage(
-                        AppConfig.prefs[signalImageKey],
-                        isAssetImage(AppConfig.prefs[signalImageKey]),
+                      context: context,
+                      image: buildImage(
+                        path: AppConfig.prefs[signalImageKey],
+                        isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                       ),
                     );
                   case ConnectionState.done:
@@ -99,34 +96,26 @@ class _SignalBoardState extends State<SignalBoard> {
       ),
 
       // Background image/decoration
-      buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppConfig.prefs[backColorKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
-      // Android config
-      MaterialScaffoldData(
+      // Scaffold config
+      scaffoldConfig: MaterialScaffoldData(
         endDrawer: signalBoardDrawer(context),
         floatingActionButton: ezButton(
           // Refresh
-          () => setState(() {}),
+          action: () => setState(() {}),
           // Reload
-          () => setState(() {
+          longAction: () => setState(() {
             _signalStream = streamSignals(membersPath);
             _requestStream = streamSignals(memberReqsPath);
           }),
-          Icon(Icons.refresh),
-          ElevatedButton.styleFrom(
-            backgroundColor: Color(AppConfig.prefs[buttonColorKey]),
-            foregroundColor: Color(AppConfig.prefs[buttonTextColorKey]),
-            padding: EdgeInsets.all(AppConfig.prefs[paddingKey]),
-            shape: CircleBorder(),
-          ),
+          body: Icon(PlatformIcons(context).refresh),
+          customStyle: ElevatedButton.styleFrom(shape: CircleBorder()),
         ),
       ),
-
-      // iOS config
-      CupertinoPageScaffoldData(),
     );
   }
 }
