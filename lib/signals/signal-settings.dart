@@ -1,4 +1,3 @@
-import '../utils/helpers.dart';
 import '../utils/constants.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -35,7 +34,6 @@ class _SignalSettingsState extends State<SignalSettings> {
             body: [
               ImageSetting(
                 prefsKey: signalImageKey,
-                isAssetImage: isAssetImage(AppConfig.prefs[signalImageKey]),
                 fullscreen: false,
                 title: 'Image',
                 credits:

@@ -2,7 +2,6 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../signals/signal-api.dart';
 import '../utils/constants.dart';
-import '../utils/helpers.dart';
 import '../user/user-api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -190,7 +189,6 @@ class _SignalMembersState extends State<SignalMembers> {
                 context: context,
                 image: buildImage(
                   path: AppConfig.prefs[signalImageKey],
-                  isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                 ),
               );
             case ConnectionState.done:

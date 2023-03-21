@@ -1,5 +1,4 @@
 import '../utils/constants.dart';
-import '../utils/helpers.dart';
 import '../utils/validate.dart';
 import '../user/user-api.dart';
 import '../signals/signal-api.dart';
@@ -163,7 +162,6 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                         context: context,
                         image: buildImage(
                           path: AppConfig.prefs[signalImageKey],
-                          isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                         ),
                       );
                     case ConnectionState.done:

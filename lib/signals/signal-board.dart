@@ -1,7 +1,6 @@
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../utils/drawers.dart';
-import '../utils/helpers.dart';
 import '../utils/constants.dart';
 import '../signals/signal.dart';
 import '../signals/signal-api.dart';
@@ -47,7 +46,6 @@ class _SignalBoardState extends State<SignalBoard> {
                       context: context,
                       image: buildImage(
                         path: AppConfig.prefs[signalImageKey],
-                        isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                       ),
                     );
                   case ConnectionState.done:

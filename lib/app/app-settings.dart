@@ -1,4 +1,3 @@
-import '../utils/helpers.dart';
 import '../utils/constants.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -34,7 +33,6 @@ class _AppSettingsState extends State<AppSettings> {
               // Background image
               ImageSetting(
                 prefsKey: backImageKey,
-                isAssetImage: isAssetImage(AppConfig.prefs[backImageKey]),
                 fullscreen: true,
                 title: 'Image',
                 credits: credits[AppConfig.prefs[backImageKey]] ?? 'Wherever you got it!',

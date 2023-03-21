@@ -1,7 +1,6 @@
 import '../user/user-api.dart';
 import '../utils/constants.dart';
 import '../utils/drawers.dart';
-import '../utils/helpers.dart';
 import '../signals/signal-board.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -73,7 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 context: context,
                 image: buildImage(
                   path: smokeSignalPath,
-                  isAsset: isAssetImage(smokeSignalPath),
                 ),
               )
             : // Show authBuild

@@ -1,4 +1,3 @@
-import '../utils/helpers.dart';
 import '../user/user-api.dart';
 import '../signals/signal-api.dart';
 import '../utils/constants.dart';
@@ -344,7 +343,6 @@ class _SignalState extends State<Signal> {
               child: Card(
                   child: buildImage(
                 path: iconPath,
-                isAsset: isAssetImage(iconPath),
               )),
             ),
 
@@ -394,7 +392,6 @@ class _SignalState extends State<Signal> {
                         // Show the current count surrounded by smoke signals
                         buildImage(
                           path: AppConfig.prefs[signalImageKey],
-                          isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                         ),
                         Text(
                           widget.activeMembers.length.toString(),
@@ -402,7 +399,6 @@ class _SignalState extends State<Signal> {
                         ),
                         buildImage(
                           path: AppConfig.prefs[signalImageKey],
-                          isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                         ),
                       ]
                     : [

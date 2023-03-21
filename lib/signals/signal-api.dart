@@ -1,4 +1,3 @@
-import '../utils/helpers.dart';
 import '../utils/constants.dart';
 import '../utils/validate.dart';
 import '../user/user-api.dart';
@@ -278,7 +277,6 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
                   context: context,
                   image: buildImage(
                     path: AppConfig.prefs[signalImageKey],
-                    isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                   ),
                 );
               case ConnectionState.done:
