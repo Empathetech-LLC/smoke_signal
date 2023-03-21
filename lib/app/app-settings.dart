@@ -117,8 +117,8 @@ class _AppSettingsState extends State<AppSettings> {
                 type: SettingType.margin,
                 title: 'Margin',
                 min: 5.0,
-                max: 25.0,
-                steps: 8,
+                max: 35.0,
+                steps: 12,
               ),
 
               // Padding
