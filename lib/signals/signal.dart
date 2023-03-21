@@ -425,7 +425,7 @@ class _SignalState extends State<Signal> {
         children: [
           // Label
           ezButton(
-            action: () {},
+            action: doNothing,
             body: Text('Join:\n$signalTitle?', style: watchingTextStyle),
             customStyle: signalStyle(),
           ),
@@ -438,11 +438,11 @@ class _SignalState extends State<Signal> {
               context: context,
               onConfirm: () async {
                 await acceptInvite(context, signalTitle);
-                setState(() {});
+                setState(doNothing);
               },
               onDeny: () async {
                 await declineInvite(context, signalTitle);
-                setState(() {});
+                setState(doNothing);
               },
               axis: Axis.horizontal,
             ),

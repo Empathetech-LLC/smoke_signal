@@ -105,7 +105,7 @@ class _SignalBoardState extends State<SignalBoard> {
         endDrawer: signalBoardDrawer(context),
         floatingActionButton: ezButton(
           // Refresh
-          action: () => setState(() {}),
+          action: () => setState(doNothing),
           // Reload
           longAction: () => setState(() {
             _signalStream = streamSignals(membersPath);

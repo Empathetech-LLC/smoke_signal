@@ -42,7 +42,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
           ezIconButton(
             action: () {
               editAvatar(context);
-              setState(() {});
+              setState(doNothing);
             },
             body: Text('New pic'),
             icon: Icon(PlatformIcons(context).photoCamera),
@@ -61,7 +61,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
           ezIconButton(
             action: () {
               editName(context);
-              setState(() {});
+              setState(doNothing);
             },
             body: Text('New name'),
             icon: Icon(PlatformIcons(context).edit),
