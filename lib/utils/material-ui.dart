@@ -14,7 +14,7 @@ Drawer standardDrawer(BuildContext context) {
   return Drawer(
     backgroundColor: Color(AppConfig.prefs[themeColorKey]),
     child: ezScrollView(
-      [
+      children: [
         // App icon
         DrawerHeader(
           child: CircleAvatar(
@@ -25,30 +25,28 @@ Drawer standardDrawer(BuildContext context) {
         ),
 
         // GoTo settings
-        ezTextIconButton(
-          () => Navigator.of(context).popAndPushNamed(
+        ezIconButton(
+          action: () => Navigator.of(context).popAndPushNamed(
             settingsRoute,
             arguments: {indexArg: 0},
           ),
-          () {},
-          'Settings',
-          PlatformIcons(context).settings,
+          icon: Icon(PlatformIcons(context).settings),
+          body: Text('Settings'),
         ),
         Container(height: buttonSpacer),
 
         // Show input rules
-        ezTextButton(
-          () => ezDialog(
-            context,
-            'Input rules',
-            Text(
+        ezButton(
+          action: () => ezDialog(
+            context: context,
+            title: 'Input rules',
+            content: Text(
               validatorRule,
               style: getTextStyle(dialogContentStyleKey),
               textAlign: TextAlign.center,
             ),
           ),
-          () {},
-          'Input rules',
+          body: Text('Input rules'),
         ),
         Container(height: buttonSpacer),
       ],
@@ -62,7 +60,7 @@ Drawer signalBoardDrawer(BuildContext context) {
   return Drawer(
     backgroundColor: Color(AppConfig.prefs[themeColorKey]),
     child: ezScrollView(
-      [
+      children: [
         // Header: User profile preview, edit button, logout button
         DrawerHeader(
           child: Row(
@@ -97,16 +95,15 @@ Drawer signalBoardDrawer(BuildContext context) {
                 children: [
                   // Edit
                   ezButton(
-                    () => Navigator.of(context).popAndPushNamed(profileSettingsRoute),
-                    () {},
-                    Icon(Icons.edit),
+                    action: () =>
+                        Navigator.of(context).popAndPushNamed(profileSettingsRoute),
+                    body: Icon(Icons.edit),
                   ),
 
                   // Logout
                   ezButton(
-                    () => logout(context),
-                    () {},
-                    Icon(Icons.logout),
+                    action: () => logout(context),
+                    body: Icon(Icons.logout),
                   ),
                 ],
               ),
@@ -116,39 +113,36 @@ Drawer signalBoardDrawer(BuildContext context) {
         Container(height: buttonSpacer),
 
         // Add new signal
-        ezTextIconButton(
-          () => Navigator.of(context).popAndPushNamed(createSignalRoute),
-          () {},
-          'New',
-          PlatformIcons(context).add,
+        ezIconButton(
+          action: () => Navigator.of(context).popAndPushNamed(createSignalRoute),
+          body: Text('New'),
+          icon: Icon(PlatformIcons(context).add),
         ),
         Container(height: buttonSpacer),
 
         // GoTo settings
-        ezTextIconButton(
-          () => Navigator.of(context).popAndPushNamed(
+        ezIconButton(
+          action: () => Navigator.of(context).popAndPushNamed(
             settingsRoute,
             arguments: {indexArg: 1},
           ),
-          () {},
-          'Settings',
-          PlatformIcons(context).settings,
+          body: Text('Settings'),
+          icon: Icon(PlatformIcons(context).settings),
         ),
         Container(height: buttonSpacer),
 
         // Show input rules
-        ezTextButton(
-          () => ezDialog(
-            context,
-            'Input rules',
-            Text(
+        ezButton(
+          action: () => ezDialog(
+            context: context,
+            title: 'Input rules',
+            content: Text(
               validatorRule,
               style: getTextStyle(dialogContentStyleKey),
               textAlign: TextAlign.center,
             ),
           ),
-          () {},
-          'Input rules',
+          body: Text('Input rules'),
         ),
         Container(height: buttonSpacer),
       ],
