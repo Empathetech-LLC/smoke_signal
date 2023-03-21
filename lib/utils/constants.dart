@@ -18,14 +18,14 @@ final Map<String, String> credits = {
 };
 
 // Routes
-const String signupRoute = 'sign-up-screen';
-const String loginRoute = 'login-screen';
-const String resetPasswordRoute = 'reset-password-screen';
-const String homeRoute = 'home-screen';
-const String settingsRoute = 'settings-screen';
-const String profileSettingsRoute = 'profile-settings-screen';
-const String signalMembersRoute = 'signal-members-screen';
-const String createSignalRoute = 'create-signal-screen';
+const String signupRoute = '/signup';
+const String loginRoute = '/login';
+const String resetPasswordRoute = '/reset-password';
+const String homeRoute = '/';
+const String settingsRoute = '/settings';
+const String profileSettingsRoute = '/profile-settings';
+const String signalMembersRoute = '/signal-members';
+const String createSignalRoute = '/create-signal';
 
 // Images
 const String appIconPath = 'assets/app-icon.png';
