@@ -58,7 +58,7 @@ class SmokeSignal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ezApp(
-      appTitle: 'Smoke Signal',
+      appTitle: appTitle,
       initialRoute: homeRoute,
       routes: {
         signupRoute: (context) => SignUpScreen(),
