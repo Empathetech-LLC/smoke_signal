@@ -152,7 +152,8 @@ class _SignalSettingsState extends State<SignalSettings> {
                     Navigator.of(context).pop();
                   },
                   onDeny: () => Navigator.of(context).pop(),
-                  axis: Axis.horizontal,
+                  axis: Axis.vertical,
+                  spacer: AppConfig.prefs[dialogSpacingKey],
                 ),
               );
             },

@@ -151,6 +151,8 @@ void updateMessage(BuildContext context, String title) {
   final messageFormKey = GlobalKey<FormState>();
   TextEditingController _messageController = TextEditingController();
 
+  double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
+
   ezDialog(
     context: context,
     title: 'New message...',
@@ -166,31 +168,33 @@ void updateMessage(BuildContext context, String title) {
           validator: signalMessageValidator,
           autovalidateMode: AutovalidateMode.onUserInteraction,
         ),
-        Container(height: AppConfig.prefs[dialogSpacingKey]),
+        Container(height: dialogSpacer),
 
         // Yes/no buttons
         ezYesNo(
-            context: context,
-            onConfirm: () async {
-              // Don't do anything if the message is invalid
-              if (!messageFormKey.currentState!.validate()) {
-                popNLog(context, 'Invalid message!');
-                return;
-              }
+          context: context,
+          onConfirm: () async {
+            // Don't do anything if the message is invalid
+            if (!messageFormKey.currentState!.validate()) {
+              popNLog(context, 'Invalid message!');
+              return;
+            }
 
-              Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-              try {
-                // Upload the new message
-                String message = _messageController.text.trim();
-                await AppUser.db.collection(signalsPath).doc(title).update(
-                  {messagePath: message},
-                );
-              } catch (e) {
-                popNLog(context, e.toString());
-              }
-            },
-            onDeny: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
-            axis: Axis.horizontal),
+            Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+            try {
+              // Upload the new message
+              String message = _messageController.text.trim();
+              await AppUser.db.collection(signalsPath).doc(title).update(
+                {messagePath: message},
+              );
+            } catch (e) {
+              popNLog(context, e.toString());
+            }
+          },
+          onDeny: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
+          axis: Axis.horizontal,
+          spacer: dialogSpacer,
+        ),
       ],
     ),
   );
@@ -326,6 +330,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
       },
       onDeny: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
       axis: Axis.vertical,
+      spacer: AppConfig.prefs[dialogSpacingKey],
     ),
   );
 }
@@ -336,26 +341,28 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
     context: context,
     title: 'Leave $title?',
     content: ezYesNo(
-        context: context,
-        onConfirm: () async {
-          Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-          try {
-            // Clear local prefs for the signal
-            prefKeys.forEach((key) {
-              AppConfig.preferences.remove(key);
-            });
+      context: context,
+      onConfirm: () async {
+        Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+        try {
+          // Clear local prefs for the signal
+          prefKeys.forEach((key) {
+            AppConfig.preferences.remove(key);
+          });
 
-            // Remove the current user from the list of members
-            await AppUser.db.collection(signalsPath).doc(title).update(
-              {
-                membersPath: FieldValue.arrayRemove([AppUser.account.uid])
-              },
-            );
-          } catch (e) {
-            popNLog(context, e.toString());
-          }
-        },
-        onDeny: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
-        axis: Axis.vertical),
+          // Remove the current user from the list of members
+          await AppUser.db.collection(signalsPath).doc(title).update(
+            {
+              membersPath: FieldValue.arrayRemove([AppUser.account.uid])
+            },
+          );
+        } catch (e) {
+          popNLog(context, e.toString());
+        }
+      },
+      onDeny: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
+      axis: Axis.vertical,
+      spacer: AppConfig.prefs[dialogSpacingKey],
+    ),
   );
 }

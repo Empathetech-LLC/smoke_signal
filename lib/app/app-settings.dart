@@ -15,7 +15,10 @@ class AppSettings extends StatefulWidget {
 class _AppSettingsState extends State<AppSettings> {
   @override
   Widget build(BuildContext context) {
+    // Gather theme data
+
     double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+    double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
     return navWindow(
       context: context,
@@ -56,14 +59,14 @@ class _AppSettingsState extends State<AppSettings> {
               ColorSetting(toControl: buttonColorKey, message: 'Buttons'),
               Container(height: buttonSpacer),
               ColorSetting(toControl: buttonTextColorKey, message: 'Button text'),
-              Container(height: buttonSpacer),
+              Container(height: dialogSpacer),
 
               // User hint: hold the buttons to reset the color
               paddedText(
                 'Hold each to reset',
                 style: getTextStyle(dialogContentStyleKey),
               ),
-              Container(height: AppConfig.prefs[paddingKey]),
+              Container(height: dialogSpacer),
 
               // Reset all app color settings
               GestureDetector(
@@ -84,7 +87,8 @@ class _AppSettingsState extends State<AppSettings> {
                         Navigator.of(context).pop();
                       },
                       onDeny: () => Navigator.of(context).pop(),
-                      axis: Axis.horizontal,
+                      axis: Axis.vertical,
+                      spacer: dialogSpacer,
                     ),
                   );
                 },
@@ -177,7 +181,8 @@ class _AppSettingsState extends State<AppSettings> {
                     Navigator.of(context).pop();
                   },
                   onDeny: () => Navigator.of(context).pop(),
-                  axis: Axis.horizontal,
+                  axis: Axis.vertical,
+                  spacer: dialogSpacer,
                 ),
               );
             },

@@ -116,6 +116,7 @@ void logout(BuildContext context) {
       },
       onDeny: () => Navigator.of(context).pop(),
       axis: Axis.vertical,
+      spacer: AppConfig.prefs[dialogSpacingKey],
     ),
   );
 }
@@ -321,6 +322,7 @@ void editAvatar(BuildContext context) {
           },
           onDeny: () => Navigator.of(context).pop(),
           axis: Axis.horizontal,
+          spacer: dialogSpacer,
           confirmMsg: 'Submit',
           denyMsg: 'Cancel',
         ),
@@ -378,6 +380,7 @@ void editName(BuildContext context) {
           },
           onDeny: () => Navigator.of(context).pop(),
           axis: Axis.horizontal,
+          spacer: dialogSpacer,
           confirmMsg: 'Submit',
           denyMsg: 'Cancel',
         ),
