@@ -166,7 +166,7 @@ void updateMessage(BuildContext context, String title) {
           controller: _messageController,
           hintText: 'Notification',
           validator: signalMessageValidator,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          autoValidateMode: AutovalidateMode.onUserInteraction,
         ),
         Container(height: AppConfig.prefs[dialogSpacingKey]),
 
