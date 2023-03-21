@@ -31,13 +31,13 @@ class _SignalSettingsState extends State<SignalSettings> {
           //// Images
 
           ezList(
-            title: 'Image',
+            title: 'Signal',
             body: [
               ImageSetting(
                 prefsKey: AppConfig.prefs[signalImageKey],
                 isAssetImage: isAssetImage(AppConfig.prefs[signalImageKey]),
                 fullscreen: false,
-                title: 'Signal',
+                title: 'Image',
                 credits:
                     credits[AppConfig.prefs[signalImageKey]] ?? 'Wherever you got it!',
               )
