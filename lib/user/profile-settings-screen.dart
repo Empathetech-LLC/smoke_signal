@@ -48,7 +48,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
             icon: Icon(PlatformIcons(context).photoCamera),
           ),
 
-          Container(height: 1.5 * buttonSpacer),
+          Container(height: buttonSpacer),
 
           // Display name
           Text(
