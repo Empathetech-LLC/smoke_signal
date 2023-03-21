@@ -106,18 +106,16 @@ Future<void> attemptLogin(BuildContext context, String email, String password) a
 // Logout current user
 void logout(BuildContext context) {
   ezDialog(
-    context,
-    'Logout?',
-    ezYesNoCol(
-      context,
-      // On yes
-      () async {
+    context: context,
+    title: 'Logout?',
+    content: ezYesNo(
+      context: context,
+      onConfirm: () async {
         Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
         await AppUser.auth.signOut();
       },
-
-      // On no
-      () => Navigator.of(context).pop(),
+      onDeny: () => Navigator.of(context).pop(),
+      axis: Axis.vertical,
     ),
   );
 }
@@ -193,9 +191,12 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
         GestureDetector(
           // On long press: diplay the user's profile name
           onLongPress: () => ezDialog(
-            context,
-            null,
-            paddedText(profile.name, getTextStyle(dialogTitleStyleKey), TextAlign.center),
+            context: context,
+            content: paddedText(
+              profile.name,
+              style: getTextStyle(dialogTitleStyleKey),
+              alignment: TextAlign.center,
+            ),
           ),
           child: CircleAvatar(
             foregroundImage: CachedNetworkImageProvider(profile.avatarURL),
@@ -208,11 +209,12 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
     );
   });
 
-  return ezCenterScroll(
-    children,
-    MainAxisSize.max,
-    MainAxisAlignment.spaceEvenly,
-    Axis.horizontal,
+  return ezScrollView(
+    children: children,
+    centered: true,
+    axisSize: MainAxisSize.max,
+    axisAlign: MainAxisAlignment.spaceEvenly,
+    direction: Axis.horizontal,
   );
 }
 
@@ -248,14 +250,18 @@ Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
           ),
 
           // Display name
-          paddedText(profile.name, getTextStyle(dialogTitleStyleKey), TextAlign.start),
+          paddedText(
+            profile.name,
+            style: getTextStyle(dialogTitleStyleKey),
+            alignment: TextAlign.start,
+          ),
         ],
       ),
       Container(height: dialogSpacer),
     ]);
   });
 
-  return ezCenterScroll(children);
+  return ezScrollView(children: children, centered: true);
 }
 
 // Update the users avatar
@@ -266,21 +272,18 @@ void editAvatar(BuildContext context) {
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
   ezDialog(
-    context,
-    null,
-    Column(
+    context: context,
+    content: Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // URL text field/form
         ezForm(
-          urlFormKey,
-          _urlController,
-          'Enter URL',
-          false,
-          null,
-          urlValidator,
-          AutovalidateMode.onUserInteraction,
+          key: urlFormKey,
+          controller: _urlController,
+          hintText: 'Enter URL',
+          validator: urlValidator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
         ),
         Container(height: dialogSpacer),
 
@@ -294,10 +297,9 @@ void editAvatar(BuildContext context) {
         Container(height: dialogSpacer),
 
         // Submit & cancel buttons
-        ezYesNoRow(
-          context,
-          // On yes (submit)
-          () async {
+        ezYesNo(
+          context: context,
+          onConfirm: () async {
             // Close keyboard if open
             AppConfig.focus.primaryFocus?.unfocus();
 
@@ -317,13 +319,10 @@ void editAvatar(BuildContext context) {
               {avatarURLPath: photoURL},
             );
           },
-
-          // On no (cancel)
-          () => Navigator.of(context).pop(),
-
-          // Modifications
-          'Submit',
-          'Cancel',
+          onDeny: () => Navigator.of(context).pop(),
+          axis: Axis.horizontal,
+          confirmMsg: 'Submit',
+          denyMsg: 'Cancel',
         ),
       ],
     ),
@@ -338,29 +337,26 @@ void editName(BuildContext context) {
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
   ezDialog(
-    context,
-    'Who are you?',
-    Column(
+    context: context,
+    title: 'Who are you?',
+    content: Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Name field
         ezForm(
-          nameFormKey,
-          _nameController,
-          'Enter display name',
-          false,
-          null,
-          displayNameValidator,
-          AutovalidateMode.onUserInteraction,
+          key: nameFormKey,
+          controller: _nameController,
+          hintText: 'Enter display name',
+          validator: displayNameValidator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
         ),
         Container(height: dialogSpacer),
 
         // Submit & cancel buttons
-        ezYesNoRow(
-          context,
-          // On yes (submit)
-          () async {
+        ezYesNo(
+          context: context,
+          onConfirm: () async {
             // Close keyboard if open
             AppConfig.focus.primaryFocus?.unfocus();
 
@@ -380,13 +376,10 @@ void editName(BuildContext context) {
               {displayNamePath: newName},
             );
           },
-
-          // On no (cancel)
-          () => Navigator.of(context).pop(),
-
-          // Modifications
-          'Submit',
-          'Cancel',
+          onDeny: () => Navigator.of(context).pop(),
+          axis: Axis.horizontal,
+          confirmMsg: 'Submit',
+          denyMsg: 'Cancel',
         ),
       ],
     ),

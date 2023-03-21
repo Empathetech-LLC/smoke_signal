@@ -31,31 +31,28 @@ class _ResetScreenState extends State<ResetScreen> {
   @override
   Widget build(BuildContext context) {
     return ezScaffold(
-      context,
+      context: context,
 
-      // Title
-      'No problem!',
+      title: 'No problem!',
 
-      // Body
-      ezCenterScroll(
-        [
+      body: ezScrollView(
+        children: [
           // Email form
           AutofillGroup(
             child: ezForm(
-              emailFormKey,
-              _emailController,
-              'Enter email',
-              false,
-              [AutofillHints.email],
-              emailValidator,
-              AutovalidateMode.onUserInteraction,
+              key: emailFormKey,
+              controller: _emailController,
+              hintText: 'Enter email',
+              autofillHints: [AutofillHints.email],
+              validator: emailValidator,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
           ),
           Container(height: buttonSpacer),
 
           // Submit button
           ezIconButton(
-            () async {
+            action: () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();
 
@@ -74,24 +71,22 @@ class _ResetScreenState extends State<ResetScreen> {
                 popNLog(context, 'Failed to send password reset email:\n$e');
               }
             },
-            'Send link',
-            PlatformIcons(context).mail,
+            body: Text('Send link'),
+            icon: Icon(PlatformIcons(context).mail),
           ),
           Container(height: buttonSpacer),
         ],
+        centered: true,
       ),
 
       // Background image/decoration
-      buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppConfig.prefs[backColorKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
-      // Android drawer aka settings hamburger
-      MaterialScaffoldData(endDrawer: standardDrawer(context)),
-
-      // iOS config
-      CupertinoPageScaffoldData(),
+      // Scaffold config
+      scaffoldConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
     );
   }
 }

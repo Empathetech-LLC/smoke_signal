@@ -35,14 +35,12 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return ezScaffold(
-      context,
+      context: context,
 
-      // Title
-      'Welcome back!',
+      title: 'Welcome back!',
 
-      // Body
-      ezCenterScroll(
-        [
+      body: ezScrollView(
+        children: [
           // Autofill group allows for password manager inputs and such
           AutofillGroup(
             child: Column(
@@ -51,23 +49,22 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 // Email field
                 ezForm(
-                  emailFormKey,
-                  _emailController,
-                  'Enter email',
-                  false,
-                  [AutofillHints.email],
-                  emailValidator,
-                  AutovalidateMode.onUserInteraction,
+                  key: emailFormKey,
+                  controller: _emailController,
+                  hintText: 'Enter email',
+                  autofillHints: [AutofillHints.email],
+                  validator: emailValidator,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 Container(height: buttonSpacer),
 
                 // Password field
                 ezForm(
-                  passwordFormKey,
-                  _passwdController,
-                  'Enter password',
-                  true,
-                  [AutofillHints.password],
+                  key: passwordFormKey,
+                  controller: _passwdController,
+                  hintText: 'Enter password',
+                  private: true,
+                  autofillHints: [AutofillHints.password],
                 ),
               ],
             ),
@@ -91,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           // Attempt login button
           ezButton(
-            () async {
+            action: () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();
 
@@ -107,22 +104,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 _passwdController.text.trim(),
               );
             },
-            'Login',
+            body: Text('Login'),
           ),
         ],
+        centered: true,
       ),
 
       // Background image/decoration
-      buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppConfig.prefs[backColorKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
-      // Android drawer aka settings hamburger
-      MaterialScaffoldData(endDrawer: standardDrawer(context)),
-
-      // iOS config
-      CupertinoPageScaffoldData(),
+      // Scaffold config
+      scaffoldConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
     );
   }
 }

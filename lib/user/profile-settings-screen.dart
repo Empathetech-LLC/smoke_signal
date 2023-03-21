@@ -22,14 +22,12 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return ezScaffold(
-      context,
+      context: context,
 
-      // Title
-      'Edit Profile',
+      title: 'Edit Profile',
 
-      // Body
-      ezCenterScroll(
-        [
+      body: ezScrollView(
+        children: [
           Container(height: buttonSpacer),
 
           // Profile image
@@ -43,12 +41,12 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
           // Edit picture
           ezIconButton(
-            () {
+            action: () {
               editAvatar(context);
               setState(() {});
             },
-            'New pic',
-            PlatformIcons(context).photoCamera,
+            body: Text('New pic'),
+            icon: Icon(PlatformIcons(context).photoCamera),
           ),
 
           Container(height: 1.5 * buttonSpacer),
@@ -62,29 +60,27 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
           // Edit name
           ezIconButton(
-            () {
+            action: () {
               editName(context);
               setState(() {});
             },
-            'New name',
-            PlatformIcons(context).edit,
+            body: Text('New name'),
+            icon: Icon(PlatformIcons(context).edit),
           ),
 
           Container(height: buttonSpacer),
         ],
+        centered: true,
       ),
 
       // Background image/decoration
-      buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
 
       // Fallback background color
-      Color(AppConfig.prefs[backColorKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
-      // Android drawer aka settings hamburger
-      MaterialScaffoldData(),
-
-      // iOS config
-      CupertinoPageScaffoldData(),
+      // Scaffold config
+      scaffoldConfig: MaterialScaffoldData(),
     );
   }
 }
