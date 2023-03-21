@@ -43,12 +43,11 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Edit picture
-          ezTextIconButton(
+          ezIconButton(
             () {
               editAvatar(context);
               setState(() {});
             },
-            () {},
             'New pic',
             PlatformIcons(context).photoCamera,
           ),
@@ -63,12 +62,11 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Edit name
-          ezTextIconButton(
+          ezIconButton(
             () {
               editName(context);
               setState(() {});
             },
-            () {},
             'New name',
             PlatformIcons(context).edit,
           ),

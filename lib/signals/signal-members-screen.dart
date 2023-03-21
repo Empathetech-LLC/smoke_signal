@@ -120,12 +120,11 @@ class _SignalMembersState extends State<SignalMembers> {
     // Add (send requests) button
     children.addAll(
       [
-        ezTextButton(
+        ezButton(
           () async {
             await requestMembers(context, widget.title, requestIDs);
             Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
           },
-          () {},
           'Send requests',
         ),
         Container(height: dialogSpacer),

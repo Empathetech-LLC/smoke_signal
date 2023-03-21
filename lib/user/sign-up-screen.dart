@@ -74,7 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Container(height: buttonSpacer),
 
           // Attempt sign up button
-          ezTextButton(
+          ezButton(
             () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();
@@ -92,7 +92,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 _passwdController.text.trim(),
               );
             },
-            () {},
             'Sign up',
           ),
         ],

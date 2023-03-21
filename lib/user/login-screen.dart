@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(height: buttonSpacer),
 
           // Attempt login button
-          ezTextButton(
+          ezButton(
             () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();
@@ -107,7 +107,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 _passwdController.text.trim(),
               );
             },
-            () {},
             'Login',
           ),
         ],

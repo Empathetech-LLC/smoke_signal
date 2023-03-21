@@ -54,7 +54,7 @@ class _ResetScreenState extends State<ResetScreen> {
           Container(height: buttonSpacer),
 
           // Submit button
-          ezTextIconButton(
+          ezIconButton(
             () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();
@@ -74,7 +74,6 @@ class _ResetScreenState extends State<ResetScreen> {
                 popNLog(context, 'Failed to send password reset email:\n$e');
               }
             },
-            () {},
             'Send link',
             PlatformIcons(context).mail,
           ),

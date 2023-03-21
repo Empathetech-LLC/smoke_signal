@@ -193,7 +193,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
           Container(height: buttonSpacer),
 
           // Add button
-          ezTextIconButton(
+          ezIconButton(
             () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();
@@ -218,7 +218,6 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
               Navigator.of(context).pop();
             },
-            () {},
             'Done',
             PlatformIcons(context).cloudUpload,
           ),

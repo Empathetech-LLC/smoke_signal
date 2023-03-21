@@ -110,31 +110,29 @@ class _SignalState extends State<Signal> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // From file
-          ezTextIconButton(
+          ezIconButton(
             () {
               changeImage(context, iconPathPref, ImageSource.gallery);
               Navigator.of(context).pop();
             },
-            () {},
             'File',
             PlatformIcons(context).folder,
           ),
           Container(height: dialogSpacer),
 
           // From camera
-          ezTextIconButton(
+          ezIconButton(
             () {
               changeImage(context, iconPathPref, ImageSource.camera);
               Navigator.of(context).pop();
             },
-            () {},
             'Camera',
             PlatformIcons(context).photoCamera,
           ),
           Container(height: dialogSpacer),
 
           // Reset
-          ezTextButton(
+          ezButton(
             () async {
               // Build path
               Directory currDir = await getApplicationDocumentsDirectory();
@@ -153,7 +151,6 @@ class _SignalState extends State<Signal> {
               AppConfig.preferences.remove(iconPathPref);
               Navigator.of(context).pop();
             },
-            () {},
             'Reset',
           ),
           Container(height: dialogSpacer),
@@ -196,7 +193,7 @@ class _SignalState extends State<Signal> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Manage members
-          ezTextButton(
+          ezButton(
             () => Navigator.of(context).popAndPushNamed(
               signalMembersRoute,
               arguments: {
@@ -206,17 +203,16 @@ class _SignalState extends State<Signal> {
                 memberReqsArg: widget.memberReqs,
               },
             ),
-            () {},
             'Members',
           ),
           Container(height: dialogSpacer),
 
           // Set icon
-          ezTextButton(setIcon, () {}, 'Set icon'),
+          ezButton(setIcon, 'Set icon'),
           Container(height: dialogSpacer),
 
           // Show/hide icon
-          ezTextButton(toggleIcon, () {}, 'Toggle icon'),
+          ezButton(toggleIcon, 'Toggle icon'),
           Container(height: dialogSpacer),
 
           // Owner: Reset count, update message, transfer signal, or delete signal
@@ -226,35 +222,32 @@ class _SignalState extends State<Signal> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: AppUser.account.uid == widget.owner
                 ? [
-                    ezTextButton(
-                      () async {
+                    ezButton(
+                      action: () async {
                         Navigator.of(context).pop();
                         await resetSignal(context, signalTitle);
                       },
-                      () {},
                       'Reset signal',
                     ),
                     Container(height: dialogSpacer),
-                    ezTextButton(
-                      () {
+                    ezButton(
+                      action: () {
                         Navigator.of(context).pop();
                         updateMessage(context, signalTitle);
                       },
-                      () {},
                       'Update message',
                     ),
                     Container(height: dialogSpacer),
-                    ezTextButton(
-                      () {
+                    ezButton(
+                      action: () {
                         Navigator.of(context).pop();
                         confirmTransfer(context, signalTitle, widget.members);
                       },
-                      () {},
                       'Transfer signal',
                     ),
                     Container(height: dialogSpacer),
-                    ezTextButton(
-                      () {
+                    ezButton(
+                      action: () {
                         Navigator.of(context).pop();
                         confirmDelete(
                           context,
@@ -262,14 +255,13 @@ class _SignalState extends State<Signal> {
                           [showIconPref, iconPathPref],
                         );
                       },
-                      () {},
                       'Delete signal',
                     ),
                     Container(height: dialogSpacer),
                   ]
                 : [
-                    ezTextButton(
-                      () {
+                    ezButton(
+                      action: () {
                         Navigator.of(context).pop();
                         confirmDeparture(
                           context,
@@ -277,7 +269,6 @@ class _SignalState extends State<Signal> {
                           [showIconPref, iconPathPref],
                         );
                       },
-                      () {},
                       'Leave signal',
                     ),
                     Container(height: dialogSpacer),
@@ -313,18 +304,20 @@ class _SignalState extends State<Signal> {
   Widget defaultSignal() {
     bool joined = widget.activeMembers.contains(AppUser.account.uid);
 
-    return ezTextButton(
-      () => toggleParticipation(
+    return ezButton(
+      action: () => toggleParticipation(
         context,
         joined,
         widget.title,
         widget.members,
         widget.message,
       ),
-      showEdits,
-      signalTitle,
-      joined ? joinedTextStyle : watchingTextStyle,
-      signalStyle(),
+      longAction: showEdits,
+      body: Text(
+        signalTitle,
+        style: joined ? joinedTextStyle : watchingTextStyle,
+      ),
+      customStyle: signalStyle(),
     );
   }
 
@@ -351,7 +344,11 @@ class _SignalState extends State<Signal> {
             // Icon
             Container(
               width: signalHeight,
-              child: Card(child: buildImage(iconPath, isAssetImage(iconPath))),
+              child: Card(
+                  child: buildImage(
+                path: iconPath,
+                isAsset: isAssetImage(iconPath),
+              )),
             ),
 
             // Title card
@@ -399,16 +396,16 @@ class _SignalState extends State<Signal> {
                     ? [
                         // Show the current count surrounded by smoke signals
                         buildImage(
-                          AppConfig.prefs[signalImageKey],
-                          isAssetImage(AppConfig.prefs[signalImageKey]),
+                          path: AppConfig.prefs[signalImageKey],
+                          isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                         ),
                         Text(
                           widget.activeMembers.length.toString(),
                           style: joinedTextStyle,
                         ),
                         buildImage(
-                          AppConfig.prefs[signalImageKey],
-                          isAssetImage(AppConfig.prefs[signalImageKey]),
+                          path: AppConfig.prefs[signalImageKey],
+                          isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                         ),
                       ]
                     : [
@@ -434,31 +431,27 @@ class _SignalState extends State<Signal> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Label
-          ezTextButton(
-            () {},
-            () {},
-            'Join:\n$signalTitle?',
-            watchingTextStyle,
-            signalStyle(),
+          ezButton(
+            action: () {},
+            body: Text('Join:\n$signalTitle?', style: watchingTextStyle),
+            customStyle: signalStyle(),
           ),
 
           // Buttons
           SizedBox(
             width: screenWidth(context) * (2 / 3),
             height: signalCountHeight,
-            child: ezYesNoRow(
-              context,
-              // On yes
-              () async {
+            child: ezYesNo(
+              context: context,
+              onConfirm: () async {
                 await acceptInvite(context, signalTitle);
                 setState(() {});
               },
-
-              // On no
-              () async {
+              onDeny: () async {
                 await declineInvite(context, signalTitle);
                 setState(() {});
               },
+              axis: Axis.horizontal,
             ),
           ),
         ],
