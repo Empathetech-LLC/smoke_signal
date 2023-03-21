@@ -21,7 +21,7 @@ DecorationImage? buildDecoration(String? path) {
   return (path == null)
       ? null
       : DecorationImage(
-          image: provideImage(path, isAssetImage(path)),
+          image: provideImage(path: path, isAsset: isAssetImage(path)),
           fit: BoxFit.fill,
         );
 }
