@@ -1,5 +1,8 @@
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
+/// Application title [String]
+const String appTitle = 'Smoke Signal';
+
 /// Image path -> image source key -> value pair
 final Map<String, String> credits = {
   appIconPath: 'Empathetech LLC: The Founder\n\nUnnamed',
