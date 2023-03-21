@@ -1,6 +1,6 @@
 import '../user/user-api.dart';
 import '../utils/constants.dart';
-import '../utils/material-ui.dart';
+import '../utils/drawers.dart';
 import '../utils/helpers.dart';
 import '../signals/signal-board.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -64,48 +64,44 @@ class _HomeScreenState extends State<HomeScreen> {
       return SignalBoard();
     } else {
       return ezScaffold(
-        context,
+        context: context,
 
-        // Title
-        appTitle,
+        title: appTitle,
 
-        // Body
-        (type == loadingBuild)
+        body: (type == loadingBuild)
             ? loadingMessage(
-                context, buildImage(smokeSignalPath, isAssetImage(smokeSignalPath)))
+                context: context,
+                image: buildImage(
+                  path: smokeSignalPath,
+                  isAsset: isAssetImage(smokeSignalPath),
+                ),
+              )
             : // Show authBuild
-            ezCenterScroll(
-                [
-                  // Login
-                  ezTextIconButton(
-                    () => Navigator.of(context).pushNamed(loginRoute),
-                    () {},
-                    'Login',
-                    PlatformIcons(context).mail,
-                  ),
-                  Container(height: buttonSpacer),
+            ezScrollView(children: [
+                // Login
+                ezIconButton(
+                  action: () => Navigator.of(context).pushNamed(loginRoute),
+                  body: Text('Login'),
+                  icon: Icon(PlatformIcons(context).mail),
+                ),
+                Container(height: buttonSpacer),
 
-                  // Sign up
-                  ezTextIconButton(
-                    () => Navigator.of(context).pushNamed(signupRoute),
-                    () {},
-                    'Sign up',
-                    PlatformIcons(context).mail,
-                  ),
-                ],
-              ),
+                // Sign up
+                ezIconButton(
+                  action: () => Navigator.of(context).pushNamed(signupRoute),
+                  body: Text('Sign up'),
+                  icon: Icon(PlatformIcons(context).mail),
+                ),
+              ], centered: true),
 
         // Background image/decoration
-        buildDecoration(AppConfig.prefs[backImageKey]),
+        backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
 
         // Fallback background color
-        Color(AppConfig.prefs[backColorKey]),
+        backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
         // Android config
-        MaterialScaffoldData(endDrawer: standardDrawer(context)),
-
-        // iOS config
-        CupertinoPageScaffoldData(),
+        scaffoldConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
       );
     }
   }
