@@ -154,50 +154,45 @@ void updateMessage(BuildContext context, String title) {
   TextEditingController _messageController = TextEditingController();
 
   ezDialog(
-    context,
-    'New message...',
-    Column(
+    context: context,
+    title: 'New message...',
+    content: Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Text field
         ezForm(
-          messageFormKey,
-          _messageController,
-          'Notification',
-          false,
-          null,
-          signalMessageValidator,
-          AutovalidateMode.onUserInteraction,
+          key: messageFormKey,
+          controller: _messageController,
+          hintText: 'Notification',
+          validator: signalMessageValidator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
         ),
         Container(height: AppConfig.prefs[dialogSpacingKey]),
 
         // Yes/no buttons
-        ezYesNoRow(
-          context,
-          // On yes
-          () async {
-            // Don't do anything if the message is invalid
-            if (!messageFormKey.currentState!.validate()) {
-              popNLog(context, 'Invalid message!');
-              return;
-            }
+        ezYesNo(
+            context: context,
+            onConfirm: () async {
+              // Don't do anything if the message is invalid
+              if (!messageFormKey.currentState!.validate()) {
+                popNLog(context, 'Invalid message!');
+                return;
+              }
 
-            Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-            try {
-              // Upload the new message
-              String message = _messageController.text.trim();
-              await AppUser.db.collection(signalsPath).doc(title).update(
-                {messagePath: message},
-              );
-            } catch (e) {
-              popNLog(context, e.toString());
-            }
-          },
-
-          // On no
-          () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
-        ),
+              Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+              try {
+                // Upload the new message
+                String message = _messageController.text.trim();
+                await AppUser.db.collection(signalsPath).doc(title).update(
+                  {messagePath: message},
+                );
+              } catch (e) {
+                popNLog(context, e.toString());
+              }
+            },
+            onDeny: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
+            axis: Axis.horizontal),
       ],
     ),
   );
@@ -254,8 +249,8 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
               // Display name
               paddedText(
                 profile.name,
-                getTextStyle(dialogTitleStyleKey),
-                TextAlign.start,
+                style: getTextStyle(dialogTitleStyleKey),
+                alignment: TextAlign.start,
               ),
             ],
           ),
@@ -264,19 +259,14 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
       ]);
     });
 
-    return ezCenterScroll(children);
+    return ezScrollView(children: children, centered: true);
   }
 
   // Actual pop-up
   ezDialog(
-    context,
-
-    // Title
-    'Select user',
-
-    // Body
-
-    Column(
+    context: context,
+    title: 'Select user',
+    content: Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -286,10 +276,10 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
                 return loadingMessage(
-                  context,
-                  buildImage(
-                    AppConfig.prefs[signalImageKey],
-                    isAssetImage(AppConfig.prefs[signalImageKey]),
+                  context: context,
+                  image: buildImage(
+                    path: AppConfig.prefs[signalImageKey],
+                    isAsset: isAssetImage(AppConfig.prefs[signalImageKey]),
                   ),
                 );
               case ConnectionState.done:
@@ -307,13 +297,9 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
             }
           },
         ),
-
-        // Cancel
-        ezTextIconButton(
-          () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
-          () {},
-          'Cancel',
-          PlatformIcons(context).clear,
+        ezCancel(
+          context: context,
+          onCancel: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
         ),
       ],
     ),
@@ -323,12 +309,11 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
 // Optionally delete the signal in firestore and clear local prefs
 void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
   ezDialog(
-    context,
-    'Delete $title?',
-    ezYesNoCol(
-      context,
-      // On yes
-      () async {
+    context: context,
+    title: 'Delete $title?',
+    content: ezYesNo(
+      context: context,
+      onConfirm: () async {
         Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
         try {
           // Clear local prefs for the signal
@@ -342,9 +327,8 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
           popNLog(context, e.toString());
         }
       },
-
-      // On no
-      () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
+      onDeny: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
+      axis: Axis.vertical,
     ),
   );
 }
@@ -352,32 +336,29 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
 // Optionally delete the signal in firestore and clear local prefs
 void confirmDeparture(BuildContext context, String title, List<String> prefKeys) {
   ezDialog(
-    context,
-    'Leave $title?',
-    ezYesNoCol(
-      context,
-      // On yes
-      () async {
-        Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
-        try {
-          // Clear local prefs for the signal
-          prefKeys.forEach((key) {
-            AppConfig.preferences.remove(key);
-          });
+    context: context,
+    title: 'Leave $title?',
+    content: ezYesNo(
+        context: context,
+        onConfirm: () async {
+          Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+          try {
+            // Clear local prefs for the signal
+            prefKeys.forEach((key) {
+              AppConfig.preferences.remove(key);
+            });
 
-          // Remove the current user from the list of members
-          await AppUser.db.collection(signalsPath).doc(title).update(
-            {
-              membersPath: FieldValue.arrayRemove([AppUser.account.uid])
-            },
-          );
-        } catch (e) {
-          popNLog(context, e.toString());
-        }
-      },
-
-      // On no
-      () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
-    ),
+            // Remove the current user from the list of members
+            await AppUser.db.collection(signalsPath).doc(title).update(
+              {
+                membersPath: FieldValue.arrayRemove([AppUser.account.uid])
+              },
+            );
+          } catch (e) {
+            popNLog(context, e.toString());
+          }
+        },
+        onDeny: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
+        axis: Axis.vertical),
   );
 }
