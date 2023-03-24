@@ -6,7 +6,6 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,15 +15,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // Initialize state
-
   final emailFormKey = GlobalKey<FormState>();
   final passwordFormKey = GlobalKey<FormState>();
 
   late TextEditingController _emailController = TextEditingController();
   late TextEditingController _passwdController = TextEditingController();
 
-  // Gather theme data
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
@@ -36,8 +32,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return ezScaffold(
       context: context,
 
+      // Title && theme
       title: 'Welcome back!',
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
+      // Body
       body: ezScrollView(
         children: [
           // Autofill group allows for password manager inputs and such
@@ -109,14 +109,9 @@ class _LoginScreenState extends State<LoginScreen> {
         centered: true,
       ),
 
-      // Background image/decoration
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-
-      // Fallback background color
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
-
-      // Scaffold config
-      materialConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
+      // User interaction
+      drawerHeader: standardDrawerHeader(),
+      drawerBody: standardDrawerBody(context),
     );
   }
 }

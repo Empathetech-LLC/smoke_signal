@@ -15,12 +15,10 @@ class ResetScreen extends StatefulWidget {
 }
 
 class _ResetScreenState extends State<ResetScreen> {
-  // Gather instance data
   final emailFormKey = GlobalKey<FormState>();
 
   late TextEditingController _emailController = TextEditingController();
 
-  // Gather theme data
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
   late TextStyle contents = getTextStyle(dialogContentStyleKey);
@@ -32,8 +30,12 @@ class _ResetScreenState extends State<ResetScreen> {
     return ezScaffold(
       context: context,
 
+      // Title && theme
       title: 'No problem!',
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
+      // Body
       body: ezScrollView(
         children: [
           // Email form
@@ -78,14 +80,9 @@ class _ResetScreenState extends State<ResetScreen> {
         centered: true,
       ),
 
-      // Background image/decoration
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-
-      // Fallback background color
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
-
-      // Scaffold config
-      materialConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
+      // User interaction
+      drawerHeader: standardDrawerHeader(),
+      drawerBody: standardDrawerBody(context),
     );
   }
 }

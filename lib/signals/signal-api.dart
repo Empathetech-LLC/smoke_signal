@@ -1,6 +1,7 @@
 import '../utils/constants.dart';
 import '../utils/validate.dart';
 import '../user/user-api.dart';
+import '../user/user-profile.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';

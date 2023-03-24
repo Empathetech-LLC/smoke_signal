@@ -32,22 +32,16 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  // Initialize state
-
   late int navIndex = widget.startIndex;
 
-  late List<Widget> windows = [
+  List<Widget> windows = [
     AppSettings(),
     SignalSettings(),
   ];
 
-  // Gather theme data
-  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-
-  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
-
-  // Draw state
+  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +68,6 @@ class _SettingsState extends State<Settings> {
           tooltip: 'Show signals settings',
         ),
       ],
-      materialConfig: MaterialScaffoldData(),
     );
   }
 }

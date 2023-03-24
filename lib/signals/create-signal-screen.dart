@@ -1,6 +1,8 @@
+import '../utils/drawers.dart';
 import '../utils/constants.dart';
 import '../utils/validate.dart';
 import '../user/user-api.dart';
+import '../user/user-profile.dart';
 import '../signals/signal-api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -102,8 +104,12 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
     return ezScaffold(
       context: context,
 
+      // Title && theme
       title: 'New signal',
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
+      // Body
       body: ezScrollView(
         children: [
           // Title field
@@ -216,14 +222,9 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
         centered: true,
       ),
 
-      // Background image/decoration
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-
-      // Fallback background color
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
-
-      // Scaffold config
-      materialConfig: MaterialScaffoldData(),
+      // User interaction
+      drawerHeader: signalDrawerHeader(context),
+      drawerBody: signalDrawerBody(context),
     );
   }
 }

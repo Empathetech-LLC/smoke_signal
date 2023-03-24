@@ -18,12 +18,18 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  // Initialize state
+/// Enumerator for communitcating with [HomeScreen] build schold be returned
+enum HomeBuildType {
+  loading,
+  auth,
+  app,
+}
 
+class _HomeScreenState extends State<HomeScreen> {
   late Stream<User?> _authStream;
 
-  // Request permission for firebase cloud messager
+  /// Request permission for Firebase Cloud Messager
+  /// via [AppUser.messager]
   requestFCMPermission() async {
     await AppUser.messager.requestPermission(
       alert: true,
@@ -43,64 +49,57 @@ class _HomeScreenState extends State<HomeScreen> {
     requestFCMPermission();
   }
 
-  // Local aliases
-  final String loadingBuild = 'loadingBuild';
-  final String authBuild = 'authBuild';
-  final String appBuild = 'appBuild';
-
-  // Gather theme data
   late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  // Draw state
+  /// Updates current build based on the current auth [type]
+  Widget getBuild(HomeBuildType type) {
+    switch (type) {
+      case HomeBuildType.app:
+        return SignalBoard();
 
-  // Returns the current build based on the auth state
-  Widget getBuild(String type) {
-    if (type == appBuild) {
-      return SignalBoard();
-    } else {
-      return ezScaffold(
-        context: context,
+      case HomeBuildType.loading:
+      case HomeBuildType.auth:
+      default:
+        return ezScaffold(
+          context: context,
 
-        title: appTitle,
+          // Title && theme
+          title: appTitle,
+          backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+          backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
-        body: (type == loadingBuild)
-            ? loadingMessage(
-                context: context,
-                image: buildImage(
-                  path: smokeSignalPath,
-                ),
-              )
-            : // Show authBuild
-            ezScrollView(children: [
-                // Login
-                ezIconButton(
-                  action: () => Navigator.of(context).pushNamed(loginRoute),
-                  message: 'Login',
-                  icon: ezIcon(PlatformIcons(context).mail),
-                ),
-                Container(height: buttonSpacer),
+          // Body
+          body: (type == HomeBuildType.loading)
+              ? loadingMessage(
+                  context: context,
+                  image: buildImage(path: smokeSignalPath),
+                )
+              : // Show authBuild
+              ezScrollView(children: [
+                  // Login
+                  ezIconButton(
+                    action: () => Navigator.of(context).pushNamed(loginRoute),
+                    message: 'Login',
+                    icon: ezIcon(PlatformIcons(context).mail),
+                  ),
+                  Container(height: buttonSpacer),
 
-                // Sign up
-                ezIconButton(
-                  action: () => Navigator.of(context).pushNamed(signupRoute),
-                  message: 'Sign up',
-                  icon: ezIcon(PlatformIcons(context).mail),
-                ),
-              ], centered: true),
+                  // Sign up
+                  ezIconButton(
+                    action: () => Navigator.of(context).pushNamed(signupRoute),
+                    message: 'Sign up',
+                    icon: ezIcon(PlatformIcons(context).mail),
+                  ),
+                ], centered: true),
 
-        // Background image/decoration
-        backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-
-        // Fallback background color
-        backgroundColor: Color(AppConfig.prefs[backColorKey]),
-
-        // Android config
-        materialConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
-      );
+          // User interaction
+          drawerHeader: standardDrawerHeader(),
+          drawerBody: standardDrawerBody(context),
+        );
     }
   }
 
@@ -112,16 +111,17 @@ class _HomeScreenState extends State<HomeScreen> {
         switch (snapshot.connectionState) {
           // Waiting on response
           case ConnectionState.waiting:
-            return getBuild(loadingBuild);
+            return getBuild(HomeBuildType.loading);
 
           // Received response
           case ConnectionState.done:
           default:
             // Check for user data, show auth build if invalid
-            if (snapshot.hasError || !snapshot.hasData) return getBuild(authBuild);
+            if (snapshot.hasError || !snapshot.hasData)
+              return getBuild(HomeBuildType.auth);
 
             User? currUser = snapshot.data;
-            if (currUser == null) return getBuild(authBuild);
+            if (currUser == null) return getBuild(HomeBuildType.auth);
 
             // User is found!
 
@@ -145,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Load Smoke Signal!
 
-            return getBuild(appBuild);
+            return getBuild(HomeBuildType.app);
         }
       },
     );

@@ -15,33 +15,31 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  // Initialize state
-
   final emailFormKey = GlobalKey<FormState>();
   final passwordFormKey = GlobalKey<FormState>();
 
   late TextEditingController _signupEmailController = TextEditingController();
   late TextEditingController _passwdController = TextEditingController();
 
-  // Gather theme data
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
   late TextStyle contents = getTextStyle(dialogContentStyleKey);
 
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
-  // Draw state
-
   @override
   Widget build(BuildContext context) {
     return ezScaffold(
       context: context,
 
+      // Title & theme
       title: 'Welcome!',
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
+      // Body
       body: ezScrollView(
         children: [
-          // Autofill group allows for password manager inputs and such
           AutofillGroup(
             child: Column(
               children: [
@@ -94,14 +92,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         centered: true,
       ),
 
-      // Background image/decoration
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-
-      // Fallback background color
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
-
-      // Scaffold config
-      materialConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
+      // User interaction
+      drawerHeader: standardDrawerHeader(),
+      drawerBody: standardDrawerBody(context),
     );
   }
 }

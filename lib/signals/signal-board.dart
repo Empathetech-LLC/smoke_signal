@@ -32,8 +32,12 @@ class _SignalBoardState extends State<SignalBoard> {
     return ezScaffold(
       context: context,
 
+      // Title && theme
       title: 'Signals',
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
+      // Body
       body: ezScrollView(
         children: [
           // Signals the user is a member of
@@ -94,26 +98,21 @@ class _SignalBoardState extends State<SignalBoard> {
         centered: true,
       ),
 
-      // Background image/decoration
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      // User interaction
+      drawerHeader: signalDrawerHeader(context),
+      drawerBody: signalDrawerBody(context),
 
-      // Fallback background color
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
+      fab: ezButton(
+        // Refresh
+        action: () => setState(doNothing),
 
-      // Scaffold config
-      materialConfig: MaterialScaffoldData(
-        endDrawer: signalBoardDrawer(context),
-        floatingActionButton: ezButton(
-          // Refresh
-          action: () => setState(doNothing),
-          // Reload
-          longAction: () => setState(() {
-            _signalStream = streamSignals(membersPath);
-            _requestStream = streamSignals(memberReqsPath);
-          }),
-          body: ezIcon(PlatformIcons(context).refresh),
-          customStyle: ElevatedButton.styleFrom(shape: CircleBorder()),
-        ),
+        // Reload
+        longAction: () => setState(() {
+          _signalStream = streamSignals(membersPath);
+          _requestStream = streamSignals(memberReqsPath);
+        }),
+        body: ezIcon(PlatformIcons(context).refresh),
+        customStyle: ElevatedButton.styleFrom(shape: CircleBorder()),
       ),
     );
   }

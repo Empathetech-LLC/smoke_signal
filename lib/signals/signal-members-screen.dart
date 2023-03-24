@@ -1,13 +1,13 @@
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-
 import '../signals/signal-api.dart';
 import '../utils/constants.dart';
 import '../user/user-api.dart';
+import '../user/user-profile.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SignalMemberScreen extends StatelessWidget {
   const SignalMemberScreen({super.key});
@@ -179,7 +179,13 @@ class _SignalMembersState extends State<SignalMembers> {
   Widget build(BuildContext context) {
     return ezScaffold(
       context: context,
+
+      // Title && theme
       title: widget.title + ' members',
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
+
+      // Body
       body: StreamBuilder<QuerySnapshot>(
         stream: _userStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -206,9 +212,6 @@ class _SignalMembersState extends State<SignalMembers> {
           }
         },
       ),
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
-      materialConfig: MaterialScaffoldData(),
     );
   }
 }

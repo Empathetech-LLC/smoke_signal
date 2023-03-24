@@ -14,7 +14,6 @@ class ProfileSettingsScreen extends StatefulWidget {
 }
 
 class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
-  // Gather theme data
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 
@@ -23,8 +22,12 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     return ezScaffold(
       context: context,
 
+      // Title && theme
       title: 'Edit Profile',
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
+      // Body
       body: ezScrollView(
         children: [
           Container(height: buttonSpacer),
@@ -71,15 +74,6 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
         ],
         centered: true,
       ),
-
-      // Background image/decoration
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-
-      // Fallback background color
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
-
-      // Scaffold config
-      materialConfig: MaterialScaffoldData(),
     );
   }
 }
