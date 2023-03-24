@@ -17,14 +17,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// Required function
-// Handles notifations while the app is in the background/closed
+/// Handle notifations while the app is in the background/closed
 Future<void> _backgroundMsgHandler(RemoteMessage message) async {
-  // Smoke Signal notifications don't have actions (currently)
+  doNothing();
 }
 
 void main() async {
-  // Required first method on asynchronous main
+  // Required first method on async main
   WidgetsFlutterBinding.ensureInitialized();
 
   // Lock app to portait
@@ -52,6 +51,8 @@ void main() async {
   runApp(SmokeSignal());
 }
 
+/// Smoke Signal app definition
+/// Jolly co-operation!
 class SmokeSignal extends StatelessWidget {
   const SmokeSignal({super.key});
 
