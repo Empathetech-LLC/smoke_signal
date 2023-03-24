@@ -29,7 +29,7 @@ Drawer standardDrawer(BuildContext context) {
             settingsRoute,
             arguments: {indexArg: 0},
           ),
-          icon: Icon(PlatformIcons(context).settings),
+          icon: ezIcon(PlatformIcons(context).settings),
           message: 'Settings',
         ),
         Container(height: buttonSpacer),
@@ -96,13 +96,13 @@ Drawer signalBoardDrawer(BuildContext context) {
                   ezButton(
                     action: () =>
                         Navigator.of(context).popAndPushNamed(profileSettingsRoute),
-                    body: Icon(Icons.edit),
+                    body: ezIcon(Icons.edit),
                   ),
 
                   // Logout
                   ezButton(
                     action: () => logout(context),
-                    body: Icon(Icons.logout),
+                    body: ezIcon(Icons.logout),
                   ),
                 ],
               ),
@@ -115,7 +115,7 @@ Drawer signalBoardDrawer(BuildContext context) {
         ezIconButton(
           action: () => Navigator.of(context).popAndPushNamed(createSignalRoute),
           message: 'New',
-          icon: Icon(PlatformIcons(context).add),
+          icon: ezIcon(PlatformIcons(context).add),
         ),
         Container(height: buttonSpacer),
 
@@ -126,7 +126,7 @@ Drawer signalBoardDrawer(BuildContext context) {
             arguments: {indexArg: 1},
           ),
           message: 'Settings',
-          icon: Icon(PlatformIcons(context).settings),
+          icon: ezIcon(PlatformIcons(context).settings),
         ),
         Container(height: buttonSpacer),
 

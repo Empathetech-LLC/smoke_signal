@@ -181,7 +181,7 @@ List<UserProfile> buildProfiles(List<DocumentSnapshot> userDocs) {
 // Displays a horizontally scrollable list of user profile pictures
 Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
   // Return an "avatar" with the none icon when the list is empty
-  if (profiles.isEmpty) return Icon(PlatformIcons(context).clear, size: 35);
+  if (profiles.isEmpty) return ezIcon(PlatformIcons(context).clear, size: 35);
 
   List<Widget> children = [];
 
@@ -229,7 +229,7 @@ Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Icon(PlatformIcons(context).clear, size: 35),
+        ezIcon(PlatformIcons(context).clear, size: 35),
         Container(height: dialogSpacer),
       ],
     );

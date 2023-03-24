@@ -111,7 +111,7 @@ class _SignalBoardState extends State<SignalBoard> {
             _signalStream = streamSignals(membersPath);
             _requestStream = streamSignals(memberReqsPath);
           }),
-          body: Icon(PlatformIcons(context).refresh),
+          body: ezIcon(PlatformIcons(context).refresh),
           customStyle: ElevatedButton.styleFrom(shape: CircleBorder()),
         ),
       ),

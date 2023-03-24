@@ -64,12 +64,12 @@ class _SettingsState extends State<Settings> {
       }),
       items: [
         BottomNavigationBarItem(
-          icon: Icon(PlatformIcons(context).person),
+          icon: ezIcon(PlatformIcons(context).person),
           label: 'App',
           tooltip: 'Show app settings',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.fireplace),
+          icon: ezIcon(Icons.fireplace),
           label: 'Signals',
           tooltip: 'Show signals settings',
         ),

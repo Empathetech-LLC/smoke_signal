@@ -71,7 +71,7 @@ class _ResetScreenState extends State<ResetScreen> {
               }
             },
             message: 'Send link',
-            icon: Icon(PlatformIcons(context).mail),
+            icon: ezIcon(PlatformIcons(context).mail),
           ),
           Container(height: buttonSpacer),
         ],

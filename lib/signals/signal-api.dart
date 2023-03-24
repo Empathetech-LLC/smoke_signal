@@ -215,7 +215,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Icon(PlatformIcons(context).clear, size: 35),
+          ezIcon(PlatformIcons(context).clear, size: 35),
           Container(height: dialogSpacer),
         ],
       );

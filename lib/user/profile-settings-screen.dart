@@ -45,7 +45,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               setState(doNothing);
             },
             message: 'New pic',
-            icon: Icon(PlatformIcons(context).photoCamera),
+            icon: ezIcon(PlatformIcons(context).photoCamera),
           ),
 
           Container(height: buttonSpacer),
@@ -64,7 +64,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               setState(doNothing);
             },
             message: 'New name',
-            icon: Icon(PlatformIcons(context).edit),
+            icon: ezIcon(PlatformIcons(context).edit),
           ),
 
           Container(height: buttonSpacer),
