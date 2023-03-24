@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// Wrapper for housing all Firebase instances
 class AppUser {
   static late FirebaseMessaging messager;
   static late FirebaseAuth auth;
@@ -16,37 +15,10 @@ class AppUser {
   static late FirebaseFirestore db;
 }
 
-class UserProfile {
-  String id;
-  String name;
-  String avatarURL;
-
-  UserProfile(this.id, this.name, this.avatarURL);
-
-  /// Builds a local UserProfile from a Firestore (user) DocumentSnapshot
-  static UserProfile buildFromDoc(DocumentSnapshot userDoc) {
-    final data = userDoc.data() as Map<String, dynamic>;
-    return UserProfile(userDoc.id, data[displayNamePath], data[avatarURLPath]);
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      other is UserProfile && this.id == other.id && this.name == other.name;
-
-  @override
-  int get hashCode => Object.hash(this.id, this.name);
-
-  @override
-  String toString() {
-    return this.name;
-  }
-}
-
 /// Attempt creating a new firebase user account
-/// (can) cost money!!
-/// Writing data free tier == 20k writes/day, 1GB limit
-/// Reading data free tier == 50k reads/day
-
+/// Can cost money!!
+///   Writing data free tier == 20k writes/day, 1GB limit
+///   Reading data free tier == 50k reads/day
 Future<void> attemptAccountCreation(
     BuildContext context, String email, String password) async {
   try {
@@ -55,21 +27,20 @@ Future<void> attemptAccountCreation(
     // Successful login, return to the home screen
     Navigator.of(context).pop();
   } on FirebaseAuthException catch (e) {
-    // Email is already in use, attempt login
-    if (e.code == 'email-already-in-use') {
-      popNLog(context, 'Email already in use, attempting login');
-      await attemptLogin(context, email, password);
-    }
+    switch (e.code) {
+      case 'email-already-in-use':
+        popNLog(context, 'Email already in use, attempting login');
+        await attemptLogin(context, email, password);
+        break;
 
-    // Weak password
-    else if (e.code == 'weak-password') {
-      popNLog(context, 'The provided password is too weak');
-    }
+      case 'weak-password':
+        popNLog(context, 'The provided password is too weak');
+        break;
 
-    // etc
-    else {
-      String message = 'Firebase error on user creation\n' + e.code;
-      popNLog(context, message);
+      default:
+        String message = 'Firebase error on user creation\n' + e.code;
+        popNLog(context, message);
+        break;
     }
   } catch (e) {
     String message = 'Error creating user\n' + e.toString();
@@ -77,7 +48,7 @@ Future<void> attemptAccountCreation(
   }
 }
 
-// Attempt logging in firebase user with passed credentials
+/// Attempt logging in firebase user with passed credentials
 Future<void> attemptLogin(BuildContext context, String email, String password) async {
   try {
     await AppUser.auth.signInWithEmailAndPassword(email: email, password: password);
@@ -85,25 +56,24 @@ Future<void> attemptLogin(BuildContext context, String email, String password) a
     // Successful login, return to the home screen
     Navigator.of(context).pop();
   } on FirebaseAuthException catch (e) {
-    // Wrong username
-    if (e.code == 'user-not-found') {
-      popNLog(context, 'No user found for that email!');
-    }
+    switch (e.code) {
+      case 'user-not-found':
+        popNLog(context, 'No user found for that email!');
+        break;
 
-    // Wrong password
-    else if (e.code == 'wrong-password') {
-      popNLog(context, 'Incorrect password');
-    }
+      case 'wrong-password':
+        popNLog(context, 'Incorrect password');
+        break;
 
-    // etc
-    else {
-      String message = 'Error logging in\n' + e.code;
-      popNLog(context, message);
+      default:
+        String message = 'Error logging in\n' + e.code;
+        popNLog(context, message);
+        break;
     }
   }
 }
 
-// Logout current user
+/// Logout current user
 void logout(BuildContext context) {
   ezDialog(
     context: context,
@@ -121,20 +91,24 @@ void logout(BuildContext context) {
   );
 }
 
-// Merge the current users FCM token with firestore
+/// Merge the current users FCM token with firestore
+/// Can cost money!!
+///   Writing data free tier == 20k writes/day, 1GB limit
+///   Reading data free tier == 50k reads/day
 Future<void> setToken(User currUser) async {
   String userToken = await AppUser.messager.getToken() ?? '';
 
-  // Set with merge here as update fails with no pre-existing doc
+  // The doc may not exist yet, so use set w/ merge
   await FirebaseFirestore.instance.collection(usersPath).doc(currUser.uid).set(
-    {
-      fcmTokenPath: userToken,
-    },
+    {fcmTokenPath: userToken},
     SetOptions(merge: true),
   );
 }
 
-// Stream user docs from db, optionally filtering by the list of ids we know we want
+/// Stream user docs from db, optionally filtering by the list of ids we know we want
+/// Can cost money!!
+///   Writing data free tier == 20k writes/day, 1GB limit
+///   Reading data free tier == 50k reads/day
 Stream<QuerySnapshot<Map<String, dynamic>>> streamUsers([List<String>? ids]) {
   try {
     if (ids == null) {
@@ -150,18 +124,26 @@ Stream<QuerySnapshot<Map<String, dynamic>>> streamUsers([List<String>? ids]) {
   }
 }
 
-// Return the FCM token of the user with the passed ID
+/// Return the FCM token of the user with the passed ID
+/// Can cost money!!
+///   Writing data free tier == 20k writes/day, 1GB limit
+///   Reading data free tier == 50k reads/day
 Future<String> getToken(String id) async {
   try {
     DocumentSnapshot userSnap = await AppUser.db.collection(usersPath).doc(id).get();
+
     final data = userSnap.data() as Map<String, dynamic>;
+
     return data[fcmTokenPath];
   } catch (e) {
     return '';
   }
 }
 
-// Get the FCM tokens for all the passed user ids
+/// Get the FCM tokens for all the passed user ids
+/// Can cost money!!
+///   Writing data free tier == 20k writes/day, 1GB limit
+///   Reading data free tier == 50k reads/day
 Future<List<String>> gatherTokens(List<String> ids) async {
   List<Future<String>> tokenReqs = ids.map((id) async => await getToken(id)).toList();
   List<String> tokens = await Future.wait(tokenReqs);
@@ -171,101 +153,10 @@ Future<List<String>> gatherTokens(List<String> ids) async {
   return tokens;
 }
 
-// Map all db user docs to local user profiles
-List<UserProfile> buildProfiles(List<DocumentSnapshot> userDocs) {
-  return userDocs
-      .map((DocumentSnapshot userDoc) => UserProfile.buildFromDoc(userDoc))
-      .toList();
-}
-
-// Displays a horizontally scrollable list of user profile pictures
-Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
-  // Return an "avatar" with the none icon when the list is empty
-  if (profiles.isEmpty) return ezIcon(PlatformIcons(context).clear, size: 35);
-
-  List<Widget> children = [];
-
-  // Build the avatars
-  profiles.forEach((profile) {
-    children.addAll(
-      [
-        GestureDetector(
-          // On long press: diplay the user's profile name
-          onLongPress: () => ezDialog(
-            context: context,
-            content: paddedText(
-              profile.name,
-              style: getTextStyle(dialogTitleStyleKey),
-              alignment: TextAlign.center,
-            ),
-          ),
-          child: CircleAvatar(
-            foregroundImage: CachedNetworkImageProvider(profile.avatarURL),
-            minRadius: 35,
-            maxRadius: 35,
-          ),
-        ),
-        Container(width: AppConfig.prefs[paddingKey]),
-      ],
-    );
-  });
-
-  return ezScrollView(
-    children: children,
-    centered: true,
-    axisSize: MainAxisSize.max,
-    axisAlign: MainAxisAlignment.spaceEvenly,
-    direction: Axis.horizontal,
-  );
-}
-
-// Displays list of user profile pics alongside their display names
-Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
-  double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
-
-  // Return an "avatar" with the none icon when the list is empty
-  if (profiles.isEmpty)
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ezIcon(PlatformIcons(context).clear, size: 35),
-        Container(height: dialogSpacer),
-      ],
-    );
-
-  List<Widget> children = [];
-
-  // Build the rows
-  profiles.forEach((profile) {
-    children.addAll([
-      Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // Profile image/avatar
-          CircleAvatar(
-            foregroundImage: CachedNetworkImageProvider(profile.avatarURL),
-            minRadius: 35,
-            maxRadius: 35,
-          ),
-
-          // Display name
-          paddedText(
-            profile.name,
-            style: getTextStyle(dialogTitleStyleKey),
-            alignment: TextAlign.start,
-          ),
-        ],
-      ),
-      Container(height: dialogSpacer),
-    ]);
-  });
-
-  return ezScrollView(children: children, centered: true);
-}
-
-// Update the users avatar
+/// Update the users avatar
+/// Can cost money!!
+///   Writing data free tier == 20k writes/day, 1GB limit
+///   Reading data free tier == 50k reads/day
 void editAvatar(BuildContext context) {
   final urlFormKey = GlobalKey<FormState>();
   TextEditingController _urlController = TextEditingController();
@@ -331,7 +222,10 @@ void editAvatar(BuildContext context) {
   );
 }
 
-// Update the users display name
+/// Update the users display name
+/// Can cost money!!
+///   Writing data free tier == 20k writes/day, 1GB limit
+///   Reading data free tier == 50k reads/day
 void editName(BuildContext context) {
   final nameFormKey = GlobalKey<FormState>();
   TextEditingController _nameController = TextEditingController();
