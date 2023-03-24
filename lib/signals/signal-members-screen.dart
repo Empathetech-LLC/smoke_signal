@@ -208,7 +208,7 @@ class _SignalMembersState extends State<SignalMembers> {
       ),
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
-      scaffoldConfig: MaterialScaffoldData(),
+      materialConfig: MaterialScaffoldData(),
     );
   }
 }

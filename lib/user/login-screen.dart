@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
       // Scaffold config
-      scaffoldConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
+      materialConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
     );
   }
 }

@@ -101,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
       // Scaffold config
-      scaffoldConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
+      materialConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
     );
   }
 }

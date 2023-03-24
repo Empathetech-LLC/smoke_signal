@@ -74,7 +74,7 @@ class _SettingsState extends State<Settings> {
           tooltip: 'Show signals settings',
         ),
       ],
-      scaffoldConfig: MaterialScaffoldData(),
+      materialConfig: MaterialScaffoldData(),
     );
   }
 }

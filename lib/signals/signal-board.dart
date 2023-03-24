@@ -101,7 +101,7 @@ class _SignalBoardState extends State<SignalBoard> {
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
       // Scaffold config
-      scaffoldConfig: MaterialScaffoldData(
+      materialConfig: MaterialScaffoldData(
         endDrawer: signalBoardDrawer(context),
         floatingActionButton: ezButton(
           // Refresh

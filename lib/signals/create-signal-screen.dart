@@ -223,7 +223,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
       // Scaffold config
-      scaffoldConfig: MaterialScaffoldData(),
+      materialConfig: MaterialScaffoldData(),
     );
   }
 }

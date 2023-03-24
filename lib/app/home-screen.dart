@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
         // Android config
-        scaffoldConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
+        materialConfig: MaterialScaffoldData(endDrawer: standardDrawer(context)),
       );
     }
   }

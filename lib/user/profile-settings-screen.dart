@@ -79,7 +79,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
       // Scaffold config
-      scaffoldConfig: MaterialScaffoldData(),
+      materialConfig: MaterialScaffoldData(),
     );
   }
 }
