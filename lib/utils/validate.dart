@@ -10,33 +10,33 @@ const String validatorRule = """For display names, signal titles, and signal mes
 
 final RegExp validatorRegex = new RegExp(r'^[\d\w\s-_!,?^]{3,20}$');
 
-// Validate emails with the community plugin
+/// Validate emails via [EmailValidator]
 String? emailValidator(String? toCheck) {
   return (toCheck != null && !EmailValidator.validate(toCheck))
       ? 'Email does not exist'
       : null;
 }
 
-// Validate display names with the shared rules (in constants)
+/// Validate display names via [validatorRegex]
 String? displayNameValidator(String? toCheck) {
   return (toCheck != null && !validatorRegex.hasMatch(toCheck))
       ? 'Invalid display name'
       : null;
 }
 
-// Validate urls with the built in tool
+/// Validate URLs via [Uri.tryParse]
 String? urlValidator(String? toCheck) {
   return (toCheck != null && !Uri.tryParse(toCheck)!.hasAbsolutePath)
       ? 'Invalid URL'
       : null;
 }
 
-// Validate signal titles with the shared rules (in constants)
+/// Validate signal titles via [validatorRegex]
 String? signalTitleValidator(String? toCheck) {
   return (toCheck != null && !validatorRegex.hasMatch(toCheck)) ? 'Invalid title' : null;
 }
 
-// Validate signal notification messages with the shared rules (constants)
+/// Validate signal notification messages via [validatorRegex]
 String? signalMessageValidator(String? toCheck) {
   return (toCheck != null && !validatorRegex.hasMatch(toCheck))
       ? 'Invalid message'
