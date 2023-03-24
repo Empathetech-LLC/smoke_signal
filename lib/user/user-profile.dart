@@ -34,16 +34,16 @@ class UserProfile {
   }
 }
 
-/// Map all db user docs to local user profiles
+/// Map all Firebase [DocumentSnapshot] user docs to local [UserProfile]s
 List<UserProfile> buildProfiles(List<DocumentSnapshot> userDocs) {
   return userDocs
       .map((DocumentSnapshot userDoc) => UserProfile.buildFromDoc(userDoc))
       .toList();
 }
 
-/// Displays a horizontally scrollable list of user profile pictures
+/// Displays a horizontally scrollable list of [UserProfile] pictures
 Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
-  // Return an "avatar" with the none icon when the list is empty
+  // Return clear icon on empty list
   if (profiles.isEmpty) return ezIcon(PlatformIcons(context).clear, size: 35);
 
   List<Widget> children = [];
@@ -82,11 +82,11 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
   );
 }
 
-/// Displays list of user profile pics alongside their display names
+/// Displays a list of [UserProfile] pictures alongside their display names
 Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
   double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
-  // Return an "avatar" with the none icon when the list is empty
+  // Return clear icon on empty list
   if (profiles.isEmpty)
     return Column(
       mainAxisSize: MainAxisSize.max,
