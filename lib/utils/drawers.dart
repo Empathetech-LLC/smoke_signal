@@ -107,7 +107,7 @@ List<Widget> signalDrawerBody(BuildContext context) {
     // Add new signal
     ezIconButton(
       action: () => Navigator.of(context).popAndPushNamed(createSignalRoute),
-      message: 'New',
+      message: 'New signal',
       icon: ezIcon(PlatformIcons(context).add),
     ),
     Container(height: buttonSpacer),
