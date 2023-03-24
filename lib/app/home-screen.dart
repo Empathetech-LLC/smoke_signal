@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Login
                 ezIconButton(
                   action: () => Navigator.of(context).pushNamed(loginRoute),
-                  body: Text('Login'),
+                  message: 'Login',
                   icon: Icon(PlatformIcons(context).mail),
                 ),
                 Container(height: buttonSpacer),
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Sign up
                 ezIconButton(
                   action: () => Navigator.of(context).pushNamed(signupRoute),
-                  body: Text('Sign up'),
+                  message: 'Sign up',
                   icon: Icon(PlatformIcons(context).mail),
                 ),
               ], centered: true),

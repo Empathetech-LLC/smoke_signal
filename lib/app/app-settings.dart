@@ -27,7 +27,7 @@ class _AppSettingsState extends State<AppSettings> {
         children: [
           warningCard(
             context: context,
-            content: 'Changes won\'t take effect until restart',
+            warning: 'Changes won\'t take effect until restart',
           ),
           Container(height: buttonSpacer),
           ezList(

@@ -23,7 +23,7 @@ class _SignalSettingsState extends State<SignalSettings> {
         children: [
           warningCard(
             context: context,
-            content: 'Changes won\'t take effect until restart',
+            warning: 'Changes won\'t take effect until restart',
           ),
           Container(height: buttonSpacer),
 

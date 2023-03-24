@@ -70,7 +70,7 @@ class _ResetScreenState extends State<ResetScreen> {
                 popNLog(context, 'Failed to send password reset email:\n$e');
               }
             },
-            body: Text('Send link'),
+            message: 'Send link',
             icon: Icon(PlatformIcons(context).mail),
           ),
           Container(height: buttonSpacer),

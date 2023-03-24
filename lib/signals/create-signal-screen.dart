@@ -208,7 +208,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
               Navigator.of(context).pop();
             },
-            body: Text('Done'),
+            message: 'Done',
             icon: Icon(PlatformIcons(context).cloudUpload),
           ),
           Container(height: buttonSpacer),

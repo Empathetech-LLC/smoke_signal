@@ -44,7 +44,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               editAvatar(context);
               setState(doNothing);
             },
-            body: Text('New pic'),
+            message: 'New pic',
             icon: Icon(PlatformIcons(context).photoCamera),
           ),
 
@@ -63,7 +63,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               editName(context);
               setState(doNothing);
             },
-            body: Text('New name'),
+            message: 'New name',
             icon: Icon(PlatformIcons(context).edit),
           ),
 

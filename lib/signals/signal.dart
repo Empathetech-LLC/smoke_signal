@@ -112,7 +112,7 @@ class _SignalState extends State<Signal> {
               );
               Navigator.of(context).pop();
             },
-            body: Text('File'),
+            message: 'File',
             icon: Icon(PlatformIcons(context).folder),
           ),
           Container(height: dialogSpacer),
@@ -127,7 +127,7 @@ class _SignalState extends State<Signal> {
               );
               Navigator.of(context).pop();
             },
-            body: Text('Camera'),
+            message: 'Camera',
             icon: Icon(PlatformIcons(context).photoCamera),
           ),
           Container(height: dialogSpacer),

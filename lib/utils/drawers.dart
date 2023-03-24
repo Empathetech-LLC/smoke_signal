@@ -30,7 +30,7 @@ Drawer standardDrawer(BuildContext context) {
             arguments: {indexArg: 0},
           ),
           icon: Icon(PlatformIcons(context).settings),
-          body: Text('Settings'),
+          message: 'Settings',
         ),
         Container(height: buttonSpacer),
 
@@ -114,7 +114,7 @@ Drawer signalBoardDrawer(BuildContext context) {
         // Add new signal
         ezIconButton(
           action: () => Navigator.of(context).popAndPushNamed(createSignalRoute),
-          body: Text('New'),
+          message: 'New',
           icon: Icon(PlatformIcons(context).add),
         ),
         Container(height: buttonSpacer),
@@ -125,7 +125,7 @@ Drawer signalBoardDrawer(BuildContext context) {
             settingsRoute,
             arguments: {indexArg: 1},
           ),
-          body: Text('Settings'),
+          message: 'Settings',
           icon: Icon(PlatformIcons(context).settings),
         ),
         Container(height: buttonSpacer),
