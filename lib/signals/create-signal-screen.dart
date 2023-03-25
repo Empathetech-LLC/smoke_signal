@@ -85,7 +85,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 ezText(
                   profile.name,
                   style: getTextStyle(dialogTitleStyleKey),
-                  alignment: TextAlign.start,
+                  textAlign: TextAlign.start,
                 ),
               ],
             ),

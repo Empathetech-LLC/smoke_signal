@@ -105,7 +105,7 @@ class _SignalMembersState extends State<SignalMembers> {
                 ezText(
                   profile.name,
                   style: getTextStyle(dialogTitleStyleKey),
-                  alignment: TextAlign.start,
+                  textAlign: TextAlign.start,
                 ),
               ],
             ),

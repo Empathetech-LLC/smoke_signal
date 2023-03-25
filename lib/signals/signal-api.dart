@@ -253,7 +253,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
               ezText(
                 profile.name,
                 style: getTextStyle(dialogTitleStyleKey),
-                alignment: TextAlign.start,
+                textAlign: TextAlign.start,
               ),
             ],
           ),

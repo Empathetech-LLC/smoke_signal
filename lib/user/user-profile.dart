@@ -59,7 +59,7 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
             content: ezText(
               profile.name,
               style: getTextStyle(dialogTitleStyleKey),
-              alignment: TextAlign.center,
+              textAlign: TextAlign.center,
             ),
           ),
           child: CircleAvatar(
@@ -117,7 +117,7 @@ Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
           ezText(
             profile.name,
             style: getTextStyle(dialogTitleStyleKey),
-            alignment: TextAlign.start,
+            textAlign: TextAlign.start,
           ),
         ],
       ),
