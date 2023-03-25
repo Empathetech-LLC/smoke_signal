@@ -52,6 +52,13 @@ class _AppSettingsState extends State<AppSettings> {
           ezList(
             title: 'Colors',
             body: [
+              // User hint: hold the buttons to reset the color
+              ezText(
+                'Hold each to reset',
+                style: getTextStyle(dialogContentStyleKey),
+              ),
+              Container(height: dialogSpacer),
+
               // Theme
               ColorSetting(toControl: themeColorKey, message: 'Theme'),
               Container(height: buttonSpacer),
@@ -62,14 +69,7 @@ class _AppSettingsState extends State<AppSettings> {
               ColorSetting(toControl: buttonColorKey, message: 'Buttons'),
               Container(height: buttonSpacer),
               ColorSetting(toControl: buttonTextColorKey, message: 'Button text'),
-              Container(height: dialogSpacer),
-
-              // User hint: hold the buttons to reset the color
-              ezText(
-                'Hold each to reset',
-                style: getTextStyle(dialogContentStyleKey),
-              ),
-              Container(height: dialogSpacer),
+              Container(height: buttonSpacer),
 
               // Reset all app color settings
               GestureDetector(

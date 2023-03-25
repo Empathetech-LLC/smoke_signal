@@ -47,6 +47,13 @@ class _SignalSettingsState extends State<SignalSettings> {
           ezList(
             title: 'Colors',
             body: [
+              // User hint: hold the buttons to reset the color
+              ezText(
+                'Hold each to reset',
+                style: getTextStyle(dialogContentStyleKey),
+              ),
+              Container(height: AppConfig.prefs[dialogSpacingKey]),
+
               // Signals
               ColorSetting(toControl: watchingColorKey, message: 'Watching'),
               Container(height: buttonSpacer),
@@ -57,13 +64,6 @@ class _SignalSettingsState extends State<SignalSettings> {
               Container(height: buttonSpacer),
               ColorSetting(toControl: joinedTextColorKey, message: 'Joined text'),
               Container(height: buttonSpacer),
-
-              // User hint: hold the buttons to reset the color
-              ezText(
-                'Hold each to reset',
-                style: getTextStyle(dialogContentStyleKey),
-              ),
-              Container(height: AppConfig.prefs[paddingKey]),
 
               // Reset all signal color settings
               GestureDetector(
