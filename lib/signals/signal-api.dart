@@ -250,7 +250,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
               ),
 
               // Display name
-              paddedText(
+              ezText(
                 profile.name,
                 style: getTextStyle(dialogTitleStyleKey),
                 alignment: TextAlign.start,

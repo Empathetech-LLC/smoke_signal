@@ -62,7 +62,7 @@ class _AppSettingsState extends State<AppSettings> {
               Container(height: dialogSpacer),
 
               // User hint: hold the buttons to reset the color
-              paddedText(
+              ezText(
                 'Hold each to reset',
                 style: getTextStyle(dialogContentStyleKey),
               ),
@@ -92,7 +92,7 @@ class _AppSettingsState extends State<AppSettings> {
                     ),
                   );
                 },
-                child: paddedText(
+                child: ezText(
                   'Reset all',
                   style: getTextStyle(subTitleStyleKey),
                 ),
@@ -186,7 +186,7 @@ class _AppSettingsState extends State<AppSettings> {
                 ),
               );
             },
-            child: paddedText(
+            child: ezText(
               'Reset all',
               style: getTextStyle(subTitleStyleKey),
             ),

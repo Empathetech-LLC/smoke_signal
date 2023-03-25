@@ -59,7 +59,7 @@ class _SignalSettingsState extends State<SignalSettings> {
               Container(height: buttonSpacer),
 
               // User hint: hold the buttons to reset the color
-              paddedText(
+              ezText(
                 'Hold each to reset',
                 style: getTextStyle(dialogContentStyleKey),
               ),
@@ -87,7 +87,7 @@ class _SignalSettingsState extends State<SignalSettings> {
                         spacer: AppConfig.prefs[dialogSpacingKey]),
                   );
                 },
-                child: paddedText(
+                child: ezText(
                   'Reset all',
                   style: getTextStyle(subTitleStyleKey),
                 ),
@@ -157,7 +157,7 @@ class _SignalSettingsState extends State<SignalSettings> {
                 ),
               );
             },
-            child: paddedText(
+            child: ezText(
               'Reset all',
               style: getTextStyle(subTitleStyleKey),
             ),

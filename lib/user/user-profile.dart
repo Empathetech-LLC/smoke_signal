@@ -56,7 +56,7 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
           // On long press: diplay the user's profile name
           onLongPress: () => ezDialog(
             context: context,
-            content: paddedText(
+            content: ezText(
               profile.name,
               style: getTextStyle(dialogTitleStyleKey),
               alignment: TextAlign.center,
@@ -114,7 +114,7 @@ Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
           ),
 
           // Display name
-          paddedText(
+          ezText(
             profile.name,
             style: getTextStyle(dialogTitleStyleKey),
             alignment: TextAlign.start,

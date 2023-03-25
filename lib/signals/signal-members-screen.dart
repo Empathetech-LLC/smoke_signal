@@ -102,7 +102,7 @@ class _SignalMembersState extends State<SignalMembers> {
                 ),
 
                 // Display name
-                paddedText(
+                ezText(
                   profile.name,
                   style: getTextStyle(dialogTitleStyleKey),
                   alignment: TextAlign.start,
@@ -154,12 +154,12 @@ class _SignalMembersState extends State<SignalMembers> {
     return ezScrollView(
       children: [
         // Available members - show all pictures
-        paddedText('Available', style: getTextStyle(titleStyleKey)),
+        ezText('Available', style: getTextStyle(titleStyleKey)),
         showUserPics(context, memberProfiles),
         Container(height: buttonSpacer),
 
         // Active members - show all pictures
-        paddedText('Active', style: getTextStyle(titleStyleKey)),
+        ezText('Active', style: getTextStyle(titleStyleKey)),
         showUserPics(context, activeProfiles),
         Container(height: buttonSpacer),
 
