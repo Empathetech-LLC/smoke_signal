@@ -104,6 +104,8 @@ Widget signalDrawerHeader(BuildContext context) {
 List<Widget> signalDrawerBody(BuildContext context) {
   double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
   return [
+    Container(height: buttonSpacer),
+
     // Add new signal
     ezIconButton(
       action: () => Navigator.of(context).popAndPushNamed(createSignalRoute),
