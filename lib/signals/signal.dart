@@ -356,7 +356,6 @@ class _SignalState extends State<Signal> {
                     ),
                   ),
                 ),
-          Container(height: padding),
 
           // Signal count
           SizedBox(
