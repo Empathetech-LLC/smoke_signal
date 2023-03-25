@@ -73,10 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
           // Forgot password option
           GestureDetector(
-            onTap: () => Navigator.of(context).push(platformPageRoute(
+            onTap: () => pushScreen(
               context: context,
-              builder: (context) => ResetPasswordScreen(),
-            )),
+              screen: ResetPasswordScreen(),
+            ),
             child: Text(
               'Forgot your password?',
               style: TextStyle(

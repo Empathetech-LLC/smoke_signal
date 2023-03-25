@@ -181,15 +181,13 @@ class _SignalState extends State<Signal> {
         children: [
           // Manage members
           EZButton(
-            action: () => Navigator.of(context).pushReplacement(
-              platformPageRoute(
-                context: context,
-                builder: (context) => SignalMembersScreen(
-                  title: signalTitle,
-                  members: widget.members,
-                  activeMembers: widget.activeMembers,
-                  memberReqs: widget.memberReqs,
-                ),
+            action: () => replaceScreen(
+              context: context,
+              screen: SignalMembersScreen(
+                title: signalTitle,
+                members: widget.members,
+                activeMembers: widget.activeMembers,
+                memberReqs: widget.memberReqs,
               ),
             ),
             body: Text('Members'),

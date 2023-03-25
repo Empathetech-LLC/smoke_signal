@@ -28,10 +28,10 @@ List<Widget> standardDrawerBody(BuildContext context) {
   return [
     // GoTo settings
     EZButton.icon(
-      action: () => Navigator.of(context).pushReplacement(platformPageRoute(
+      action: () => replaceScreen(
         context: context,
-        builder: (context) => SettingsScreen(startIndex: 0),
-      )),
+        screen: SettingsScreen(startIndex: 0),
+      ),
       icon: ezIcon(PlatformIcons(context).settings),
       message: 'Settings',
     ),
@@ -88,11 +88,9 @@ Widget signalDrawerHeader(BuildContext context) {
         children: [
           // Edit
           EZButton(
-            action: () => Navigator.of(context).pushReplacement(
-              platformPageRoute(
-                context: context,
-                builder: (context) => ProfileSettingsScreen(),
-              ),
+            action: () => replaceScreen(
+              context: context,
+              screen: ProfileSettingsScreen(),
             ),
             body: ezIcon(PlatformIcons(context).edit),
           ),
@@ -117,11 +115,9 @@ List<Widget> signalDrawerBody(BuildContext context) {
 
     // Add new signal
     EZButton.icon(
-      action: () => Navigator.of(context).pushReplacement(
-        platformPageRoute(
-          context: context,
-          builder: (context) => CreateSignalScreen(),
-        ),
+      action: () => replaceScreen(
+        context: context,
+        screen: CreateSignalScreen(),
       ),
       message: 'New signal',
       icon: ezIcon(PlatformIcons(context).add),
@@ -130,11 +126,9 @@ List<Widget> signalDrawerBody(BuildContext context) {
 
     // GoTo settings
     EZButton.icon(
-      action: () => Navigator.of(context).pushReplacement(
-        platformPageRoute(
-          context: context,
-          builder: (context) => SettingsScreen(startIndex: 1),
-        ),
+      action: () => replaceScreen(
+        context: context,
+        screen: SettingsScreen(startIndex: 1),
       ),
       message: 'Settings',
       icon: ezIcon(PlatformIcons(context).settings),
