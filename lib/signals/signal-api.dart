@@ -1,3 +1,4 @@
+import '../app/home-screen.dart';
 import '../utils/constants.dart';
 import '../utils/validate.dart';
 import '../user/user-api.dart';
@@ -181,7 +182,7 @@ void updateMessage(BuildContext context, String title) {
               return;
             }
 
-            popScreen(context);
+            popUntilScreen(context: context, screen: HomeScreen());
             try {
               // Upload the new message
               String message = _messageController.text.trim();
@@ -228,7 +229,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
       children.addAll([
         GestureDetector(
           onTap: () async {
-            popScreen(context);
+            popUntilScreen(context: context, screen: HomeScreen());
             try {
               // Set the owner to "this" user
               await AppUser.db.collection(signalsPath).doc(title).update(
@@ -316,7 +317,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
     content: ezYesNo(
       context: context,
       onConfirm: () async {
-        popScreen(context);
+        popUntilScreen(context: context, screen: HomeScreen());
         try {
           // Clear local prefs for the signal
           prefKeys.forEach((key) {
@@ -344,7 +345,7 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
     content: ezYesNo(
       context: context,
       onConfirm: () async {
-        popScreen(context);
+        popUntilScreen(context: context, screen: HomeScreen());
         try {
           // Clear local prefs for the signal
           prefKeys.forEach((key) {

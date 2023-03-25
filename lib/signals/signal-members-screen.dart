@@ -1,3 +1,4 @@
+import '../app/home-screen.dart';
 import '../signals/signal-api.dart';
 import '../utils/constants.dart';
 import '../user/user-api.dart';
@@ -100,7 +101,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
         EZButton(
           action: () async {
             await requestMembers(context, widget.title, requestIDs);
-            popScreen(context);
+            popUntilScreen(context: context, screen: HomeScreen());
           },
           body: Text('Send requests'),
         ),

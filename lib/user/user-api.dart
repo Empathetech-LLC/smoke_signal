@@ -1,3 +1,4 @@
+import '../app/home-screen.dart';
 import '../utils/constants.dart';
 import '../utils/validate.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -81,7 +82,7 @@ void logout(BuildContext context) {
     content: ezYesNo(
       context: context,
       onConfirm: () async {
-        popScreen(context);
+        popUntilScreen(context: context, screen: HomeScreen());
         await AppUser.auth.signOut();
       },
       onDeny: () => popScreen(context),
