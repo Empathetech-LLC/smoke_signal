@@ -181,7 +181,7 @@ void updateMessage(BuildContext context, String title) {
               return;
             }
 
-            popUntilScreen(context: context, screen: HomeScreen());
+            popUntilHome(context);
             try {
               // Upload the new message
               String message = _messageController.text.trim();
@@ -228,7 +228,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
       children.addAll([
         GestureDetector(
           onTap: () async {
-            popUntilScreen(context: context, screen: HomeScreen());
+            popUntilHome(context);
             try {
               // Set the owner to "this" user
               await AppUser.db.collection(signalsPath).doc(title).update(
@@ -316,7 +316,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
     content: ezYesNo(
       context: context,
       onConfirm: () async {
-        popUntilScreen(context: context, screen: HomeScreen());
+        popUntilHome(context);
         try {
           // Clear local prefs for the signal
           prefKeys.forEach((key) {
@@ -344,7 +344,7 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
     content: ezYesNo(
       context: context,
       onConfirm: () async {
-        popUntilScreen(context: context, screen: HomeScreen());
+        popUntilHome(context);
         try {
           // Clear local prefs for the signal
           prefKeys.forEach((key) {

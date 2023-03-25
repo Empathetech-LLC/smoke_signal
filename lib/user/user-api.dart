@@ -82,7 +82,7 @@ void logout(BuildContext context) {
     content: ezYesNo(
       context: context,
       onConfirm: () async {
-        popUntilScreen(context: context, screen: HomeScreen());
+        popUntilHome(context);
         await AppUser.auth.signOut();
       },
       onDeny: () => popScreen(context),
