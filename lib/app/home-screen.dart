@@ -1,3 +1,5 @@
+import '../user/login-screen.dart';
+import '../user/sign-up-screen.dart';
 import '../user/user-api.dart';
 import '../utils/constants.dart';
 import '../utils/drawers.dart';
@@ -82,7 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ezScrollView(children: [
                   // Login
                   EZButton.icon(
-                    action: () => Navigator.of(context).pushNamed(loginRoute),
+                    action: () => Navigator.of(context).push(
+                      platformPageRoute(
+                        context: context,
+                        builder: (context) => LoginScreen(),
+                      ),
+                    ),
                     message: 'Login',
                     icon: ezIcon(PlatformIcons(context).mail),
                   ),
@@ -90,7 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   // Sign up
                   EZButton.icon(
-                    action: () => Navigator.of(context).pushNamed(signupRoute),
+                    action: () => Navigator.of(context).push(platformPageRoute(
+                      context: context,
+                      builder: (context) => SignUpScreen(),
+                    )),
                     message: 'Sign up',
                     icon: ezIcon(PlatformIcons(context).mail),
                   ),
