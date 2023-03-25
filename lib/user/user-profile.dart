@@ -41,10 +41,25 @@ List<UserProfile> buildProfiles(List<DocumentSnapshot> userDocs) {
       .toList();
 }
 
+/// [Widget] to display when there are on users found
+Widget noUserCoin(BuildContext context) {
+  return Container(
+    decoration: BoxDecoration(
+      color: Color(AppConfig.prefs[themeColorKey]),
+      shape: BoxShape.circle,
+    ),
+    child: ezIcon(
+      PlatformIcons(context).clear,
+      color: Color(AppConfig.prefs[themeTextColorKey]),
+      size: 35,
+    ),
+  );
+}
+
 /// Displays a horizontally scrollable list of [UserProfile] pictures
 Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
   // Return clear icon on empty list
-  if (profiles.isEmpty) return ezIcon(PlatformIcons(context).clear, size: 35);
+  if (profiles.isEmpty) return noUserCoin(context);
 
   List<Widget> children = [];
 
@@ -92,7 +107,7 @@ Widget showUserProfiles(BuildContext context, List<UserProfile> profiles) {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        ezIcon(PlatformIcons(context).clear, size: 35),
+        noUserCoin(context),
         Container(height: dialogSpacer),
       ],
     );

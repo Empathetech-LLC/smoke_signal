@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Return documents from the 'signals' collection
 /// Filter by the current user's membership in the passed field
@@ -217,7 +216,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ezIcon(PlatformIcons(context).clear, size: 35),
+          noUserCoin(context),
           Container(height: dialogSpacer),
         ],
       );
