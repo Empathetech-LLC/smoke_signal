@@ -181,7 +181,7 @@ class _SignalState extends State<Signal> {
         children: [
           // Manage members
           EZButton(
-            action: () => replaceScreen(
+            action: () => popAndPushScreen(
               context: context,
               screen: SignalMembersScreen(
                 title: signalTitle,

@@ -28,7 +28,7 @@ List<Widget> standardDrawerBody(BuildContext context) {
   return [
     // GoTo settings
     EZButton.icon(
-      action: () => replaceScreen(
+      action: () => popAndPushScreen(
         context: context,
         screen: SettingsScreen(startIndex: 0),
       ),
@@ -88,7 +88,7 @@ Widget signalDrawerHeader(BuildContext context) {
         children: [
           // Edit
           EZButton(
-            action: () => replaceScreen(
+            action: () => popAndPushScreen(
               context: context,
               screen: ProfileSettingsScreen(),
             ),
@@ -115,7 +115,7 @@ List<Widget> signalDrawerBody(BuildContext context) {
 
     // Add new signal
     EZButton.icon(
-      action: () => replaceScreen(
+      action: () => popAndPushScreen(
         context: context,
         screen: CreateSignalScreen(),
       ),
@@ -126,7 +126,7 @@ List<Widget> signalDrawerBody(BuildContext context) {
 
     // GoTo settings
     EZButton.icon(
-      action: () => replaceScreen(
+      action: () => popAndPushScreen(
         context: context,
         screen: SettingsScreen(startIndex: 1),
       ),
