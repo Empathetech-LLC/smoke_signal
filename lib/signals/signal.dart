@@ -102,7 +102,7 @@ class _SignalState extends State<Signal> {
                 prefsPath: iconPathPref,
                 source: ImageSource.gallery,
               );
-              Navigator.of(context).pop();
+              popScreen(context);
             },
             message: 'File',
             icon: ezIcon(PlatformIcons(context).folder),
@@ -117,7 +117,7 @@ class _SignalState extends State<Signal> {
                 prefsPath: iconPathPref,
                 source: ImageSource.camera,
               );
-              Navigator.of(context).pop();
+              popScreen(context);
             },
             message: 'Camera',
             icon: ezIcon(PlatformIcons(context).photoCamera),
@@ -142,7 +142,7 @@ class _SignalState extends State<Signal> {
 
               // Wipe [SharedPreferences]
               AppConfig.preferences.remove(iconPathPref);
-              Navigator.of(context).pop();
+              popScreen(context);
             },
             body: Text('Reset'),
           ),
@@ -199,7 +199,7 @@ class _SignalState extends State<Signal> {
           // Set icon
           EZButton(
             action: () {
-              Navigator.of(context).pop();
+              popScreen(context);
               setIcon();
             },
             body: Text('Set icon'),
@@ -220,7 +220,7 @@ class _SignalState extends State<Signal> {
                     // Reset
                     EZButton(
                       action: () async {
-                        Navigator.of(context).pop();
+                        popScreen(context);
                         await resetSignal(context, signalTitle);
                       },
                       body: Text('Reset signal'),
@@ -230,7 +230,7 @@ class _SignalState extends State<Signal> {
                     // Update
                     EZButton(
                       action: () {
-                        Navigator.of(context).pop();
+                        popScreen(context);
                         updateMessage(context, signalTitle);
                       },
                       body: Text('Update message'),
@@ -240,7 +240,7 @@ class _SignalState extends State<Signal> {
                     // Transfer
                     EZButton(
                       action: () {
-                        Navigator.of(context).pop();
+                        popScreen(context);
                         confirmTransfer(context, signalTitle, widget.members);
                       },
                       body: Text('Transfer signal'),
@@ -250,7 +250,7 @@ class _SignalState extends State<Signal> {
                     // Delete
                     EZButton(
                       action: () {
-                        Navigator.of(context).pop();
+                        popScreen(context);
                         confirmDelete(
                           context,
                           signalTitle,
@@ -264,7 +264,7 @@ class _SignalState extends State<Signal> {
                     // Leave
                     EZButton(
                       action: () {
-                        Navigator.of(context).pop();
+                        popScreen(context);
                         confirmDeparture(
                           context,
                           signalTitle,

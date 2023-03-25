@@ -80,9 +80,9 @@ class _SignalSettingsState extends State<SignalSettings> {
                           AppConfig.preferences.remove(joinedColorKey);
                           AppConfig.preferences.remove(joinedTextColorKey);
 
-                          Navigator.of(context).pop();
+                          popScreen(context);
                         },
-                        onDeny: () => Navigator.of(context).pop(),
+                        onDeny: () => popScreen(context),
                         axis: Axis.vertical,
                         spacer: AppConfig.prefs[dialogSpacingKey]),
                   );
@@ -149,9 +149,9 @@ class _SignalSettingsState extends State<SignalSettings> {
                       AppConfig.preferences.remove(key);
                     });
 
-                    Navigator.of(context).pop();
+                    popScreen(context);
                   },
-                  onDeny: () => Navigator.of(context).pop(),
+                  onDeny: () => popScreen(context),
                   axis: Axis.vertical,
                   spacer: AppConfig.prefs[dialogSpacingKey],
                 ),

@@ -25,7 +25,7 @@ Future<void> attemptAccountCreation(
     await AppUser.auth.createUserWithEmailAndPassword(email: email, password: password);
 
     // Successful login, return to the home screen
-    Navigator.of(context).pop();
+    popScreen(context);
   } on FirebaseAuthException catch (e) {
     switch (e.code) {
       case 'email-already-in-use':
@@ -54,7 +54,7 @@ Future<void> attemptLogin(BuildContext context, String email, String password) a
     await AppUser.auth.signInWithEmailAndPassword(email: email, password: password);
 
     // Successful login, return to the home screen
-    Navigator.of(context).pop();
+    popScreen(context);
   } on FirebaseAuthException catch (e) {
     switch (e.code) {
       case 'user-not-found':
@@ -81,10 +81,10 @@ void logout(BuildContext context) {
     content: ezYesNo(
       context: context,
       onConfirm: () async {
-        Navigator.of(context).pop();
+        popScreen(context);
         await AppUser.auth.signOut();
       },
-      onDeny: () => Navigator.of(context).pop(),
+      onDeny: () => popScreen(context),
       axis: Axis.vertical,
       spacer: AppConfig.prefs[dialogSpacingKey],
     ),
@@ -204,7 +204,7 @@ void editAvatar(BuildContext context) {
 
             // Save text & close dialog
             String photoURL = _urlController.text.trim();
-            Navigator.of(context).pop();
+            popScreen(context);
 
             // Update firestore and the firebase user config
             await AppUser.account.updatePhotoURL(photoURL);
@@ -212,7 +212,7 @@ void editAvatar(BuildContext context) {
               {avatarURLPath: photoURL},
             );
           },
-          onDeny: () => Navigator.of(context).pop(),
+          onDeny: () => popScreen(context),
           axis: Axis.vertical,
           spacer: dialogSpacer,
           confirmMsg: 'Submit',
@@ -266,7 +266,7 @@ void editName(BuildContext context) {
 
             // Save text & close dialog
             String newName = _nameController.text.trim();
-            Navigator.of(context).pop();
+            popScreen(context);
 
             // Update firestore and the firebase user config
             await AppUser.account.updateDisplayName(newName);
@@ -274,7 +274,7 @@ void editName(BuildContext context) {
               {displayNamePath: newName},
             );
           },
-          onDeny: () => Navigator.of(context).pop(),
+          onDeny: () => popScreen(context),
           axis: Axis.vertical,
           spacer: dialogSpacer,
           confirmMsg: 'Submit',

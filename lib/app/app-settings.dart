@@ -87,9 +87,9 @@ class _AppSettingsState extends State<AppSettings> {
                         AppConfig.preferences.remove(buttonColorKey);
                         AppConfig.preferences.remove(buttonTextColorKey);
 
-                        Navigator.of(context).pop();
+                        popScreen(context);
                       },
-                      onDeny: () => Navigator.of(context).pop(),
+                      onDeny: () => popScreen(context),
                       axis: Axis.vertical,
                       spacer: dialogSpacer,
                     ),
@@ -181,9 +181,9 @@ class _AppSettingsState extends State<AppSettings> {
                       AppConfig.preferences.remove(key);
                     });
 
-                    Navigator.of(context).pop();
+                    popScreen(context);
                   },
-                  onDeny: () => Navigator.of(context).pop(),
+                  onDeny: () => popScreen(context),
                   axis: Axis.vertical,
                   spacer: dialogSpacer,
                 ),
