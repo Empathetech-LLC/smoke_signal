@@ -145,7 +145,6 @@ class _SignalState extends State<Signal> {
             },
             body: Text('Reset'),
           ),
-          Container(height: dialogSpacer),
         ],
       ),
     );
@@ -195,7 +194,13 @@ class _SignalState extends State<Signal> {
           Container(height: dialogSpacer),
 
           // Set icon
-          EZButton(action: setIcon, body: Text('Set icon')),
+          EZButton(
+            action: () {
+              Navigator.of(context).pop();
+              setIcon();
+            },
+            body: Text('Set icon'),
+          ),
           Container(height: dialogSpacer),
 
           // Show/hide icon
@@ -274,6 +279,8 @@ class _SignalState extends State<Signal> {
 
   @override
   Widget build(BuildContext context) {
+    double padding = AppConfig.prefs[paddingKey];
+
     // Current user is a member
     if (widget.members.contains(AppUser.account.uid)) {
       bool joined = widget.activeMembers.contains(AppUser.account.uid);
@@ -349,6 +356,7 @@ class _SignalState extends State<Signal> {
                     ),
                   ),
                 ),
+          Container(height: padding),
 
           // Signal count
           SizedBox(
@@ -395,32 +403,32 @@ class _SignalState extends State<Signal> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Label
-          EZButton(
-            action: doNothing,
-            body: Text('Join:\n$signalTitle?', style: watchingTextStyle),
-            customStyle: ElevatedButton.styleFrom(
-              backgroundColor: watchingColor,
-              foregroundColor: getContrastColor(watchingColor),
-              fixedSize: Size(screenWidth(context), signalHeight),
+          SizedBox(
+            width: screenWidth(context),
+            height: signalHeight,
+            child: Card(
+              color: watchingColor,
+              child: Center(
+                child: Text(
+                  'Join:\n$signalTitle?',
+                  style: watchingTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
           ),
+          Container(height: padding),
 
           // Buttons
-          SizedBox(
-            width: screenWidth(context) * (2 / 3),
-            height: signalCountHeight,
-            child: ezYesNo(
-              context: context,
-              onConfirm: () async {
-                await acceptInvite(context, signalTitle);
-                setState(doNothing);
-              },
-              onDeny: () async {
-                await declineInvite(context, signalTitle);
-                setState(doNothing);
-              },
-              axis: Axis.horizontal,
-            ),
+          ezYesNo(
+            context: context,
+            onConfirm: () async {
+              await acceptInvite(context, signalTitle);
+            },
+            onDeny: () async {
+              await declineInvite(context, signalTitle);
+            },
+            axis: Axis.horizontal,
           ),
         ],
       );
