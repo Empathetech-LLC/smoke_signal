@@ -1,6 +1,9 @@
 import 'constants.dart';
 import 'validate.dart';
 import '../user/user-api.dart';
+import '../app/settings-screen.dart';
+import '../signals/create-signal-screen.dart';
+import '../user/profile-settings-screen.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
@@ -25,10 +28,10 @@ List<Widget> standardDrawerBody(BuildContext context) {
   return [
     // GoTo settings
     EZButton.icon(
-      action: () => Navigator.of(context).popAndPushNamed(
-        settingsRoute,
-        arguments: {indexArg: 0},
-      ),
+      action: () => Navigator.of(context).pushReplacement(platformPageRoute(
+        context: context,
+        builder: (context) => SettingsScreen(startIndex: 0),
+      )),
       icon: ezIcon(PlatformIcons(context).settings),
       message: 'Settings',
     ),
@@ -85,7 +88,12 @@ Widget signalDrawerHeader(BuildContext context) {
         children: [
           // Edit
           EZButton(
-            action: () => Navigator.of(context).popAndPushNamed(profileSettingsRoute),
+            action: () => Navigator.of(context).pushReplacement(
+              platformPageRoute(
+                context: context,
+                builder: (context) => ProfileSettingsScreen(),
+              ),
+            ),
             body: ezIcon(PlatformIcons(context).edit),
           ),
           Container(height: AppConfig.prefs[dialogSpacingKey]),
@@ -109,7 +117,12 @@ List<Widget> signalDrawerBody(BuildContext context) {
 
     // Add new signal
     EZButton.icon(
-      action: () => Navigator.of(context).popAndPushNamed(createSignalRoute),
+      action: () => Navigator.of(context).pushReplacement(
+        platformPageRoute(
+          context: context,
+          builder: (context) => CreateSignalScreen(),
+        ),
+      ),
       message: 'New signal',
       icon: ezIcon(PlatformIcons(context).add),
     ),
@@ -117,9 +130,11 @@ List<Widget> signalDrawerBody(BuildContext context) {
 
     // GoTo settings
     EZButton.icon(
-      action: () => Navigator.of(context).popAndPushNamed(
-        settingsRoute,
-        arguments: {indexArg: 1},
+      action: () => Navigator.of(context).pushReplacement(
+        platformPageRoute(
+          context: context,
+          builder: (context) => SettingsScreen(startIndex: 1),
+        ),
       ),
       message: 'Settings',
       icon: ezIcon(PlatformIcons(context).settings),

@@ -1,11 +1,12 @@
 import '../user/user-api.dart';
+import '../user/reset-password-screen.dart';
 import '../utils/drawers.dart';
-import '../utils/constants.dart';
 import '../utils/validate.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -72,7 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
           // Forgot password option
           GestureDetector(
-            onTap: () => Navigator.of(context).pushNamed(resetPasswordRoute),
+            onTap: () => Navigator.of(context).push(platformPageRoute(
+              context: context,
+              builder: (context) => ResetPasswordScreen(),
+            )),
             child: Text(
               'Forgot your password?',
               style: TextStyle(

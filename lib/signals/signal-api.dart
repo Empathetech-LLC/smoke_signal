@@ -181,7 +181,7 @@ void updateMessage(BuildContext context, String title) {
               return;
             }
 
-            Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+            Navigator.of(context).pop();
             try {
               // Upload the new message
               String message = _messageController.text.trim();
@@ -192,7 +192,7 @@ void updateMessage(BuildContext context, String title) {
               popNLog(context, e.toString());
             }
           },
-          onDeny: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
+          onDeny: () => Navigator.of(context).pop(),
           axis: Axis.horizontal,
           spacer: dialogSpacer,
         ),
@@ -228,7 +228,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
       children.addAll([
         GestureDetector(
           onTap: () async {
-            Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+            Navigator.of(context).pop();
             try {
               // Set the owner to "this" user
               await AppUser.db.collection(signalsPath).doc(title).update(
@@ -301,7 +301,7 @@ void confirmTransfer(BuildContext context, String title, List<String> members) {
         ),
         ezCancel(
           context: context,
-          onCancel: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
+          onCancel: () => Navigator.of(context).pop(),
         ),
       ],
     ),
@@ -316,7 +316,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
     content: ezYesNo(
       context: context,
       onConfirm: () async {
-        Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+        Navigator.of(context).pop();
         try {
           // Clear local prefs for the signal
           prefKeys.forEach((key) {
@@ -329,7 +329,7 @@ void confirmDelete(BuildContext context, String title, List<String> prefKeys) {
           popNLog(context, e.toString());
         }
       },
-      onDeny: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
+      onDeny: () => Navigator.of(context).pop(),
       axis: Axis.vertical,
       spacer: AppConfig.prefs[dialogSpacingKey],
     ),
@@ -344,7 +344,7 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
     content: ezYesNo(
       context: context,
       onConfirm: () async {
-        Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+        Navigator.of(context).pop();
         try {
           // Clear local prefs for the signal
           prefKeys.forEach((key) {
@@ -361,7 +361,7 @@ void confirmDeparture(BuildContext context, String title, List<String> prefKeys)
           popNLog(context, e.toString());
         }
       },
-      onDeny: () => Navigator.of(context).popUntil(ModalRoute.withName(homeRoute)),
+      onDeny: () => Navigator.of(context).pop(),
       axis: Axis.vertical,
       spacer: AppConfig.prefs[dialogSpacingKey],
     ),

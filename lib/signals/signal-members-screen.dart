@@ -7,29 +7,9 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class SignalMemberScreen extends StatelessWidget {
-  const SignalMemberScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // Gather signal data from navigator arguments
-    // There is no path to this route except via a signal
-    final args =
-        (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
-
-    return SignalMembers(
-      title: args[titleArg],
-      members: args[membersArg],
-      activeMembers: args[activeMembersArg],
-      memberReqs: args[memberReqsArg],
-    );
-  }
-}
-
-class SignalMembers extends StatefulWidget {
-  const SignalMembers({
+class SignalMembersScreen extends StatefulWidget {
+  const SignalMembersScreen({
     Key? key,
     required this.title,
     required this.members,
@@ -43,10 +23,10 @@ class SignalMembers extends StatefulWidget {
   final List<String> memberReqs;
 
   @override
-  _SignalMembersState createState() => _SignalMembersState();
+  _SignalMembersScreenState createState() => _SignalMembersScreenState();
 }
 
-class _SignalMembersState extends State<SignalMembers> {
+class _SignalMembersScreenState extends State<SignalMembersScreen> {
   // Initialize state
 
   late Stream<QuerySnapshot<Map<String, dynamic>>> _userStream;
@@ -120,7 +100,7 @@ class _SignalMembersState extends State<SignalMembers> {
         EZButton(
           action: () async {
             await requestMembers(context, widget.title, requestIDs);
-            Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+            Navigator.of(context).pop();
           },
           body: Text('Send requests'),
         ),

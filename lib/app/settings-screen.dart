@@ -1,26 +1,12 @@
 import '../app/app-settings.dart';
-import '../utils/constants.dart';
 import '../signals/signal-settings.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // Get the starting index (app settings or signal settings) from the navigator args
-    final args =
-        (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
-
-    return Settings(startIndex: args[indexArg]);
-  }
-}
-
-class Settings extends StatefulWidget {
-  const Settings({
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({
     Key? key,
     required this.startIndex,
   }) : super(key: key);
@@ -31,7 +17,7 @@ class Settings extends StatefulWidget {
   _SettingsState createState() => _SettingsState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsState extends State<SettingsScreen> {
   late int navIndex = widget.startIndex;
 
   List<Widget> windows = [

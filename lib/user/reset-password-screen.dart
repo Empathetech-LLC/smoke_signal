@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class ResetScreen extends StatefulWidget {
-  const ResetScreen({super.key});
+class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({super.key});
 
   @override
   _ResetScreenState createState() => _ResetScreenState();
 }
 
-class _ResetScreenState extends State<ResetScreen> {
+class _ResetScreenState extends State<ResetPasswordScreen> {
   final emailFormKey = GlobalKey<FormState>();
 
   late TextEditingController _emailController = TextEditingController();

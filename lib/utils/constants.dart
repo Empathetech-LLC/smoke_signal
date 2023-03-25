@@ -22,15 +22,6 @@ const String appIconPath = 'assets/app-icon.png';
 const String darkForestPath = 'assets/dark-forest.png';
 const String smokeSignalPath = 'assets/smoke-signal.gif';
 
-// Navigator arguments
-const String indexArg = 'index';
-const String titleArg = 'title';
-const String membersArg = 'members';
-const String activeMembersArg = 'activeMembers';
-const String memberReqsArg = 'memberReqs';
-const String unaddedArg = 'unadded';
-const String streamArg = 'stream';
-
 // Shared Preferences keys
 const String signalImageKey = 'signalImage';
 const String signalSpacingKey = 'signalSpacing';

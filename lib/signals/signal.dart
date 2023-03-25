@@ -1,5 +1,6 @@
 import '../user/user-api.dart';
 import '../signals/signal-api.dart';
+import '../signals/signal-members-screen.dart';
 import '../utils/constants.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -180,14 +181,16 @@ class _SignalState extends State<Signal> {
         children: [
           // Manage members
           EZButton(
-            action: () => Navigator.of(context).popAndPushNamed(
-              signalMembersRoute,
-              arguments: {
-                titleArg: signalTitle,
-                membersArg: widget.members,
-                activeMembersArg: widget.activeMembers,
-                memberReqsArg: widget.memberReqs,
-              },
+            action: () => Navigator.of(context).pushReplacement(
+              platformPageRoute(
+                context: context,
+                builder: (context) => SignalMembersScreen(
+                  title: signalTitle,
+                  members: widget.members,
+                  activeMembers: widget.activeMembers,
+                  memberReqs: widget.memberReqs,
+                ),
+              ),
             ),
             body: Text('Members'),
           ),

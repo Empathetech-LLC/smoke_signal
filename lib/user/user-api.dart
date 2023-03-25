@@ -81,7 +81,7 @@ void logout(BuildContext context) {
     content: ezYesNo(
       context: context,
       onConfirm: () async {
-        Navigator.of(context).popUntil(ModalRoute.withName(homeRoute));
+        Navigator.of(context).pop();
         await AppUser.auth.signOut();
       },
       onDeny: () => Navigator.of(context).pop(),
