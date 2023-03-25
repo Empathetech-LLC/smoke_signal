@@ -204,7 +204,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
               }
 
               // Attempt adding signal
-              await addtoDB(
+              bool added = await addtoDB(
                 context,
                 _titleController.text.trim(),
                 _messageController.text.trim(),
@@ -212,9 +212,9 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 requestIDs,
               );
 
-              popScreen(context);
+              if (added) popScreen(context, success: true);
             },
-            message: 'Done',
+            message: 'Add',
             icon: ezIcon(PlatformIcons(context).cloudUpload),
           ),
           Container(height: buttonSpacer),
