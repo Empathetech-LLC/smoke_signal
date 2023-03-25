@@ -27,7 +27,7 @@ Stream<QuerySnapshot<Object?>> streamSignals(String filter) {
 }
 
 // Send new signal to firestore
-Future<void> addtoDB(BuildContext context, String title, String message, bool isActive,
+Future<bool> addtoDB(BuildContext context, String title, String message, bool isActive,
     List<String> requestIDs) async {
   try {
     // Check to see if a document with the same name exists
@@ -35,7 +35,7 @@ Future<void> addtoDB(BuildContext context, String title, String message, bool is
 
     if (check.exists) {
       popNLog(context, 'That name is taken!');
-      return;
+      return false;
     }
 
     // Upload the new document
@@ -48,8 +48,11 @@ Future<void> addtoDB(BuildContext context, String title, String message, bool is
         memberReqsPath: requestIDs,
       },
     );
+
+    return true;
   } catch (e) {
     popNLog(context, e.toString());
+    return false;
   }
 }
 
