@@ -165,6 +165,7 @@ void editAvatar(BuildContext context) {
 
   ezDialog(
     context: context,
+    needsClose: false,
     content: Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -235,6 +236,7 @@ void editName(BuildContext context) {
   ezDialog(
     context: context,
     title: 'Who are you?',
+    needsClose: false,
     content: Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
