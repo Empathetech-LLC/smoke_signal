@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
+/// Happy signaling!
 class Signal extends StatefulWidget {
   const Signal({
     Key? key,
@@ -28,7 +29,7 @@ class Signal extends StatefulWidget {
   final List<String> activeMembers;
   final List<String> memberReqs;
 
-  // Local signal constructor from signal db document
+  /// Construct a [Signal] from a Firebase signal [DocumentSnapshot]
   static Signal buildSignal(DocumentSnapshot signalDoc) {
     final data = signalDoc.data() as Map<String, dynamic>;
 
@@ -47,53 +48,43 @@ class Signal extends StatefulWidget {
 }
 
 class _SignalState extends State<Signal> {
-  // Initialize state
-
   late String signalTitle = widget.title;
-
   late String showIconPref = signalTitle + 'ShowIcon';
   late String iconPathPref = signalTitle + 'Icon';
-
-  late bool showIcon = AppConfig.preferences.getBool(showIconPref) ?? false;
   late String iconPath = AppConfig.preferences.getString(iconPathPref) ?? appIconPath;
 
-  // Gather theme data
-  late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
-  late double signalSpacer = AppConfig.prefs[signalSpacingKey];
-
-  late double signalHeight = AppConfig.prefs[signalHeightKey];
-  late double signalCountHeight = AppConfig.prefs[signalCountHeightKey];
+  late bool showIcon = AppConfig.preferences.getBool(showIconPref) ?? false;
 
   late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-
   late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
   late Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
-
   late Color joinedColor = Color(AppConfig.prefs[joinedColorKey]);
   late Color joinedTextColor = Color(AppConfig.prefs[joinedTextColorKey]);
-
   late Color watchingColor = Color(AppConfig.prefs[watchingColorKey]);
   late Color watchingTextColor = Color(AppConfig.prefs[watchingTextColorKey]);
 
-  late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
+  late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
+  late double signalSpacer = AppConfig.prefs[signalSpacingKey];
+  late double signalHeight = AppConfig.prefs[signalHeightKey];
+  late double signalCountHeight = AppConfig.prefs[signalCountHeightKey];
+
   late TextStyle titleTextStyle = getTextStyle(titleStyleKey);
+  late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
 
   late TextStyle joinedTextStyle = TextStyle(
     fontFamily: titleTextStyle.fontFamily,
     fontSize: titleTextStyle.fontSize,
-    color: Color(AppConfig.prefs[joinedTextColorKey]),
+    color: joinedTextColor,
   );
 
   late TextStyle watchingTextStyle = TextStyle(
     fontFamily: titleTextStyle.fontFamily,
     fontSize: titleTextStyle.fontSize,
-    color: Color(AppConfig.prefs[watchingTextColorKey]),
+    color: watchingTextColor,
   );
 
-  // Define interactions
-
-  // Set a custom icon for the signal
+  /// Set a custom [Icon] for the [Signal] via [changeImage]
   void setIcon() {
     ezDialog(
       context: context,
@@ -144,11 +135,11 @@ class _SignalState extends State<Signal> {
                 File toDelete = File(imagePath);
                 await toDelete.delete();
               } catch (e) {
-                // Ignore errors thrown
-                // Delete is called without knowledge of a file existing
+                doNothing();
+                // Delete is called without knowledge of a file existing, so ignore errors
               }
 
-              // Wipe the shared pref
+              // Wipe [SharedPreferences]
               AppConfig.preferences.remove(iconPathPref);
               Navigator.of(context).pop();
             },
@@ -160,7 +151,7 @@ class _SignalState extends State<Signal> {
     );
   }
 
-  // Flip the state of whether the Signal's icon show be displayed
+  /// Toggle whether the [Signal]s icon ([Image]) is being shown
   void toggleIcon() {
     // Hide icon
     if (showIcon) {
@@ -179,7 +170,7 @@ class _SignalState extends State<Signal> {
     }
   }
 
-  // Show all edits the user can make
+  /// Show all [Signal] edits the user can make
   void showEdits() {
     ezDialog(
       context: context,
@@ -218,6 +209,7 @@ class _SignalState extends State<Signal> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: AppUser.account.uid == widget.owner
                 ? [
+                    // Reset
                     EZButton(
                       action: () async {
                         Navigator.of(context).pop();
@@ -226,6 +218,8 @@ class _SignalState extends State<Signal> {
                       body: Text('Reset signal'),
                     ),
                     Container(height: dialogSpacer),
+
+                    // Update
                     EZButton(
                       action: () {
                         Navigator.of(context).pop();
@@ -234,6 +228,8 @@ class _SignalState extends State<Signal> {
                       body: Text('Update message'),
                     ),
                     Container(height: dialogSpacer),
+
+                    // Transfer
                     EZButton(
                       action: () {
                         Navigator.of(context).pop();
@@ -242,6 +238,8 @@ class _SignalState extends State<Signal> {
                       body: Text('Transfer signal'),
                     ),
                     Container(height: dialogSpacer),
+
+                    // Delete
                     EZButton(
                       action: () {
                         Navigator.of(context).pop();
@@ -253,9 +251,9 @@ class _SignalState extends State<Signal> {
                       },
                       body: Text('Delete signal'),
                     ),
-                    Container(height: dialogSpacer),
                   ]
                 : [
+                    // Leave
                     EZButton(
                       action: () {
                         Navigator.of(context).pop();
@@ -267,102 +265,9 @@ class _SignalState extends State<Signal> {
                       },
                       body: Text('Leave signal'),
                     ),
-                    Container(height: dialogSpacer),
                   ],
           ),
         ],
-      ),
-    );
-  }
-
-  // Draw state
-
-  // Signal button styling
-  ButtonStyle signalStyle() {
-    bool joined = widget.activeMembers.contains(AppUser.account.uid);
-
-    return joined
-        ? ElevatedButton.styleFrom(
-            backgroundColor: joinedColor,
-            shadowColor: joinedColor,
-            foregroundColor: joinedColor,
-            fixedSize: Size(screenWidth(context), signalHeight),
-          )
-        : ElevatedButton.styleFrom(
-            backgroundColor: watchingColor,
-            shadowColor: watchingColor,
-            foregroundColor: watchingColor,
-            fixedSize: Size(screenWidth(context), signalHeight),
-          );
-  }
-
-  // Default (no icon) signal styling
-  Widget defaultSignal() {
-    bool joined = widget.activeMembers.contains(AppUser.account.uid);
-
-    return EZButton(
-      action: () => toggleParticipation(
-        context,
-        joined,
-        widget.title,
-        widget.members,
-        widget.message,
-      ),
-      longAction: showEdits,
-      body: Text(
-        signalTitle,
-        style: joined ? joinedTextStyle : watchingTextStyle,
-      ),
-      customStyle: signalStyle(),
-    );
-  }
-
-  // Signal styling when the icon is showing
-  Widget iconSignal() {
-    bool joined = widget.activeMembers.contains(AppUser.account.uid);
-
-    return GestureDetector(
-      onTap: () => toggleParticipation(
-        context,
-        joined,
-        widget.title,
-        widget.members,
-        widget.message,
-      ),
-      onLongPress: showEdits,
-      child: Container(
-        width: screenWidth(context),
-        height: signalHeight,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // Icon
-            Container(
-              width: signalHeight,
-              child: Card(
-                  child: buildImage(
-                path: iconPath,
-              )),
-            ),
-
-            // Title card
-            Expanded(
-              child: SizedBox.expand(
-                child: Card(
-                  color: joined ? joinedColor : watchingColor,
-                  child: Center(
-                    child: Text(
-                      signalTitle,
-                      style: joined ? joinedTextStyle : watchingTextStyle,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -371,14 +276,82 @@ class _SignalState extends State<Signal> {
   Widget build(BuildContext context) {
     // Current user is a member
     if (widget.members.contains(AppUser.account.uid)) {
+      bool joined = widget.activeMembers.contains(AppUser.account.uid);
+
       return Column(
         children: [
           // Signal button
-          showIcon ? iconSignal() : defaultSignal(),
+          showIcon
+              // With icon image
+              ? GestureDetector(
+                  onTap: () => toggleParticipation(
+                    context,
+                    joined,
+                    widget.title,
+                    widget.members,
+                    widget.message,
+                  ),
+                  onLongPress: showEdits,
+                  child: Container(
+                    width: screenWidth(context),
+                    height: signalHeight,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        // Icon image
+                        Container(
+                          width: signalHeight,
+                          height: signalHeight,
+                          child: buildImage(path: iconPath),
+                        ),
+
+                        // Title card
+                        Expanded(
+                          child: SizedBox.expand(
+                            child: Card(
+                              color: joined ? joinedColor : watchingColor,
+                              child: Center(
+                                child: Text(
+                                  signalTitle,
+                                  style: joined ? joinedTextStyle : watchingTextStyle,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : GestureDetector(
+                  onTap: () => toggleParticipation(
+                    context,
+                    joined,
+                    widget.title,
+                    widget.members,
+                    widget.message,
+                  ),
+                  onLongPress: showEdits,
+                  child: SizedBox(
+                    width: screenWidth(context),
+                    height: signalHeight,
+                    child: Card(
+                      color: joined ? joinedColor : watchingColor,
+                      child: Center(
+                        child: Text(
+                          signalTitle,
+                          style: joined ? joinedTextStyle : watchingTextStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
 
           // Signal count
           SizedBox(
-            // Show current count
             width: screenWidth(context) * (2 / 3),
             height: signalCountHeight,
             child: Card(
@@ -387,22 +360,20 @@ class _SignalState extends State<Signal> {
                   : watchingColor,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                // Check AppUser's current participation
                 children: widget.activeMembers.contains(AppUser.account.uid)
                     ? [
-                        // Show the current count surrounded by smoke signals
-                        buildImage(
-                          path: AppConfig.prefs[signalImageKey],
-                        ),
+                        // Active: show the current count surrounded by smoke signals
+                        buildImage(path: AppConfig.prefs[signalImageKey]),
                         Text(
                           widget.activeMembers.length.toString(),
                           style: joinedTextStyle,
                         ),
-                        buildImage(
-                          path: AppConfig.prefs[signalImageKey],
-                        ),
+                        buildImage(path: AppConfig.prefs[signalImageKey]),
                       ]
                     : [
-                        // Only show the current count
+                        // Inactive: only show the current count
                         Text(
                           widget.activeMembers.length.toString(),
                           style: watchingTextStyle,
@@ -427,7 +398,11 @@ class _SignalState extends State<Signal> {
           EZButton(
             action: doNothing,
             body: Text('Join:\n$signalTitle?', style: watchingTextStyle),
-            customStyle: signalStyle(),
+            customStyle: ElevatedButton.styleFrom(
+              backgroundColor: watchingColor,
+              foregroundColor: getContrastColor(watchingColor),
+              fixedSize: Size(screenWidth(context), signalHeight),
+            ),
           ),
 
           // Buttons
