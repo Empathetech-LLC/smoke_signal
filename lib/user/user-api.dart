@@ -212,7 +212,7 @@ void editAvatar(BuildContext context) {
             );
           },
           onDeny: () => Navigator.of(context).pop(),
-          axis: Axis.horizontal,
+          axis: Axis.vertical,
           spacer: dialogSpacer,
           confirmMsg: 'Submit',
           denyMsg: 'Cancel',
@@ -273,7 +273,7 @@ void editName(BuildContext context) {
             );
           },
           onDeny: () => Navigator.of(context).pop(),
-          axis: Axis.horizontal,
+          axis: Axis.vertical,
           spacer: dialogSpacer,
           confirmMsg: 'Submit',
           denyMsg: 'Cancel',
