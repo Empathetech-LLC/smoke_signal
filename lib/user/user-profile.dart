@@ -76,8 +76,8 @@ Widget showUserPics(BuildContext context, List<UserProfile> profiles) {
   return ezScrollView(
     children: children,
     centered: true,
-    axisSize: MainAxisSize.max,
-    axisAlign: MainAxisAlignment.spaceEvenly,
+    mainAxisSize: MainAxisSize.max,
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     direction: Axis.horizontal,
   );
 }
