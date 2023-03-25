@@ -102,7 +102,7 @@ class _SignalBoardState extends State<SignalBoard> {
       drawerHeader: signalDrawerHeader(context),
       drawerBody: signalDrawerBody(context),
 
-      fab: ezButton(
+      fab: EZButton(
         // Refresh
         action: () => setState(doNothing),
 

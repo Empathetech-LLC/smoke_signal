@@ -103,7 +103,7 @@ class _SignalState extends State<Signal> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // From file
-          ezIconButton(
+          EZButton.icon(
             action: () {
               changeImage(
                 context: context,
@@ -118,7 +118,7 @@ class _SignalState extends State<Signal> {
           Container(height: dialogSpacer),
 
           // From camera
-          ezIconButton(
+          EZButton.icon(
             action: () {
               changeImage(
                 context: context,
@@ -133,7 +133,7 @@ class _SignalState extends State<Signal> {
           Container(height: dialogSpacer),
 
           // Reset
-          ezButton(
+          EZButton(
             action: () async {
               // Build path
               Directory currDir = await getApplicationDocumentsDirectory();
@@ -189,7 +189,7 @@ class _SignalState extends State<Signal> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Manage members
-          ezButton(
+          EZButton(
             action: () => Navigator.of(context).popAndPushNamed(
               signalMembersRoute,
               arguments: {
@@ -204,11 +204,11 @@ class _SignalState extends State<Signal> {
           Container(height: dialogSpacer),
 
           // Set icon
-          ezButton(action: setIcon, body: Text('Set icon')),
+          EZButton(action: setIcon, body: Text('Set icon')),
           Container(height: dialogSpacer),
 
           // Show/hide icon
-          ezButton(action: toggleIcon, body: Text('Toggle icon')),
+          EZButton(action: toggleIcon, body: Text('Toggle icon')),
           Container(height: dialogSpacer),
 
           // Owner: Reset count, update message, transfer signal, or delete signal
@@ -218,7 +218,7 @@ class _SignalState extends State<Signal> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: AppUser.account.uid == widget.owner
                 ? [
-                    ezButton(
+                    EZButton(
                       action: () async {
                         Navigator.of(context).pop();
                         await resetSignal(context, signalTitle);
@@ -226,7 +226,7 @@ class _SignalState extends State<Signal> {
                       body: Text('Reset signal'),
                     ),
                     Container(height: dialogSpacer),
-                    ezButton(
+                    EZButton(
                       action: () {
                         Navigator.of(context).pop();
                         updateMessage(context, signalTitle);
@@ -234,7 +234,7 @@ class _SignalState extends State<Signal> {
                       body: Text('Update message'),
                     ),
                     Container(height: dialogSpacer),
-                    ezButton(
+                    EZButton(
                       action: () {
                         Navigator.of(context).pop();
                         confirmTransfer(context, signalTitle, widget.members);
@@ -242,7 +242,7 @@ class _SignalState extends State<Signal> {
                       body: Text('Transfer signal'),
                     ),
                     Container(height: dialogSpacer),
-                    ezButton(
+                    EZButton(
                       action: () {
                         Navigator.of(context).pop();
                         confirmDelete(
@@ -256,7 +256,7 @@ class _SignalState extends State<Signal> {
                     Container(height: dialogSpacer),
                   ]
                 : [
-                    ezButton(
+                    EZButton(
                       action: () {
                         Navigator.of(context).pop();
                         confirmDeparture(
@@ -300,7 +300,7 @@ class _SignalState extends State<Signal> {
   Widget defaultSignal() {
     bool joined = widget.activeMembers.contains(AppUser.account.uid);
 
-    return ezButton(
+    return EZButton(
       action: () => toggleParticipation(
         context,
         joined,
@@ -424,7 +424,7 @@ class _SignalState extends State<Signal> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Label
-          ezButton(
+          EZButton(
             action: doNothing,
             body: Text('Join:\n$signalTitle?', style: watchingTextStyle),
             customStyle: signalStyle(),

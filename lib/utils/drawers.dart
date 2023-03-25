@@ -24,7 +24,7 @@ List<Widget> standardDrawerBody(BuildContext context) {
 
   return [
     // GoTo settings
-    ezIconButton(
+    EZButton.icon(
       action: () => Navigator.of(context).popAndPushNamed(
         settingsRoute,
         arguments: {indexArg: 0},
@@ -35,7 +35,7 @@ List<Widget> standardDrawerBody(BuildContext context) {
     Container(height: buttonSpacer),
 
     // Show input rules
-    ezButton(
+    EZButton(
       action: () => ezDialog(
         context: context,
         title: 'Input rules',
@@ -84,13 +84,13 @@ Widget signalDrawerHeader(BuildContext context) {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Edit
-          ezButton(
+          EZButton(
             action: () => Navigator.of(context).popAndPushNamed(profileSettingsRoute),
             body: ezIcon(PlatformIcons(context).edit),
           ),
 
           // Logout
-          ezButton(
+          EZButton(
             action: () => logout(context),
             body: ezIcon(Icons.logout),
           ),
@@ -107,7 +107,7 @@ List<Widget> signalDrawerBody(BuildContext context) {
     Container(height: buttonSpacer),
 
     // Add new signal
-    ezIconButton(
+    EZButton.icon(
       action: () => Navigator.of(context).popAndPushNamed(createSignalRoute),
       message: 'New signal',
       icon: ezIcon(PlatformIcons(context).add),
@@ -115,7 +115,7 @@ List<Widget> signalDrawerBody(BuildContext context) {
     Container(height: buttonSpacer),
 
     // GoTo settings
-    ezIconButton(
+    EZButton.icon(
       action: () => Navigator.of(context).popAndPushNamed(
         settingsRoute,
         arguments: {indexArg: 1},
@@ -126,7 +126,7 @@ List<Widget> signalDrawerBody(BuildContext context) {
     Container(height: buttonSpacer),
 
     // Show input rules
-    ezButton(
+    EZButton(
       action: () => ezDialog(
         context: context,
         title: 'Input rules',

@@ -52,7 +52,7 @@ class _ResetScreenState extends State<ResetScreen> {
           Container(height: buttonSpacer),
 
           // Submit button
-          ezIconButton(
+          EZButton.icon(
             action: () async {
               // Close keyboard if open
               AppConfig.focus.primaryFocus?.unfocus();

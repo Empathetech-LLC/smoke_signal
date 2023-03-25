@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
               : // Show authBuild
               ezScrollView(children: [
                   // Login
-                  ezIconButton(
+                  EZButton.icon(
                     action: () => Navigator.of(context).pushNamed(loginRoute),
                     message: 'Login',
                     icon: ezIcon(PlatformIcons(context).mail),
@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(height: buttonSpacer),
 
                   // Sign up
-                  ezIconButton(
+                  EZButton.icon(
                     action: () => Navigator.of(context).pushNamed(signupRoute),
                     message: 'Sign up',
                     icon: ezIcon(PlatformIcons(context).mail),

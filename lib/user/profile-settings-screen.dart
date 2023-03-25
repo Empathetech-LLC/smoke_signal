@@ -42,7 +42,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Edit picture
-          ezIconButton(
+          EZButton.icon(
             action: () {
               editAvatar(context);
               setState(doNothing);
@@ -61,7 +61,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Edit name
-          ezIconButton(
+          EZButton.icon(
             action: () {
               editName(context);
               setState(doNothing);
