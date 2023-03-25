@@ -80,7 +80,7 @@ Widget signalDrawerHeader(BuildContext context) {
 
       // Edit and logout buttons
       Column(
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Edit
@@ -88,6 +88,7 @@ Widget signalDrawerHeader(BuildContext context) {
             action: () => Navigator.of(context).popAndPushNamed(profileSettingsRoute),
             body: ezIcon(PlatformIcons(context).edit),
           ),
+          Container(height: AppConfig.prefs[dialogSpacingKey]),
 
           // Logout
           EZButton(
