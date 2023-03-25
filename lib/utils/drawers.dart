@@ -2,7 +2,6 @@ import 'constants.dart';
 import 'validate.dart';
 import '../user/user-api.dart';
 import '../app/settings-screen.dart';
-import '../signals/create-signal-screen.dart';
 import '../user/profile-settings-screen.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -105,49 +104,4 @@ Widget signalDrawerHeader(BuildContext context) {
       ),
     ],
   );
-}
-
-/// Custom drawer body for Signal Board
-List<Widget> signalDrawerBody(BuildContext context) {
-  double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
-  return [
-    Container(height: buttonSpacer),
-
-    // Add new signal
-    EZButton.icon(
-      action: () => popAndPushScreen(
-        context: context,
-        screen: CreateSignalScreen(),
-      ),
-      message: 'New signal',
-      icon: ezIcon(PlatformIcons(context).add),
-    ),
-    Container(height: buttonSpacer),
-
-    // GoTo settings
-    EZButton.icon(
-      action: () => popAndPushScreen(
-        context: context,
-        screen: SettingsScreen(startIndex: 1),
-      ),
-      message: 'Settings',
-      icon: ezIcon(PlatformIcons(context).settings),
-    ),
-    Container(height: buttonSpacer),
-
-    // Show input rules
-    EZButton(
-      action: () => ezDialog(
-        context: context,
-        title: 'Input rules',
-        content: Text(
-          validatorRule,
-          style: getTextStyle(dialogContentStyleKey),
-          textAlign: TextAlign.center,
-        ),
-      ),
-      body: Text('Input rules'),
-    ),
-    Container(height: buttonSpacer),
-  ];
 }
