@@ -221,10 +221,6 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
         ],
         centered: true,
       ),
-
-      // User interaction
-      drawerHeader: signalDrawerHeader(context),
-      drawerBody: signalDrawerBody(context),
     );
   }
 }
