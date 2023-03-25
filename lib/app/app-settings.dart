@@ -15,14 +15,17 @@ class AppSettings extends StatefulWidget {
 class _AppSettingsState extends State<AppSettings> {
   @override
   Widget build(BuildContext context) {
-    // Gather theme data
-
     double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
     double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
     return navWindow(
       context: context,
 
+      // Styling
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
+
+      // Body
       body: ezScrollView(
         children: [
           warningCard(
@@ -193,12 +196,6 @@ class _AppSettingsState extends State<AppSettings> {
           ),
         ],
       ),
-
-      // Background image/decoration
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-
-      // Fallback background color
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
     );
   }
 }
