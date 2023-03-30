@@ -1,10 +1,10 @@
-import '../app/settings-screen.dart';
+import 'signal.dart';
+import 'signal-api.dart';
+import 'create-signal-screen.dart';
 import '../utils/drawers.dart';
 import '../utils/constants.dart';
 import '../utils/validate.dart';
-import '../signals/signal.dart';
-import '../signals/signal-api.dart';
-import '../signals/create-signal-screen.dart';
+import '../app/settings-screen.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -121,10 +121,14 @@ class _SignalBoardState extends State<SignalBoard> {
 
         // GoTo settings
         EZButton.icon(
-          action: () => popAndPushScreen(
-            context: context,
-            screen: SettingsScreen(),
-          ),
+          action: () async {
+            bool shouldRefresh = await popAndPushScreen(
+              context: context,
+              screen: SettingsScreen(),
+            );
+
+            if (shouldRefresh) refresh();
+          },
           message: 'Settings',
           icon: ezIcon(PlatformIcons(context).settings),
         ),
