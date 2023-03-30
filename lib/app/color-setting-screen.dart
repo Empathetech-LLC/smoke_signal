@@ -36,30 +36,65 @@ class _ColorSettingScreenState extends State<ColorSettingScreen> {
           Container(height: buttonSpacer),
 
           // Background
-          ColorSetting(toControl: backColorKey, message: 'Background'),
+          ColorSetting(
+            toControl: backColorKey,
+            message: 'Background',
+          ),
           Container(height: buttonSpacer),
 
           // Theme
-          ColorSetting(toControl: themeColorKey, message: 'Theme'),
+          ColorSetting(
+            toControl: themeColorKey,
+            message: 'Theme',
+          ),
           Container(height: buttonSpacer),
-          ColorSetting(toControl: themeTextColorKey, message: 'Theme\ntext'),
+
+          ColorSetting(
+            toControl: themeTextColorKey,
+            message: 'Theme\ntext',
+            textBackground: AppConfig.prefs[themeColorKey],
+          ),
           Container(height: buttonSpacer),
 
           // Buttons
-          ColorSetting(toControl: buttonColorKey, message: 'Buttons'),
+          ColorSetting(
+            toControl: buttonColorKey,
+            message: 'Buttons',
+          ),
           Container(height: buttonSpacer),
-          ColorSetting(toControl: buttonTextColorKey, message: 'Button\ntext'),
+
+          ColorSetting(
+            toControl: buttonTextColorKey,
+            message: 'Button\ntext',
+            textBackground: AppConfig.prefs[buttonColorKey],
+          ),
           Container(height: buttonSpacer),
 
           // Signals
-          ColorSetting(toControl: watchingColorKey, message: 'Watching\nsignal'),
-          Container(height: buttonSpacer),
-          ColorSetting(toControl: watchingTextColorKey, message: 'Watching\nsignal text'),
+          ColorSetting(
+            toControl: watchingColorKey,
+            message: 'Watching\nsignal',
+          ),
           Container(height: buttonSpacer),
 
-          ColorSetting(toControl: joinedColorKey, message: 'Joined\nsignal'),
+          ColorSetting(
+            toControl: watchingTextColorKey,
+            message: 'Watching\nsignal text',
+            textBackground: AppConfig.prefs[watchingColorKey],
+          ),
           Container(height: buttonSpacer),
-          ColorSetting(toControl: joinedTextColorKey, message: 'Joined\nsignal text'),
+
+          ColorSetting(
+            toControl: joinedColorKey,
+            message: 'Joined\nsignal',
+          ),
+          Container(height: buttonSpacer),
+
+          ColorSetting(
+            toControl: joinedTextColorKey,
+            message: 'Joined\nsignal text',
+            textBackground: AppConfig.prefs[joinedColorKey],
+          ),
           Container(height: buttonSpacer),
 
           // Reset all color settings
