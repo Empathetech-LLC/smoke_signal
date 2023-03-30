@@ -1,0 +1,124 @@
+import '../utils/constants.dart';
+
+import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+
+import 'package:flutter/material.dart';
+
+class StyleSettingScreen extends StatefulWidget {
+  const StyleSettingScreen({Key? key}) : super(key: key);
+
+  @override
+  _StyleSettingScreenState createState() => _StyleSettingScreenState();
+}
+
+class _StyleSettingScreenState extends State<StyleSettingScreen> {
+  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+
+  @override
+  Widget build(BuildContext context) {
+    double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+    double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
+
+    return ezScaffold(
+      context: context,
+      title: 'Style settings',
+      backgroundColor: Color(AppConfig.prefs[themeColorKey]),
+      body: ezScrollView(
+        children: [
+          // Font Family
+          FontFamilySetting(),
+          Container(height: buttonSpacer),
+
+          // Font size
+          SliderSetting(
+            prefsKey: fontSizeKey,
+            type: SettingType.fontSize,
+            title: 'Font size',
+            min: 12.0,
+            max: 48.0,
+            steps: 18,
+          ),
+          Container(height: buttonSpacer),
+
+          // Margin
+          SliderSetting(
+            prefsKey: marginKey,
+            type: SettingType.margin,
+            title: 'Margin',
+            min: 5.0,
+            max: 35.0,
+            steps: 12,
+          ),
+          Container(height: buttonSpacer),
+
+          // Padding
+          SliderSetting(
+            prefsKey: paddingKey,
+            type: SettingType.padding,
+            title: 'Padding',
+            min: 5.0,
+            max: 25.0,
+            steps: 8,
+          ),
+          Container(height: buttonSpacer),
+
+          // Button spacing
+          SliderSetting(
+            prefsKey: buttonSpacingKey,
+            type: SettingType.buttonSpacing,
+            title: 'Button spacing',
+            min: 10.0,
+            max: 100.0,
+            steps: 18,
+          ),
+          Container(height: buttonSpacer),
+
+          // Dialog spacing
+          SliderSetting(
+            prefsKey: dialogSpacingKey,
+            type: SettingType.dialogSpacing,
+            title: 'Dialog spacing',
+            min: 10.0,
+            max: 100.0,
+            steps: 18,
+          ),
+          Container(height: buttonSpacer),
+
+          // Signal height
+          SliderSetting(
+            prefsKey: signalHeightKey,
+            type: SettingType.buttonHeight,
+            title: 'Signal card height',
+            min: 75,
+            max: 200,
+            steps: 5,
+          ),
+          Container(height: buttonSpacer),
+
+          // Signal count height
+          SliderSetting(
+            prefsKey: signalCountHeightKey,
+            type: SettingType.buttonHeight,
+            title: 'Signal count height',
+            min: 50,
+            max: 100,
+            steps: 10,
+          ),
+          Container(height: buttonSpacer),
+
+          // Signal spacing
+          SliderSetting(
+            prefsKey: signalSpacingKey,
+            type: SettingType.buttonSpacing,
+            title: 'Signal spacing',
+            min: 10.0,
+            max: 100.0,
+            steps: 18,
+          ),
+        ],
+      ),
+    );
+  }
+}
