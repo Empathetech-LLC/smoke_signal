@@ -23,42 +23,43 @@ class _ColorSettingScreenState extends State<ColorSettingScreen> {
 
     return ezScaffold(
       context: context,
-      title: 'Settings',
-      backgroundColor: Color(AppConfig.prefs[themeColorKey]),
+      title: 'Color settings',
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
       body: ezScrollView(
         children: [
           // User hint: hold the buttons to reset the color
-          ezText(
+          Container(height: buttonSpacer),
+          Text(
             'Hold buttons to reset',
             style: getTextStyle(dialogContentStyleKey),
           ),
-          Container(height: dialogSpacer),
+          Container(height: buttonSpacer),
 
           // Background
-          ColorSetting(toControl: backColorKey, message: 'Background color'),
+          ColorSetting(toControl: backColorKey, message: 'Background'),
           Container(height: buttonSpacer),
 
           // Theme
           ColorSetting(toControl: themeColorKey, message: 'Theme'),
           Container(height: buttonSpacer),
-          ColorSetting(toControl: themeTextColorKey, message: 'Theme text'),
+          ColorSetting(toControl: themeTextColorKey, message: 'Theme\ntext'),
           Container(height: buttonSpacer),
 
           // Buttons
           ColorSetting(toControl: buttonColorKey, message: 'Buttons'),
           Container(height: buttonSpacer),
-          ColorSetting(toControl: buttonTextColorKey, message: 'Button text'),
+          ColorSetting(toControl: buttonTextColorKey, message: 'Button\ntext'),
           Container(height: buttonSpacer),
 
           // Signals
-          ColorSetting(toControl: watchingColorKey, message: 'Watching'),
+          ColorSetting(toControl: watchingColorKey, message: 'Watching\nsignal'),
           Container(height: buttonSpacer),
-          ColorSetting(toControl: watchingTextColorKey, message: 'Watching text'),
+          ColorSetting(toControl: watchingTextColorKey, message: 'Watching\nsignal text'),
           Container(height: buttonSpacer),
 
-          ColorSetting(toControl: joinedColorKey, message: 'Joined'),
+          ColorSetting(toControl: joinedColorKey, message: 'Joined\nsignal'),
           Container(height: buttonSpacer),
-          ColorSetting(toControl: joinedTextColorKey, message: 'Joined text'),
+          ColorSetting(toControl: joinedTextColorKey, message: 'Joined\nsignal text'),
           Container(height: buttonSpacer),
 
           // Reset all color settings
@@ -94,6 +95,7 @@ class _ColorSettingScreenState extends State<ColorSettingScreen> {
               style: getTextStyle(subTitleStyleKey),
             ),
           ),
+          Container(height: buttonSpacer),
         ],
       ),
     );
