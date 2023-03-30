@@ -118,21 +118,6 @@ class _SignalBoardState extends State<SignalBoard> {
       drawerBody: [
         Container(height: buttonSpacer),
 
-        // Add new signal
-        EZButton.icon(
-          action: () async {
-            bool shouldReload = await popAndPushScreen(
-              context: context,
-              screen: CreateSignalScreen(),
-            );
-
-            if (shouldReload) reload();
-          },
-          message: 'New signal',
-          icon: ezIcon(PlatformIcons(context).add),
-        ),
-        Container(height: buttonSpacer),
-
         // GoTo settings
         EZButton.icon(
           action: () => popAndPushScreen(
@@ -158,13 +143,28 @@ class _SignalBoardState extends State<SignalBoard> {
           body: Text('Input rules'),
         ),
         Container(height: buttonSpacer),
+
+        // Reload
+        EZButton.icon(
+          action: () {
+            popScreen(context);
+            reload();
+          },
+          message: 'Reload',
+          icon: ezIcon(PlatformIcons(context).refresh),
+        ),
       ],
 
       fab: EZButton(
-        action: refresh,
-        longAction: reload,
-        body: ezIcon(PlatformIcons(context).refresh),
-        customStyle: ElevatedButton.styleFrom(shape: CircleBorder()),
+        action: () async {
+          bool shouldReload = await popAndPushScreen(
+            context: context,
+            screen: CreateSignalScreen(),
+          );
+
+          if (shouldReload) reload();
+        },
+        body: ezIcon(PlatformIcons(context).add),
       ),
     );
   }
