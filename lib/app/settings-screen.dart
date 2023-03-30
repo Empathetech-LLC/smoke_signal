@@ -26,14 +26,15 @@ class _SettingsState extends State<SettingsScreen> {
     return ezScaffold(
       context: context,
       title: 'Settings',
-      backgroundColor: Color(AppConfig.prefs[themeColorKey]),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
       body: ezScrollView(
         children: [
           warningCard(
             context: context,
             warning: 'Changes won\'t take effect until restart',
           ),
-          Container(height: buttonSpacer),
+          Container(height: 2 * buttonSpacer),
 
           // Colors
           EZButton(
@@ -54,14 +55,14 @@ class _SettingsState extends State<SettingsScreen> {
             action: () => pushScreen(context: context, screen: StyleSettingScreen()),
             body: Text('Styling'),
           ),
-          Container(height: buttonSpacer),
+          Container(height: 2 * buttonSpacer),
 
           // Reset all signal settings
           GestureDetector(
             onTap: () {
               ezDialog(
                 context: context,
-                title: 'Reset all app settings?',
+                title: 'Reset all settings?',
                 content: ezYesNo(
                   context: context,
                   onConfirm: () {
@@ -77,13 +78,12 @@ class _SettingsState extends State<SettingsScreen> {
                 ),
               );
             },
-            child: ezText(
+            child: Text(
               'Reset all',
               style: getTextStyle(subTitleStyleKey),
             ),
           ),
         ],
-        centered: true,
       ),
     );
   }
