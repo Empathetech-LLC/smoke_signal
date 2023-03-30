@@ -22,6 +22,8 @@ class Signal extends StatefulWidget {
     required this.owner,
     required this.activeMembers,
     required this.memberReqs,
+    required this.refreshBoard,
+    required this.reloadBoard,
   }) : super(key: key);
 
   final String title;
@@ -30,9 +32,15 @@ class Signal extends StatefulWidget {
   final String owner;
   final List<String> activeMembers;
   final List<String> memberReqs;
+  final void Function() refreshBoard;
+  final void Function() reloadBoard;
 
   /// Construct a [Signal] from a Firebase signal [DocumentSnapshot]
-  static Signal buildSignal(DocumentSnapshot signalDoc) {
+  static Signal buildSignal(
+    DocumentSnapshot signalDoc,
+    void Function() refreshBoard,
+    void Function() reloadBoard,
+  ) {
     final data = signalDoc.data() as Map<String, dynamic>;
 
     return Signal(
@@ -42,6 +50,8 @@ class Signal extends StatefulWidget {
       owner: data[ownerPath],
       activeMembers: List<String>.from(data[activeMembersPath]),
       memberReqs: List<String>.from(data[memberReqsPath]),
+      refreshBoard: refreshBoard,
+      reloadBoard: reloadBoard,
     );
   }
 
@@ -269,6 +279,7 @@ class _SignalState extends State<Signal> {
                           signalTitle,
                           [showIconPref, iconPathPref],
                         );
+                        widget.refreshBoard();
                       },
                       body: Text('Leave signal'),
                     ),
