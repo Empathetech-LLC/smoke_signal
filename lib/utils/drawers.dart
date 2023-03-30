@@ -30,7 +30,7 @@ List<Widget> standardDrawerBody(BuildContext context) {
     EZButton.icon(
       action: () => popAndPushScreen(
         context: context,
-        screen: SettingsScreen(startIndex: 0),
+        screen: SettingsScreen(),
       ),
       icon: ezIcon(PlatformIcons(context).settings),
       message: 'Settings',

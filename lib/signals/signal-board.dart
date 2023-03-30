@@ -123,7 +123,7 @@ class _SignalBoardState extends State<SignalBoard> {
         EZButton.icon(
           action: () => popAndPushScreen(
             context: context,
-            screen: SettingsScreen(startIndex: 1),
+            screen: SettingsScreen(),
           ),
           message: 'Settings',
           icon: ezIcon(PlatformIcons(context).settings),

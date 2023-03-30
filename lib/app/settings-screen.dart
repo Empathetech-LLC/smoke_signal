@@ -7,12 +7,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({
-    Key? key,
-    required this.startIndex,
-  }) : super(key: key);
-
-  final int startIndex;
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   _SettingsState createState() => _SettingsState();
