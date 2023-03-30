@@ -35,7 +35,6 @@ const String joinedTextColorKey = 'joinedSignalTextColor';
 /// [Map] of default values for all Smoke Signal specific user customizable UI variables
 /// Beyond those already present in [AppConfig] from empathetech_flutter_ui
 final Map<String, dynamic> customDefaults = {
-  fontFamilyKey: 'Roboto',
   backImageKey: darkForestPath,
   signalImageKey: smokeSignalPath,
   signalSpacingKey: 50.0,

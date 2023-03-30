@@ -1,4 +1,3 @@
-import '../utils/drawers.dart';
 import '../utils/constants.dart';
 import '../utils/validate.dart';
 import '../user/user-api.dart';
