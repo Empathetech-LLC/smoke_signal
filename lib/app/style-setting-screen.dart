@@ -18,13 +18,13 @@ class _StyleSettingScreenState extends State<StyleSettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+    double buttonSpacer = AppConfig.prefs[buttonSpacingKey] * 2;
     double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
     return ezScaffold(
       context: context,
       title: 'Style settings',
-      backgroundColor: Color(AppConfig.prefs[themeColorKey]),
+      backgroundColor: Color(AppConfig.prefs[backColorKey]),
       body: ezScrollView(
         children: [
           // Font Family
@@ -86,11 +86,22 @@ class _StyleSettingScreenState extends State<StyleSettingScreen> {
           ),
           Container(height: buttonSpacer),
 
+          // Signal spacing
+          SliderSetting(
+            prefsKey: signalSpacingKey,
+            type: SettingType.buttonSpacing,
+            title: 'Signal spacing',
+            min: 10.0,
+            max: 100.0,
+            steps: 18,
+          ),
+          Container(height: buttonSpacer),
+
           // Signal height
           SliderSetting(
             prefsKey: signalHeightKey,
             type: SettingType.buttonHeight,
-            title: 'Signal card height',
+            title: 'Signal height',
             min: 75,
             max: 200,
             steps: 5,
@@ -108,15 +119,40 @@ class _StyleSettingScreenState extends State<StyleSettingScreen> {
           ),
           Container(height: buttonSpacer),
 
-          // Signal spacing
-          SliderSetting(
-            prefsKey: signalSpacingKey,
-            type: SettingType.buttonSpacing,
-            title: 'Signal spacing',
-            min: 10.0,
-            max: 100.0,
-            steps: 18,
+          // Reset all style settings
+          GestureDetector(
+            onTap: () {
+              ezDialog(
+                context: context,
+                title: 'Reset style?',
+                content: ezYesNo(
+                  context: context,
+                  onConfirm: () {
+                    // Remove all color settings
+                    AppConfig.preferences.remove(fontFamilyKey);
+                    AppConfig.preferences.remove(fontSizeKey);
+                    AppConfig.preferences.remove(marginKey);
+                    AppConfig.preferences.remove(paddingKey);
+                    AppConfig.preferences.remove(buttonSpacingKey);
+                    AppConfig.preferences.remove(dialogSpacingKey);
+                    AppConfig.preferences.remove(signalSpacingKey);
+                    AppConfig.preferences.remove(signalHeightKey);
+                    AppConfig.preferences.remove(signalCountHeightKey);
+
+                    popScreen(context);
+                  },
+                  onDeny: () => popScreen(context),
+                  axis: Axis.vertical,
+                  spacer: dialogSpacer,
+                ),
+              );
+            },
+            child: ezText(
+              'Reset all',
+              style: getTextStyle(subTitleStyleKey),
+            ),
           ),
+          Container(height: buttonSpacer),
         ],
       ),
     );
