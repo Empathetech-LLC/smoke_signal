@@ -21,16 +21,23 @@ Widget standardDrawerHeader() {
 
 /// "Standard" drawer body
 /// For use on screen in which settings should be available, but no user is logged in
-List<Widget> standardDrawerBody(BuildContext context) {
+List<Widget> standardDrawerBody({
+  required BuildContext context,
+  void Function()? onReturn,
+}) {
   double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
   return [
     // GoTo settings
     EZButton.icon(
-      action: () => popAndPushScreen(
-        context: context,
-        screen: AppSettingsScreen(),
-      ),
+      action: () async {
+        bool doAction = await popAndPushScreen(
+          context: context,
+          screen: AppSettingsScreen(),
+        );
+
+        if (doAction && onReturn != null) onReturn();
+      },
       icon: ezIcon(PlatformIcons(context).settings),
       message: 'Settings',
     ),
@@ -54,7 +61,10 @@ List<Widget> standardDrawerBody(BuildContext context) {
 }
 
 /// Custom drawer header for Signal Board
-Widget signalDrawerHeader(BuildContext context) {
+Widget signalDrawerHeader({
+  required BuildContext context,
+  required void Function() refresh,
+}) {
   return Row(
     mainAxisSize: MainAxisSize.max,
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -87,10 +97,14 @@ Widget signalDrawerHeader(BuildContext context) {
         children: [
           // Edit
           EZButton(
-            action: () => popAndPushScreen(
-              context: context,
-              screen: ProfileSettingsScreen(),
-            ),
+            action: () async {
+              bool shouldRefresh = await popAndPushScreen(
+                context: context,
+                screen: ProfileSettingsScreen(),
+              );
+
+              if (shouldRefresh) refresh();
+            },
             body: ezIcon(PlatformIcons(context).edit),
           ),
           Container(height: AppConfig.prefs[dialogSpacingKey]),
