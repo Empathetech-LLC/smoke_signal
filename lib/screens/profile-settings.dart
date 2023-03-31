@@ -9,10 +9,10 @@ class ProfileSettingsScreen extends StatefulWidget {
   const ProfileSettingsScreen({super.key});
 
   @override
-  _ProfileSettingsScreenState createState() => _ProfileSettingsScreenState();
+  _ProfileSettingsState createState() => _ProfileSettingsState();
 }
 
-class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
+class _ProfileSettingsState extends State<ProfileSettingsScreen> {
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
 

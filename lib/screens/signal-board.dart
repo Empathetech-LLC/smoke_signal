@@ -1,8 +1,8 @@
-import 'signal.dart';
-import 'create-signal-screen.dart';
+import 'create-signal.dart';
+import 'app-settings.dart';
+import '../utils/signal.dart';
 import '../utils/drawers.dart';
 import '../utils/constants.dart';
-import '../app/settings-screen.dart';
 
 import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -121,7 +121,7 @@ class _SignalBoardState extends State<SignalBoard> {
           action: () async {
             bool shouldRefresh = await popAndPushScreen(
               context: context,
-              screen: SettingsScreen(),
+              screen: AppSettingsScreen(),
             );
 
             if (shouldRefresh) refresh();

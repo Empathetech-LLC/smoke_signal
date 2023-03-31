@@ -1,6 +1,6 @@
 import 'constants.dart';
-import '../app/settings-screen.dart';
-import '../user/profile-settings-screen.dart';
+import '../screens/app-settings.dart';
+import '../screens/profile-settings.dart';
 
 import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -29,7 +29,7 @@ List<Widget> standardDrawerBody(BuildContext context) {
     EZButton.icon(
       action: () => popAndPushScreen(
         context: context,
-        screen: SettingsScreen(),
+        screen: AppSettingsScreen(),
       ),
       icon: ezIcon(PlatformIcons(context).settings),
       message: 'Settings',

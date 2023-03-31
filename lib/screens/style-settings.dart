@@ -4,14 +4,14 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class StyleSettingScreen extends StatefulWidget {
-  const StyleSettingScreen({Key? key}) : super(key: key);
+class StyleSettingsScreen extends StatefulWidget {
+  const StyleSettingsScreen({Key? key}) : super(key: key);
 
   @override
-  _StyleSettingScreenState createState() => _StyleSettingScreenState();
+  _StyleSettingsState createState() => _StyleSettingsState();
 }
 
-class _StyleSettingScreenState extends State<StyleSettingScreen> {
+class _StyleSettingsState extends State<StyleSettingsScreen> {
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
   Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);

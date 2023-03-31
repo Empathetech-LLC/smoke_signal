@@ -1,4 +1,4 @@
-import '../user/reset-password-screen.dart';
+import 'reset-password.dart';
 import '../utils/drawers.dart';
 
 import 'package:empathetech_ss_api/empathetech_ss_api.dart';

@@ -1,19 +1,19 @@
-import 'color-setting-screen.dart';
-import 'image-setting-screen.dart';
-import 'style-setting-screen.dart';
+import 'color-settings.dart';
+import 'image-settings.dart';
+import 'style-settings.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+class AppSettingsScreen extends StatefulWidget {
+  const AppSettingsScreen({Key? key}) : super(key: key);
 
   @override
-  _SettingsState createState() => _SettingsState();
+  _AppSettingsState createState() => _AppSettingsState();
 }
 
-class _SettingsState extends State<SettingsScreen> {
+class _AppSettingsState extends State<AppSettingsScreen> {
   Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
   Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
@@ -37,21 +37,21 @@ class _SettingsState extends State<SettingsScreen> {
 
           // Colors
           EZButton(
-            action: () => pushScreen(context: context, screen: ColorSettingScreen()),
+            action: () => pushScreen(context: context, screen: ColorSettingsScreen()),
             body: Text('Colors'),
           ),
           Container(height: buttonSpacer),
 
           // Images
           EZButton(
-            action: () => pushScreen(context: context, screen: ImageSettingScreen()),
+            action: () => pushScreen(context: context, screen: ImageSettingsScreen()),
             body: Text('Images'),
           ),
           Container(height: buttonSpacer),
 
           // Styling
           EZButton(
-            action: () => pushScreen(context: context, screen: StyleSettingScreen()),
+            action: () => pushScreen(context: context, screen: StyleSettingsScreen()),
             body: Text('Styling'),
           ),
           Container(height: 2 * buttonSpacer),

@@ -1,5 +1,5 @@
+import 'screens/home.dart';
 import '../utils/constants.dart';
-import '../app/home-screen.dart';
 
 import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';

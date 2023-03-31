@@ -1,8 +1,8 @@
-import '../user/login-screen.dart';
-import '../user/sign-up-screen.dart';
-import '../utils/constants.dart';
+import 'login.dart';
+import 'sign-up.dart';
+import 'signal-board.dart';
 import '../utils/drawers.dart';
-import '../signals/signal-board.dart';
+import '../utils/constants.dart';
 
 import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
