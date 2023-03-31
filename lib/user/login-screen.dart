@@ -30,9 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ezScaffold(
-      context: context,
-
+    return EZScaffold(
       // Title && theme
       title: 'Welcome back!',
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),

@@ -23,8 +23,7 @@ class _SettingsState extends State<SettingsScreen> {
     double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
     double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
-    return ezScaffold(
-      context: context,
+    return EZScaffold(
       title: 'Settings',
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
       backgroundColor: Color(AppConfig.prefs[backColorKey]),

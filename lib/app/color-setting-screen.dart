@@ -21,8 +21,7 @@ class _ColorSettingScreenState extends State<ColorSettingScreen> {
     double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
     double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
-    return ezScaffold(
-      context: context,
+    return EZScaffold(
       title: 'Color settings',
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
       body: ezScrollView(

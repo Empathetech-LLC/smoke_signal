@@ -101,9 +101,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ezScaffold(
-      context: context,
-
+    return EZScaffold(
       // Title && theme
       title: 'New signal',
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),

@@ -29,9 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ezScaffold(
-      context: context,
-
+    return EZScaffold(
       // Title & theme
       title: 'Welcome!',
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),

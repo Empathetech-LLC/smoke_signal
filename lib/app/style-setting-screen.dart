@@ -21,8 +21,7 @@ class _StyleSettingScreenState extends State<StyleSettingScreen> {
     double buttonSpacer = AppConfig.prefs[buttonSpacingKey] * 2;
     double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
-    return ezScaffold(
-      context: context,
+    return EZScaffold(
       title: 'Style settings',
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
       body: ezScrollView(

@@ -67,9 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case HomeBuildType.loading:
       case HomeBuildType.auth:
       default:
-        return ezScaffold(
-          context: context,
-
+        return EZScaffold(
           // Title && theme
           title: appTitle,
           backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),

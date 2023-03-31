@@ -28,9 +28,7 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ezScaffold(
-      context: context,
-
+    return EZScaffold(
       // Title && theme
       title: 'No problem!',
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),

@@ -21,8 +21,7 @@ class _ImageSettingScreenState extends State<ImageSettingScreen> {
     double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
     double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
-    return ezScaffold(
-      context: context,
+    return EZScaffold(
       title: 'Image settings',
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
       body: ezScrollView(

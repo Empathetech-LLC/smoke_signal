@@ -45,9 +45,7 @@ class _SignalBoardState extends State<SignalBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return ezScaffold(
-      context: context,
-
+    return EZScaffold(
       // Title && theme
       title: 'Signals',
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),

@@ -20,9 +20,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ezScaffold(
-      context: context,
-
+    return EZScaffold(
       // Title && theme
       title: 'Edit Profile',
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),

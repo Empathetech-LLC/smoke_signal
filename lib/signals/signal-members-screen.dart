@@ -158,9 +158,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ezScaffold(
-      context: context,
-
+    return EZScaffold(
       // Title && theme
       title: widget.title + ' members',
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
