@@ -99,7 +99,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
         EZButton(
           action: () async {
             await requestMembers(context, widget.title, requestIDs);
-            popUntilHome(context);
+            popScreen(context);
           },
           body: Text('Send requests'),
         ),
