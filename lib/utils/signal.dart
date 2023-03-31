@@ -96,8 +96,8 @@ class _SignalState extends State<Signal> {
   );
 
   /// Set a custom [Icon] for the [Signal] via [changeImage]
-  void setIcon() {
-    ezDialog(
+  Future<bool> setIcon() async {
+    return await ezDialog(
       context: context,
       title: 'From where?',
       content: Column(
@@ -106,13 +106,13 @@ class _SignalState extends State<Signal> {
         children: [
           // From file
           EZButton.icon(
-            action: () {
-              changeImage(
+            action: () async {
+              bool changed = await changeImage(
                 context: context,
                 prefsPath: iconPathPref,
                 source: ImageSource.gallery,
               );
-              popScreen(context);
+              popScreen(context, success: changed);
             },
             message: 'File',
             icon: ezIcon(PlatformIcons(context).folder),
@@ -121,13 +121,13 @@ class _SignalState extends State<Signal> {
 
           // From camera
           EZButton.icon(
-            action: () {
-              changeImage(
+            action: () async {
+              bool changed = await changeImage(
                 context: context,
                 prefsPath: iconPathPref,
                 source: ImageSource.camera,
               );
-              popScreen(context);
+              popScreen(context, success: changed);
             },
             message: 'Camera',
             icon: ezIcon(PlatformIcons(context).photoCamera),
@@ -152,7 +152,7 @@ class _SignalState extends State<Signal> {
 
               // Wipe [SharedPreferences]
               AppConfig.preferences.remove(iconPathPref);
-              popScreen(context);
+              popScreen(context, success: true);
             },
             body: Text('Reset'),
           ),
@@ -206,9 +206,10 @@ class _SignalState extends State<Signal> {
 
           // Set icon
           EZButton(
-            action: () {
+            action: () async {
               popScreen(context);
-              setIcon();
+              bool shouldRefresh = await setIcon();
+              if (shouldRefresh) widget.refreshBoard();
             },
             body: Text('Set icon'),
           ),
