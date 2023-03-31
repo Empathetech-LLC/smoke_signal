@@ -1,8 +1,10 @@
-Smoke Signal is a user first, zero social algorithms, zero forceed advertisements social media app.
+# Smoke Signal
 
-Smoke Signal intends to be a familiar community building tool, without all the non-sense. The price for non-sense removal is whatever your personal server cost to run Smoke Signal is. More on that later.
+Smoke Signal is a live status/group activities social media app. Currently, Smoke Signal has no official release. With a little Firebase elbow-grease the code here can be used to side-load Smoke Signal.
 
-## Table of Contents
+It is intended for Smoke Signal to have an official release. If you would like to expedite that process, see [Contributing](#Contributing)
+
+### Table of Contents
 
 * [Ingredients](#Ingredients)
 * [Contributing](#Contributing)
@@ -10,13 +12,15 @@ Smoke Signal intends to be a familiar community building tool, without all the n
 * [License](#License)
 * [Credits](#Credits)
 
-# Ingredients
+## Ingredients
 
-The front end is built with [Flutter](https://flutter.dev/), which allows for instant (ish) cross platform development. The back end is built with [Firebase](https://firebase.google.com/), which has all the pros/cons of a [BaaS](https://www.cloudflare.com/learning/serverless/glossary/backend-as-a-service-baas/). For Smoke Signal, we're happy to use Firebase for the great Flutter libraries (both are Google products) and the solid [free tier](https://firebase.google.com/pricing).
+The front end is built with [Flutter](https://flutter.dev/), which allows for instant (ish) cross platform development. The back end is built with [Firebase](https://firebase.google.com/), which has all the pros/cons of a [BaaS](https://www.cloudflare.com/learning/serverless/glossary/backend-as-a-service-baas/). For Smoke Signal, we're happy to start with Firebase for the great Flutter libraries (both are Google products) and the solid [free tier](https://firebase.google.com/pricing).
 
-# Contributing
+The plan is to migrate Smoke Signal to run on the [Mastodon](https://github.com/mastodon/mastodon) platform, then release it on the official App Stores.
 
-## Time
+## Contributing
+
+### Time
 
 You can open an issue, start a discussion, or [reach out](mailto:support@empathetech.net) about becomming a contributor.
 
@@ -24,64 +28,60 @@ Smoke Signal is released under the [GNU GPLv3 License](LICENSE)
 
 If you're comfortable please send/post some custom themes and activity boards! I'd love to see what people create!
 
-## Money
+*Side note* If you love the customizability of Smoke Signal, let it [inspire you](https://pub.dev/packages/empathetech_flutter_ui)
+
+### Money
 
 Much thanks for any and all donations. Hopefully Empathetech has earned it making your life a little easier.
 
-### Paypal
+#### Paypal
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=NGEL6AB5A6KNL)
 
-### Venmo
+#### Venmo
 
 [@empathetech-llc](https://venmo.com/empathetech-llc)
 
-### Cash App
+#### Cash App
 
 [$empathetech](https://cash.app/$empathetech)
 
-# Contact
+## Contact
 
 [Us](mailto:support@empathetech.net)
 
-# License
+## License
 
 [GNU GPLv3](LICENSE)
 
-# Credits
+## Credits
 
 ## Freelance support
 
 None, yet.
 
-## Community support/free assets
+### Community support/free assets
 
 [pimen](https://pimen.itch.io/) for making the art for the default active image (Smoke Signal)
 
 [edermunizz](https://edermunizz.itch.io/) for making the art for the "Dark Forest" background
 
-[brullov](https://brullov.itch.io/) for making the art for the "Oak Forest" background
-
-[trixelized](https://trixelized.itch.io/) for making the art for the "Stary Forest" background
-
-[freepik]("https://www.freepik.com/") for making the loading .gif and no image icon
-
-## Flutter libraries
+### Flutter libraries
 
 - [Flutter colorpicker](https://pub.dev/packages/flutter_colorpicker)
 - [Email validator](https://pub.dev/packages/email_validator)
 - [Local notifications](https://pub.dev/packages/flutter_local_notifications)
 - [Launcher icons](https://pub.dev/packages/flutter_launcher_icons)
 
-## ...and last, but certainly not least...
+### ...and last, but certainly not least...
 
 YouTube tutorial makers, Medium article writers, Stack Overflow folx, and friends. You're the bridge between an idea and action.
 
-# Using the app
+## Using the app
 
 If you're the skim-reading type, you can stop now! Just open the app and mess around! Hopefully it's intuitive. [If not...](#Contributing)
 
-## Login/Sign up
+### Login/Sign up
 
 Email/password combinations given in the sign up screen will be automatically stored in the [Firebase Firestore](https://firebase.google.com/docs/firestore).
 
@@ -91,7 +91,7 @@ Once added, users will be able to use the login screen.
 
 *NOTE:* Currently, the only way to update an existing user's password is manually in the [Firebase Console](https://console.firebase.google.com) (under Authentication).
 
-## Signals/Activities 
+### Signals/Activities 
 
 Once signed in, users will be greeted by the activity board where they can join, edit, and/or create activities.
 
@@ -111,7 +111,7 @@ Oh, and don't worry, you won't accidentally logout a bunch (there's a prompt for
 
 <img src="/docs/assets/logout.png" alt="Smoke Signal logout prompt" width="250"/>
 
-## Customization
+### Customization
 
 Everything is customizable in Smoke Signal...
 
