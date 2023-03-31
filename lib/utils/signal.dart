@@ -181,8 +181,8 @@ class _SignalState extends State<Signal> {
   }
 
   /// Show all [Signal] edits the user can make
-  void showEdits() {
-    ezDialog(
+  Future<bool> showEdits() {
+    return ezDialog(
       context: context,
       title: 'Options',
       content: Column(
@@ -209,7 +209,7 @@ class _SignalState extends State<Signal> {
             action: () async {
               popScreen(context);
               bool shouldRefresh = await setIcon();
-              if (shouldRefresh) widget.refreshBoard();
+              if (shouldRefresh) widget.reloadBoard();
             },
             body: Text('Set icon'),
           ),
