@@ -17,7 +17,6 @@ dependencies:
   
   # Flutter (Google)
   cupertino_icons: ^1.0.2
-  flutter_native_splash: ^2.2.7
   path: ^1.8.2
   path_provider: ^2.0.11
   shared_preferences: ^2.0.15
@@ -41,10 +40,8 @@ dependencies:
   empathetech_flutter_ui: ^1.1.2
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
-  # Community
+  dependency_validator: ^3.0.0
+  flutter_native_splash: ^2.2.7
   flutter_launcher_icons: ^0.12.0
 
 # App configuration
