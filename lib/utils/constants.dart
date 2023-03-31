@@ -10,7 +10,7 @@ final List<String> assets = [
   smokeSignalPath,
 ];
 
-/// Image path -> image source key -> value pair
+/// Image path -> image source
 final Map<String, String> credits = {
   appIconPath: 'Empathetech LLC: The Founder\n\nUnnamed',
   smokeSignalPath: 'https://pimen.itch.io/\n\n\'Smoke Effect\'',
