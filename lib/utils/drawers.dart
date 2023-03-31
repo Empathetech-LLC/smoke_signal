@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-/// "Standard" drawer header
+/// "Standard" drawer header: circle avatar of the app's icon
 /// For use on screen in which settings should be available, but no user is logged in
 Widget standardDrawerHeader() {
   return CircleAvatar(
@@ -19,7 +19,7 @@ Widget standardDrawerHeader() {
   );
 }
 
-/// "Standard" drawer body
+/// "Standard" drawer body: GoTo settings and show input rules
 /// For use on screen in which settings should be available, but no user is logged in
 List<Widget> standardDrawerBody(
   BuildContext context, {
@@ -61,6 +61,7 @@ List<Widget> standardDrawerBody(
 }
 
 /// Custom drawer header for Signal Board
+/// Show profile information, GoTo profile settings, and logout
 Widget signalDrawerHeader(
   BuildContext context, {
   required void Function() refresh,
