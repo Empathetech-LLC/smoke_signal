@@ -80,7 +80,7 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
 
       // User interaction
       drawerHeader: standardDrawerHeader(),
-      drawerBody: standardDrawerBody(context: context),
+      drawerBody: standardDrawerBody(context),
     );
   }
 }

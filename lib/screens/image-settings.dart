@@ -48,10 +48,10 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
           GestureDetector(
             onTap: () {
               ezDialog(
-                context: context,
+                context,
                 title: 'Reset all images?',
                 content: ezYesNo(
-                  context: context,
+                  context,
                   onConfirm: () {
                     // Remove all color settings
                     AppConfig.preferences.remove(backImageKey);

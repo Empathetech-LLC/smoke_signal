@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // Body
           body: (type == HomeBuildType.loading)
               ? loadingMessage(
-                  context: context,
+                  context,
                   image: buildImage(path: smokeSignalPath),
                 )
               : // Show authBuild
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Login
                   EZButton.icon(
                     action: () => pushScreen(
-                      context: context,
+                      context,
                       screen: LoginScreen(),
                     ),
                     message: 'Login',
@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Sign up
                   EZButton.icon(
                     action: () => pushScreen(
-                      context: context,
+                      context,
                       screen: SignUpScreen(),
                     ),
                     message: 'Sign up',
@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // User interaction
           drawerHeader: standardDrawerHeader(),
-          drawerBody: standardDrawerBody(context: context),
+          drawerBody: standardDrawerBody(context),
         );
     }
   }

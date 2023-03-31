@@ -100,10 +100,10 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
           GestureDetector(
             onTap: () {
               ezDialog(
-                context: context,
+                context,
                 title: 'Reset all colors?',
                 content: ezYesNo(
-                  context: context,
+                  context,
                   onConfirm: () {
                     // Remove all color settings
                     AppConfig.preferences.remove(backColorKey);

@@ -169,7 +169,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return loadingMessage(
-                context: context,
+                context,
                 image: buildImage(
                   path: AppConfig.prefs[signalImageKey],
                 ),

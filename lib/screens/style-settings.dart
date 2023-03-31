@@ -122,10 +122,10 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
           GestureDetector(
             onTap: () {
               ezDialog(
-                context: context,
+                context,
                 title: 'Reset style?',
                 content: ezYesNo(
-                  context: context,
+                  context,
                   onConfirm: () {
                     // Remove all color settings
                     AppConfig.preferences.remove(fontFamilyKey);

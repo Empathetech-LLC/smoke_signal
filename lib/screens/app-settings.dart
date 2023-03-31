@@ -30,28 +30,28 @@ class _AppSettingsState extends State<AppSettingsScreen> {
       body: ezScrollView(
         children: [
           warningCard(
-            context: context,
+            context,
             warning: 'Changes won\'t take effect until restart',
           ),
           Container(height: 2 * buttonSpacer),
 
           // Colors
           EZButton(
-            action: () => pushScreen(context: context, screen: ColorSettingsScreen()),
+            action: () => pushScreen(context, screen: ColorSettingsScreen()),
             body: Text('Colors'),
           ),
           Container(height: buttonSpacer),
 
           // Images
           EZButton(
-            action: () => pushScreen(context: context, screen: ImageSettingsScreen()),
+            action: () => pushScreen(context, screen: ImageSettingsScreen()),
             body: Text('Images'),
           ),
           Container(height: buttonSpacer),
 
           // Styling
           EZButton(
-            action: () => pushScreen(context: context, screen: StyleSettingsScreen()),
+            action: () => pushScreen(context, screen: StyleSettingsScreen()),
             body: Text('Styling'),
           ),
           Container(height: 2 * buttonSpacer),
@@ -60,10 +60,10 @@ class _AppSettingsState extends State<AppSettingsScreen> {
           GestureDetector(
             onTap: () {
               ezDialog(
-                context: context,
+                context,
                 title: 'Reset all settings?',
                 content: ezYesNo(
-                  context: context,
+                  context,
                   onConfirm: () {
                     AppConfig.prefs.forEach((key, value) {
                       AppConfig.preferences.remove(key);

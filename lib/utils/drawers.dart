@@ -21,8 +21,8 @@ Widget standardDrawerHeader() {
 
 /// "Standard" drawer body
 /// For use on screen in which settings should be available, but no user is logged in
-List<Widget> standardDrawerBody({
-  required BuildContext context,
+List<Widget> standardDrawerBody(
+  BuildContext context, {
   void Function()? onReturn,
 }) {
   double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
@@ -32,7 +32,7 @@ List<Widget> standardDrawerBody({
     EZButton.icon(
       action: () async {
         bool doAction = await popAndPushScreen(
-          context: context,
+          context,
           screen: AppSettingsScreen(),
         );
 
@@ -46,7 +46,7 @@ List<Widget> standardDrawerBody({
     // Show input rules
     EZButton(
       action: () => ezDialog(
-        context: context,
+        context,
         title: 'Input rules',
         content: Text(
           validatorRule,
@@ -61,8 +61,8 @@ List<Widget> standardDrawerBody({
 }
 
 /// Custom drawer header for Signal Board
-Widget signalDrawerHeader({
-  required BuildContext context,
+Widget signalDrawerHeader(
+  BuildContext context, {
   required void Function() refresh,
 }) {
   return Row(
@@ -99,7 +99,7 @@ Widget signalDrawerHeader({
           EZButton(
             action: () async {
               bool shouldRefresh = await popAndPushScreen(
-                context: context,
+                context,
                 screen: ProfileSettingsScreen(),
               );
 

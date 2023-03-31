@@ -91,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       // User interaction
       drawerHeader: standardDrawerHeader(),
-      drawerBody: standardDrawerBody(context: context),
+      drawerBody: standardDrawerBody(context),
     );
   }
 }

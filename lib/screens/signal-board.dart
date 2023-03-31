@@ -60,7 +60,7 @@ class _SignalBoardState extends State<SignalBoard> {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
                     return loadingMessage(
-                      context: context,
+                      context,
                       image: buildImage(
                         path: AppConfig.prefs[signalImageKey],
                       ),
@@ -112,7 +112,7 @@ class _SignalBoardState extends State<SignalBoard> {
       ),
 
       // User interaction
-      drawerHeader: signalDrawerHeader(context: context, refresh: refresh),
+      drawerHeader: signalDrawerHeader(context, refresh: refresh),
       drawerBody: [
         Container(height: buttonSpacer),
 
@@ -120,7 +120,7 @@ class _SignalBoardState extends State<SignalBoard> {
         EZButton.icon(
           action: () async {
             bool shouldRefresh = await popAndPushScreen(
-              context: context,
+              context,
               screen: AppSettingsScreen(),
             );
 
@@ -134,7 +134,7 @@ class _SignalBoardState extends State<SignalBoard> {
         // Show input rules
         EZButton(
           action: () => ezDialog(
-            context: context,
+            context,
             title: 'Input rules',
             content: Text(
               validatorRule,
@@ -160,7 +160,7 @@ class _SignalBoardState extends State<SignalBoard> {
       fab: EZButton(
         action: () async {
           bool shouldReload = await pushScreen(
-            context: context,
+            context,
             screen: CreateSignalScreen(),
           );
 

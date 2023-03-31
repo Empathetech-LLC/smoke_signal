@@ -98,7 +98,7 @@ class _SignalState extends State<Signal> {
   /// Set a custom [Icon] for the [Signal] via [changeImage]
   Future<bool> setIcon() async {
     return await ezDialog(
-      context: context,
+      context,
       title: 'From where?',
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -108,7 +108,7 @@ class _SignalState extends State<Signal> {
           EZButton.icon(
             action: () async {
               bool changed = await changeImage(
-                context: context,
+                context,
                 prefsPath: iconPathPref,
                 source: ImageSource.gallery,
               );
@@ -123,7 +123,7 @@ class _SignalState extends State<Signal> {
           EZButton.icon(
             action: () async {
               bool changed = await changeImage(
-                context: context,
+                context,
                 prefsPath: iconPathPref,
                 source: ImageSource.camera,
               );
@@ -183,7 +183,7 @@ class _SignalState extends State<Signal> {
   /// Show all [Signal] edits the user can make
   Future<bool> showEdits() {
     return ezDialog(
-      context: context,
+      context,
       title: 'Options',
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -192,7 +192,7 @@ class _SignalState extends State<Signal> {
           // Manage members
           EZButton(
             action: () => popAndPushScreen(
-              context: context,
+              context,
               screen: SignalMembersScreen(
                 title: signalTitle,
                 members: widget.members,
@@ -231,6 +231,8 @@ class _SignalState extends State<Signal> {
                       action: () async {
                         popScreen(context);
                         await resetSignal(context, signalTitle);
+                        // Reset signal causes a stream update
+                        // so the screen will update automatically
                       },
                       body: Text('Reset signal'),
                     ),
@@ -433,7 +435,7 @@ class _SignalState extends State<Signal> {
 
           // Buttons
           ezYesNo(
-            context: context,
+            context,
             onConfirm: () async {
               await acceptInvite(context, signalTitle);
             },

@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
           // Forgot password option
           GestureDetector(
             onTap: () => pushScreen(
-              context: context,
+              context,
               screen: ResetPasswordScreen(),
             ),
             child: Text(
@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       // User interaction
       drawerHeader: standardDrawerHeader(),
-      drawerBody: standardDrawerBody(context: context),
+      drawerBody: standardDrawerBody(context),
     );
   }
 }
