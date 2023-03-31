@@ -1,0 +1,58 @@
+name: smoke_signal
+
+description: Purposely simple/manual live activity social media app. Ping your friends when you start a potential group activity, so they know vibes are afoot!
+
+publish_to: none
+
+version: 1.0.0
+
+environment:
+  sdk: ">=2.17.5 <3.0.0"
+
+dependencies:
+  # Google
+  flutter:
+    sdk: flutter
+  path_provider: ^2.0.11
+  shared_preferences: ^2.0.15
+  image_picker: ^0.8.5+3
+  firebase_core: ^2.3.0
+  firebase_auth: ^4.1.4
+  firebase_messaging: ^14.1.2
+  cloud_firestore: ^4.1.0
+
+  # Community
+  empathetech_flutter_ui: ^1.1.4
+  empathetech_ss_api: ^1.0.1
+  # empathetech_flutter_ui:
+  #   path: ../empathetech_flutter_ui
+  # empathetech_ss_api:
+  #   path: ../empathetech_ss_api
+  cached_network_image: ^3.2.3
+  flutter_platform_widgets: ^3.2.0
+
+dev_dependencies:
+  dependency_validator: ^3.0.0
+  flutter_native_splash: ^2.2.7
+  flutter_launcher_icons: ^0.12.0
+
+# App configuration
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/app-icon.png
+    - assets/dark-forest.png
+    - assets/smoke-signal.gif
+
+flutter_icons:
+  image_path: assets/app-icon.png
+  adaptive_icon_foreground: assets/app-icon.png
+  adaptive_icon_background: "#A520DA"
+  android: true
+  ios: true
+
+flutter_native_splash:
+  color: "#A520DA"
+  image: assets/app-icon.png
