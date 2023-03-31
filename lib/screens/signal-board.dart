@@ -159,7 +159,7 @@ class _SignalBoardState extends State<SignalBoard> {
 
       fab: EZButton(
         action: () async {
-          bool shouldReload = await popAndPushScreen(
+          bool shouldReload = await pushScreen(
             context: context,
             screen: CreateSignalScreen(),
           );
