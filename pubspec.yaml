@@ -16,11 +16,8 @@ dependencies:
     path: ../empathetech_ss_api
   
   # Flutter (Google)
-  cupertino_icons: ^1.0.2
-  path: ^1.8.2
   path_provider: ^2.0.11
   shared_preferences: ^2.0.15
-  google_fonts: ^4.0.3
   image_picker: ^0.8.5+3
 
   # Firebase (Google)
@@ -28,16 +25,13 @@ dependencies:
   firebase_auth: ^4.1.4
   firebase_messaging: ^14.1.2
   cloud_firestore: ^4.1.0
-  cloud_functions: ^4.0.10
+
+  # Empathetech
+  empathetech_flutter_ui: ^1.1.2
 
   # Community
-  flutter_colorpicker: ^1.0.3
-  email_validator: ^2.1.17
   cached_network_image: ^3.2.3
   flutter_platform_widgets: ^3.2.0
-
-  # Also Empathetech
-  empathetech_flutter_ui: ^1.1.2
 
 dev_dependencies:
   dependency_validator: ^3.0.0
