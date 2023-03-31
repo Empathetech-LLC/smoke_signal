@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // User interaction
           drawerHeader: standardDrawerHeader(),
-          drawerBody: standardDrawerBody(context),
+          drawerBody: standardDrawerBody(context: context),
         );
     }
   }

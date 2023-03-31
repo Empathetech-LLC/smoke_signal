@@ -112,7 +112,7 @@ class _SignalBoardState extends State<SignalBoard> {
       ),
 
       // User interaction
-      drawerHeader: signalDrawerHeader(context),
+      drawerHeader: signalDrawerHeader(context: context, refresh: refresh),
       drawerBody: [
         Container(height: buttonSpacer),
 

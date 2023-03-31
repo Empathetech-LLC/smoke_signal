@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       // User interaction
       drawerHeader: standardDrawerHeader(),
-      drawerBody: standardDrawerBody(context),
+      drawerBody: standardDrawerBody(context: context),
     );
   }
 }
