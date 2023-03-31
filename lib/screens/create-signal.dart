@@ -16,8 +16,6 @@ class CreateSignalScreen extends StatefulWidget {
 }
 
 class _CreateSignalScreenState extends State<CreateSignalScreen> {
-  // Initialize state
-
   late Stream<QuerySnapshot<Map<String, dynamic>>> _userStream;
 
   @override
@@ -35,7 +33,6 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
   late TextEditingController _titleController = TextEditingController();
   late TextEditingController _messageController = TextEditingController();
 
-  // Gather theme data
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
@@ -93,8 +90,6 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
     return children;
   }
-
-  // Draw state
 
   @override
   Widget build(BuildContext context) {
