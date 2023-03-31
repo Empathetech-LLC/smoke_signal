@@ -1,15 +1,14 @@
-import '../user/user-api.dart';
-import '../signals/signal-api.dart';
-import '../signals/signal-members-screen.dart';
 import '../utils/constants.dart';
+import '../signals/signal-members-screen.dart';
 
+import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Happy signaling!

@@ -1,11 +1,10 @@
 import 'signal.dart';
-import 'signal-api.dart';
 import 'create-signal-screen.dart';
 import '../utils/drawers.dart';
 import '../utils/constants.dart';
-import '../utils/validate.dart';
 import '../app/settings-screen.dart';
 
+import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';

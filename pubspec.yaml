@@ -12,8 +12,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  empathetech_flutter_ui:
-    path: ../empathetech_flutter_ui
+  empathetech_ss_api:
+    path: ../empathetech_ss_api
   
   # Flutter (Google)
   cupertino_icons: ^1.0.2
@@ -36,6 +36,9 @@ dependencies:
   email_validator: ^2.1.17
   cached_network_image: ^3.2.3
   flutter_platform_widgets: ^3.2.0
+
+  # Also Empathetech
+  empathetech_flutter_ui: ^1.1.2
 
 dev_dependencies:
   flutter_test:

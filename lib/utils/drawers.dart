@@ -1,9 +1,8 @@
 import 'constants.dart';
-import 'validate.dart';
-import '../user/user-api.dart';
 import '../app/settings-screen.dart';
 import '../user/profile-settings-screen.dart';
 
+import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 import 'package:flutter/material.dart';
