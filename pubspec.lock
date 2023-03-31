@@ -130,7 +130,7 @@ packages:
     source: hosted
     version: "3.4.0"
   cloud_functions:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: cloud_functions
       sha256: "414a3189b5890c954a11b67bdde3507f7b3f9b6f78b7c677a5ce12c34d3b38d3"
@@ -194,7 +194,7 @@ packages:
     source: hosted
     version: "0.17.2"
   cupertino_icons:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: cupertino_icons
       sha256: e35129dc44c9118cee2a5603506d823bab99c68393879edb440e0090d07586be
@@ -218,7 +218,7 @@ packages:
     source: hosted
     version: "3.2.2"
   email_validator:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: email_validator
       sha256: e9a90f27ab2b915a27d7f9c2a7ddda5dd752d6942616ee83529b686fc086221b
@@ -358,7 +358,7 @@ packages:
     source: hosted
     version: "3.3.0"
   flutter_colorpicker:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_colorpicker
       sha256: "458a6ed8ea480eb16ff892aedb4b7092b2804affd7e046591fb03127e8d8ef8b"
@@ -440,7 +440,7 @@ packages:
     source: hosted
     version: "2.1.1"
   google_fonts:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: google_fonts
       sha256: "927573f2e8a8d65c17931e21918ad0ab0666b1b636537de7c4932bdb487b190f"
@@ -600,7 +600,7 @@ packages:
     source: hosted
     version: "2.1.0"
   path:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: path
       sha256: db9d4f58c908a4ba5953fcee2ae317c94889433e5024c27ce74a37f94267945b
