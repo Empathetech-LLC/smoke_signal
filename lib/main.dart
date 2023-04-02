@@ -11,7 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Handle notifations while the app is in the background/closed
+/// Handle notifications while the app is in the background/closed
 Future<void> _backgroundMsgHandler(RemoteMessage message) async {
   doNothing();
 }
@@ -20,7 +20,7 @@ void main() async {
   // Required first method on async main
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Lock app to portait
+  // Lock app to portrait
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   // Initialize app config
