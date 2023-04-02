@@ -228,18 +228,16 @@ packages:
   empathetech_flutter_ui:
     dependency: "direct main"
     description:
-      name: empathetech_flutter_ui
-      sha256: "5a3a21d6e1333764f7023ffc40f0c9232797c2845ab01fce1fc88ae59aaeede8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.4"
+      path: "../empathetech_flutter_ui"
+      relative: true
+    source: path
+    version: "1.1.5"
   empathetech_ss_api:
     dependency: "direct main"
     description:
-      name: empathetech_ss_api
-      sha256: "3d13c7b3b6fca6666f50dea21d6201f734e2279f08897a3a79409d47c8913ff7"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../empathetech_ss_api"
+      relative: true
+    source: path
     version: "1.0.1"
   fake_async:
     dependency: transitive
