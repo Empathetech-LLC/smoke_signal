@@ -114,7 +114,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
     List<UserProfile> memberProfiles = [];
     List<UserProfile> activeProfiles = [];
     List<UserProfile> pendingProfiles = [];
-    List<UserProfile> unnaddedProfiles = [];
+    List<UserProfile> unAddedProfiles = [];
 
     profiles.forEach((profile) {
       if (widget.members.contains(profile.id)) {
@@ -126,7 +126,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       } else if (widget.memberReqs.contains(profile.id)) {
         pendingProfiles.add(profile);
       } else {
-        unnaddedProfiles.add(profile);
+        unAddedProfiles.add(profile);
       }
     });
 
@@ -146,7 +146,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
         ezList(title: 'Pending', body: [showUserProfiles(context, pendingProfiles)]),
 
         // Addable users - exandable, toggle-able, profiles
-        ezList(title: 'Add?', body: buildSwitches(unnaddedProfiles)),
+        ezList(title: 'Add?', body: buildSwitches(unAddedProfiles)),
         Container(height: buttonSpacer),
       ],
     );
