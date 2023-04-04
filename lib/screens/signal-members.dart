@@ -6,6 +6,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SignalMembersScreen extends StatefulWidget {
   const SignalMembersScreen({
@@ -42,43 +43,30 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
   late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
   late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
+  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
   late Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
 
   // Creates the widgets for the toggle list from the gathered profiles
-  List<Widget> buildSwitches(List<UserProfile> profiles) {
-    List<Widget> children = [];
+  List<PlatformListTile> buildSwitchTiles(List<UserProfile> profiles) {
+    List<PlatformListTile> children = [];
 
     profiles.forEach((profile) {
       if (profile.id != AppUser.account.uid)
-        children.addAll(
-          [
-            Row(
+        children.add(
+          PlatformListTile(
+            // User info
+            title: Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Switch
-                ezSwitch(
-                  value: requestIDs.contains(profile.id),
-                  onChanged: (bool? value) {
-                    if (value == true) {
-                      setState(() {
-                        requestIDs.add(profile.id);
-                      });
-                    } else {
-                      setState(() {
-                        requestIDs.remove(profile.id);
-                      });
-                    }
-                  },
-                ),
-
                 // Profile image/avatar
                 CircleAvatar(
                   foregroundImage: CachedNetworkImageProvider(profile.avatarURL),
                   minRadius: 35,
                   maxRadius: 35,
                 ),
+                Container(width: AppConfig.prefs[paddingKey]),
 
                 // Display name
                 ezText(
@@ -88,24 +76,25 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
                 ),
               ],
             ),
-            Container(height: dialogSpacer),
-          ],
+
+            // Toggle
+            trailing: ezSwitch(
+              value: requestIDs.contains(profile.id),
+              onChanged: (bool? value) {
+                if (value == true) {
+                  setState(() {
+                    requestIDs.add(profile.id);
+                  });
+                } else {
+                  setState(() {
+                    requestIDs.remove(profile.id);
+                  });
+                }
+              },
+            ),
+          ),
         );
     });
-
-    // Add (send requests) button
-    children.addAll(
-      [
-        EZButton(
-          action: () async {
-            await requestMembers(context, widget.title, requestIDs);
-            popScreen(context);
-          },
-          body: Text('Send requests'),
-        ),
-        Container(height: dialogSpacer),
-      ],
-    );
 
     return children;
   }
@@ -130,26 +119,46 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       }
     });
 
-    return ezScrollView(
-      children: [
-        // Available members - show all pictures
-        ezText('Available', style: getTextStyle(titleStyleKey)),
-        showUserPics(context, memberProfiles),
-        Container(height: buttonSpacer),
+    List<Widget> viewChildren = [
+      // Available members - show all pictures
+      ezText(
+        'Available',
+        style: getTextStyle(titleStyleKey),
+        background: Color(AppConfig.prefs[themeColorKey]),
+      ),
+      showUserPics(context, memberProfiles),
+      Container(height: buttonSpacer),
 
-        // Active members - show all pictures
-        ezText('Active', style: getTextStyle(titleStyleKey)),
-        showUserPics(context, activeProfiles),
-        Container(height: buttonSpacer),
+      // Active members - show all pictures
+      ezText(
+        'Active',
+        style: getTextStyle(titleStyleKey),
+        background: Color(AppConfig.prefs[themeColorKey]),
+      ),
+      showUserPics(context, activeProfiles),
+      Container(height: buttonSpacer),
+    ];
 
-        // Pending members - expandable profiles
-        ezList(title: 'Pending', body: [showUserProfiles(context, pendingProfiles)]),
+    if (unAddedProfiles.isNotEmpty) {
+      // Addable users - expandable, toggle-able, profiles
+      viewChildren.add(
+        ezList(
+          context,
+          title: 'Add?',
+          items: buildSwitchTiles(unAddedProfiles),
+          // Confirm adding users button
+          trailingAction: EZButton(
+            action: () async {
+              await requestMembers(context, widget.title, requestIDs);
+              popScreen(context);
+            },
+            body: Text('Send requests'),
+          ),
+        ),
+      );
+    }
 
-        // Addable users - expandable, toggle-able, profiles
-        ezList(title: 'Add?', body: buildSwitches(unAddedProfiles)),
-        Container(height: buttonSpacer),
-      ],
-    );
+    return ezScrollView(children: viewChildren);
   }
 
   // Draw state
