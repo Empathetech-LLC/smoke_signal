@@ -147,8 +147,9 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
           // List of toggle-able members to send join requests on creation
           ezList(
+            context,
             title: 'Starting members',
-            body: [
+            items: [
               StreamBuilder<QuerySnapshot>(
                 stream: _userStream,
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
