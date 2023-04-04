@@ -145,7 +145,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
         // Pending members - expandable profiles
         ezList(title: 'Pending', body: [showUserProfiles(context, pendingProfiles)]),
 
-        // Addable users - exandable, toggle-able, profiles
+        // Addable users - expandable, toggle-able, profiles
         ezList(title: 'Add?', body: buildSwitches(unAddedProfiles)),
         Container(height: buttonSpacer),
       ],
