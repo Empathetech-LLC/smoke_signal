@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
           body: (type == HomeBuildType.loading)
               ? loadingMessage(
                   context,
-                  image: buildImage(path: smokeSignalPath),
+                  image: buildImage(pathKey: signalImageKey),
                 )
               : // Show authBuild
               ezScrollView(children: [

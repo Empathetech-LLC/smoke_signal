@@ -61,9 +61,7 @@ class _SignalBoardState extends State<SignalBoard> {
                   case ConnectionState.waiting:
                     return loadingMessage(
                       context,
-                      image: buildImage(
-                        path: AppConfig.prefs[signalImageKey],
-                      ),
+                      image: buildImage(pathKey: signalImageKey),
                     );
                   case ConnectionState.done:
                   default:

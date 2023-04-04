@@ -170,9 +170,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
             case ConnectionState.waiting:
               return loadingMessage(
                 context,
-                image: buildImage(
-                  path: AppConfig.prefs[signalImageKey],
-                ),
+                image: buildImage(pathKey: signalImageKey),
               );
             case ConnectionState.done:
             default:

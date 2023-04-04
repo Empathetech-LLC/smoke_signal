@@ -156,9 +156,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                     case ConnectionState.waiting:
                       return loadingMessage(
                         context,
-                        image: buildImage(
-                          path: AppConfig.prefs[signalImageKey],
-                        ),
+                        image: buildImage(pathKey: signalImageKey),
                       );
                     case ConnectionState.done:
                     default:
@@ -194,7 +192,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
               }
 
               // Attempt adding signal
-              bool added = await addtoDB(
+              bool added = await addToDB(
                 context,
                 _titleController.text.trim(),
                 _messageController.text.trim(),

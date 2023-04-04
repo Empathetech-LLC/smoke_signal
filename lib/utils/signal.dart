@@ -60,11 +60,10 @@ class Signal extends StatefulWidget {
 
 class _SignalState extends State<Signal> {
   late String signalTitle = widget.title;
-  late String showIconPref = signalTitle + 'ShowIcon';
-  late String iconPathPref = signalTitle + 'Icon';
-  late String iconPath = AppConfig.preferences.getString(iconPathPref) ?? appIconPath;
+  late String showIconKey = signalTitle + 'ShowIcon';
+  late String iconPathKey = signalTitle + 'Icon';
 
-  late bool showIcon = AppConfig.preferences.getBool(showIconPref) ?? false;
+  late bool showIcon = AppConfig.preferences.getBool(showIconKey) ?? false;
 
   late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
@@ -109,7 +108,7 @@ class _SignalState extends State<Signal> {
             action: () async {
               bool changed = await changeImage(
                 context,
-                prefsPath: iconPathPref,
+                prefsPath: iconPathKey,
                 source: ImageSource.gallery,
               );
               popScreen(context, success: changed);
@@ -124,7 +123,7 @@ class _SignalState extends State<Signal> {
             action: () async {
               bool changed = await changeImage(
                 context,
-                prefsPath: iconPathPref,
+                prefsPath: iconPathKey,
                 source: ImageSource.camera,
               );
               popScreen(context, success: changed);
@@ -151,7 +150,7 @@ class _SignalState extends State<Signal> {
               }
 
               // Wipe [SharedPreferences]
-              AppConfig.preferences.remove(iconPathPref);
+              AppConfig.preferences.remove(iconPathKey);
               popScreen(context, success: true);
             },
             body: Text('Reset'),
@@ -165,7 +164,7 @@ class _SignalState extends State<Signal> {
   void toggleIcon() {
     // Hide icon
     if (showIcon) {
-      AppConfig.preferences.remove(showIconPref);
+      AppConfig.preferences.remove(showIconKey);
       setState(() {
         showIcon = false;
       });
@@ -173,7 +172,7 @@ class _SignalState extends State<Signal> {
 
     // Show icon
     else {
-      AppConfig.preferences.setBool(showIconPref, true);
+      AppConfig.preferences.setBool(showIconKey, true);
       setState(() {
         showIcon = true;
       });
@@ -265,7 +264,7 @@ class _SignalState extends State<Signal> {
                         confirmDelete(
                           context,
                           signalTitle,
-                          [showIconPref, iconPathPref],
+                          [showIconKey, iconPathKey],
                         );
                       },
                       body: Text('Delete signal'),
@@ -279,7 +278,7 @@ class _SignalState extends State<Signal> {
                         confirmDeparture(
                           context,
                           signalTitle,
-                          [showIconPref, iconPathPref],
+                          [showIconKey, iconPathKey],
                         );
                         widget.refreshBoard();
                       },
@@ -325,7 +324,10 @@ class _SignalState extends State<Signal> {
                         Container(
                           width: signalHeight,
                           height: signalHeight,
-                          child: buildImage(path: iconPath),
+                          child: buildImage(
+                            pathKey: iconPathKey,
+                            backup: appIconPath,
+                          ),
                         ),
 
                         // Title card
@@ -387,12 +389,12 @@ class _SignalState extends State<Signal> {
                 children: widget.activeMembers.contains(AppUser.account.uid)
                     ? [
                         // Active: show the current count surrounded by smoke signals
-                        buildImage(path: AppConfig.prefs[signalImageKey]),
+                        buildImage(pathKey: signalImageKey),
                         Text(
                           widget.activeMembers.length.toString(),
                           style: joinedTextStyle,
                         ),
-                        buildImage(path: AppConfig.prefs[signalImageKey]),
+                        buildImage(pathKey: signalImageKey),
                       ]
                     : [
                         // Inactive: only show the current count
