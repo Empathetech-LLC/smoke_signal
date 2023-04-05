@@ -75,7 +75,7 @@ class _SignalBoardState extends State<SignalBoard> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: snapshot.data!.docs
                           .map((DocumentSnapshot signalDoc) =>
-                              Signal.buildSignal(signalDoc, refresh, reload))
+                              Signal.buildSignal(signalDoc, reload))
                           .toList(),
                     );
                 }
@@ -100,7 +100,7 @@ class _SignalBoardState extends State<SignalBoard> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: snapshot.data!.docs
                           .map((DocumentSnapshot signalDoc) =>
-                              Signal.buildSignal(signalDoc, refresh, reload))
+                              Signal.buildSignal(signalDoc, reload))
                           .toList(),
                     );
                 }
