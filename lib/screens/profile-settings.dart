@@ -13,8 +13,30 @@ class ProfileSettingsScreen extends StatefulWidget {
 }
 
 class _ProfileSettingsState extends State<ProfileSettingsScreen> {
-  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+
+  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+
+  late String name = AppUser.account.displayName ?? defaultDisplayName;
+  late String url = AppUser.account.photoURL ?? defaultAvatarURL;
+
+  /// Get the display name from source
+  void refreshName() async {
+    String newName = await getName();
+
+    setState(() {
+      name = newName;
+    });
+  }
+
+  /// Get the pic URL from source
+  void refreshPic() async {
+    String newUrl = await getAvatar();
+
+    setState(() {
+      url = newUrl;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +53,7 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
 
           // Profile image
           CircleAvatar(
-            foregroundImage:
-                CachedNetworkImageProvider(AppUser.account.photoURL ?? defaultAvatarURL),
+            foregroundImage: CachedNetworkImageProvider(url),
             minRadius: 100,
             maxRadius: 100,
           ),
@@ -40,9 +61,9 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
 
           // Edit picture
           EZButton.icon(
-            action: () {
-              editAvatar(context);
-              setState(doNothing);
+            action: () async {
+              bool shouldRefresh = await editAvatar(context);
+              if (shouldRefresh) refreshPic();
             },
             message: 'New pic',
             icon: ezIcon(PlatformIcons(context).photoCamera),
@@ -51,17 +72,14 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Display name
-          Text(
-            AppUser.account.displayName ?? defaultDisplayName,
-            style: getTextStyle(titleStyleKey),
-          ),
+          Text(name, style: getTextStyle(titleStyleKey)),
           Container(height: buttonSpacer),
 
           // Edit name
           EZButton.icon(
-            action: () {
-              editName(context);
-              setState(doNothing);
+            action: () async {
+              bool shouldRefresh = await editName(context);
+              if (shouldRefresh) refreshName();
             },
             message: 'New name',
             icon: ezIcon(PlatformIcons(context).edit),
