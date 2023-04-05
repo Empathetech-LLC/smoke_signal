@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               // Don't attempt login if we know the input is invalid
               if (!emailFormKey.currentState!.validate()) {
-                popNLog(context, 'Invalid email!');
+                logAlert(context, 'Invalid email!');
                 return;
               }
 

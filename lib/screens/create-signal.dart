@@ -162,7 +162,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                     case ConnectionState.done:
                     default:
                       if (snapshot.hasError) {
-                        popNLog(context, snapshot.error.toString());
+                        logAlert(context, snapshot.error.toString());
                         return Container();
                       }
 
@@ -185,10 +185,10 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
               // Don't do anything if the input is invalid
               if (!titleFormKey.currentState!.validate()) {
-                popNLog(context, 'Invalid title!');
+                logAlert(context, 'Invalid title!');
                 return;
               } else if (!messageFormKey.currentState!.validate()) {
-                popNLog(context, 'Invalid message!');
+                logAlert(context, 'Invalid message!');
                 return;
               }
 

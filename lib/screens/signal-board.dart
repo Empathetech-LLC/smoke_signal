@@ -66,7 +66,7 @@ class _SignalBoardState extends State<SignalBoard> {
                   case ConnectionState.done:
                   default:
                     if (snapshot.hasError) {
-                      popNLog(context, snapshot.error.toString());
+                      logAlert(context, snapshot.error.toString());
                       return Container();
                     }
 
@@ -91,7 +91,7 @@ class _SignalBoardState extends State<SignalBoard> {
                   case ConnectionState.done:
                   default:
                     if (snapshot.hasError) {
-                      popNLog(context, snapshot.error.toString());
+                      logAlert(context, snapshot.error.toString());
                       return Container();
                     }
 

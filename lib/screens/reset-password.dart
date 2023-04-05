@@ -57,7 +57,7 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
 
               // Don't do anything if the email is invalid
               if (!emailFormKey.currentState!.validate()) {
-                popNLog(context, 'Invalid email!');
+                logAlert(context, 'Invalid email!');
                 return;
               }
 
@@ -65,9 +65,9 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
               try {
                 await AppUser.auth
                     .sendPasswordResetEmail(email: _emailController.text.trim());
-                popNLog(context, 'Password reset email has been sent!');
+                logAlert(context, 'Password reset email has been sent!');
               } on Exception catch (e) {
-                popNLog(context, 'Failed to send password reset email:\n$e');
+                logAlert(context, 'Failed to send password reset email:\n$e');
               }
             },
             message: 'Send link',
