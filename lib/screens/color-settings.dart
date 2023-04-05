@@ -99,30 +99,31 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
           // Reset all color settings
           GestureDetector(
             onTap: () {
-              ezDialog(
-                context,
-                title: 'Reset all colors?',
-                content: ezYesNo(
-                  context,
-                  onConfirm: () {
-                    // Remove all color settings
-                    AppConfig.preferences.remove(backColorKey);
-                    AppConfig.preferences.remove(themeColorKey);
-                    AppConfig.preferences.remove(themeTextColorKey);
-                    AppConfig.preferences.remove(buttonColorKey);
-                    AppConfig.preferences.remove(buttonTextColorKey);
-                    AppConfig.preferences.remove(watchingColorKey);
-                    AppConfig.preferences.remove(watchingTextColorKey);
-                    AppConfig.preferences.remove(joinedColorKey);
-                    AppConfig.preferences.remove(joinedTextColorKey);
+              ezDialog(context,
+                  title: 'Reset all colors?',
+                  content: [
+                    ezYesNo(
+                      context,
+                      onConfirm: () {
+                        // Remove all color settings
+                        AppConfig.preferences.remove(backColorKey);
+                        AppConfig.preferences.remove(themeColorKey);
+                        AppConfig.preferences.remove(themeTextColorKey);
+                        AppConfig.preferences.remove(buttonColorKey);
+                        AppConfig.preferences.remove(buttonTextColorKey);
+                        AppConfig.preferences.remove(watchingColorKey);
+                        AppConfig.preferences.remove(watchingTextColorKey);
+                        AppConfig.preferences.remove(joinedColorKey);
+                        AppConfig.preferences.remove(joinedTextColorKey);
 
-                    popScreen(context);
-                  },
-                  onDeny: () => popScreen(context),
-                  axis: Axis.vertical,
-                  spacer: dialogSpacer,
-                ),
-              );
+                        popScreen(context);
+                      },
+                      onDeny: () => popScreen(context),
+                      axis: Axis.vertical,
+                      spacer: dialogSpacer,
+                    ),
+                  ],
+                  needsClose: false);
             },
             child: ezText(
               'Reset all',

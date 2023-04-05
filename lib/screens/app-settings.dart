@@ -62,19 +62,22 @@ class _AppSettingsState extends State<AppSettingsScreen> {
               ezDialog(
                 context,
                 title: 'Reset all settings?',
-                content: ezYesNo(
-                  context,
-                  onConfirm: () {
-                    AppConfig.prefs.forEach((key, value) {
-                      AppConfig.preferences.remove(key);
-                    });
+                content: [
+                  ezYesNo(
+                    context,
+                    onConfirm: () {
+                      AppConfig.prefs.forEach((key, value) {
+                        AppConfig.preferences.remove(key);
+                      });
 
-                    popScreen(context);
-                  },
-                  onDeny: () => popScreen(context),
-                  axis: Axis.vertical,
-                  spacer: dialogSpacer,
-                ),
+                      popScreen(context);
+                    },
+                    onDeny: () => popScreen(context),
+                    axis: Axis.vertical,
+                    spacer: dialogSpacer,
+                  ),
+                ],
+                needsClose: false,
               );
             },
             child: Text(

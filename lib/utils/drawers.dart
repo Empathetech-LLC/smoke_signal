@@ -48,11 +48,13 @@ List<Widget> standardDrawerBody(
       action: () => ezDialog(
         context,
         title: 'Input rules',
-        content: Text(
-          validatorRule,
-          style: getTextStyle(dialogContentStyleKey),
-          textAlign: TextAlign.center,
-        ),
+        content: [
+          Text(
+            validatorRule,
+            style: getTextStyle(dialogContentStyleKey),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
       body: Text('Input rules'),
     ),

@@ -134,11 +134,13 @@ class _SignalBoardState extends State<SignalBoard> {
           action: () => ezDialog(
             context,
             title: 'Input rules',
-            content: Text(
-              validatorRule,
-              style: getTextStyle(dialogContentStyleKey),
-              textAlign: TextAlign.center,
-            ),
+            content: [
+              Text(
+                validatorRule,
+                style: getTextStyle(dialogContentStyleKey),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
           body: Text('Input rules'),
         ),

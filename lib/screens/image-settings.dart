@@ -50,19 +50,22 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
               ezDialog(
                 context,
                 title: 'Reset all images?',
-                content: ezYesNo(
-                  context,
-                  onConfirm: () {
-                    // Remove all color settings
-                    AppConfig.preferences.remove(backImageKey);
-                    AppConfig.preferences.remove(signalImageKey);
+                content: [
+                  ezYesNo(
+                    context,
+                    onConfirm: () {
+                      // Remove all color settings
+                      AppConfig.preferences.remove(backImageKey);
+                      AppConfig.preferences.remove(signalImageKey);
 
-                    popScreen(context);
-                  },
-                  onDeny: () => popScreen(context),
-                  axis: Axis.vertical,
-                  spacer: dialogSpacer,
-                ),
+                      popScreen(context);
+                    },
+                    onDeny: () => popScreen(context),
+                    axis: Axis.vertical,
+                    spacer: dialogSpacer,
+                  ),
+                ],
+                needsClose: false,
               );
             },
             child: ezText(

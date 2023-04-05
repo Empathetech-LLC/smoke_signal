@@ -124,26 +124,29 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
               ezDialog(
                 context,
                 title: 'Reset style?',
-                content: ezYesNo(
-                  context,
-                  onConfirm: () {
-                    // Remove all color settings
-                    AppConfig.preferences.remove(fontFamilyKey);
-                    AppConfig.preferences.remove(fontSizeKey);
-                    AppConfig.preferences.remove(marginKey);
-                    AppConfig.preferences.remove(paddingKey);
-                    AppConfig.preferences.remove(buttonSpacingKey);
-                    AppConfig.preferences.remove(dialogSpacingKey);
-                    AppConfig.preferences.remove(signalSpacingKey);
-                    AppConfig.preferences.remove(signalHeightKey);
-                    AppConfig.preferences.remove(signalCountHeightKey);
+                content: [
+                  ezYesNo(
+                    context,
+                    onConfirm: () {
+                      // Remove all color settings
+                      AppConfig.preferences.remove(fontFamilyKey);
+                      AppConfig.preferences.remove(fontSizeKey);
+                      AppConfig.preferences.remove(marginKey);
+                      AppConfig.preferences.remove(paddingKey);
+                      AppConfig.preferences.remove(buttonSpacingKey);
+                      AppConfig.preferences.remove(dialogSpacingKey);
+                      AppConfig.preferences.remove(signalSpacingKey);
+                      AppConfig.preferences.remove(signalHeightKey);
+                      AppConfig.preferences.remove(signalCountHeightKey);
 
-                    popScreen(context);
-                  },
-                  onDeny: () => popScreen(context),
-                  axis: Axis.vertical,
-                  spacer: dialogSpacer,
-                ),
+                      popScreen(context);
+                    },
+                    onDeny: () => popScreen(context),
+                    axis: Axis.vertical,
+                    spacer: dialogSpacer,
+                  ),
+                ],
+                needsClose: false,
               );
             },
             child: ezText(
