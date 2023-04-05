@@ -108,6 +108,7 @@ class _SignalState extends State<Signal> {
               prefsPath: iconPathKey,
               source: ImageSource.gallery,
             );
+
             popScreen(context, success: changed);
           },
           message: 'File',
@@ -131,7 +132,7 @@ class _SignalState extends State<Signal> {
         Container(height: dialogSpacer),
 
         // Reset
-        EZButton(
+        EZButton.icon(
           action: () async {
             // Build path
             Directory currDir = await getApplicationDocumentsDirectory();
@@ -150,7 +151,8 @@ class _SignalState extends State<Signal> {
             AppConfig.preferences.remove(iconPathKey);
             popScreen(context, success: true);
           },
-          body: Text('Reset'),
+          message: 'Reset',
+          icon: ezIcon(PlatformIcons(context).refresh),
         ),
       ],
     );
