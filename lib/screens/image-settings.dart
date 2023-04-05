@@ -32,6 +32,7 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
             fullscreen: true,
             title: 'Background',
             credits: credits[AppConfig.prefs[backImageKey]] ?? 'Wherever you got it!',
+            allowClear: true,
           ),
           Container(height: buttonSpacer),
 
@@ -41,6 +42,7 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
             fullscreen: false,
             title: 'Signal',
             credits: credits[AppConfig.prefs[signalImageKey]] ?? 'Wherever you got it!',
+            allowClear: false,
           ),
           Container(height: buttonSpacer),
         ],
