@@ -103,13 +103,13 @@ class _SignalState extends State<Signal> {
         // From file
         EZButton.icon(
           action: () async {
-            bool changed = await changeImage(
+            String? changed = await changeImage(
               context,
               prefsPath: iconPathKey,
               source: ImageSource.gallery,
             );
 
-            popScreen(context, success: changed);
+            popScreen(context, pass: changed);
           },
           message: 'File',
           icon: ezIcon(PlatformIcons(context).folder),
@@ -119,12 +119,12 @@ class _SignalState extends State<Signal> {
         // From camera
         EZButton.icon(
           action: () async {
-            bool changed = await changeImage(
+            String? changed = await changeImage(
               context,
               prefsPath: iconPathKey,
               source: ImageSource.camera,
             );
-            popScreen(context, success: changed);
+            popScreen(context, pass: changed);
           },
           message: 'Camera',
           icon: ezIcon(PlatformIcons(context).photoCamera),
@@ -149,7 +149,7 @@ class _SignalState extends State<Signal> {
 
             // Wipe [SharedPreferences]
             AppConfig.preferences.remove(iconPathKey);
-            popScreen(context, success: true);
+            popScreen(context, pass: true);
           },
           message: 'Reset',
           icon: ezIcon(PlatformIcons(context).refresh),
