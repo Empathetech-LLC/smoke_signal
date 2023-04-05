@@ -24,6 +24,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
     return EZScaffold(
       title: 'Color settings',
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
       body: ezScrollView(
         children: [
           // User hint: hold the buttons to reset the color

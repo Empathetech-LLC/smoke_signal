@@ -23,6 +23,7 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
     return EZScaffold(
       title: 'Image settings',
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
       body: ezScrollView(
         children: [
           // Background

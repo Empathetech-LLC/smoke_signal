@@ -24,6 +24,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
     return EZScaffold(
       title: 'Style settings',
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
       body: ezScrollView(
         children: [
           // Font Family
