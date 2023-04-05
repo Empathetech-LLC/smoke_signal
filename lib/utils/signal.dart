@@ -254,13 +254,13 @@ class _SignalState extends State<Signal> {
                   // Delete
                   EZButton(
                     action: () async {
-                      dynamic result = await confirmDelete(
+                      popScreen(context);
+                      confirmDelete(
                         context,
                         signalTitle,
                         [showIconKey, iconPathKey],
                       );
-                      popScreen(context, pass: result);
-                      // Delete signal triggers a stream update
+                      // Deleting a signal triggers a stream update
                       // so the screen will update automatically
                     },
                     body: Text('Delete signal'),
@@ -269,14 +269,14 @@ class _SignalState extends State<Signal> {
               : [
                   // Leave
                   EZButton(
-                    action: () async {
-                      dynamic result = await confirmDeparture(
+                    action: () {
+                      popScreen(context);
+                      confirmDeparture(
                         context,
                         signalTitle,
                         [showIconKey, iconPathKey],
                       );
-                      popScreen(context, pass: result);
-                      // Leave signal triggers a stream update
+                      // Leaving a signal triggers a stream update
                       // so the screen will update automatically
                     },
                     body: Text('Leave signal'),
