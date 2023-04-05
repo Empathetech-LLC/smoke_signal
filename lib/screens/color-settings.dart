@@ -117,6 +117,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
                         AppConfig.preferences.remove(joinedTextColorKey);
 
                         popScreen(context);
+                        popScreen(context);
                       },
                       onDeny: () => popScreen(context),
                       axis: Axis.vertical,

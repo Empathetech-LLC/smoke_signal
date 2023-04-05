@@ -140,6 +140,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
                       AppConfig.preferences.remove(signalCountHeightKey);
 
                       popScreen(context);
+                      popScreen(context);
                     },
                     onDeny: () => popScreen(context),
                     axis: Axis.vertical,

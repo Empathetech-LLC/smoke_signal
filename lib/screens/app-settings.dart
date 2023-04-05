@@ -67,9 +67,12 @@ class _AppSettingsState extends State<AppSettingsScreen> {
                     context,
                     onConfirm: () {
                       AppConfig.prefs.forEach((key, value) {
+                        // Note we iterate rather than .clear()
+                        // As [AppConfig.preferences] might contain custom [File] paths
                         AppConfig.preferences.remove(key);
                       });
 
+                      popScreen(context);
                       popScreen(context);
                     },
                     onDeny: () => popScreen(context),
