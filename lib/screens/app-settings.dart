@@ -72,8 +72,8 @@ class _AppSettingsState extends State<AppSettingsScreen> {
                         AppConfig.preferences.remove(key);
                       });
 
-                      popScreen(context);
-                      popScreen(context);
+                      popScreen(context, pass: true);
+                      popScreen(context, pass: true);
                     },
                     onDeny: () => popScreen(context),
                     axis: Axis.vertical,

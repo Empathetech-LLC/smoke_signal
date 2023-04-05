@@ -95,8 +95,9 @@ class _SignalState extends State<Signal> {
   );
 
   /// Set a custom [Icon] for the [Signal] via [changeImage]
-  Future<bool> setIcon() async {
-    return await ezDialog(
+  /// Returns the path of the new image on success
+  Future<dynamic> setIcon() async {
+    return ezDialog(
       context,
       title: 'From where?',
       content: [
@@ -178,7 +179,7 @@ class _SignalState extends State<Signal> {
   }
 
   /// Show all [Signal] edits the user can make
-  Future<bool> showEdits() {
+  Future<dynamic> showEdits() {
     return ezDialog(
       context,
       title: 'Options',
@@ -201,9 +202,9 @@ class _SignalState extends State<Signal> {
         // Set icon
         EZButton(
           action: () async {
-            popScreen(context);
-            bool shouldRefresh = await setIcon();
-            if (shouldRefresh) widget.reloadBoard();
+            dynamic result = await setIcon();
+            popScreen(context, pass: result);
+            if (result != null) widget.reloadBoard();
           },
           body: Text('Set icon'),
         ),
@@ -223,20 +224,20 @@ class _SignalState extends State<Signal> {
                   // Reset
                   EZButton(
                     action: () async {
-                      popScreen(context);
+                      popScreen(context, pass: true);
                       await resetSignal(context, signalTitle);
-                      // Reset signal causes a stream update
+                      // Reset signal triggers a stream update
                       // so the screen will update automatically
                     },
                     body: Text('Reset signal'),
                   ),
                   Container(height: dialogSpacer),
 
-                  // Update
+                  // Update message
                   EZButton(
-                    action: () {
-                      popScreen(context);
-                      updateMessage(context, signalTitle);
+                    action: () async {
+                      dynamic result = await updateMessage(context, signalTitle);
+                      popScreen(context, pass: result);
                     },
                     body: Text('Update message'),
                   ),
@@ -244,9 +245,10 @@ class _SignalState extends State<Signal> {
 
                   // Transfer
                   EZButton(
-                    action: () {
-                      popScreen(context);
-                      confirmTransfer(context, signalTitle, widget.members);
+                    action: () async {
+                      dynamic result =
+                          await confirmTransfer(context, signalTitle, widget.members);
+                      popScreen(context, pass: result);
                     },
                     body: Text('Transfer signal'),
                   ),
@@ -254,13 +256,15 @@ class _SignalState extends State<Signal> {
 
                   // Delete
                   EZButton(
-                    action: () {
-                      popScreen(context);
-                      confirmDelete(
+                    action: () async {
+                      dynamic result = await confirmDelete(
                         context,
                         signalTitle,
                         [showIconKey, iconPathKey],
                       );
+                      popScreen(context, pass: result);
+                      // Delete signal triggers a stream update
+                      // so the screen will update automatically
                     },
                     body: Text('Delete signal'),
                   ),
@@ -268,14 +272,15 @@ class _SignalState extends State<Signal> {
               : [
                   // Leave
                   EZButton(
-                    action: () {
-                      popScreen(context);
-                      confirmDeparture(
+                    action: () async {
+                      dynamic result = await confirmDeparture(
                         context,
                         signalTitle,
                         [showIconKey, iconPathKey],
                       );
-                      widget.refreshBoard();
+                      popScreen(context, pass: result);
+                      // Leave signal triggers a stream update
+                      // so the screen will update automatically
                     },
                     body: Text('Leave signal'),
                   ),

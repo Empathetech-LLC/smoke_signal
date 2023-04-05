@@ -17,7 +17,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final emailFormKey = GlobalKey<FormState>();
   final passwordFormKey = GlobalKey<FormState>();
 
-  late TextEditingController _signupEmailController = TextEditingController();
+  late TextEditingController _signUpEmailController = TextEditingController();
   late TextEditingController _passwdController = TextEditingController();
 
   late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
@@ -43,7 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 // Email field
                 ezForm(
                   key: emailFormKey,
-                  controller: _signupEmailController,
+                  controller: _signUpEmailController,
                   hintText: 'Enter email',
                   autofillHints: [AutofillHints.email],
                   validator: emailValidator,
@@ -79,7 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // Attempt login
               await attemptAccountCreation(
                 context,
-                _signupEmailController.text.trim(),
+                _signUpEmailController.text.trim(),
                 _passwdController.text.trim(),
               );
             },

@@ -149,7 +149,7 @@ class _SignalBoardState extends State<SignalBoard> {
         // Reload
         EZButton.icon(
           action: () {
-            popScreen(context);
+            popScreen(context, pass: true);
             reload();
           },
           message: 'Reload',
