@@ -12,15 +12,14 @@ class ImageSettingsScreen extends StatefulWidget {
 }
 
 class _ImageSettingsState extends State<ImageSettingsScreen> {
-  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
+  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+
+  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
 
   @override
   Widget build(BuildContext context) {
-    double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
-    double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
-
     return EZScaffold(
       title: 'Image settings',
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
@@ -41,37 +40,6 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
             fullscreen: false,
             title: 'Signal',
             credits: credits[AppConfig.prefs[signalImageKey]] ?? 'Wherever you got it!',
-          ),
-          Container(height: buttonSpacer),
-
-          // Reset all image settings
-          GestureDetector(
-            onTap: () {
-              ezDialog(
-                context,
-                title: 'Reset all images?',
-                content: [
-                  ezYesNo(
-                    context,
-                    onConfirm: () {
-                      // Remove all color settings
-                      AppConfig.preferences.remove(backImageKey);
-                      AppConfig.preferences.remove(signalImageKey);
-
-                      popScreen(context);
-                    },
-                    onDeny: () => popScreen(context),
-                    axis: Axis.vertical,
-                    spacer: dialogSpacer,
-                  ),
-                ],
-                needsClose: false,
-              );
-            },
-            child: ezText(
-              'Reset all',
-              style: getTextStyle(subTitleStyleKey),
-            ),
           ),
           Container(height: buttonSpacer),
         ],
