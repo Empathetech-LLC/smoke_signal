@@ -117,12 +117,12 @@ class _SignalBoardState extends State<SignalBoard> {
         // GoTo settings
         EZButton.icon(
           action: () async {
-            bool shouldRefresh = await popAndPushScreen(
+            dynamic shouldRefresh = await popAndPushScreen(
               context,
               screen: AppSettingsScreen(),
             );
 
-            if (shouldRefresh) refresh();
+            if (shouldRefresh != null) refresh();
           },
           message: 'Settings',
           icon: ezIcon(PlatformIcons(context).settings),
@@ -159,12 +159,12 @@ class _SignalBoardState extends State<SignalBoard> {
 
       fab: EZButton(
         action: () async {
-          bool shouldReload = await pushScreen(
+          dynamic shouldReload = await pushScreen(
             context,
             screen: CreateSignalScreen(),
           );
 
-          if (shouldReload) reload();
+          if (shouldReload != null) reload();
         },
         body: ezIcon(PlatformIcons(context).add),
       ),

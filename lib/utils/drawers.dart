@@ -31,12 +31,12 @@ List<Widget> standardDrawerBody(
     // GoTo settings
     EZButton.icon(
       action: () async {
-        bool doAction = await popAndPushScreen(
+        dynamic result = await popAndPushScreen(
           context,
           screen: AppSettingsScreen(),
         );
 
-        if (doAction && onReturn != null) onReturn();
+        if (result != null && onReturn != null) onReturn();
       },
       icon: ezIcon(PlatformIcons(context).settings),
       message: 'Settings',
@@ -101,12 +101,12 @@ Widget signalDrawerHeader(
           // Edit
           EZButton(
             action: () async {
-              bool shouldRefresh = await popAndPushScreen(
+              dynamic shouldRefresh = await popAndPushScreen(
                 context,
                 screen: ProfileSettingsScreen(),
               );
 
-              if (shouldRefresh) refresh();
+              if (shouldRefresh != null) refresh();
             },
             body: ezIcon(PlatformIcons(context).edit),
           ),
