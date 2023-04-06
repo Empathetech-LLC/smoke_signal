@@ -320,7 +320,7 @@ class _SignalState extends State<Signal> {
                         Container(
                           width: signalHeight,
                           height: signalHeight,
-                          child: buildImage(
+                          child: ezImage(
                             pathKey: iconPathKey,
                             backup: appIconPath,
                           ),
@@ -385,12 +385,12 @@ class _SignalState extends State<Signal> {
                 children: widget.activeMembers.contains(AppUser.account.uid)
                     ? [
                         // Active: show the current count surrounded by smoke signals
-                        buildImage(pathKey: signalImageKey),
+                        ezImage(pathKey: signalImageKey),
                         Text(
                           widget.activeMembers.length.toString(),
                           style: joinedTextStyle,
                         ),
-                        buildImage(pathKey: signalImageKey),
+                        ezImage(pathKey: signalImageKey),
                       ]
                     : [
                         // Inactive: only show the current count

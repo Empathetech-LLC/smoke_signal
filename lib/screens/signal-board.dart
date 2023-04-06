@@ -61,7 +61,7 @@ class _SignalBoardState extends State<SignalBoard> {
                   case ConnectionState.waiting:
                     return loadingMessage(
                       context,
-                      image: buildImage(pathKey: signalImageKey),
+                      image: ezImage(pathKey: signalImageKey),
                     );
                   case ConnectionState.done:
                   default:
