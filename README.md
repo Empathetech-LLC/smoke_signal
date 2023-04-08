@@ -22,17 +22,17 @@ The plan is to migrate Smoke Signal to run on the [Mastodon](https://github.com/
 
 ### Time
 
-You can open an issue, start a discussion, or [reach out](mailto:support@empathetech.net) about becomming a contributor.
+You can open an issue, start a discussion, or [reach out](mailto:support@empathetech.net) about becoming a contributor.
 
 Smoke Signal is released under the [GNU GPLv3 License](LICENSE)
 
 If you're comfortable please send/post some custom themes and activity boards! I'd love to see what people create!
 
-*Side note* If you love the customizability of Smoke Signal, let it [inspire you](https://pub.dev/packages/empathetech_flutter_ui)
+*Side note* If you love how customizable Smoke Signal is, let it [inspire you](https://pub.dev/packages/empathetech_flutter_ui)
 
 ### Money
 
-Much thanks for any and all donations. Hopefully Empathetech has earned it making your life a little easier.
+Much thanks for any and all donations. Hopefully Empathetech has earned it making your life a little better.
 
 #### Paypal
 
@@ -68,7 +68,7 @@ None, yet.
 
 ### Flutter libraries
 
-Cehck the `#Community` section in the [pubspec](pubspec.yaml)
+Check the `#Community` section in the [pubspec](pubspec.yaml)
 
 ### ...and last, but certainly not least...
 
