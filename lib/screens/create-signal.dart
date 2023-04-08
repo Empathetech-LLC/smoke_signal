@@ -53,7 +53,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 // Switch
-                ezSwitch(
+                ezCheckBox(
                   value: requestIDs.contains(profile.id),
                   onChanged: (bool? value) {
                     if (value == true) {

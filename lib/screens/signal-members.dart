@@ -78,7 +78,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
             ),
 
             // Toggle
-            trailing: ezSwitch(
+            trailing: ezCheckBox(
               value: requestIDs.contains(profile.id),
               onChanged: (bool? value) {
                 if (value == true) {
