@@ -52,7 +52,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
           ColorSetting(
             toControl: themeTextColorKey,
             message: 'Theme\ntext',
-            textBackground: AppConfig.prefs[themeColorKey],
+            textBackgroundKey: themeColorKey,
           ),
           Container(height: buttonSpacer),
 
@@ -66,7 +66,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
           ColorSetting(
             toControl: buttonTextColorKey,
             message: 'Button\ntext',
-            textBackground: AppConfig.prefs[buttonColorKey],
+            textBackgroundKey: buttonColorKey,
           ),
           Container(height: buttonSpacer),
 
@@ -80,7 +80,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
           ColorSetting(
             toControl: watchingTextColorKey,
             message: 'Watching\nsignal text',
-            textBackground: AppConfig.prefs[watchingColorKey],
+            textBackgroundKey: watchingColorKey,
           ),
           Container(height: buttonSpacer),
 
@@ -93,7 +93,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
           ColorSetting(
             toControl: joinedTextColorKey,
             message: 'Joined\nsignal text',
-            textBackground: AppConfig.prefs[joinedColorKey],
+            textBackgroundKey: joinedColorKey,
           ),
           Container(height: buttonSpacer),
 
