@@ -40,40 +40,26 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
   late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
   late Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
 
-  // Creates the widgets for the toggle list from the gathered profiles
-  List<Widget> buildSwitches(List<UserProfile> profiles) {
-    List<Widget> children = [];
+  /// Creates a [List] of [PlatformListTile]s for displaying [UserProfile]s alongside
+  List<PlatformListTile> buildSwitches(List<UserProfile> profiles) {
+    List<PlatformListTile> children = [];
 
     profiles.forEach((profile) {
       if (profile.id != AppUser.account.uid)
-        children.addAll(
-          [
-            Row(
+        children.add(
+          PlatformListTile(
+            // User info
+            title: Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Switch
-                ezCheckBox(
-                  value: requestIDs.contains(profile.id),
-                  onChanged: (bool? value) {
-                    if (value == true) {
-                      setState(() {
-                        requestIDs.add(profile.id);
-                      });
-                    } else {
-                      setState(() {
-                        requestIDs.remove(profile.id);
-                      });
-                    }
-                  },
-                ),
-
                 // Profile image/avatar
                 CircleAvatar(
                   foregroundImage: CachedNetworkImageProvider(profile.avatarURL),
                   minRadius: 35,
                   maxRadius: 35,
                 ),
+                Container(width: AppConfig.prefs[paddingKey]),
 
                 // Display name
                 ezText(
@@ -83,8 +69,23 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 ),
               ],
             ),
-            Container(height: dialogSpacer),
-          ],
+
+            // Toggle
+            trailing: ezCheckBox(
+              value: requestIDs.contains(profile.id),
+              onChanged: (bool? value) {
+                if (value == true) {
+                  setState(() {
+                    requestIDs.add(profile.id);
+                  });
+                } else {
+                  setState(() {
+                    requestIDs.remove(profile.id);
+                  });
+                }
+              },
+            ),
+          ),
         );
     });
 
@@ -146,34 +147,29 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
           Container(height: buttonSpacer),
 
           // List of toggle-able members to send join requests on creation
-          ezList(
-            context,
-            title: 'Starting members',
-            items: [
-              StreamBuilder<QuerySnapshot>(
-                stream: _userStream,
-                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return loadingMessage(
-                        context,
-                        image: ezImage(pathKey: signalImageKey),
-                      );
-                    case ConnectionState.done:
-                    default:
-                      if (snapshot.hasError) {
-                        logAlert(context, snapshot.error.toString());
-                        return Container();
-                      }
-
-                      return ezScrollView(
-                        children: buildSwitches(buildProfiles(snapshot.data!.docs)),
-                        centered: true,
-                      );
+          StreamBuilder<QuerySnapshot>(
+            stream: _userStream,
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return loadingMessage(
+                    context,
+                    image: ezImage(pathKey: signalImageKey),
+                  );
+                case ConnectionState.done:
+                default:
+                  if (snapshot.hasError) {
+                    logAlert(context, snapshot.error.toString());
+                    return Container();
                   }
-                },
-              ),
-            ],
+
+                  return ezTileList(
+                    context,
+                    title: 'Starting members',
+                    items: buildSwitches(buildProfiles(snapshot.data!.docs)),
+                  );
+              }
+            },
           ),
           Container(height: buttonSpacer),
 
