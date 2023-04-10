@@ -141,20 +141,24 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
 
     if (unAddedProfiles.isNotEmpty) {
       // Addable users - expandable, toggle-able, profiles
-      viewChildren.add(
-        ezList(
-          context,
-          title: 'Add?',
-          items: buildSwitchTiles(unAddedProfiles),
-          // Confirm adding users button
-          trailingAction: EZButton(
+      viewChildren.addAll(
+        [
+          ezTileList(
+            context,
+            title: 'Add?',
+            items: buildSwitchTiles(unAddedProfiles),
+          ),
+          Container(height: buttonSpacer),
+
+          // Submit button
+          EZButton(
             action: () async {
               await requestMembers(context, widget.title, requestIDs);
               popScreen(context, pass: true);
             },
             body: Text('Send requests'),
           ),
-        ),
+        ],
       );
     }
 
