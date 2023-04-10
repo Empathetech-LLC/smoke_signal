@@ -93,7 +93,7 @@ class _SignalState extends State<Signal> {
 
   /// Set a custom [Icon] for the [Signal] via [changeImage]
   /// Returns the path of the new image on success
-  Future<dynamic> setIcon() async {
+  Future<dynamic> setIcon() {
     return ezDialog(
       context,
       title: 'From where?',
@@ -253,7 +253,7 @@ class _SignalState extends State<Signal> {
 
                   // Delete
                   EZButton(
-                    action: () async {
+                    action: () {
                       popScreen(context);
                       confirmDelete(
                         context,
