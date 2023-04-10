@@ -140,10 +140,9 @@ class _HomeScreenState extends State<HomeScreen> {
             // Notifs will be received on any page hereafter
             FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
               await NotificationService().show(
-                0,
-                message.notification?.title,
-                message.notification?.body,
-                null,
+                id: 0,
+                title: message.notification?.title,
+                body: message.notification?.body,
               );
             });
 
