@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// Handle notifications while the app is in the background/closed
 Future<void> _backgroundMsgHandler(RemoteMessage message) async {
@@ -17,19 +16,16 @@ Future<void> _backgroundMsgHandler(RemoteMessage message) async {
 }
 
 void main() async {
-  // Required first method on async main
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Lock app to portrait
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
-  // Initialize app config
-  AppConfig.focus = FocusManager.instance;
-  AppConfig.preferences = await SharedPreferences.getInstance();
-  AppConfig.init(assetPaths: assets, customDefaults: customDefaults);
+  AppConfig.init(
+    assetPaths: assets,
+    customDefaults: customDefaults,
+    orientations: [DeviceOrientation.portraitUp],
+  );
 
   // Setup notification service
-  await NotificationService().init();
+  NotificationService().init();
 
   // Initialize firebase
   await Firebase.initializeApp();
@@ -45,9 +41,8 @@ void main() async {
   runApp(SmokeSignal());
 }
 
-/// Smoke Signal app definition
-/// Jolly co-operation!
 class SmokeSignal extends StatelessWidget {
+  /// Jolly co-operation!
   const SmokeSignal({super.key});
 
   @override
