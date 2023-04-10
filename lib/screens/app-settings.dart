@@ -1,6 +1,4 @@
-import 'color-settings.dart';
-import 'image-settings.dart';
-import 'style-settings.dart';
+import 'screens.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -24,7 +22,7 @@ class _AppSettingsState extends State<AppSettingsScreen> {
     double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
 
     return EZScaffold(
-      title: 'Settings',
+      title: Text('Settings', style: getTextStyle(titleStyleKey)),
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
       body: ezScrollView(

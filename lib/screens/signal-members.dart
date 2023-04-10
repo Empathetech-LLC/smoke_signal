@@ -1,4 +1,4 @@
-import '../utils/constants.dart';
+import '../utils/utils.dart';
 
 import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -167,7 +167,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
   Widget build(BuildContext context) {
     return EZScaffold(
       // Title && theme
-      title: widget.title + ' members',
+      title: Text(widget.title + ' members', style: getTextStyle(titleStyleKey)),
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
 

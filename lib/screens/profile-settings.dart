@@ -42,7 +42,7 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
   Widget build(BuildContext context) {
     return EZScaffold(
       // Title && theme
-      title: 'Edit Profile',
+      title: Text('Edit Profile', style: getTextStyle(titleStyleKey)),
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
 

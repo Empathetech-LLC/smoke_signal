@@ -1,5 +1,5 @@
-import 'reset-password.dart';
-import '../utils/drawers.dart';
+import 'screens.dart';
+import '../utils/utils.dart';
 
 import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return EZScaffold(
       // Title && theme
-      title: 'Welcome back!',
+      title: Text('Welcome back!', style: getTextStyle(titleStyleKey)),
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
 

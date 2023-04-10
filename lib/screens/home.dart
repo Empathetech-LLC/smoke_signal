@@ -1,8 +1,5 @@
-import 'login.dart';
-import 'sign-up.dart';
-import 'signal-board.dart';
-import '../utils/drawers.dart';
-import '../utils/constants.dart';
+import 'screens.dart';
+import '../utils/utils.dart';
 
 import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -21,7 +18,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-/// Enumerator for communitcating with [HomeScreen] build schold be returned
+/// Enumerator for communicating with [HomeScreen] build should be returned
 enum HomeBuildType {
   loading,
   auth,
@@ -69,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
       default:
         return EZScaffold(
           // Title && theme
-          title: appTitle,
+          title: Text(appTitle, style: getTextStyle(titleStyleKey)),
           backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
           backgroundColor: Color(AppConfig.prefs[backColorKey]),
 

@@ -1,4 +1,4 @@
-import '../utils/constants.dart';
+import '../utils/utils.dart';
 
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
@@ -21,7 +21,7 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return EZScaffold(
-      title: 'Image settings',
+      title: Text('Image settings', style: getTextStyle(titleStyleKey)),
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
       body: ezScrollView(

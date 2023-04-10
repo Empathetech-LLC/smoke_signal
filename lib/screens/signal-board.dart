@@ -1,8 +1,5 @@
-import 'create-signal.dart';
-import 'app-settings.dart';
-import '../utils/signal.dart';
-import '../utils/drawers.dart';
-import '../utils/constants.dart';
+import 'screens.dart';
+import '../utils/utils.dart';
 
 import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -46,7 +43,7 @@ class _SignalBoardState extends State<SignalBoard> {
   Widget build(BuildContext context) {
     return EZScaffold(
       // Title && theme
-      title: 'Signals',
+      title: Text('Signals', style: getTextStyle(titleStyleKey)),
       backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
       backgroundColor: Color(AppConfig.prefs[backColorKey]),
 
