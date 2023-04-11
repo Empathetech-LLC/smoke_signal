@@ -179,7 +179,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       // Body
       body: standardWindow(
         context: context,
-        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        background: imageBackground(EzConfig.prefs[backImageKey]),
         body: StreamBuilder<QuerySnapshot>(
           stream: _userStream,
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {

@@ -102,7 +102,7 @@ class _SignalBoardState extends State<SignalBoard> {
       // Body
       body: standardWindow(
         context: context,
-        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        background: imageBackground(EzConfig.prefs[backImageKey]),
         body: ezScrollView(
           children: [
             // Signals the user is a member of

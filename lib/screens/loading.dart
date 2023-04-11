@@ -27,7 +27,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       ),
       body: standardWindow(
         context: context,
-        backgroundImage: buildDecoration(backImageKey),
+        background: imageBackground(EzConfig.prefs[backImageKey]),
         body: loadingMessage(
           context: context,
           image: ezImage(pathKey: signalImageKey),

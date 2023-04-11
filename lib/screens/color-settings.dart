@@ -28,7 +28,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
       // Body
       body: standardWindow(
         context: context,
-        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        background: imageBackground(EzConfig.prefs[backImageKey]),
         body: ezScrollView(
           children: [
             // User hint: hold the buttons to reset the color

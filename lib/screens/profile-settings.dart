@@ -47,7 +47,7 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
       // Body
       body: standardWindow(
         context: context,
-        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        background: imageBackground(EzConfig.prefs[backImageKey]),
         body: ezScrollView(
           children: [
             Container(height: buttonSpacer),

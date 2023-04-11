@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
       // Body
       body: standardWindow(
         context: context,
-        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        background: imageBackground(EzConfig.prefs[backImageKey]),
         body: ezScrollView(
           children: [
             // Autofill group allows for password manager inputs and such

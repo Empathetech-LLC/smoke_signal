@@ -33,7 +33,7 @@ class _AuthScreenState extends State<AuthScreen> {
       ),
       body: standardWindow(
         context: context,
-        backgroundImage: buildDecoration(backImageKey),
+        background: imageBackground(EzConfig.prefs[backImageKey]),
         body: ezScrollView(
           children: [
             // Login

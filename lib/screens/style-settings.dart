@@ -26,7 +26,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
       appBar: EzAppBar(title: Text('Style settings', style: getTextStyle(titleStyleKey))),
       body: standardWindow(
         context: context,
-        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        background: imageBackground(EzConfig.prefs[backImageKey]),
         body: ezScrollView(
           children: [
             // Font Family
