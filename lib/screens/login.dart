@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
         title: Text('Welcome back!', style: getTextStyle(titleStyleKey)),
-        endDrawer: EzDrawer(
+        trailing: EzDrawer(
           header: standardDrawerHeader(),
           body: standardDrawerBody(context: context),
         ),

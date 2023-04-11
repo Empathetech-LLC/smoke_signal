@@ -49,7 +49,7 @@ class _SignalBoardState extends State<SignalBoard> {
         title: Text('Signals', style: getTextStyle(titleStyleKey)),
 
         // End Drawer
-        endDrawer: EzDrawer(
+        trailing: EzDrawer(
           header: signalDrawerHeader(context: context, refresh: refresh),
           body: [
             Container(height: buttonSpacer),

@@ -32,7 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
         title: Text('Welcome!', style: getTextStyle(titleStyleKey)),
-        endDrawer: EzDrawer(
+        trailing: EzDrawer(
           header: standardDrawerHeader(),
           body: standardDrawerBody(context: context),
         ),

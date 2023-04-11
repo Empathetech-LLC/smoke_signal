@@ -26,10 +26,10 @@ class _AuthScreenState extends State<AuthScreen> {
           appTitle,
           style: getTextStyle(titleStyleKey),
         ),
-      ),
-      endDrawer: EzDrawer(
-        header: standardDrawerHeader(),
-        body: standardDrawerBody(context: context),
+        trailing: EzDrawer(
+          header: standardDrawerHeader(),
+          body: standardDrawerBody(context: context),
+        ),
       ),
       body: standardWindow(
         context: context,
