@@ -171,7 +171,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      backgroundDecoration: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
+      background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
         title: Text(widget.title + ' members', style: getTextStyle(titleStyleKey)),
       ),

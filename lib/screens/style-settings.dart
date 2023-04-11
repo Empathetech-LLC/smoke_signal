@@ -22,7 +22,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
     double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
     return EzScaffold(
-      backgroundDecoration: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
+      background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(title: Text('Style settings', style: getTextStyle(titleStyleKey))),
       body: standardWindow(
         context: context,

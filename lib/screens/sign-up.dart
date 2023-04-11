@@ -29,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      backgroundDecoration: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
+      background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
         title: Text('Welcome!', style: getTextStyle(titleStyleKey)),
         endDrawer: EzDrawer(

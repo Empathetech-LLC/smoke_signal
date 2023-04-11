@@ -42,7 +42,7 @@ class _SignalBoardState extends State<SignalBoard> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      backgroundDecoration: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
+      background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
 
       // App bar
       appBar: EzAppBar(
