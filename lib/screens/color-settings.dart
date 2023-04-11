@@ -22,118 +22,124 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
     double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
     return EzScaffold(
-      title: Text('Color settings', style: getTextStyle(titleStyleKey)),
       backgroundColor: Color(EzConfig.prefs[backColorKey]),
-      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
-      body: ezScrollView(
-        children: [
-          // User hint: hold the buttons to reset the color
-          Container(height: buttonSpacer),
-          Text(
-            'Hold buttons to reset',
-            style: getTextStyle(dialogContentStyleKey),
-          ),
-          Container(height: buttonSpacer),
+      appBar: EzAppBar(title: Text('Color settings', style: getTextStyle(titleStyleKey))),
 
-          // Background
-          EzColorSetting(
-            toControl: backColorKey,
-            message: 'Background',
-          ),
-          Container(height: buttonSpacer),
-
-          // Theme
-          EzColorSetting(
-            toControl: themeColorKey,
-            message: 'Theme',
-          ),
-          Container(height: buttonSpacer),
-
-          EzColorSetting(
-            toControl: themeTextColorKey,
-            message: 'Theme\ntext',
-            textBackgroundKey: themeColorKey,
-          ),
-          Container(height: buttonSpacer),
-
-          // Buttons
-          EzColorSetting(
-            toControl: buttonColorKey,
-            message: 'Buttons',
-          ),
-          Container(height: buttonSpacer),
-
-          EzColorSetting(
-            toControl: buttonTextColorKey,
-            message: 'Button\ntext',
-            textBackgroundKey: buttonColorKey,
-          ),
-          Container(height: buttonSpacer),
-
-          // Signals
-          EzColorSetting(
-            toControl: watchingColorKey,
-            message: 'Watching\nsignal',
-          ),
-          Container(height: buttonSpacer),
-
-          EzColorSetting(
-            toControl: watchingTextColorKey,
-            message: 'Watching\nsignal text',
-            textBackgroundKey: watchingColorKey,
-          ),
-          Container(height: buttonSpacer),
-
-          EzColorSetting(
-            toControl: joinedColorKey,
-            message: 'Joined\nsignal',
-          ),
-          Container(height: buttonSpacer),
-
-          EzColorSetting(
-            toControl: joinedTextColorKey,
-            message: 'Joined\nsignal text',
-            textBackgroundKey: joinedColorKey,
-          ),
-          Container(height: buttonSpacer),
-
-          // Reset all color settings
-          GestureDetector(
-            onTap: () {
-              ezDialog(context,
-                  title: 'Reset all colors?',
-                  content: [
-                    ezYesNo(
-                      context,
-                      onConfirm: () {
-                        // Remove all color settings
-                        EzConfig.preferences.remove(backColorKey);
-                        EzConfig.preferences.remove(themeColorKey);
-                        EzConfig.preferences.remove(themeTextColorKey);
-                        EzConfig.preferences.remove(buttonColorKey);
-                        EzConfig.preferences.remove(buttonTextColorKey);
-                        EzConfig.preferences.remove(watchingColorKey);
-                        EzConfig.preferences.remove(watchingTextColorKey);
-                        EzConfig.preferences.remove(joinedColorKey);
-                        EzConfig.preferences.remove(joinedTextColorKey);
-
-                        popScreen(context, pass: true);
-                        popScreen(context, pass: true);
-                      },
-                      onDeny: () => popScreen(context),
-                      axis: Axis.vertical,
-                      spacer: dialogSpacer,
-                    ),
-                  ],
-                  needsClose: false);
-            },
-            child: ezText(
-              'Reset all',
-              style: getTextStyle(subTitleStyleKey),
+      // Body
+      body: standardWindow(
+        context: context,
+        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        body: ezScrollView(
+          children: [
+            // User hint: hold the buttons to reset the color
+            Container(height: buttonSpacer),
+            Text(
+              'Hold buttons to reset',
+              style: getTextStyle(dialogContentStyleKey),
             ),
-          ),
-          Container(height: buttonSpacer),
-        ],
+            Container(height: buttonSpacer),
+
+            // Background
+            EzColorSetting(
+              toControl: backColorKey,
+              message: 'Background',
+            ),
+            Container(height: buttonSpacer),
+
+            // Theme
+            EzColorSetting(
+              toControl: themeColorKey,
+              message: 'Theme',
+            ),
+            Container(height: buttonSpacer),
+
+            EzColorSetting(
+              toControl: themeTextColorKey,
+              message: 'Theme\ntext',
+              textBackgroundKey: themeColorKey,
+            ),
+            Container(height: buttonSpacer),
+
+            // Buttons
+            EzColorSetting(
+              toControl: buttonColorKey,
+              message: 'Buttons',
+            ),
+            Container(height: buttonSpacer),
+
+            EzColorSetting(
+              toControl: buttonTextColorKey,
+              message: 'Button\ntext',
+              textBackgroundKey: buttonColorKey,
+            ),
+            Container(height: buttonSpacer),
+
+            // Signals
+            EzColorSetting(
+              toControl: watchingColorKey,
+              message: 'Watching\nsignal',
+            ),
+            Container(height: buttonSpacer),
+
+            EzColorSetting(
+              toControl: watchingTextColorKey,
+              message: 'Watching\nsignal text',
+              textBackgroundKey: watchingColorKey,
+            ),
+            Container(height: buttonSpacer),
+
+            EzColorSetting(
+              toControl: joinedColorKey,
+              message: 'Joined\nsignal',
+            ),
+            Container(height: buttonSpacer),
+
+            EzColorSetting(
+              toControl: joinedTextColorKey,
+              message: 'Joined\nsignal text',
+              textBackgroundKey: joinedColorKey,
+            ),
+            Container(height: buttonSpacer),
+
+            // Reset all color settings
+            GestureDetector(
+              onTap: () {
+                ezDialog(
+                    context: context,
+                    title: 'Reset all colors?',
+                    content: [
+                      ezYesNo(
+                        context: context,
+                        onConfirm: () {
+                          // Remove all color settings
+                          EzConfig.preferences.remove(backColorKey);
+                          EzConfig.preferences.remove(themeColorKey);
+                          EzConfig.preferences.remove(themeTextColorKey);
+                          EzConfig.preferences.remove(buttonColorKey);
+                          EzConfig.preferences.remove(buttonTextColorKey);
+                          EzConfig.preferences.remove(watchingColorKey);
+                          EzConfig.preferences.remove(watchingTextColorKey);
+                          EzConfig.preferences.remove(joinedColorKey);
+                          EzConfig.preferences.remove(joinedTextColorKey);
+
+                          popScreen(context: context, pass: true);
+                          popScreen(context: context, pass: true);
+                        },
+                        onDeny: () => popScreen(context: context),
+                        axis: Axis.vertical,
+                        spacer: dialogSpacer,
+                      ),
+                    ],
+                    needsClose: false);
+              },
+              child: ezText(
+                'Reset all',
+                style: getTextStyle(subTitleStyleKey),
+              ),
+            ),
+            Container(height: buttonSpacer),
+          ],
+        ),
       ),
     );
   }

@@ -29,69 +29,73 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      // Title & theme
-      title: Text('Welcome!', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
       backgroundColor: Color(EzConfig.prefs[backColorKey]),
-
-      // Body
-      body: ezScrollView(
-        children: [
-          AutofillGroup(
-            child: Column(
-              children: [
-                // Email field
-                ezForm(
-                  key: emailFormKey,
-                  controller: _signUpEmailController,
-                  hintText: 'Enter email',
-                  autofillHints: [AutofillHints.email],
-                  validator: emailValidator,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                ),
-                Container(height: buttonSpacer),
-
-                // Password field
-                ezForm(
-                  key: passwordFormKey,
-                  controller: _passwdController,
-                  hintText: 'Enter password',
-                  private: true,
-                  autofillHints: [AutofillHints.password],
-                ),
-              ],
-            ),
-          ),
-          Container(height: buttonSpacer),
-
-          // Attempt sign up button
-          EZButton(
-            action: () async {
-              // Close keyboard if open
-              EzConfig.focus.primaryFocus?.unfocus();
-
-              // Don't do anything if the input is invalid
-              if (!emailFormKey.currentState!.validate()) {
-                logAlert(context, 'Invalid email!');
-                return;
-              }
-
-              // Attempt login
-              await attemptAccountCreation(
-                context,
-                _signUpEmailController.text.trim(),
-                _passwdController.text.trim(),
-              );
-            },
-            body: Text('Sign up'),
-          ),
-        ],
-        centered: true,
+      appBar: EzAppBar(
+        title: Text('Welcome!', style: getTextStyle(titleStyleKey)),
+        endDrawer: EzDrawer(
+          header: standardDrawerHeader(),
+          body: standardDrawerBody(context: context),
+        ),
       ),
 
-      // User interaction
-      drawerHeader: standardDrawerHeader(),
-      drawerBody: standardDrawerBody(context),
+      // Body
+      body: standardWindow(
+        context: context,
+        backgroundImage: buildDecoration(backImageKey),
+        body: ezScrollView(
+          children: [
+            AutofillGroup(
+              child: Column(
+                children: [
+                  // Email field
+                  ezForm(
+                    key: emailFormKey,
+                    controller: _signUpEmailController,
+                    hintText: 'Enter email',
+                    autofillHints: [AutofillHints.email],
+                    validator: emailValidator,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                  ),
+                  Container(height: buttonSpacer),
+
+                  // Password field
+                  ezForm(
+                    key: passwordFormKey,
+                    controller: _passwdController,
+                    hintText: 'Enter password',
+                    private: true,
+                    autofillHints: [AutofillHints.password],
+                  ),
+                ],
+              ),
+            ),
+            Container(height: buttonSpacer),
+
+            // Attempt sign up button
+            EZButton(
+              action: () async {
+                // Close keyboard if open
+                EzConfig.focus.primaryFocus?.unfocus();
+
+                // Don't do anything if the input is invalid
+                if (!emailFormKey.currentState!.validate()) {
+                  logAlert(context, 'Invalid email!');
+                  return;
+                }
+
+                // Attempt login
+                await attemptAccountCreation(
+                  context,
+                  _signUpEmailController.text.trim(),
+                  _passwdController.text.trim(),
+                );
+              },
+              body: Text('Sign up'),
+            ),
+          ],
+          centered: true,
+        ),
+      ),
     );
   }
 }

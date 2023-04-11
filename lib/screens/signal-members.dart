@@ -144,7 +144,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       viewChildren.addAll(
         [
           ezTileList(
-            context,
+            context: context,
             title: 'Add?',
             items: buildSwitchTiles(unAddedProfiles),
           ),
@@ -154,7 +154,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
           EZButton.icon(
             action: () async {
               await requestMembers(context, widget.title, requestIDs);
-              popScreen(context, pass: true);
+              popScreen(context: context, pass: true);
             },
             message: 'Send requests',
             icon: ezIcon(PlatformIcons(context).cloudUpload),
@@ -171,35 +171,39 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      // Title && theme
-      title: Text(widget.title + ' members', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
       backgroundColor: Color(EzConfig.prefs[backColorKey]),
+      appBar: EzAppBar(
+        title: Text(widget.title + ' members', style: getTextStyle(titleStyleKey)),
+      ),
 
       // Body
-      body: StreamBuilder<QuerySnapshot>(
-        stream: _userStream,
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return loadingMessage(
-                context,
-                image: ezImage(pathKey: signalImageKey),
-              );
-            case ConnectionState.done:
-            default:
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    snapshot.error.toString(),
-                    style: getTextStyle(errorStyleKey),
-                  ),
+      body: standardWindow(
+        context: context,
+        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        body: StreamBuilder<QuerySnapshot>(
+          stream: _userStream,
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return loadingMessage(
+                  context: context,
+                  image: ezImage(pathKey: signalImageKey),
                 );
-              }
+              case ConnectionState.done:
+              default:
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text(
+                      snapshot.error.toString(),
+                      style: getTextStyle(errorStyleKey),
+                    ),
+                  );
+                }
 
-              return sortUsers(buildProfiles(snapshot.data!.docs));
-          }
-        },
+                return sortUsers(buildProfiles(snapshot.data!.docs));
+            }
+          },
+        ),
       ),
     );
   }

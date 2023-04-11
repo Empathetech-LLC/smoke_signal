@@ -35,13 +35,15 @@ const String joinedTextColorKey = 'joinedSignalTextColor';
 /// [Map] of default values for all Smoke Signal specific user customizable UI variables
 /// Beyond those already present in [EzConfig] from empathetech_flutter_ui
 final Map<String, dynamic> customDefaults = {
+  backColorKey: 0xFF11121E, // Color found at the base of 'assets/dark-forest.png'
+  themeColorKey: 0xFF09090F, // Halfway between the above color and black
   backImageKey: darkForestPath,
   signalImageKey: smokeSignalPath,
   signalSpacingKey: 50.0,
   signalHeightKey: 125.0,
   signalCountHeightKey: 75.0,
-  watchingColorKey: 0xE620DAA5, // Empathetech eucalyptus
-  watchingTextColorKey: 0xFF000000, // Black text
-  joinedColorKey: 0xE6A520DA, // Empathetech purple
-  joinedTextColorKey: 0xFFFFFFFF, // White text
+  watchingColorKey: 0xE620DAA5, // Eucalyptus - one of Empathetech's triadic colors
+  watchingTextColorKey: 0xFF000000, // Black
+  joinedColorKey: 0xE6A520DA, // Purple (X11) - one of Empathetech's triadic colors
+  joinedTextColorKey: 0xFFFFFFFF, // White
 };

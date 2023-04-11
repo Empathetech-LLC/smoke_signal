@@ -30,89 +30,93 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      // Title && theme
-      title: Text('Welcome back!', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
       backgroundColor: Color(EzConfig.prefs[backColorKey]),
-
-      // Body
-      body: ezScrollView(
-        children: [
-          // Autofill group allows for password manager inputs and such
-          AutofillGroup(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // Email field
-                ezForm(
-                  key: emailFormKey,
-                  controller: _emailController,
-                  hintText: 'Enter email',
-                  autofillHints: [AutofillHints.email],
-                  validator: emailValidator,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                ),
-                Container(height: buttonSpacer),
-
-                // Password field
-                ezForm(
-                  key: passwordFormKey,
-                  controller: _passwdController,
-                  hintText: 'Enter password',
-                  private: true,
-                  autofillHints: [AutofillHints.password],
-                ),
-              ],
-            ),
-          ),
-          Container(height: buttonSpacer),
-
-          // Forgot password option
-          GestureDetector(
-            onTap: () => pushScreen(
-              context,
-              screen: ResetPasswordScreen(),
-            ),
-            child: Text(
-              'Forgot your password?',
-              style: TextStyle(
-                color: contents.color,
-                fontSize: contents.fontSize,
-                fontFamily: contents.fontFamily,
-                decoration: TextDecoration.underline,
-              ),
-            ),
-          ),
-          Container(height: buttonSpacer),
-
-          // Attempt login button
-          EZButton(
-            action: () async {
-              // Close keyboard if open
-              EzConfig.focus.primaryFocus?.unfocus();
-
-              // Don't attempt login if we know the input is invalid
-              if (!emailFormKey.currentState!.validate()) {
-                logAlert(context, 'Invalid email!');
-                return;
-              }
-
-              await attemptLogin(
-                context,
-                _emailController.text.trim(),
-                _passwdController.text.trim(),
-              );
-            },
-            body: Text('Login'),
-          ),
-        ],
-        centered: true,
+      appBar: EzAppBar(
+        title: Text('Welcome back!', style: getTextStyle(titleStyleKey)),
+        endDrawer: EzDrawer(
+          header: standardDrawerHeader(),
+          body: standardDrawerBody(context: context),
+        ),
       ),
 
-      // User interaction
-      drawerHeader: standardDrawerHeader(),
-      drawerBody: standardDrawerBody(context),
+      // Body
+      body: standardWindow(
+        context: context,
+        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        body: ezScrollView(
+          children: [
+            // Autofill group allows for password manager inputs and such
+            AutofillGroup(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Email field
+                  ezForm(
+                    key: emailFormKey,
+                    controller: _emailController,
+                    hintText: 'Enter email',
+                    autofillHints: [AutofillHints.email],
+                    validator: emailValidator,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                  ),
+                  Container(height: buttonSpacer),
+
+                  // Password field
+                  ezForm(
+                    key: passwordFormKey,
+                    controller: _passwdController,
+                    hintText: 'Enter password',
+                    private: true,
+                    autofillHints: [AutofillHints.password],
+                  ),
+                ],
+              ),
+            ),
+            Container(height: buttonSpacer),
+
+            // Forgot password option
+            GestureDetector(
+              onTap: () => pushScreen(
+                context: context,
+                screen: ResetPasswordScreen(),
+              ),
+              child: Text(
+                'Forgot your password?',
+                style: TextStyle(
+                  color: contents.color,
+                  fontSize: contents.fontSize,
+                  fontFamily: contents.fontFamily,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            Container(height: buttonSpacer),
+
+            // Attempt login button
+            EZButton(
+              action: () async {
+                // Close keyboard if open
+                EzConfig.focus.primaryFocus?.unfocus();
+
+                // Don't attempt login if we know the input is invalid
+                if (!emailFormKey.currentState!.validate()) {
+                  logAlert(context, 'Invalid email!');
+                  return;
+                }
+
+                await attemptLogin(
+                  context,
+                  _emailController.text.trim(),
+                  _passwdController.text.trim(),
+                );
+              },
+              body: Text('Login'),
+            ),
+          ],
+          centered: true,
+        ),
+      ),
     );
   }
 }

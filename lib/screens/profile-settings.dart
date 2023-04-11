@@ -41,53 +41,55 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      // Title && theme
-      title: Text('Edit Profile', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
       backgroundColor: Color(EzConfig.prefs[backColorKey]),
+      appBar: EzAppBar(title: Text('Edit Profile', style: getTextStyle(titleStyleKey))),
 
       // Body
-      body: ezScrollView(
-        children: [
-          Container(height: buttonSpacer),
+      body: standardWindow(
+        context: context,
+        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        body: ezScrollView(
+          children: [
+            Container(height: buttonSpacer),
 
-          // Profile image
-          CircleAvatar(
-            foregroundImage: CachedNetworkImageProvider(url),
-            minRadius: 100,
-            maxRadius: 100,
-          ),
-          Container(height: buttonSpacer),
+            // Profile image
+            CircleAvatar(
+              foregroundImage: CachedNetworkImageProvider(url),
+              minRadius: 100,
+              maxRadius: 100,
+            ),
+            Container(height: buttonSpacer),
 
-          // Edit picture
-          EZButton.icon(
-            action: () async {
-              bool shouldRefresh = await editAvatar(context);
-              if (shouldRefresh) refreshPic();
-            },
-            message: 'New pic',
-            icon: ezIcon(PlatformIcons(context).photoCamera),
-          ),
+            // Edit picture
+            EZButton.icon(
+              action: () async {
+                bool shouldRefresh = await editAvatar(context);
+                if (shouldRefresh) refreshPic();
+              },
+              message: 'New pic',
+              icon: ezIcon(PlatformIcons(context).photoCamera),
+            ),
 
-          Container(height: buttonSpacer),
+            Container(height: buttonSpacer),
 
-          // Display name
-          Text(name, style: getTextStyle(titleStyleKey)),
-          Container(height: buttonSpacer),
+            // Display name
+            Text(name, style: getTextStyle(titleStyleKey)),
+            Container(height: buttonSpacer),
 
-          // Edit name
-          EZButton.icon(
-            action: () async {
-              bool shouldRefresh = await editName(context);
-              if (shouldRefresh) refreshName();
-            },
-            message: 'New name',
-            icon: ezIcon(PlatformIcons(context).edit),
-          ),
+            // Edit name
+            EZButton.icon(
+              action: () async {
+                bool shouldRefresh = await editName(context);
+                if (shouldRefresh) refreshName();
+              },
+              message: 'New name',
+              icon: ezIcon(PlatformIcons(context).edit),
+            ),
 
-          Container(height: buttonSpacer),
-        ],
-        centered: true,
+            Container(height: buttonSpacer),
+          ],
+          centered: true,
+        ),
       ),
     );
   }

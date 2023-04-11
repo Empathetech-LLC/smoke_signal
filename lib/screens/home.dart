@@ -1,5 +1,4 @@
 import 'screens.dart';
-import '../utils/utils.dart';
 
 import 'package:empathetech_ss_api/empathetech_ss_api.dart';
 import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -30,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// Request permission for Firebase Cloud Messager
   /// via [AppUser.messager]
-  requestFCMPermission() async {
+  _requestFCMPermission() async {
     await AppUser.messager.requestPermission(
       alert: true,
       announcement: true,
@@ -46,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _authStream = AppUser.auth.authStateChanges();
-    requestFCMPermission();
+    _requestFCMPermission();
   }
 
   late Color themeColor = Color(EzConfig.prefs[themeColorKey]);
@@ -56,54 +54,17 @@ class _HomeScreenState extends State<HomeScreen> {
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
   /// Updates current build based on the current auth [type]
-  Widget getBuild(HomeBuildType type) {
+  Widget _getBuild(HomeBuildType type) {
     switch (type) {
       case HomeBuildType.app:
         return SignalBoard();
 
       case HomeBuildType.loading:
+        return LoadingScreen();
+
       case HomeBuildType.auth:
       default:
-        return EzScaffold(
-          // Title && theme
-          title: Text(appTitle, style: getTextStyle(titleStyleKey)),
-          backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
-          backgroundColor: Color(EzConfig.prefs[backColorKey]),
-
-          // Body
-          body: (type == HomeBuildType.loading)
-              ? loadingMessage(
-                  context,
-                  image: ezImage(pathKey: signalImageKey),
-                )
-              : // Show authBuild
-              ezScrollView(children: [
-                  // Login
-                  EZButton.icon(
-                    action: () => pushScreen(
-                      context,
-                      screen: LoginScreen(),
-                    ),
-                    message: 'Login',
-                    icon: ezIcon(PlatformIcons(context).mail),
-                  ),
-                  Container(height: buttonSpacer),
-
-                  // Sign up
-                  EZButton.icon(
-                    action: () => pushScreen(
-                      context,
-                      screen: SignUpScreen(),
-                    ),
-                    message: 'Sign up',
-                    icon: ezIcon(PlatformIcons(context).mail),
-                  ),
-                ], centered: true),
-
-          // User interaction
-          drawerHeader: standardDrawerHeader(),
-          drawerBody: standardDrawerBody(context),
-        );
+        return AuthScreen();
     }
   }
 
@@ -115,17 +76,17 @@ class _HomeScreenState extends State<HomeScreen> {
         switch (snapshot.connectionState) {
           // Waiting on response
           case ConnectionState.waiting:
-            return getBuild(HomeBuildType.loading);
+            return _getBuild(HomeBuildType.loading);
 
           // Received response
           case ConnectionState.done:
           default:
             // Check for user data, show auth build if invalid
             if (snapshot.hasError || !snapshot.hasData)
-              return getBuild(HomeBuildType.auth);
+              return _getBuild(HomeBuildType.auth);
 
             User? currUser = snapshot.data;
-            if (currUser == null) return getBuild(HomeBuildType.auth);
+            if (currUser == null) return _getBuild(HomeBuildType.auth);
 
             // User is found!
 
@@ -148,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Load Smoke Signal!
 
-            return getBuild(HomeBuildType.app);
+            return _getBuild(HomeBuildType.app);
         }
       },
     );

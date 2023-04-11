@@ -42,122 +42,131 @@ class _SignalBoardState extends State<SignalBoard> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      // Title && theme
-      title: Text('Signals', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
       backgroundColor: Color(EzConfig.prefs[backColorKey]),
 
-      // Body
-      body: ezScrollView(
-        children: [
-          // Signals the user is a member of
-          StreamBuilder<QuerySnapshot>(
-              stream: _signalStream,
-              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.waiting:
-                    return loadingMessage(
-                      context,
-                      image: ezImage(pathKey: signalImageKey),
-                    );
-                  case ConnectionState.done:
-                  default:
-                    if (snapshot.hasError) {
-                      logAlert(context, snapshot.error.toString());
-                      return Container();
-                    }
+      // App bar
+      appBar: EzAppBar(
+        title: Text('Signals', style: getTextStyle(titleStyleKey)),
 
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: snapshot.data!.docs
-                          .map((DocumentSnapshot signalDoc) =>
-                              Signal.buildSignal(signalDoc, reload))
-                          .toList(),
-                    );
-                }
-              }),
+        // End Drawer
+        endDrawer: EzDrawer(
+          header: signalDrawerHeader(context: context, refresh: refresh),
+          body: [
+            Container(height: buttonSpacer),
 
-          // Signal requests pending the user's approval
-          StreamBuilder<QuerySnapshot>(
-              stream: _requestStream,
-              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.waiting:
-                    return Container(); // Don't need two loading messages
-                  case ConnectionState.done:
-                  default:
-                    if (snapshot.hasError) {
-                      logAlert(context, snapshot.error.toString());
-                      return Container();
-                    }
+            // GoTo settings
+            EZButton.icon(
+              action: () async {
+                dynamic shouldRefresh = await popAndPushScreen(
+                  context: context,
+                  screen: AppSettingsScreen(),
+                );
 
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: snapshot.data!.docs
-                          .map((DocumentSnapshot signalDoc) =>
-                              Signal.buildSignal(signalDoc, reload))
-                          .toList(),
-                    );
-                }
-              }),
-        ],
-        centered: true,
+                if (shouldRefresh != null) refresh();
+              },
+              message: 'Settings',
+              icon: ezIcon(PlatformIcons(context).settings),
+            ),
+            Container(height: buttonSpacer),
+
+            // Show input rules
+            EZButton(
+              action: () => ezDialog(
+                context: context,
+                title: 'Input rules',
+                content: [
+                  Text(
+                    validatorRule,
+                    style: getTextStyle(dialogContentStyleKey),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+              body: Text('Input rules'),
+            ),
+            Container(height: buttonSpacer),
+
+            // Reload
+            EZButton.icon(
+              action: () {
+                popScreen(context: context, pass: true);
+                reload();
+              },
+              message: 'Reload',
+              icon: ezIcon(PlatformIcons(context).refresh),
+            ),
+          ],
+        ),
       ),
 
-      // User interaction
-      drawerHeader: signalDrawerHeader(context, refresh: refresh),
-      drawerBody: [
-        Container(height: buttonSpacer),
+      // Body
+      body: standardWindow(
+        context: context,
+        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        body: ezScrollView(
+          children: [
+            // Signals the user is a member of
+            StreamBuilder<QuerySnapshot>(
+                stream: _signalStream,
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return loadingMessage(
+                        context: context,
+                        image: ezImage(pathKey: signalImageKey),
+                      );
+                    case ConnectionState.done:
+                    default:
+                      if (snapshot.hasError) {
+                        logAlert(context, snapshot.error.toString());
+                        return Container();
+                      }
 
-        // GoTo settings
-        EZButton.icon(
-          action: () async {
-            dynamic shouldRefresh = await popAndPushScreen(
-              context,
-              screen: AppSettingsScreen(),
-            );
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: snapshot.data!.docs
+                            .map((DocumentSnapshot signalDoc) =>
+                                Signal.buildSignal(signalDoc, reload))
+                            .toList(),
+                      );
+                  }
+                }),
 
-            if (shouldRefresh != null) refresh();
-          },
-          message: 'Settings',
-          icon: ezIcon(PlatformIcons(context).settings),
+            // Signal requests pending the user's approval
+            StreamBuilder<QuerySnapshot>(
+                stream: _requestStream,
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return Container(); // Don't need two loading messages
+                    case ConnectionState.done:
+                    default:
+                      if (snapshot.hasError) {
+                        logAlert(context, snapshot.error.toString());
+                        return Container();
+                      }
+
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: snapshot.data!.docs
+                            .map((DocumentSnapshot signalDoc) =>
+                                Signal.buildSignal(signalDoc, reload))
+                            .toList(),
+                      );
+                  }
+                }),
+          ],
+          centered: true,
         ),
-        Container(height: buttonSpacer),
+      ),
 
-        // Show input rules
-        EZButton(
-          action: () => ezDialog(
-            context,
-            title: 'Input rules',
-            content: [
-              Text(
-                validatorRule,
-                style: getTextStyle(dialogContentStyleKey),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-          body: Text('Input rules'),
-        ),
-        Container(height: buttonSpacer),
-
-        // Reload
-        EZButton.icon(
-          action: () {
-            popScreen(context, pass: true);
-            reload();
-          },
-          message: 'Reload',
-          icon: ezIcon(PlatformIcons(context).refresh),
-        ),
-      ],
-
+      // Floating Action Button
       fab: EZButton(
         action: () async {
           dynamic shouldReload = await pushScreen(
-            context,
+            context: context,
             screen: CreateSignalScreen(),
           );
 

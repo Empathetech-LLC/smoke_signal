@@ -21,32 +21,35 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      title: Text('Image settings', style: getTextStyle(titleStyleKey)),
       backgroundColor: Color(EzConfig.prefs[backColorKey]),
-      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
-      body: ezScrollView(
-        children: [
-          // Background
-          EzImageSetting(
-            prefsKey: backImageKey,
-            fullscreen: true,
-            title: 'Background',
-            credits: credits[EzConfig.prefs[backImageKey]] ?? 'Wherever you got it!',
-            allowClear: true,
-          ),
-          Container(height: buttonSpacer),
+      appBar: EzAppBar(title: Text('Image settings', style: getTextStyle(titleStyleKey))),
+      body: standardWindow(
+        context: context,
+        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        body: ezScrollView(
+          children: [
+            // Background
+            EzImageSetting(
+              prefsKey: backImageKey,
+              fullscreen: true,
+              title: 'Background',
+              credits: credits[EzConfig.prefs[backImageKey]] ?? 'Wherever you got it!',
+              allowClear: true,
+            ),
+            Container(height: buttonSpacer),
 
-          // Signal
-          EzImageSetting(
-            prefsKey: signalImageKey,
-            fullscreen: false,
-            title: 'Signal',
-            credits: credits[EzConfig.prefs[signalImageKey]] ?? 'Wherever you got it!',
-            allowClear: false,
-          ),
-          Container(height: buttonSpacer),
-        ],
-        centered: true,
+            // Signal
+            EzImageSetting(
+              prefsKey: signalImageKey,
+              fullscreen: false,
+              title: 'Signal',
+              credits: credits[EzConfig.prefs[signalImageKey]] ?? 'Wherever you got it!',
+              allowClear: false,
+            ),
+            Container(height: buttonSpacer),
+          ],
+          centered: true,
+        ),
       ),
     );
   }

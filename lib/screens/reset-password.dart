@@ -28,59 +28,63 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      // Title && theme
-      title: Text('No problem!', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
       backgroundColor: Color(EzConfig.prefs[backColorKey]),
-
-      // Body
-      body: ezScrollView(
-        children: [
-          // Email form
-          AutofillGroup(
-            child: ezForm(
-              key: emailFormKey,
-              controller: _emailController,
-              hintText: 'Enter email',
-              autofillHints: [AutofillHints.email],
-              validator: emailValidator,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-            ),
-          ),
-          Container(height: buttonSpacer),
-
-          // Submit button
-          EZButton.icon(
-            action: () async {
-              // Close keyboard if open
-              EzConfig.focus.primaryFocus?.unfocus();
-
-              // Don't do anything if the email is invalid
-              if (!emailFormKey.currentState!.validate()) {
-                logAlert(context, 'Invalid email!');
-                return;
-              }
-
-              // Attempt reset
-              try {
-                await AppUser.auth
-                    .sendPasswordResetEmail(email: _emailController.text.trim());
-                logAlert(context, 'Password reset email has been sent!');
-              } on Exception catch (e) {
-                logAlert(context, 'Failed to send password reset email:\n$e');
-              }
-            },
-            message: 'Send link',
-            icon: ezIcon(PlatformIcons(context).mail),
-          ),
-          Container(height: buttonSpacer),
-        ],
-        centered: true,
+      appBar: EzAppBar(
+        title: Text('No problem!', style: getTextStyle(titleStyleKey)),
+        endDrawer: EzDrawer(
+          header: standardDrawerHeader(),
+          body: standardDrawerBody(context: context),
+        ),
       ),
 
-      // User interaction
-      drawerHeader: standardDrawerHeader(),
-      drawerBody: standardDrawerBody(context),
+      // Body
+      body: standardWindow(
+        context: context,
+        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        body: ezScrollView(
+          children: [
+            // Email form
+            AutofillGroup(
+              child: ezForm(
+                key: emailFormKey,
+                controller: _emailController,
+                hintText: 'Enter email',
+                autofillHints: [AutofillHints.email],
+                validator: emailValidator,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+              ),
+            ),
+            Container(height: buttonSpacer),
+
+            // Submit button
+            EZButton.icon(
+              action: () async {
+                // Close keyboard if open
+                EzConfig.focus.primaryFocus?.unfocus();
+
+                // Don't do anything if the email is invalid
+                if (!emailFormKey.currentState!.validate()) {
+                  logAlert(context, 'Invalid email!');
+                  return;
+                }
+
+                // Attempt reset
+                try {
+                  await AppUser.auth
+                      .sendPasswordResetEmail(email: _emailController.text.trim());
+                  logAlert(context, 'Password reset email has been sent!');
+                } on Exception catch (e) {
+                  logAlert(context, 'Failed to send password reset email:\n$e');
+                }
+              },
+              message: 'Send link',
+              icon: ezIcon(PlatformIcons(context).mail),
+            ),
+            Container(height: buttonSpacer),
+          ],
+          centered: true,
+        ),
+      ),
     );
   }
 }

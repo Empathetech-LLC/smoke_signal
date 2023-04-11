@@ -95,116 +95,118 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      // Title && theme
-      title: Text('New signal', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
       backgroundColor: Color(EzConfig.prefs[backColorKey]),
+      appBar: EzAppBar(title: Text('New signal', style: getTextStyle(titleStyleKey))),
 
       // Body
-      body: ezScrollView(
-        children: [
-          // Title field
-          ezForm(
-            key: titleFormKey,
-            controller: _titleController,
-            hintText: 'Signal title',
-            validator: signalTitleValidator,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-          ),
-          Container(height: buttonSpacer),
+      body: standardWindow(
+        context: context,
+        backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+        body: ezScrollView(
+          children: [
+            // Title field
+            ezForm(
+              key: titleFormKey,
+              controller: _titleController,
+              hintText: 'Signal title',
+              validator: signalTitleValidator,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+            ),
+            Container(height: buttonSpacer),
 
-          // Message field
-          ezForm(
-            key: messageFormKey,
-            controller: _messageController,
-            hintText: 'Notification',
-            validator: signalMessageValidator,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-          ),
-          Container(height: buttonSpacer),
+            // Message field
+            ezForm(
+              key: messageFormKey,
+              controller: _messageController,
+              hintText: 'Notification',
+              validator: signalMessageValidator,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+            ),
+            Container(height: buttonSpacer),
 
-          // Toggle for current participation
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                'Currently active?',
-                style: getTextStyle(dialogTitleStyleKey),
-              ),
-              ezSwitch(
-                value: isActive,
-                onChanged: (bool? value) {
-                  // Flip state and close keyboard if open
-                  EzConfig.focus.primaryFocus?.unfocus();
+            // Toggle for current participation
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  'Currently active?',
+                  style: getTextStyle(dialogTitleStyleKey),
+                ),
+                ezSwitch(
+                  value: isActive,
+                  onChanged: (bool? value) {
+                    // Flip state and close keyboard if open
+                    EzConfig.focus.primaryFocus?.unfocus();
 
-                  setState(() {
-                    isActive = value!;
-                  });
-                },
-              ),
-            ],
-          ),
-          Container(height: buttonSpacer),
+                    setState(() {
+                      isActive = value!;
+                    });
+                  },
+                ),
+              ],
+            ),
+            Container(height: buttonSpacer),
 
-          // List of toggle-able members to send join requests on creation
-          StreamBuilder<QuerySnapshot>(
-            stream: _userStream,
-            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return loadingMessage(
-                    context,
-                    image: ezImage(pathKey: signalImageKey),
-                  );
-                case ConnectionState.done:
-                default:
-                  if (snapshot.hasError) {
-                    logAlert(context, snapshot.error.toString());
-                    return Container();
-                  }
+            // List of toggle-able members to send join requests on creation
+            StreamBuilder<QuerySnapshot>(
+              stream: _userStream,
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return loadingMessage(
+                      context: context,
+                      image: ezImage(pathKey: signalImageKey),
+                    );
+                  case ConnectionState.done:
+                  default:
+                    if (snapshot.hasError) {
+                      logAlert(context, snapshot.error.toString());
+                      return Container();
+                    }
 
-                  return ezTileList(
-                    context,
-                    title: 'Starting members',
-                    items: buildSwitches(buildProfiles(snapshot.data!.docs)),
-                  );
-              }
-            },
-          ),
-          Container(height: buttonSpacer),
+                    return ezTileList(
+                      context: context,
+                      title: 'Starting members',
+                      items: buildSwitches(buildProfiles(snapshot.data!.docs)),
+                    );
+                }
+              },
+            ),
+            Container(height: buttonSpacer),
 
-          // Add button
-          EZButton.icon(
-            action: () async {
-              // Close keyboard if open
-              EzConfig.focus.primaryFocus?.unfocus();
+            // Add button
+            EZButton.icon(
+              action: () async {
+                // Close keyboard if open
+                EzConfig.focus.primaryFocus?.unfocus();
 
-              // Don't do anything if the input is invalid
-              if (!titleFormKey.currentState!.validate()) {
-                logAlert(context, 'Invalid title!');
-                return;
-              } else if (!messageFormKey.currentState!.validate()) {
-                logAlert(context, 'Invalid message!');
-                return;
-              }
+                // Don't do anything if the input is invalid
+                if (!titleFormKey.currentState!.validate()) {
+                  logAlert(context, 'Invalid title!');
+                  return;
+                } else if (!messageFormKey.currentState!.validate()) {
+                  logAlert(context, 'Invalid message!');
+                  return;
+                }
 
-              // Attempt adding signal
-              bool added = await addToDB(
-                context,
-                _titleController.text.trim(),
-                _messageController.text.trim(),
-                isActive,
-                requestIDs,
-              );
+                // Attempt adding signal
+                bool added = await addToDB(
+                  context,
+                  _titleController.text.trim(),
+                  _messageController.text.trim(),
+                  isActive,
+                  requestIDs,
+                );
 
-              if (added) popScreen(context, pass: true);
-            },
-            message: 'Add',
-            icon: ezIcon(PlatformIcons(context).cloudUpload),
-          ),
-          Container(height: buttonSpacer),
-        ],
-        centered: true,
+                if (added) popScreen(context: context, pass: true);
+              },
+              message: 'Add',
+              icon: ezIcon(PlatformIcons(context).cloudUpload),
+            ),
+            Container(height: buttonSpacer),
+          ],
+          centered: true,
+        ),
       ),
     );
   }

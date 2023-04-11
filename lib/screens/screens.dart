@@ -1,8 +1,10 @@
 export 'app-settings.dart';
+export 'auth.dart';
 export 'color-settings.dart';
 export 'create-signal.dart';
 export 'home.dart';
 export 'image-settings.dart';
+export 'loading.dart';
 export 'login.dart';
 export 'profile-settings.dart';
 export 'reset-password.dart';
