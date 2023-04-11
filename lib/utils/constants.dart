@@ -3,7 +3,7 @@ import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 /// Application title [String]
 const String appTitle = 'Smoke Signal';
 
-/// Paths to asset files for [AppConfig.assets]
+/// Paths to asset files for [EzConfig.assets]
 final List<String> assets = [
   appIconPath,
   darkForestPath,
@@ -33,7 +33,7 @@ const String joinedColorKey = 'joinedSignalColor';
 const String joinedTextColorKey = 'joinedSignalTextColor';
 
 /// [Map] of default values for all Smoke Signal specific user customizable UI variables
-/// Beyond those already present in [AppConfig] from empathetech_flutter_ui
+/// Beyond those already present in [EzConfig] from empathetech_flutter_ui
 final Map<String, dynamic> customDefaults = {
   backImageKey: darkForestPath,
   signalImageKey: smokeSignalPath,

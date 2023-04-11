@@ -12,19 +12,19 @@ class ColorSettingsScreen extends StatefulWidget {
 }
 
 class _ColorSettingsState extends State<ColorSettingsScreen> {
-  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
+  Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
 
   @override
   Widget build(BuildContext context) {
-    double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
-    double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
+    double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
+    double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
-    return EZScaffold(
+    return EzScaffold(
       title: Text('Color settings', style: getTextStyle(titleStyleKey)),
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(EzConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
       body: ezScrollView(
         children: [
           // User hint: hold the buttons to reset the color
@@ -36,20 +36,20 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Background
-          ColorSetting(
+          EzColorSetting(
             toControl: backColorKey,
             message: 'Background',
           ),
           Container(height: buttonSpacer),
 
           // Theme
-          ColorSetting(
+          EzColorSetting(
             toControl: themeColorKey,
             message: 'Theme',
           ),
           Container(height: buttonSpacer),
 
-          ColorSetting(
+          EzColorSetting(
             toControl: themeTextColorKey,
             message: 'Theme\ntext',
             textBackgroundKey: themeColorKey,
@@ -57,13 +57,13 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Buttons
-          ColorSetting(
+          EzColorSetting(
             toControl: buttonColorKey,
             message: 'Buttons',
           ),
           Container(height: buttonSpacer),
 
-          ColorSetting(
+          EzColorSetting(
             toControl: buttonTextColorKey,
             message: 'Button\ntext',
             textBackgroundKey: buttonColorKey,
@@ -71,26 +71,26 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Signals
-          ColorSetting(
+          EzColorSetting(
             toControl: watchingColorKey,
             message: 'Watching\nsignal',
           ),
           Container(height: buttonSpacer),
 
-          ColorSetting(
+          EzColorSetting(
             toControl: watchingTextColorKey,
             message: 'Watching\nsignal text',
             textBackgroundKey: watchingColorKey,
           ),
           Container(height: buttonSpacer),
 
-          ColorSetting(
+          EzColorSetting(
             toControl: joinedColorKey,
             message: 'Joined\nsignal',
           ),
           Container(height: buttonSpacer),
 
-          ColorSetting(
+          EzColorSetting(
             toControl: joinedTextColorKey,
             message: 'Joined\nsignal text',
             textBackgroundKey: joinedColorKey,
@@ -107,15 +107,15 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
                       context,
                       onConfirm: () {
                         // Remove all color settings
-                        AppConfig.preferences.remove(backColorKey);
-                        AppConfig.preferences.remove(themeColorKey);
-                        AppConfig.preferences.remove(themeTextColorKey);
-                        AppConfig.preferences.remove(buttonColorKey);
-                        AppConfig.preferences.remove(buttonTextColorKey);
-                        AppConfig.preferences.remove(watchingColorKey);
-                        AppConfig.preferences.remove(watchingTextColorKey);
-                        AppConfig.preferences.remove(joinedColorKey);
-                        AppConfig.preferences.remove(joinedTextColorKey);
+                        EzConfig.preferences.remove(backColorKey);
+                        EzConfig.preferences.remove(themeColorKey);
+                        EzConfig.preferences.remove(themeTextColorKey);
+                        EzConfig.preferences.remove(buttonColorKey);
+                        EzConfig.preferences.remove(buttonTextColorKey);
+                        EzConfig.preferences.remove(watchingColorKey);
+                        EzConfig.preferences.remove(watchingTextColorKey);
+                        EzConfig.preferences.remove(joinedColorKey);
+                        EzConfig.preferences.remove(joinedTextColorKey);
 
                         popScreen(context, pass: true);
                         popScreen(context, pass: true);

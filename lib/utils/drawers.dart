@@ -24,7 +24,7 @@ List<Widget> standardDrawerBody(
   BuildContext context, {
   void Function()? onReturn,
 }) {
-  double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+  double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
   return [
     // GoTo settings
@@ -109,7 +109,7 @@ Widget signalDrawerHeader(
             },
             body: ezIcon(PlatformIcons(context).edit),
           ),
-          Container(height: AppConfig.prefs[dialogSpacingKey]),
+          Container(height: EzConfig.prefs[dialogSpacingKey]),
 
           // Logout
           EZButton(

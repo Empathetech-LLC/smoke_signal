@@ -40,12 +40,12 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
   late List<String> requestIDs = [];
 
   // Gather theme data
-  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
-  late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
+  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
+  late double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
-  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
-  late Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
+  late Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+  late Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
+  late Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
 
   // Creates the widgets for the toggle list from the gathered profiles
   List<PlatformListTile> buildSwitchTiles(List<UserProfile> profiles) {
@@ -66,7 +66,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
                   minRadius: 35,
                   maxRadius: 35,
                 ),
-                Container(width: AppConfig.prefs[paddingKey]),
+                Container(width: EzConfig.prefs[paddingKey]),
 
                 // Display name
                 ezText(
@@ -124,7 +124,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       ezText(
         'Available',
         style: getTextStyle(titleStyleKey),
-        background: Color(AppConfig.prefs[themeColorKey]),
+        background: Color(EzConfig.prefs[themeColorKey]),
       ),
       showUserPics(context, memberProfiles),
       Container(height: buttonSpacer),
@@ -133,7 +133,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       ezText(
         'Active',
         style: getTextStyle(titleStyleKey),
-        background: Color(AppConfig.prefs[themeColorKey]),
+        background: Color(EzConfig.prefs[themeColorKey]),
       ),
       showUserPics(context, activeProfiles),
       Container(height: buttonSpacer),
@@ -170,11 +170,11 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return EZScaffold(
+    return EzScaffold(
       // Title && theme
       title: Text(widget.title + ' members', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+      backgroundColor: Color(EzConfig.prefs[backColorKey]),
 
       // Body
       body: StreamBuilder<QuerySnapshot>(

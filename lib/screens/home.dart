@@ -49,11 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
     requestFCMPermission();
   }
 
-  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
-  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  late Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+  late Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
+  late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
 
-  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
   /// Updates current build based on the current auth [type]
   Widget getBuild(HomeBuildType type) {
@@ -64,11 +64,11 @@ class _HomeScreenState extends State<HomeScreen> {
       case HomeBuildType.loading:
       case HomeBuildType.auth:
       default:
-        return EZScaffold(
+        return EzScaffold(
           // Title && theme
           title: Text(appTitle, style: getTextStyle(titleStyleKey)),
-          backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-          backgroundColor: Color(AppConfig.prefs[backColorKey]),
+          backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+          backgroundColor: Color(EzConfig.prefs[backColorKey]),
 
           // Body
           body: (type == HomeBuildType.loading)
@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Listeners aren't tied to screens!
             // Notifs will be received on any page hereafter
             FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-              await NotificationService().show(
+              await EzNotifications().show(
                 id: 0,
                 title: message.notification?.title,
                 body: message.notification?.body,

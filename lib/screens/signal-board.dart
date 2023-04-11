@@ -16,7 +16,7 @@ class SignalBoard extends StatefulWidget {
 }
 
 class _SignalBoardState extends State<SignalBoard> {
-  double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+  double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
   late Stream<QuerySnapshot<Object?>> _signalStream;
   late Stream<QuerySnapshot<Object?>> _requestStream;
@@ -41,11 +41,11 @@ class _SignalBoardState extends State<SignalBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return EZScaffold(
+    return EzScaffold(
       // Title && theme
       title: Text('Signals', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+      backgroundColor: Color(EzConfig.prefs[backColorKey]),
 
       // Body
       body: ezScrollView(

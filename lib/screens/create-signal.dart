@@ -33,12 +33,12 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
   late TextEditingController _titleController = TextEditingController();
   late TextEditingController _messageController = TextEditingController();
 
-  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
-  late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
+  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
+  late double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
-  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
-  late Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
+  late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
+  late Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
+  late Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
 
   /// Creates a [List] of [PlatformListTile]s for displaying [UserProfile]s alongside
   List<PlatformListTile> buildSwitches(List<UserProfile> profiles) {
@@ -59,7 +59,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                   minRadius: 35,
                   maxRadius: 35,
                 ),
-                Container(width: AppConfig.prefs[paddingKey]),
+                Container(width: EzConfig.prefs[paddingKey]),
 
                 // Display name
                 ezText(
@@ -94,11 +94,11 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return EZScaffold(
+    return EzScaffold(
       // Title && theme
       title: Text('New signal', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+      backgroundColor: Color(EzConfig.prefs[backColorKey]),
 
       // Body
       body: ezScrollView(
@@ -135,7 +135,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 value: isActive,
                 onChanged: (bool? value) {
                   // Flip state and close keyboard if open
-                  AppConfig.focus.primaryFocus?.unfocus();
+                  EzConfig.focus.primaryFocus?.unfocus();
 
                   setState(() {
                     isActive = value!;
@@ -177,7 +177,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
           EZButton.icon(
             action: () async {
               // Close keyboard if open
-              AppConfig.focus.primaryFocus?.unfocus();
+              EzConfig.focus.primaryFocus?.unfocus();
 
               // Don't do anything if the input is invalid
               if (!titleFormKey.currentState!.validate()) {

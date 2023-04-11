@@ -60,21 +60,21 @@ class _SignalState extends State<Signal> {
   late String showIconKey = signalTitle + 'ShowIcon';
   late String iconPathKey = signalTitle + 'Icon';
 
-  late bool showIcon = AppConfig.preferences.getBool(showIconKey) ?? false;
+  late bool showIcon = EzConfig.preferences.getBool(showIconKey) ?? false;
 
-  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
-  late Color buttonTextColor = Color(AppConfig.prefs[buttonTextColorKey]);
-  late Color joinedColor = Color(AppConfig.prefs[joinedColorKey]);
-  late Color joinedTextColor = Color(AppConfig.prefs[joinedTextColorKey]);
-  late Color watchingColor = Color(AppConfig.prefs[watchingColorKey]);
-  late Color watchingTextColor = Color(AppConfig.prefs[watchingTextColorKey]);
+  late Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+  late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
+  late Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
+  late Color buttonTextColor = Color(EzConfig.prefs[buttonTextColorKey]);
+  late Color joinedColor = Color(EzConfig.prefs[joinedColorKey]);
+  late Color joinedTextColor = Color(EzConfig.prefs[joinedTextColorKey]);
+  late Color watchingColor = Color(EzConfig.prefs[watchingColorKey]);
+  late Color watchingTextColor = Color(EzConfig.prefs[watchingTextColorKey]);
 
-  late double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
-  late double signalSpacer = AppConfig.prefs[signalSpacingKey];
-  late double signalHeight = AppConfig.prefs[signalHeightKey];
-  late double signalCountHeight = AppConfig.prefs[signalCountHeightKey];
+  late double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
+  late double signalSpacer = EzConfig.prefs[signalSpacingKey];
+  late double signalHeight = EzConfig.prefs[signalHeightKey];
+  late double signalCountHeight = EzConfig.prefs[signalCountHeightKey];
 
   late TextStyle titleTextStyle = getTextStyle(titleStyleKey);
   late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
@@ -146,7 +146,7 @@ class _SignalState extends State<Signal> {
             }
 
             // Wipe [SharedPreferences]
-            AppConfig.preferences.remove(iconPathKey);
+            EzConfig.preferences.remove(iconPathKey);
             popScreen(context, pass: true);
           },
           message: 'Reset',
@@ -160,7 +160,7 @@ class _SignalState extends State<Signal> {
   void toggleIcon() {
     // Hide icon
     if (showIcon) {
-      AppConfig.preferences.remove(showIconKey);
+      EzConfig.preferences.remove(showIconKey);
       setState(() {
         showIcon = false;
       });
@@ -168,7 +168,7 @@ class _SignalState extends State<Signal> {
 
     // Show icon
     else {
-      AppConfig.preferences.setBool(showIconKey, true);
+      EzConfig.preferences.setBool(showIconKey, true);
       setState(() {
         showIcon = true;
       });
@@ -289,7 +289,7 @@ class _SignalState extends State<Signal> {
 
   @override
   Widget build(BuildContext context) {
-    double padding = AppConfig.prefs[paddingKey];
+    double padding = EzConfig.prefs[paddingKey];
 
     // Current user is a member
     if (widget.members.contains(AppUser.account.uid)) {

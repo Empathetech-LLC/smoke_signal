@@ -19,19 +19,19 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
 
   late TextEditingController _emailController = TextEditingController();
 
-  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
 
   late TextStyle contents = getTextStyle(dialogContentStyleKey);
 
-  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
   @override
   Widget build(BuildContext context) {
-    return EZScaffold(
+    return EzScaffold(
       // Title && theme
       title: Text('No problem!', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+      backgroundColor: Color(EzConfig.prefs[backColorKey]),
 
       // Body
       body: ezScrollView(
@@ -53,7 +53,7 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
           EZButton.icon(
             action: () async {
               // Close keyboard if open
-              AppConfig.focus.primaryFocus?.unfocus();
+              EzConfig.focus.primaryFocus?.unfocus();
 
               // Don't do anything if the email is invalid
               if (!emailFormKey.currentState!.validate()) {

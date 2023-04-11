@@ -13,9 +13,9 @@ class ProfileSettingsScreen extends StatefulWidget {
 }
 
 class _ProfileSettingsState extends State<ProfileSettingsScreen> {
-  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
+  late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
 
-  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
   late String name = AppUser.account.displayName ?? defaultDisplayName;
   late String url = AppUser.account.photoURL ?? defaultAvatarURL;
@@ -40,11 +40,11 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return EZScaffold(
+    return EzScaffold(
       // Title && theme
       title: Text('Edit Profile', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+      backgroundColor: Color(EzConfig.prefs[backColorKey]),
 
       // Body
       body: ezScrollView(

@@ -12,27 +12,27 @@ class StyleSettingsScreen extends StatefulWidget {
 }
 
 class _StyleSettingsState extends State<StyleSettingsScreen> {
-  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
+  Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
 
   @override
   Widget build(BuildContext context) {
-    double buttonSpacer = AppConfig.prefs[buttonSpacingKey] * 2;
-    double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
+    double buttonSpacer = EzConfig.prefs[buttonSpacingKey] * 2;
+    double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
-    return EZScaffold(
+    return EzScaffold(
       title: Text('Style settings', style: getTextStyle(titleStyleKey)),
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(EzConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
       body: ezScrollView(
         children: [
           // Font Family
-          FontFamilySetting(),
+          EzFontSetting(),
           Container(height: buttonSpacer),
 
           // Font size
-          SliderSetting(
+          EzSliderSetting(
             prefsKey: fontSizeKey,
             type: SettingType.fontSize,
             title: 'Font size',
@@ -43,7 +43,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Margin
-          SliderSetting(
+          EzSliderSetting(
             prefsKey: marginKey,
             type: SettingType.margin,
             title: 'Margin',
@@ -54,7 +54,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Padding
-          SliderSetting(
+          EzSliderSetting(
             prefsKey: paddingKey,
             type: SettingType.padding,
             title: 'Padding',
@@ -65,7 +65,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Button spacing
-          SliderSetting(
+          EzSliderSetting(
             prefsKey: buttonSpacingKey,
             type: SettingType.buttonSpacing,
             title: 'Button spacing',
@@ -76,7 +76,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Dialog spacing
-          SliderSetting(
+          EzSliderSetting(
             prefsKey: dialogSpacingKey,
             type: SettingType.dialogSpacing,
             title: 'Dialog spacing',
@@ -87,7 +87,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Signal spacing
-          SliderSetting(
+          EzSliderSetting(
             prefsKey: signalSpacingKey,
             type: SettingType.buttonSpacing,
             title: 'Signal spacing',
@@ -98,7 +98,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Signal height
-          SliderSetting(
+          EzSliderSetting(
             prefsKey: signalHeightKey,
             type: SettingType.buttonHeight,
             title: 'Signal height',
@@ -109,7 +109,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
           Container(height: buttonSpacer),
 
           // Signal count height
-          SliderSetting(
+          EzSliderSetting(
             prefsKey: signalCountHeightKey,
             type: SettingType.buttonHeight,
             title: 'Signal count height',
@@ -130,15 +130,15 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
                     context,
                     onConfirm: () {
                       // Remove all color settings
-                      AppConfig.preferences.remove(fontFamilyKey);
-                      AppConfig.preferences.remove(fontSizeKey);
-                      AppConfig.preferences.remove(marginKey);
-                      AppConfig.preferences.remove(paddingKey);
-                      AppConfig.preferences.remove(buttonSpacingKey);
-                      AppConfig.preferences.remove(dialogSpacingKey);
-                      AppConfig.preferences.remove(signalSpacingKey);
-                      AppConfig.preferences.remove(signalHeightKey);
-                      AppConfig.preferences.remove(signalCountHeightKey);
+                      EzConfig.preferences.remove(fontFamilyKey);
+                      EzConfig.preferences.remove(fontSizeKey);
+                      EzConfig.preferences.remove(marginKey);
+                      EzConfig.preferences.remove(paddingKey);
+                      EzConfig.preferences.remove(buttonSpacingKey);
+                      EzConfig.preferences.remove(dialogSpacingKey);
+                      EzConfig.preferences.remove(signalSpacingKey);
+                      EzConfig.preferences.remove(signalHeightKey);
+                      EzConfig.preferences.remove(signalCountHeightKey);
 
                       popScreen(context, pass: true);
                       popScreen(context, pass: true);

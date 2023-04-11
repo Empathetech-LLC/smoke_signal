@@ -12,36 +12,36 @@ class ImageSettingsScreen extends StatefulWidget {
 }
 
 class _ImageSettingsState extends State<ImageSettingsScreen> {
-  late Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  late Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-  late Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  late Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+  late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
+  late Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
 
-  late double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
+  late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
   @override
   Widget build(BuildContext context) {
-    return EZScaffold(
+    return EzScaffold(
       title: Text('Image settings', style: getTextStyle(titleStyleKey)),
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
+      backgroundColor: Color(EzConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
       body: ezScrollView(
         children: [
           // Background
-          ImageSetting(
+          EzImageSetting(
             prefsKey: backImageKey,
             fullscreen: true,
             title: 'Background',
-            credits: credits[AppConfig.prefs[backImageKey]] ?? 'Wherever you got it!',
+            credits: credits[EzConfig.prefs[backImageKey]] ?? 'Wherever you got it!',
             allowClear: true,
           ),
           Container(height: buttonSpacer),
 
           // Signal
-          ImageSetting(
+          EzImageSetting(
             prefsKey: signalImageKey,
             fullscreen: false,
             title: 'Signal',
-            credits: credits[AppConfig.prefs[signalImageKey]] ?? 'Wherever you got it!',
+            credits: credits[EzConfig.prefs[signalImageKey]] ?? 'Wherever you got it!',
             allowClear: false,
           ),
           Container(height: buttonSpacer),

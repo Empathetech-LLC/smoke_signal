@@ -12,19 +12,19 @@ class AppSettingsScreen extends StatefulWidget {
 }
 
 class _AppSettingsState extends State<AppSettingsScreen> {
-  Color themeColor = Color(AppConfig.prefs[themeColorKey]);
-  Color themeTextColor = Color(AppConfig.prefs[themeTextColorKey]);
-  Color buttonColor = Color(AppConfig.prefs[buttonColorKey]);
+  Color themeColor = Color(EzConfig.prefs[themeColorKey]);
+  Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
+  Color buttonColor = Color(EzConfig.prefs[buttonColorKey]);
 
   @override
   Widget build(BuildContext context) {
-    double buttonSpacer = AppConfig.prefs[buttonSpacingKey];
-    double dialogSpacer = AppConfig.prefs[dialogSpacingKey];
+    double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
+    double dialogSpacer = EzConfig.prefs[dialogSpacingKey];
 
-    return EZScaffold(
+    return EzScaffold(
       title: Text('Settings', style: getTextStyle(titleStyleKey)),
-      backgroundImage: buildDecoration(AppConfig.prefs[backImageKey]),
-      backgroundColor: Color(AppConfig.prefs[backColorKey]),
+      backgroundImage: buildDecoration(EzConfig.prefs[backImageKey]),
+      backgroundColor: Color(EzConfig.prefs[backColorKey]),
       body: ezScrollView(
         children: [
           warningCard(
@@ -64,10 +64,10 @@ class _AppSettingsState extends State<AppSettingsScreen> {
                   ezYesNo(
                     context,
                     onConfirm: () {
-                      AppConfig.prefs.forEach((key, value) {
+                      EzConfig.prefs.forEach((key, value) {
                         // Note we iterate rather than .clear()
-                        // As [AppConfig.preferences] might contain custom [File] paths
-                        AppConfig.preferences.remove(key);
+                        // As [EzConfig.preferences] might contain custom [File] paths
+                        EzConfig.preferences.remove(key);
                       });
 
                       popScreen(context, pass: true);

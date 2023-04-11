@@ -18,14 +18,14 @@ Future<void> _backgroundMsgHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  AppConfig.init(
+  EzConfig.init(
     assetPaths: assets,
     customDefaults: customDefaults,
     orientations: [DeviceOrientation.portraitUp],
   );
 
   // Setup notification service
-  NotificationService().init();
+  EzNotifications().init();
 
   // Initialize firebase
   await Firebase.initializeApp();
@@ -47,8 +47,7 @@ class SmokeSignal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ezApp(
-      context,
+    return EzApp(
       appTitle: appTitle,
       routes: {homeRoute: (context) => HomeScreen()},
     );
