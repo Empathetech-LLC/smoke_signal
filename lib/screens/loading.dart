@@ -18,7 +18,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      backgroundColor: Color(EzConfig.prefs[backColorKey]),
+      backgroundDecoration: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
         title: Text(
           appTitle,

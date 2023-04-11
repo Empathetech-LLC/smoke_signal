@@ -95,7 +95,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
-      backgroundColor: Color(EzConfig.prefs[backColorKey]),
+      backgroundDecoration: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(title: Text('New signal', style: getTextStyle(titleStyleKey))),
 
       // Body
