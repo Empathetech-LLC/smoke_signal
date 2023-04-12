@@ -48,7 +48,7 @@ class SmokeSignal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EzApp(
-      appTitle: appTitle,
+      title: appTitle,
       routes: {homeRoute: (context) => HomeScreen()},
     );
   }
