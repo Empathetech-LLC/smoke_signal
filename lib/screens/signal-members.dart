@@ -71,7 +71,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
                 // Display name
                 ezText(
                   profile.name,
-                  style: getTextStyle(dialogTitleStyleKey),
+                  style: buildTextStyle(style: dialogTitleStyleKey),
                   textAlign: TextAlign.start,
                 ),
               ],
@@ -123,7 +123,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       // Available members - show all pictures
       ezText(
         'Available',
-        style: getTextStyle(titleStyleKey),
+        style: buildTextStyle(style: titleStyleKey),
         background: Color(EzConfig.prefs[themeColorKey]),
       ),
       showUserPics(context, memberProfiles),
@@ -132,7 +132,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       // Active members - show all pictures
       ezText(
         'Active',
-        style: getTextStyle(titleStyleKey),
+        style: buildTextStyle(style: titleStyleKey),
         background: Color(EzConfig.prefs[themeColorKey]),
       ),
       showUserPics(context, activeProfiles),
@@ -173,7 +173,8 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-        title: Text(widget.title + ' members', style: getTextStyle(titleStyleKey)),
+        title:
+            Text(widget.title + ' members', style: buildTextStyle(style: titleStyleKey)),
       ),
 
       // Body
@@ -195,7 +196,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
                   return Center(
                     child: Text(
                       snapshot.error.toString(),
-                      style: getTextStyle(errorStyleKey),
+                      style: buildTextStyle(style: errorStyleKey),
                     ),
                   );
                 }

@@ -42,7 +42,8 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
   Widget build(BuildContext context) {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
-      appBar: EzAppBar(title: Text('Edit Profile', style: getTextStyle(titleStyleKey))),
+      appBar: EzAppBar(
+          title: Text('Edit Profile', style: buildTextStyle(style: titleStyleKey))),
 
       // Body
       body: standardWindow(
@@ -73,7 +74,7 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
             Container(height: buttonSpacer),
 
             // Display name
-            Text(name, style: getTextStyle(titleStyleKey)),
+            Text(name, style: buildTextStyle(style: titleStyleKey)),
             Container(height: buttonSpacer),
 
             // Edit name

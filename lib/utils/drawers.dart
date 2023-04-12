@@ -50,7 +50,7 @@ List<Widget> standardDrawerBody({
         content: [
           Text(
             validatorRule,
-            style: getTextStyle(dialogContentStyleKey),
+            style: buildTextStyle(style: dialogContentStyleKey),
             textAlign: TextAlign.center,
           ),
         ],
@@ -87,7 +87,7 @@ Widget signalDrawerHeader({
           // Profile name
           Text(
             AppUser.account.displayName ?? defaultDisplayName,
-            style: getTextStyle(dialogTitleStyleKey),
+            style: buildTextStyle(style: dialogTitleStyleKey),
           ),
         ],
       ),

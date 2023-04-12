@@ -76,8 +76,8 @@ class _SignalState extends State<Signal> {
   late double signalHeight = EzConfig.prefs[signalHeightKey];
   late double signalCountHeight = EzConfig.prefs[signalCountHeightKey];
 
-  late TextStyle titleTextStyle = getTextStyle(titleStyleKey);
-  late TextStyle buttonTextStyle = getTextStyle(buttonStyleKey);
+  late TextStyle titleTextStyle = buildTextStyle(style: titleStyleKey);
+  late TextStyle buttonTextStyle = buildTextStyle(style: buttonStyleKey);
 
   late TextStyle joinedTextStyle = TextStyle(
     fontFamily: titleTextStyle.fontFamily,

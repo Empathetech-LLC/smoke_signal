@@ -23,7 +23,8 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
 
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
-      appBar: EzAppBar(title: Text('Style settings', style: getTextStyle(titleStyleKey))),
+      appBar: EzAppBar(
+          title: Text('Style settings', style: buildTextStyle(style: titleStyleKey))),
       body: standardWindow(
         context: context,
         background: imageBackground(EzConfig.prefs[backImageKey]),
@@ -155,7 +156,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
               },
               child: ezText(
                 'Reset all',
-                style: getTextStyle(subTitleStyleKey),
+                style: buildTextStyle(style: subTitleStyleKey),
               ),
             ),
             Container(height: buttonSpacer),

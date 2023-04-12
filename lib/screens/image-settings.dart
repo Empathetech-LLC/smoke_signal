@@ -22,7 +22,8 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
   Widget build(BuildContext context) {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
-      appBar: EzAppBar(title: Text('Image settings', style: getTextStyle(titleStyleKey))),
+      appBar: EzAppBar(
+          title: Text('Image settings', style: buildTextStyle(style: titleStyleKey))),
       body: standardWindow(
         context: context,
         background: imageBackground(EzConfig.prefs[backImageKey]),

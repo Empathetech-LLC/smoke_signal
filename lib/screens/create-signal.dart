@@ -64,7 +64,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 // Display name
                 ezText(
                   profile.name,
-                  style: getTextStyle(dialogTitleStyleKey),
+                  style: buildTextStyle(style: dialogTitleStyleKey),
                   textAlign: TextAlign.start,
                 ),
               ],
@@ -96,7 +96,8 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
   Widget build(BuildContext context) {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
-      appBar: EzAppBar(title: Text('New signal', style: getTextStyle(titleStyleKey))),
+      appBar: EzAppBar(
+          title: Text('New signal', style: buildTextStyle(style: titleStyleKey))),
 
       // Body
       body: standardWindow(
@@ -130,7 +131,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
               children: [
                 Text(
                   'Currently active?',
-                  style: getTextStyle(dialogTitleStyleKey),
+                  style: buildTextStyle(style: dialogTitleStyleKey),
                 ),
                 ezSwitch(
                   value: isActive,

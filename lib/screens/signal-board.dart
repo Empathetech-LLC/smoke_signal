@@ -46,7 +46,7 @@ class _SignalBoardState extends State<SignalBoard> {
 
       // App bar
       appBar: EzAppBar(
-        title: Text('Signals', style: getTextStyle(titleStyleKey)),
+        title: Text('Signals', style: buildTextStyle(style: titleStyleKey)),
 
         // End Drawer
         trailing: EzDrawer(
@@ -77,7 +77,7 @@ class _SignalBoardState extends State<SignalBoard> {
                 content: [
                   Text(
                     validatorRule,
-                    style: getTextStyle(dialogContentStyleKey),
+                    style: buildTextStyle(style: dialogContentStyleKey),
                     textAlign: TextAlign.center,
                   ),
                 ],

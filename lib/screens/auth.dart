@@ -24,7 +24,7 @@ class _AuthScreenState extends State<AuthScreen> {
       appBar: EzAppBar(
         title: Text(
           appTitle,
-          style: getTextStyle(titleStyleKey),
+          style: buildTextStyle(style: titleStyleKey),
         ),
         trailing: EzDrawer(
           header: standardDrawerHeader(),

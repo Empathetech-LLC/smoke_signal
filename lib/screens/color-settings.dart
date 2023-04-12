@@ -23,7 +23,8 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
 
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
-      appBar: EzAppBar(title: Text('Color settings', style: getTextStyle(titleStyleKey))),
+      appBar: EzAppBar(
+          title: Text('Color settings', style: buildTextStyle(style: titleStyleKey))),
 
       // Body
       body: standardWindow(
@@ -35,7 +36,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
             Container(height: buttonSpacer),
             Text(
               'Hold buttons to reset',
-              style: getTextStyle(dialogContentStyleKey),
+              style: buildTextStyle(style: dialogContentStyleKey),
             ),
             Container(height: buttonSpacer),
 
@@ -134,7 +135,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
               },
               child: ezText(
                 'Reset all',
-                style: getTextStyle(subTitleStyleKey),
+                style: buildTextStyle(style: subTitleStyleKey),
               ),
             ),
             Container(height: buttonSpacer),

@@ -22,7 +22,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       appBar: EzAppBar(
         title: Text(
           appTitle,
-          style: getTextStyle(titleStyleKey),
+          style: buildTextStyle(style: titleStyleKey),
         ),
       ),
       body: standardWindow(
