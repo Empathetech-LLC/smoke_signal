@@ -37,7 +37,7 @@ List<Widget> standardDrawerBody({
 
         if (result != null && onReturn != null) onReturn();
       },
-      icon: ezIcon(PlatformIcons(context).settings),
+      icon: EzIcon(PlatformIcons(context).settings),
       message: 'Settings',
     ),
     Container(height: buttonSpacer),
@@ -107,14 +107,14 @@ Widget signalDrawerHeader({
 
               if (shouldRefresh != null) refresh();
             },
-            body: ezIcon(PlatformIcons(context).edit),
+            body: EzIcon(PlatformIcons(context).edit),
           ),
           Container(height: EzConfig.prefs[dialogSpacingKey]),
 
           // Logout
           EzButton(
             action: () => logout(context),
-            body: ezIcon(Icons.logout),
+            body: EzIcon(Icons.logout),
           ),
         ],
       ),

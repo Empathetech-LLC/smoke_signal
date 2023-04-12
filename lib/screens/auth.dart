@@ -43,7 +43,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 screen: LoginScreen(),
               ),
               message: 'Login',
-              icon: ezIcon(PlatformIcons(context).mail),
+              icon: EzIcon(PlatformIcons(context).mail),
             ),
             Container(height: buttonSpacer),
 
@@ -54,7 +54,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 screen: SignUpScreen(),
               ),
               message: 'Sign up',
-              icon: ezIcon(PlatformIcons(context).mail),
+              icon: EzIcon(PlatformIcons(context).mail),
             ),
           ],
           centered: true,

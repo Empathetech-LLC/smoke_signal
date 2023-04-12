@@ -202,7 +202,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 if (added) popScreen(context: context, pass: true);
               },
               message: 'Add',
-              icon: ezIcon(PlatformIcons(context).cloudUpload),
+              icon: EzIcon(PlatformIcons(context).cloudUpload),
             ),
             Container(height: buttonSpacer),
           ],

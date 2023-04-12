@@ -68,7 +68,7 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
                 if (shouldRefresh) refreshPic();
               },
               message: 'New pic',
-              icon: ezIcon(PlatformIcons(context).photoCamera),
+              icon: EzIcon(PlatformIcons(context).photoCamera),
             ),
 
             Container(height: buttonSpacer),
@@ -84,7 +84,7 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
                 if (shouldRefresh) refreshName();
               },
               message: 'New name',
-              icon: ezIcon(PlatformIcons(context).edit),
+              icon: EzIcon(PlatformIcons(context).edit),
             ),
 
             Container(height: buttonSpacer),

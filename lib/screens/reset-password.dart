@@ -78,7 +78,7 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
                 }
               },
               message: 'Send link',
-              icon: ezIcon(PlatformIcons(context).mail),
+              icon: EzIcon(PlatformIcons(context).mail),
             ),
             Container(height: buttonSpacer),
           ],

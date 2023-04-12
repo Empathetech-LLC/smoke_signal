@@ -157,7 +157,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
               popScreen(context: context, pass: true);
             },
             message: 'Send requests',
-            icon: ezIcon(PlatformIcons(context).cloudUpload),
+            icon: EzIcon(PlatformIcons(context).cloudUpload),
           ),
         ],
       );

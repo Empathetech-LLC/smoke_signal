@@ -65,7 +65,7 @@ class _SignalBoardState extends State<SignalBoard> {
                 if (shouldRefresh != null) refresh();
               },
               message: 'Settings',
-              icon: ezIcon(PlatformIcons(context).settings),
+              icon: EzIcon(PlatformIcons(context).settings),
             ),
             Container(height: buttonSpacer),
 
@@ -93,7 +93,7 @@ class _SignalBoardState extends State<SignalBoard> {
                 reload();
               },
               message: 'Reload',
-              icon: ezIcon(PlatformIcons(context).refresh),
+              icon: EzIcon(PlatformIcons(context).refresh),
             ),
           ],
         ),
@@ -172,7 +172,7 @@ class _SignalBoardState extends State<SignalBoard> {
 
           if (shouldReload != null) reload();
         },
-        body: ezIcon(PlatformIcons(context).add),
+        body: EzIcon(PlatformIcons(context).add),
       ),
     );
   }

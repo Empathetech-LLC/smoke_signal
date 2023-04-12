@@ -110,7 +110,7 @@ class _SignalState extends State<Signal> {
             popScreen(context: context, pass: changed);
           },
           message: 'File',
-          icon: ezIcon(PlatformIcons(context).folder),
+          icon: EzIcon(PlatformIcons(context).folder),
         ),
         Container(height: dialogSpacer),
 
@@ -125,7 +125,7 @@ class _SignalState extends State<Signal> {
             popScreen(context: context, pass: changed);
           },
           message: 'Camera',
-          icon: ezIcon(PlatformIcons(context).photoCamera),
+          icon: EzIcon(PlatformIcons(context).photoCamera),
         ),
         Container(height: dialogSpacer),
 
@@ -150,7 +150,7 @@ class _SignalState extends State<Signal> {
             popScreen(context: context, pass: true);
           },
           message: 'Reset',
-          icon: ezIcon(PlatformIcons(context).refresh),
+          icon: EzIcon(PlatformIcons(context).refresh),
         ),
       ],
     );
