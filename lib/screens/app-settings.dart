@@ -39,21 +39,21 @@ class _AppSettingsState extends State<AppSettingsScreen> {
             Container(height: 2 * buttonSpacer),
 
             // Colors
-            EZButton(
+            EzButton(
               action: () => pushScreen(context: context, screen: ColorSettingsScreen()),
               body: Text('Colors'),
             ),
             Container(height: buttonSpacer),
 
             // Images
-            EZButton(
+            EzButton(
               action: () => pushScreen(context: context, screen: ImageSettingsScreen()),
               body: Text('Images'),
             ),
             Container(height: buttonSpacer),
 
             // Styling
-            EZButton(
+            EzButton(
               action: () => pushScreen(context: context, screen: StyleSettingsScreen()),
               body: Text('Styling'),
             ),

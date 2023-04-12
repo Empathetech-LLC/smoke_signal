@@ -37,7 +37,7 @@ class _AuthScreenState extends State<AuthScreen> {
         body: ezScrollView(
           children: [
             // Login
-            EZButton.icon(
+            EzButton.icon(
               action: () => pushScreen(
                 context: context,
                 screen: LoginScreen(),
@@ -48,7 +48,7 @@ class _AuthScreenState extends State<AuthScreen> {
             Container(height: buttonSpacer),
 
             // Sign up
-            EZButton.icon(
+            EzButton.icon(
               action: () => pushScreen(
                 context: context,
                 screen: SignUpScreen(),

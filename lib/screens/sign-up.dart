@@ -72,7 +72,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Container(height: buttonSpacer),
 
             // Attempt sign up button
-            EZButton(
+            EzButton(
               action: () async {
                 // Close keyboard if open
                 EzConfig.focus.primaryFocus?.unfocus();

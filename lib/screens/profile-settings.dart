@@ -62,7 +62,7 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
             Container(height: buttonSpacer),
 
             // Edit picture
-            EZButton.icon(
+            EzButton.icon(
               action: () async {
                 bool shouldRefresh = await editAvatar(context);
                 if (shouldRefresh) refreshPic();
@@ -78,7 +78,7 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
             Container(height: buttonSpacer),
 
             // Edit name
-            EZButton.icon(
+            EzButton.icon(
               action: () async {
                 bool shouldRefresh = await editName(context);
                 if (shouldRefresh) refreshName();

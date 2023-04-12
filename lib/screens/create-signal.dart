@@ -176,7 +176,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             Container(height: buttonSpacer),
 
             // Add button
-            EZButton.icon(
+            EzButton.icon(
               action: () async {
                 // Close keyboard if open
                 EzConfig.focus.primaryFocus?.unfocus();

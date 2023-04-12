@@ -28,7 +28,7 @@ List<Widget> standardDrawerBody({
 
   return [
     // GoTo settings
-    EZButton.icon(
+    EzButton.icon(
       action: () async {
         dynamic result = await popAndPushScreen(
           context: context,
@@ -43,7 +43,7 @@ List<Widget> standardDrawerBody({
     Container(height: buttonSpacer),
 
     // Show input rules
-    EZButton(
+    EzButton(
       action: () => ezDialog(
         context: context,
         title: 'Input rules',
@@ -98,7 +98,7 @@ Widget signalDrawerHeader({
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // Edit
-          EZButton(
+          EzButton(
             action: () async {
               dynamic shouldRefresh = await popAndPushScreen(
                 context: context,
@@ -112,7 +112,7 @@ Widget signalDrawerHeader({
           Container(height: EzConfig.prefs[dialogSpacingKey]),
 
           // Logout
-          EZButton(
+          EzButton(
             action: () => logout(context),
             body: ezIcon(Icons.logout),
           ),

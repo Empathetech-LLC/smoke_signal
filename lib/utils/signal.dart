@@ -99,7 +99,7 @@ class _SignalState extends State<Signal> {
       title: 'From where?',
       content: [
         // From file
-        EZButton.icon(
+        EzButton.icon(
           action: () async {
             String? changed = await changeImage(
               context: context,
@@ -115,7 +115,7 @@ class _SignalState extends State<Signal> {
         Container(height: dialogSpacer),
 
         // From camera
-        EZButton.icon(
+        EzButton.icon(
           action: () async {
             String? changed = await changeImage(
               context: context,
@@ -130,7 +130,7 @@ class _SignalState extends State<Signal> {
         Container(height: dialogSpacer),
 
         // Reset
-        EZButton.icon(
+        EzButton.icon(
           action: () async {
             // Build path
             Directory currDir = await getApplicationDocumentsDirectory();
@@ -182,7 +182,7 @@ class _SignalState extends State<Signal> {
       title: 'Options',
       content: [
         // Manage members
-        EZButton(
+        EzButton(
           action: () => popAndPushScreen(
             context: context,
             screen: SignalMembersScreen(
@@ -197,7 +197,7 @@ class _SignalState extends State<Signal> {
         Container(height: dialogSpacer),
 
         // Set icon
-        EZButton(
+        EzButton(
           action: () async {
             dynamic result = await setIcon();
             popScreen(context: context, pass: result);
@@ -208,7 +208,7 @@ class _SignalState extends State<Signal> {
         Container(height: dialogSpacer),
 
         // Show/hide icon
-        EZButton(action: toggleIcon, body: Text('Toggle icon')),
+        EzButton(action: toggleIcon, body: Text('Toggle icon')),
         Container(height: dialogSpacer),
 
         // Owner: Reset count, update message, transfer signal, or delete signal
@@ -219,7 +219,7 @@ class _SignalState extends State<Signal> {
           children: AppUser.account.uid == widget.owner
               ? [
                   // Reset
-                  EZButton(
+                  EzButton(
                     action: () async {
                       popScreen(context: context, pass: true);
                       await resetSignal(context, signalTitle);
@@ -231,7 +231,7 @@ class _SignalState extends State<Signal> {
                   Container(height: dialogSpacer),
 
                   // Update message
-                  EZButton(
+                  EzButton(
                     action: () async {
                       dynamic result = await updateMessage(context, signalTitle);
                       popScreen(context: context, pass: result);
@@ -241,7 +241,7 @@ class _SignalState extends State<Signal> {
                   Container(height: dialogSpacer),
 
                   // Transfer
-                  EZButton(
+                  EzButton(
                     action: () async {
                       dynamic result =
                           await confirmTransfer(context, signalTitle, widget.members);
@@ -252,7 +252,7 @@ class _SignalState extends State<Signal> {
                   Container(height: dialogSpacer),
 
                   // Delete
-                  EZButton(
+                  EzButton(
                     action: () {
                       popScreen(context: context);
                       confirmDelete(
@@ -268,7 +268,7 @@ class _SignalState extends State<Signal> {
                 ]
               : [
                   // Leave
-                  EZButton(
+                  EzButton(
                     action: () {
                       popScreen(context: context);
                       confirmDeparture(

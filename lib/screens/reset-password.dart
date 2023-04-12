@@ -57,7 +57,7 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
             Container(height: buttonSpacer),
 
             // Submit button
-            EZButton.icon(
+            EzButton.icon(
               action: () async {
                 // Close keyboard if open
                 EzConfig.focus.primaryFocus?.unfocus();

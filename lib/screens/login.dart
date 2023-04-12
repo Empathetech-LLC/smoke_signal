@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(height: buttonSpacer),
 
             // Attempt login button
-            EZButton(
+            EzButton(
               action: () async {
                 // Close keyboard if open
                 EzConfig.focus.primaryFocus?.unfocus();

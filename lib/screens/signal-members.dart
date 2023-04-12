@@ -151,7 +151,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
           Container(height: buttonSpacer),
 
           // Submit button
-          EZButton.icon(
+          EzButton.icon(
             action: () async {
               await requestMembers(context, widget.title, requestIDs);
               popScreen(context: context, pass: true);

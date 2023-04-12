@@ -55,7 +55,7 @@ class _SignalBoardState extends State<SignalBoard> {
             Container(height: buttonSpacer),
 
             // GoTo settings
-            EZButton.icon(
+            EzButton.icon(
               action: () async {
                 dynamic shouldRefresh = await popAndPushScreen(
                   context: context,
@@ -70,7 +70,7 @@ class _SignalBoardState extends State<SignalBoard> {
             Container(height: buttonSpacer),
 
             // Show input rules
-            EZButton(
+            EzButton(
               action: () => ezDialog(
                 context: context,
                 title: 'Input rules',
@@ -87,7 +87,7 @@ class _SignalBoardState extends State<SignalBoard> {
             Container(height: buttonSpacer),
 
             // Reload
-            EZButton.icon(
+            EzButton.icon(
               action: () {
                 popScreen(context: context, pass: true);
                 reload();
@@ -163,7 +163,7 @@ class _SignalBoardState extends State<SignalBoard> {
       ),
 
       // Floating Action Button
-      fab: EZButton(
+      fab: EzButton(
         action: () async {
           dynamic shouldReload = await pushScreen(
             context: context,
