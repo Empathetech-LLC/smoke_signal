@@ -44,16 +44,21 @@ List<Widget> standardDrawerBody({
 
     // Show input rules
     EzButton(
-      action: () => ezDialog(
+      action: () => openDialog(
         context: context,
-        title: 'Input rules',
-        content: [
-          Text(
-            validatorRule,
-            style: buildTextStyle(style: dialogContentStyleKey),
-            textAlign: TextAlign.center,
+        dialog: EzDialog(
+          title: Text(
+            'Input rules',
+            style: buildTextStyle(style: dialogTitleStyleKey),
           ),
-        ],
+          contents: [
+            Text(
+              validatorRule,
+              style: buildTextStyle(style: dialogContentStyleKey),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
       body: Text('Input rules'),
     ),

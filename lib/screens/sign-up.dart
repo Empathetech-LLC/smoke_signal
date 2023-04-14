@@ -39,16 +39,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
 
       // Body
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: EzScrollView(
           children: [
             AutofillGroup(
               child: Column(
                 children: [
                   // Email field
-                  ezForm(
+                  EzFormField(
                     key: emailFormKey,
                     controller: _signUpEmailController,
                     hintText: 'Enter email',
@@ -56,14 +58,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validator: emailValidator,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
+
                   Container(height: buttonSpacer),
 
                   // Password field
-                  ezForm(
+                  EzFormField(
                     key: passwordFormKey,
                     controller: _passwdController,
                     hintText: 'Enter password',
-                    private: true,
+                    obscureText: true,
                     autofillHints: [AutofillHints.password],
                   ),
                 ],

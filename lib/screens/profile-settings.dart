@@ -46,9 +46,11 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
           title: Text('Edit Profile', style: buildTextStyle(style: titleStyleKey))),
 
       // Body
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: EzScrollView(
           children: [
             Container(height: buttonSpacer),

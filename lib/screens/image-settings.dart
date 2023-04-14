@@ -24,9 +24,11 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
           title: Text('Image settings', style: buildTextStyle(style: titleStyleKey))),
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: EzScrollView(
           children: [
             // Background

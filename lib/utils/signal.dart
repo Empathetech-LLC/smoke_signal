@@ -94,65 +94,70 @@ class _SignalState extends State<Signal> {
   /// Set a custom [Icon] for the [Signal] via [changeImage]
   /// Returns the path of the new image on success
   Future<dynamic> setIcon() {
-    return ezDialog(
+    return openDialog(
       context: context,
-      title: 'From where?',
-      content: [
-        // From file
-        EzButton.icon(
-          action: () async {
-            String? changed = await changeImage(
-              context: context,
-              prefsPath: iconPathKey,
-              source: ImageSource.gallery,
-            );
-
-            popScreen(context: context, pass: changed);
-          },
-          message: 'File',
-          icon: EzIcon(PlatformIcons(context).folder),
+      dialog: EzDialog(
+        title: Text(
+          'From where?',
+          style: buildTextStyle(style: dialogTitleStyleKey),
         ),
-        Container(height: dialogSpacer),
+        contents: [
+          // From file
+          EzButton.icon(
+            action: () async {
+              String? changed = await changeImage(
+                context: context,
+                prefsPath: iconPathKey,
+                source: ImageSource.gallery,
+              );
 
-        // From camera
-        EzButton.icon(
-          action: () async {
-            String? changed = await changeImage(
-              context: context,
-              prefsPath: iconPathKey,
-              source: ImageSource.camera,
-            );
-            popScreen(context: context, pass: changed);
-          },
-          message: 'Camera',
-          icon: EzIcon(PlatformIcons(context).photoCamera),
-        ),
-        Container(height: dialogSpacer),
+              popScreen(context: context, pass: changed);
+            },
+            message: 'File',
+            icon: EzIcon(PlatformIcons(context).folder),
+          ),
+          Container(height: dialogSpacer),
 
-        // Reset
-        EzButton.icon(
-          action: () async {
-            // Build path
-            Directory currDir = await getApplicationDocumentsDirectory();
-            String imagePath = currDir.path + signalTitle;
+          // From camera
+          EzButton.icon(
+            action: () async {
+              String? changed = await changeImage(
+                context: context,
+                prefsPath: iconPathKey,
+                source: ImageSource.camera,
+              );
+              popScreen(context: context, pass: changed);
+            },
+            message: 'Camera',
+            icon: EzIcon(PlatformIcons(context).photoCamera),
+          ),
+          Container(height: dialogSpacer),
 
-            // Delete any saved files
-            try {
-              File toDelete = File(imagePath);
-              await toDelete.delete();
-            } catch (e) {
-              doNothing();
-              // Delete is called without knowledge of a file existing, so ignore errors
-            }
+          // Reset
+          EzButton.icon(
+            action: () async {
+              // Build path
+              Directory currDir = await getApplicationDocumentsDirectory();
+              String imagePath = currDir.path + signalTitle;
 
-            // Wipe [SharedPreferences]
-            EzConfig.preferences.remove(iconPathKey);
-            popScreen(context: context, pass: true);
-          },
-          message: 'Reset',
-          icon: EzIcon(PlatformIcons(context).refresh),
-        ),
-      ],
+              // Delete any saved files
+              try {
+                File toDelete = File(imagePath);
+                await toDelete.delete();
+              } catch (e) {
+                doNothing();
+                // Delete is called without knowledge of a file existing, so ignore errors
+              }
+
+              // Wipe [SharedPreferences]
+              EzConfig.preferences.remove(iconPathKey);
+              popScreen(context: context, pass: true);
+            },
+            message: 'Reset',
+            icon: EzIcon(PlatformIcons(context).refresh),
+          ),
+        ],
+      ),
     );
   }
 
@@ -177,113 +182,118 @@ class _SignalState extends State<Signal> {
 
   /// Show all [Signal] edits the user can make
   Future<dynamic> showEdits() {
-    return ezDialog(
+    return openDialog(
       context: context,
-      title: 'Options',
-      content: [
-        // Manage members
-        EzButton(
-          action: () => popAndPushScreen(
-            context: context,
-            screen: SignalMembersScreen(
-              title: signalTitle,
-              members: widget.members,
-              activeMembers: widget.activeMembers,
-              memberReqs: widget.memberReqs,
+      dialog: EzDialog(
+        title: Text(
+          'Options',
+          style: buildTextStyle(style: dialogTitleStyleKey),
+        ),
+        contents: [
+          // Manage members
+          EzButton(
+            action: () => popAndPushScreen(
+              context: context,
+              screen: SignalMembersScreen(
+                title: signalTitle,
+                members: widget.members,
+                activeMembers: widget.activeMembers,
+                memberReqs: widget.memberReqs,
+              ),
             ),
+            body: Text('Members'),
           ),
-          body: Text('Members'),
-        ),
-        Container(height: dialogSpacer),
+          Container(height: dialogSpacer),
 
-        // Set icon
-        EzButton(
-          action: () async {
-            dynamic result = await setIcon();
-            popScreen(context: context, pass: result);
-            if (result != null) widget.reloadBoard();
-          },
-          body: Text('Set icon'),
-        ),
-        Container(height: dialogSpacer),
+          // Set icon
+          EzButton(
+            action: () async {
+              dynamic result = await setIcon();
+              popScreen(context: context, pass: result);
+              if (result != null) widget.reloadBoard();
+            },
+            body: Text('Set icon'),
+          ),
+          Container(height: dialogSpacer),
 
-        // Show/hide icon
-        EzButton(action: toggleIcon, body: Text('Toggle icon')),
-        Container(height: dialogSpacer),
+          // Show/hide icon
+          EzButton(action: toggleIcon, body: Text('Toggle icon')),
+          Container(height: dialogSpacer),
 
-        // Owner: Reset count, update message, transfer signal, or delete signal
-        // Member: Leave signal
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: AppUser.account.uid == widget.owner
-              ? [
-                  // Reset
-                  EzButton(
-                    action: () async {
-                      popScreen(context: context, pass: true);
-                      await resetSignal(context, signalTitle);
-                      // Reset signal triggers a stream update
-                      // so the screen will update automatically
-                    },
-                    body: Text('Reset signal'),
-                  ),
-                  Container(height: dialogSpacer),
+          // Owner: Reset count, update message, transfer signal, or delete signal
+          // Member: Leave signal
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: AppUser.account.uid == widget.owner
+                ? [
+                    // Reset
+                    EzButton(
+                      action: () async {
+                        popScreen(context: context, pass: true);
+                        await resetSignal(context, signalTitle);
+                        // Reset signal triggers a stream update
+                        // so the screen will update automatically
+                      },
+                      body: Text('Reset signal'),
+                    ),
+                    Container(height: dialogSpacer),
 
-                  // Update message
-                  EzButton(
-                    action: () async {
-                      dynamic result = await updateMessage(context, signalTitle);
-                      popScreen(context: context, pass: result);
-                    },
-                    body: Text('Update message'),
-                  ),
-                  Container(height: dialogSpacer),
+                    // Update message
+                    EzButton(
+                      action: () async {
+                        dynamic result = await updateMessage(context, signalTitle);
+                        popScreen(context: context, pass: result);
+                      },
+                      body: Text('Update message'),
+                    ),
+                    Container(height: dialogSpacer),
 
-                  // Transfer
-                  EzButton(
-                    action: () async {
-                      dynamic result =
-                          await confirmTransfer(context, signalTitle, widget.members);
-                      popScreen(context: context, pass: result);
-                    },
-                    body: Text('Transfer signal'),
-                  ),
-                  Container(height: dialogSpacer),
+                    // Transfer
+                    EzButton(
+                      action: () async {
+                        dynamic result =
+                            await confirmTransfer(context, signalTitle, widget.members);
+                        popScreen(context: context, pass: result);
+                      },
+                      body: Text('Transfer signal'),
+                    ),
+                    Container(height: dialogSpacer),
 
-                  // Delete
-                  EzButton(
-                    action: () {
-                      popScreen(context: context);
-                      confirmDelete(
-                        context,
-                        signalTitle,
-                        [showIconKey, iconPathKey],
-                      );
-                      // Deleting a signal triggers a stream update
-                      // so the screen will update automatically
-                    },
-                    body: Text('Delete signal'),
-                  ),
-                ]
-              : [
-                  // Leave
-                  EzButton(
-                    action: () {
-                      popScreen(context: context);
-                      confirmDeparture(
-                        context,
-                        signalTitle,
-                        [showIconKey, iconPathKey],
-                      );
-                      // Leaving a signal triggers a stream update
-                      // so the screen will update automatically
-                    },
-                    body: Text('Leave signal'),
-                  ),
-                ],
-        ),
-      ],
+                    // Delete
+                    EzButton(
+                      action: () {
+                        popScreen(context: context);
+                        confirmDelete(
+                          context,
+                          signalTitle,
+                          [showIconKey, iconPathKey],
+                        );
+                        // Deleting a signal triggers a stream update
+                        // so the screen will update automatically
+                      },
+                      body: Text('Delete signal'),
+                    ),
+                  ]
+                : [
+                    // Leave
+                    EzButton(
+                      action: () {
+                        popScreen(context: context);
+                        confirmDeparture(
+                          context,
+                          signalTitle,
+                          [showIconKey, iconPathKey],
+                        );
+                        // Leaving a signal triggers a stream update
+                        // so the screen will update automatically
+                      },
+                      body: Text('Leave signal'),
+                    ),
+                  ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -320,10 +330,7 @@ class _SignalState extends State<Signal> {
                         Container(
                           width: signalHeight,
                           height: signalHeight,
-                          child: ezImage(
-                            pathKey: iconPathKey,
-                            backup: appIconPath,
-                          ),
+                          child: EzImage(prefsKey: iconPathKey),
                         ),
 
                         // Title card
@@ -385,12 +392,12 @@ class _SignalState extends State<Signal> {
                 children: widget.activeMembers.contains(AppUser.account.uid)
                     ? [
                         // Active: show the current count surrounded by smoke signals
-                        ezImage(pathKey: signalImageKey),
+                        EzImage(prefsKey: signalImageKey),
                         Text(
                           widget.activeMembers.length.toString(),
                           style: joinedTextStyle,
                         ),
-                        ezImage(pathKey: signalImageKey),
+                        EzImage(prefsKey: signalImageKey),
                       ]
                     : [
                         // Inactive: only show the current count

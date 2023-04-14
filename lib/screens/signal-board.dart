@@ -71,16 +71,21 @@ class _SignalBoardState extends State<SignalBoard> {
 
             // Show input rules
             EzButton(
-              action: () => ezDialog(
+              action: () => openDialog(
                 context: context,
-                title: 'Input rules',
-                content: [
-                  Text(
-                    validatorRule,
+                dialog: EzDialog(
+                  title: Text(
+                    'Input rules',
                     style: buildTextStyle(style: dialogContentStyleKey),
-                    textAlign: TextAlign.center,
                   ),
-                ],
+                  contents: [
+                    Text(
+                      validatorRule,
+                      style: buildTextStyle(style: dialogContentStyleKey),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
               body: Text('Input rules'),
             ),
@@ -100,9 +105,11 @@ class _SignalBoardState extends State<SignalBoard> {
       ),
 
       // Body
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: EzScrollView(
           children: [
             // Signals the user is a member of
@@ -113,7 +120,7 @@ class _SignalBoardState extends State<SignalBoard> {
                     case ConnectionState.waiting:
                       return loadingMessage(
                         context: context,
-                        image: ezImage(pathKey: signalImageKey),
+                        image: EzImage(prefsKey: signalImageKey),
                       );
                     case ConnectionState.done:
                     default:

@@ -27,9 +27,11 @@ class _AppSettingsState extends State<AppSettingsScreen> {
           EzAppBar(title: Text('Settings', style: buildTextStyle(style: titleStyleKey))),
 
       // Body
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: EzScrollView(
           children: [
             warningCard(
@@ -61,11 +63,14 @@ class _AppSettingsState extends State<AppSettingsScreen> {
 
             // Reset all signal settings
             GestureDetector(
-              onTap: () {
-                ezDialog(
-                  context: context,
-                  title: 'Reset all settings?',
-                  content: [
+              onTap: () => openDialog(
+                context: context,
+                dialog: EzDialog(
+                  title: Text(
+                    'Reset all settings?',
+                    style: buildTextStyle(style: dialogTitleStyleKey),
+                  ),
+                  contents: [
                     ezYesNo(
                       context: context,
                       onConfirm: () {
@@ -84,8 +89,8 @@ class _AppSettingsState extends State<AppSettingsScreen> {
                     ),
                   ],
                   needsClose: false,
-                );
-              },
+                ),
+              ),
               child: Text(
                 'Reset all',
                 style: buildTextStyle(style: subTitleStyleKey),

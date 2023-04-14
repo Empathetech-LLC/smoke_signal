@@ -27,9 +27,11 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
           title: Text('Color settings', style: buildTextStyle(style: titleStyleKey))),
 
       // Body
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: EzScrollView(
           children: [
             // User hint: hold the buttons to reset the color
@@ -104,35 +106,39 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
 
             // Reset all color settings
             GestureDetector(
-              onTap: () {
-                ezDialog(
-                    context: context,
-                    title: 'Reset all colors?',
-                    content: [
-                      ezYesNo(
-                        context: context,
-                        onConfirm: () {
-                          // Remove all color settings
-                          EzConfig.preferences.remove(backColorKey);
-                          EzConfig.preferences.remove(themeColorKey);
-                          EzConfig.preferences.remove(themeTextColorKey);
-                          EzConfig.preferences.remove(buttonColorKey);
-                          EzConfig.preferences.remove(buttonTextColorKey);
-                          EzConfig.preferences.remove(watchingColorKey);
-                          EzConfig.preferences.remove(watchingTextColorKey);
-                          EzConfig.preferences.remove(joinedColorKey);
-                          EzConfig.preferences.remove(joinedTextColorKey);
+              onTap: () => openDialog(
+                context: context,
+                dialog: EzDialog(
+                  title: Text(
+                    'Reset all colors?',
+                    style: buildTextStyle(style: dialogTitleStyleKey),
+                  ),
+                  contents: [
+                    ezYesNo(
+                      context: context,
+                      onConfirm: () {
+                        // Remove all color settings
+                        EzConfig.preferences.remove(backColorKey);
+                        EzConfig.preferences.remove(themeColorKey);
+                        EzConfig.preferences.remove(themeTextColorKey);
+                        EzConfig.preferences.remove(buttonColorKey);
+                        EzConfig.preferences.remove(buttonTextColorKey);
+                        EzConfig.preferences.remove(watchingColorKey);
+                        EzConfig.preferences.remove(watchingTextColorKey);
+                        EzConfig.preferences.remove(joinedColorKey);
+                        EzConfig.preferences.remove(joinedTextColorKey);
 
-                          popScreen(context: context, pass: true);
-                          popScreen(context: context, pass: true);
-                        },
-                        onDeny: () => popScreen(context: context),
-                        axis: Axis.vertical,
-                        spacer: dialogSpacer,
-                      ),
-                    ],
-                    needsClose: false);
-              },
+                        popScreen(context: context, pass: true);
+                        popScreen(context: context, pass: true);
+                      },
+                      onDeny: () => popScreen(context: context),
+                      axis: Axis.vertical,
+                      spacer: dialogSpacer,
+                    ),
+                  ],
+                  needsClose: false,
+                ),
+              ),
               child: Text(
                 'Reset all',
                 style: buildTextStyle(style: subTitleStyleKey),

@@ -40,9 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
 
       // Body
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: EzScrollView(
           children: [
             // Autofill group allows for password manager inputs and such
@@ -52,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // Email field
-                  ezForm(
+                  EzFormField(
                     key: emailFormKey,
                     controller: _emailController,
                     hintText: 'Enter email',
@@ -63,11 +65,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(height: buttonSpacer),
 
                   // Password field
-                  ezForm(
+                  EzFormField(
                     key: passwordFormKey,
                     controller: _passwdController,
                     hintText: 'Enter password',
-                    private: true,
+                    obscureText: true,
                     autofillHints: [AutofillHints.password],
                   ),
                 ],

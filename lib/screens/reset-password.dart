@@ -38,14 +38,16 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
       ),
 
       // Body
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: EzScrollView(
           children: [
             // Email form
             AutofillGroup(
-              child: ezForm(
+              child: EzFormField(
                 key: emailFormKey,
                 controller: _emailController,
                 hintText: 'Enter email',

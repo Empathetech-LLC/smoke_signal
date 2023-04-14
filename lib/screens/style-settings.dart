@@ -25,9 +25,11 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
           title: Text('Style settings', style: buildTextStyle(style: titleStyleKey))),
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: EzScrollView(
           children: [
             // Font Family
@@ -125,33 +127,38 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
             // Reset all style settings
             GestureDetector(
               onTap: () {
-                ezDialog(
+                openDialog(
                   context: context,
-                  title: 'Reset style?',
-                  content: [
-                    ezYesNo(
-                      context: context,
-                      onConfirm: () {
-                        // Remove all color settings
-                        EzConfig.preferences.remove(fontFamilyKey);
-                        EzConfig.preferences.remove(fontSizeKey);
-                        EzConfig.preferences.remove(marginKey);
-                        EzConfig.preferences.remove(paddingKey);
-                        EzConfig.preferences.remove(buttonSpacingKey);
-                        EzConfig.preferences.remove(dialogSpacingKey);
-                        EzConfig.preferences.remove(signalSpacingKey);
-                        EzConfig.preferences.remove(signalHeightKey);
-                        EzConfig.preferences.remove(signalCountHeightKey);
-
-                        popScreen(context: context, pass: true);
-                        popScreen(context: context, pass: true);
-                      },
-                      onDeny: () => popScreen(context: context),
-                      axis: Axis.vertical,
-                      spacer: dialogSpacer,
+                  dialog: EzDialog(
+                    title: Text(
+                      'Reset style?',
+                      style: buildTextStyle(style: dialogTitleStyleKey),
                     ),
-                  ],
-                  needsClose: false,
+                    contents: [
+                      ezYesNo(
+                        context: context,
+                        onConfirm: () {
+                          // Remove all color settings
+                          EzConfig.preferences.remove(fontFamilyKey);
+                          EzConfig.preferences.remove(fontSizeKey);
+                          EzConfig.preferences.remove(marginKey);
+                          EzConfig.preferences.remove(paddingKey);
+                          EzConfig.preferences.remove(buttonSpacingKey);
+                          EzConfig.preferences.remove(dialogSpacingKey);
+                          EzConfig.preferences.remove(signalSpacingKey);
+                          EzConfig.preferences.remove(signalHeightKey);
+                          EzConfig.preferences.remove(signalCountHeightKey);
+
+                          popScreen(context: context, pass: true);
+                          popScreen(context: context, pass: true);
+                        },
+                        onDeny: () => popScreen(context: context),
+                        axis: Axis.vertical,
+                        spacer: dialogSpacer,
+                      ),
+                    ],
+                    needsClose: false,
+                  ),
                 );
               },
               child: Text(

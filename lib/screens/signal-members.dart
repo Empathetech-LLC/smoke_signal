@@ -78,7 +78,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
             ),
 
             // Toggle
-            trailing: ezCheckBox(
+            trailing: EzCheckBox(
               value: requestIDs.contains(profile.id),
               onChanged: (bool? value) {
                 if (value == true) {
@@ -124,7 +124,6 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       Text(
         'Available',
         style: buildTextStyle(style: titleStyleKey),
-        background: Color(EzConfig.prefs[themeColorKey]),
       ),
       showUserPics(context, memberProfiles),
       Container(height: buttonSpacer),
@@ -133,7 +132,6 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       Text(
         'Active',
         style: buildTextStyle(style: titleStyleKey),
-        background: Color(EzConfig.prefs[themeColorKey]),
       ),
       showUserPics(context, activeProfiles),
       Container(height: buttonSpacer),
@@ -143,7 +141,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       // Addable users - expandable, toggle-able, profiles
       viewChildren.addAll(
         [
-          ezTileList(
+          addProfilesWindow(
             context: context,
             title: 'Add?',
             items: buildSwitchTiles(unAddedProfiles),
@@ -178,9 +176,11 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       ),
 
       // Body
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: StreamBuilder<QuerySnapshot>(
           stream: _userStream,
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -188,7 +188,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
               case ConnectionState.waiting:
                 return loadingMessage(
                   context: context,
-                  image: ezImage(pathKey: signalImageKey),
+                  image: EzImage(prefsKey: signalImageKey),
                 );
               case ConnectionState.done:
               default:

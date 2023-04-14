@@ -25,12 +25,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
           style: buildTextStyle(style: titleStyleKey),
         ),
       ),
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: loadingMessage(
           context: context,
-          image: ezImage(pathKey: signalImageKey),
+          image: EzImage(prefsKey: signalImageKey),
         ),
       ),
     );

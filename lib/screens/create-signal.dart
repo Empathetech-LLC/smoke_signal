@@ -71,7 +71,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             ),
 
             // Toggle
-            trailing: ezCheckBox(
+            trailing: EzCheckBox(
               value: requestIDs.contains(profile.id),
               onChanged: (bool? value) {
                 if (value == true) {
@@ -100,13 +100,15 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
           title: Text('New signal', style: buildTextStyle(style: titleStyleKey))),
 
       // Body
-      body: standardWindow(
+      body: standardView(
         context: context,
-        background: imageBackground(EzConfig.prefs[backImageKey]),
+        background: BoxDecoration(
+          image: DecorationImage(image: EzImage.getProvider(backImageKey)),
+        ),
         body: EzScrollView(
           children: [
             // Title field
-            ezForm(
+            EzFormField(
               key: titleFormKey,
               controller: _titleController,
               hintText: 'Signal title',
@@ -116,7 +118,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             Container(height: buttonSpacer),
 
             // Message field
-            ezForm(
+            EzFormField(
               key: messageFormKey,
               controller: _messageController,
               hintText: 'Notification',
@@ -133,7 +135,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                   'Currently active?',
                   style: buildTextStyle(style: dialogTitleStyleKey),
                 ),
-                ezSwitch(
+                EzSwitch(
                   value: isActive,
                   onChanged: (bool? value) {
                     // Flip state and close keyboard if open
@@ -156,7 +158,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                   case ConnectionState.waiting:
                     return loadingMessage(
                       context: context,
-                      image: ezImage(pathKey: signalImageKey),
+                      image: EzImage(prefsKey: signalImageKey),
                     );
                   case ConnectionState.done:
                   default:
@@ -165,7 +167,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                       return Container();
                     }
 
-                    return ezTileList(
+                    return addProfilesWindow(
                       context: context,
                       title: 'Starting members',
                       items: buildSwitches(buildProfiles(snapshot.data!.docs)),
