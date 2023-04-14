@@ -27,7 +27,7 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
       body: standardWindow(
         context: context,
         background: imageBackground(EzConfig.prefs[backImageKey]),
-        body: ezScrollView(
+        body: EzScrollView(
           children: [
             // Background
             EzImageSetting(

@@ -103,7 +103,7 @@ class _SignalBoardState extends State<SignalBoard> {
       body: standardWindow(
         context: context,
         background: imageBackground(EzConfig.prefs[backImageKey]),
-        body: ezScrollView(
+        body: EzScrollView(
           children: [
             // Signals the user is a member of
             StreamBuilder<QuerySnapshot>(

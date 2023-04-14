@@ -30,7 +30,7 @@ class _AppSettingsState extends State<AppSettingsScreen> {
       body: standardWindow(
         context: context,
         background: imageBackground(EzConfig.prefs[backImageKey]),
-        body: ezScrollView(
+        body: EzScrollView(
           children: [
             warningCard(
               context: context,

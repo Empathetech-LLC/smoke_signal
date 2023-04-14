@@ -28,7 +28,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
       body: standardWindow(
         context: context,
         background: imageBackground(EzConfig.prefs[backImageKey]),
-        body: ezScrollView(
+        body: EzScrollView(
           children: [
             // Font Family
             EzFontSetting(),

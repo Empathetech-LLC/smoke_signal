@@ -42,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: standardWindow(
         context: context,
         background: imageBackground(EzConfig.prefs[backImageKey]),
-        body: ezScrollView(
+        body: EzScrollView(
           children: [
             AutofillGroup(
               child: Column(

@@ -163,7 +163,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       );
     }
 
-    return ezScrollView(children: viewChildren);
+    return EzScrollView(children: viewChildren);
   }
 
   // Draw state

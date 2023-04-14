@@ -103,7 +103,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
       body: standardWindow(
         context: context,
         background: imageBackground(EzConfig.prefs[backImageKey]),
-        body: ezScrollView(
+        body: EzScrollView(
           children: [
             // Title field
             ezForm(
