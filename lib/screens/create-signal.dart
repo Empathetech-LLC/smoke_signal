@@ -213,4 +213,11 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
 }
