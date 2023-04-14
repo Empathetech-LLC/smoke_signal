@@ -75,7 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             EzButton(
               action: () async {
                 // Close keyboard if open
-                EzConfig.focus.primaryFocus?.unfocus();
+                closeFocus();
 
                 // Don't do anything if the input is invalid
                 if (!emailFormKey.currentState!.validate()) {

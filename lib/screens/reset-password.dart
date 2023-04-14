@@ -60,7 +60,7 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
             EzButton.icon(
               action: () async {
                 // Close keyboard if open
-                EzConfig.focus.primaryFocus?.unfocus();
+                closeFocus();
 
                 // Don't do anything if the email is invalid
                 if (!emailFormKey.currentState!.validate()) {

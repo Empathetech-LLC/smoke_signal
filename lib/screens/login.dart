@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
             EzButton(
               action: () async {
                 // Close keyboard if open
-                EzConfig.focus.primaryFocus?.unfocus();
+                closeFocus();
 
                 // Don't attempt login if we know the input is invalid
                 if (!emailFormKey.currentState!.validate()) {
