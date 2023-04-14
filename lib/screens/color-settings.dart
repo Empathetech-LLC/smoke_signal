@@ -133,7 +133,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
                     ],
                     needsClose: false);
               },
-              child: ezText(
+              child: Text(
                 'Reset all',
                 style: buildTextStyle(style: subTitleStyleKey),
               ),

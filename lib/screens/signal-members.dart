@@ -69,7 +69,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
                 Container(width: EzConfig.prefs[paddingKey]),
 
                 // Display name
-                ezText(
+                Text(
                   profile.name,
                   style: buildTextStyle(style: dialogTitleStyleKey),
                   textAlign: TextAlign.start,
@@ -121,7 +121,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
 
     List<Widget> viewChildren = [
       // Available members - show all pictures
-      ezText(
+      Text(
         'Available',
         style: buildTextStyle(style: titleStyleKey),
         background: Color(EzConfig.prefs[themeColorKey]),
@@ -130,7 +130,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       Container(height: buttonSpacer),
 
       // Active members - show all pictures
-      ezText(
+      Text(
         'Active',
         style: buildTextStyle(style: titleStyleKey),
         background: Color(EzConfig.prefs[themeColorKey]),

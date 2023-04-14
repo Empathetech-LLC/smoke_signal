@@ -154,7 +154,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
                   needsClose: false,
                 );
               },
-              child: ezText(
+              child: Text(
                 'Reset all',
                 style: buildTextStyle(style: subTitleStyleKey),
               ),
