@@ -33,7 +33,7 @@ dependencies:
 dev_dependencies:
   dependency_validator: ^3.0.0
   flutter_native_splash: ^2.2.7
-  flutter_launcher_icons: ^0.12.0
+  flutter_launcher_icons: ^0.13.0
 
 # App configuration
 flutter:
@@ -51,6 +51,7 @@ flutter_icons:
   adaptive_icon_background: "#A520DA"
   android: true
   ios: true
+  remove_alpha_ios: true
 
 flutter_native_splash:
   color: "#A520DA"
