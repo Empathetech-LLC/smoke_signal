@@ -23,8 +23,8 @@ class _AppSettingsState extends State<AppSettingsScreen> {
 
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
-      appBar:
-          EzAppBar(title: Text('Settings', style: buildTextStyle(style: titleStyleKey))),
+      appBar: EzAppBar(
+          title: EzText('Settings', style: buildTextStyle(style: titleStyleKey))),
 
       // Body
       body: standardView(
@@ -43,21 +43,21 @@ class _AppSettingsState extends State<AppSettingsScreen> {
             // Colors
             EzButton(
               action: () => pushScreen(context: context, screen: ColorSettingsScreen()),
-              body: Text('Colors'),
+              body: EzText('Colors'),
             ),
             Container(height: buttonSpacer),
 
             // Images
             EzButton(
               action: () => pushScreen(context: context, screen: ImageSettingsScreen()),
-              body: Text('Images'),
+              body: EzText('Images'),
             ),
             Container(height: buttonSpacer),
 
             // Styling
             EzButton(
               action: () => pushScreen(context: context, screen: StyleSettingsScreen()),
-              body: Text('Styling'),
+              body: EzText('Styling'),
             ),
             Container(height: 2 * buttonSpacer),
 
@@ -66,7 +66,7 @@ class _AppSettingsState extends State<AppSettingsScreen> {
               onTap: () => openDialog(
                 context: context,
                 dialog: EzDialog(
-                  title: Text(
+                  title: EzText(
                     'Reset all settings?',
                     style: buildTextStyle(style: dialogTitleStyleKey),
                   ),
@@ -91,7 +91,7 @@ class _AppSettingsState extends State<AppSettingsScreen> {
                   needsClose: false,
                 ),
               ),
-              child: Text(
+              child: EzText(
                 'Reset all',
                 style: buildTextStyle(style: subTitleStyleKey),
               ),

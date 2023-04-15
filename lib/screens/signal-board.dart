@@ -46,7 +46,7 @@ class _SignalBoardState extends State<SignalBoard> {
 
       // App bar
       appBar: EzAppBar(
-        title: Text('Signals', style: buildTextStyle(style: titleStyleKey)),
+        title: EzText('Signals', style: buildTextStyle(style: titleStyleKey)),
 
         // End Drawer
         trailing: EzDrawer(
@@ -74,12 +74,12 @@ class _SignalBoardState extends State<SignalBoard> {
               action: () => openDialog(
                 context: context,
                 dialog: EzDialog(
-                  title: Text(
+                  title: EzText(
                     'Input rules',
                     style: buildTextStyle(style: dialogContentStyleKey),
                   ),
                   contents: [
-                    Text(
+                    EzText(
                       validatorRule,
                       style: buildTextStyle(style: dialogContentStyleKey),
                       textAlign: TextAlign.center,
@@ -87,7 +87,7 @@ class _SignalBoardState extends State<SignalBoard> {
                   ],
                 ),
               ),
-              body: Text('Input rules'),
+              body: EzText('Input rules'),
             ),
             Container(height: buttonSpacer),
 

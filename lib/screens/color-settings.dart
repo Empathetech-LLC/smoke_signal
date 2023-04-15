@@ -24,7 +24,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-          title: Text('Color settings', style: buildTextStyle(style: titleStyleKey))),
+          title: EzText('Color settings', style: buildTextStyle(style: titleStyleKey))),
 
       // Body
       body: standardView(
@@ -36,7 +36,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
           children: [
             // User hint: hold the buttons to reset the color
             Container(height: buttonSpacer),
-            Text(
+            EzText(
               'Hold buttons to reset',
               style: buildTextStyle(style: dialogContentStyleKey),
             ),
@@ -109,7 +109,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
               onTap: () => openDialog(
                 context: context,
                 dialog: EzDialog(
-                  title: Text(
+                  title: EzText(
                     'Reset all colors?',
                     style: buildTextStyle(style: dialogTitleStyleKey),
                   ),
@@ -139,7 +139,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
                   needsClose: false,
                 ),
               ),
-              child: Text(
+              child: EzText(
                 'Reset all',
                 style: buildTextStyle(style: subTitleStyleKey),
               ),

@@ -30,7 +30,7 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-        title: Text('No problem!', style: buildTextStyle(style: titleStyleKey)),
+        title: EzText('No problem!', style: buildTextStyle(style: titleStyleKey)),
         trailing: EzDrawer(
           header: standardDrawerHeader(),
           body: standardDrawerBody(context: context),
