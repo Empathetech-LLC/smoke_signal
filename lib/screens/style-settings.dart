@@ -25,7 +25,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
           title: EzText.simple('Style settings',
-              style: buildTextStyle(style: titleStyleKey))),
+              style: buildTextStyle(styleKey: titleStyleKey))),
       body: standardView(
         context: context,
         background: BoxDecoration(
@@ -133,7 +133,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
                   dialog: EzDialog(
                     title: EzText.simple(
                       'Reset style?',
-                      style: buildTextStyle(style: dialogTitleStyleKey),
+                      style: buildTextStyle(styleKey: dialogTitleStyleKey),
                     ),
                     contents: [
                       ezYesNo(
@@ -164,7 +164,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
               },
               child: EzText.simple(
                 'Reset all',
-                style: buildTextStyle(style: subTitleStyleKey),
+                style: buildTextStyle(styleKey: subTitleStyleKey),
               ),
             ),
             Container(height: buttonSpacer),

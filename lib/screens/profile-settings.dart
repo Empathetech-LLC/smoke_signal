@@ -43,8 +43,8 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-          title:
-              EzText.simple('Edit Profile', style: buildTextStyle(style: titleStyleKey))),
+          title: EzText.simple('Edit Profile',
+              style: buildTextStyle(styleKey: titleStyleKey))),
 
       // Body
       body: standardView(
@@ -79,7 +79,7 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
             // Display name
             EzText.simple(
               name,
-              style: buildTextStyle(style: titleStyleKey),
+              style: buildTextStyle(styleKey: titleStyleKey),
             ),
             Container(height: buttonSpacer),
 

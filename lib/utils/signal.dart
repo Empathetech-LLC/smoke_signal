@@ -76,8 +76,8 @@ class _SignalState extends State<Signal> {
   late double signalHeight = EzConfig.prefs[signalHeightKey];
   late double signalCountHeight = EzConfig.prefs[signalCountHeightKey];
 
-  late TextStyle titleTextStyle = buildTextStyle(style: titleStyleKey);
-  late TextStyle buttonTextStyle = buildTextStyle(style: buttonStyleKey);
+  late TextStyle titleTextStyle = buildTextStyle(styleKey: titleStyleKey);
+  late TextStyle buttonTextStyle = buildTextStyle(styleKey: buttonStyleKey);
 
   late TextStyle joinedTextStyle = TextStyle(
     fontFamily: titleTextStyle.fontFamily,
@@ -99,7 +99,7 @@ class _SignalState extends State<Signal> {
       dialog: EzDialog(
         title: EzText.simple(
           'From where?',
-          style: buildTextStyle(style: dialogTitleStyleKey),
+          style: buildTextStyle(styleKey: dialogTitleStyleKey),
         ),
         contents: [
           // From file
@@ -187,7 +187,7 @@ class _SignalState extends State<Signal> {
       dialog: EzDialog(
         title: EzText.simple(
           'Options',
-          style: buildTextStyle(style: dialogTitleStyleKey),
+          style: buildTextStyle(styleKey: dialogTitleStyleKey),
         ),
         contents: [
           // Manage members

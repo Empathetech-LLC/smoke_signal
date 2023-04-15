@@ -25,15 +25,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
-  late TextStyle contents = buildTextStyle(style: dialogContentStyleKey);
+  late TextStyle contents = buildTextStyle(styleKey: dialogContentStyleKey);
 
   @override
   Widget build(BuildContext context) {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-        title:
-            EzText.simple('Welcome back!', style: buildTextStyle(style: titleStyleKey)),
+        title: EzText.simple('Welcome back!',
+            style: buildTextStyle(styleKey: titleStyleKey)),
         trailing: EzDrawer(
           header: standardDrawerHeader(),
           body: standardDrawerBody(context: context),

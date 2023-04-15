@@ -24,7 +24,8 @@ class _AppSettingsState extends State<AppSettingsScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-          title: EzText.simple('Settings', style: buildTextStyle(style: titleStyleKey))),
+          title:
+              EzText.simple('Settings', style: buildTextStyle(styleKey: titleStyleKey))),
 
       // Body
       body: standardView(
@@ -68,7 +69,7 @@ class _AppSettingsState extends State<AppSettingsScreen> {
                 dialog: EzDialog(
                   title: EzText.simple(
                     'Reset all settings?',
-                    style: buildTextStyle(style: dialogTitleStyleKey),
+                    style: buildTextStyle(styleKey: dialogTitleStyleKey),
                   ),
                   contents: [
                     ezYesNo(
@@ -93,7 +94,7 @@ class _AppSettingsState extends State<AppSettingsScreen> {
               ),
               child: EzText.simple(
                 'Reset all',
-                style: buildTextStyle(style: subTitleStyleKey),
+                style: buildTextStyle(styleKey: subTitleStyleKey),
               ),
             ),
           ],

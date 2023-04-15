@@ -21,7 +21,7 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
 
   late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
 
-  late TextStyle contents = buildTextStyle(style: dialogContentStyleKey);
+  late TextStyle contents = buildTextStyle(styleKey: dialogContentStyleKey);
 
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
@@ -30,7 +30,8 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-        title: EzText.simple('No problem!', style: buildTextStyle(style: titleStyleKey)),
+        title:
+            EzText.simple('No problem!', style: buildTextStyle(styleKey: titleStyleKey)),
         trailing: EzDrawer(
           header: standardDrawerHeader(),
           body: standardDrawerBody(context: context),

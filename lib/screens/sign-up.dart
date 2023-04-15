@@ -22,7 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   late Color themeTextColor = Color(EzConfig.prefs[themeTextColorKey]);
 
-  late TextStyle contents = buildTextStyle(style: dialogContentStyleKey);
+  late TextStyle contents = buildTextStyle(styleKey: dialogContentStyleKey);
 
   late double buttonSpacer = EzConfig.prefs[buttonSpacingKey];
 
@@ -31,7 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-        title: EzText.simple('Welcome!', style: buildTextStyle(style: titleStyleKey)),
+        title: EzText.simple('Welcome!', style: buildTextStyle(styleKey: titleStyleKey)),
         trailing: EzDrawer(
           header: standardDrawerHeader(),
           body: standardDrawerBody(context: context),

@@ -49,12 +49,12 @@ List<Widget> standardDrawerBody({
         dialog: EzDialog(
           title: EzText.simple(
             'Input rules',
-            style: buildTextStyle(style: dialogTitleStyleKey),
+            style: buildTextStyle(styleKey: dialogTitleStyleKey),
           ),
           contents: [
             EzText.simple(
               validatorRule,
-              style: buildTextStyle(style: dialogContentStyleKey),
+              style: buildTextStyle(styleKey: dialogContentStyleKey),
               textAlign: TextAlign.center,
             ),
           ],
@@ -92,7 +92,7 @@ Widget signalDrawerHeader({
           // Profile name
           EzText.simple(
             AppUser.account.displayName ?? defaultDisplayName,
-            style: buildTextStyle(style: dialogTitleStyleKey),
+            style: buildTextStyle(styleKey: dialogTitleStyleKey),
           ),
         ],
       ),
