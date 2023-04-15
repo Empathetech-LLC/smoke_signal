@@ -20,7 +20,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-        title: EzText(
+        title: EzText.simple(
           appTitle,
           style: buildTextStyle(style: titleStyleKey),
         ),

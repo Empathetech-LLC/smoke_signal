@@ -97,7 +97,7 @@ class _SignalState extends State<Signal> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: EzText(
+        title: EzText.simple(
           'From where?',
           style: buildTextStyle(style: dialogTitleStyleKey),
         ),
@@ -185,7 +185,7 @@ class _SignalState extends State<Signal> {
     return openDialog(
       context: context,
       dialog: EzDialog(
-        title: EzText(
+        title: EzText.simple(
           'Options',
           style: buildTextStyle(style: dialogTitleStyleKey),
         ),
@@ -201,7 +201,7 @@ class _SignalState extends State<Signal> {
                 memberReqs: widget.memberReqs,
               ),
             ),
-            body: EzText('Members'),
+            body: EzText.simple('Members'),
           ),
           Container(height: dialogSpacer),
 
@@ -212,12 +212,12 @@ class _SignalState extends State<Signal> {
               popScreen(context: context, pass: result);
               if (result != null) widget.reloadBoard();
             },
-            body: EzText('Set icon'),
+            body: EzText.simple('Set icon'),
           ),
           Container(height: dialogSpacer),
 
           // Show/hide icon
-          EzButton(action: toggleIcon, body: EzText('Toggle icon')),
+          EzButton(action: toggleIcon, body: EzText.simple('Toggle icon')),
           Container(height: dialogSpacer),
 
           // Owner: Reset count, update message, transfer signal, or delete signal
@@ -235,7 +235,7 @@ class _SignalState extends State<Signal> {
                         // Reset signal triggers a stream update
                         // so the screen will update automatically
                       },
-                      body: EzText('Reset signal'),
+                      body: EzText.simple('Reset signal'),
                     ),
                     Container(height: dialogSpacer),
 
@@ -245,7 +245,7 @@ class _SignalState extends State<Signal> {
                         dynamic result = await updateMessage(context, signalTitle);
                         popScreen(context: context, pass: result);
                       },
-                      body: EzText('Update message'),
+                      body: EzText.simple('Update message'),
                     ),
                     Container(height: dialogSpacer),
 
@@ -256,7 +256,7 @@ class _SignalState extends State<Signal> {
                             await confirmTransfer(context, signalTitle, widget.members);
                         popScreen(context: context, pass: result);
                       },
-                      body: EzText('Transfer signal'),
+                      body: EzText.simple('Transfer signal'),
                     ),
                     Container(height: dialogSpacer),
 
@@ -272,7 +272,7 @@ class _SignalState extends State<Signal> {
                         // Deleting a signal triggers a stream update
                         // so the screen will update automatically
                       },
-                      body: EzText('Delete signal'),
+                      body: EzText.simple('Delete signal'),
                     ),
                   ]
                 : [
@@ -288,7 +288,7 @@ class _SignalState extends State<Signal> {
                         // Leaving a signal triggers a stream update
                         // so the screen will update automatically
                       },
-                      body: EzText('Leave signal'),
+                      body: EzText.simple('Leave signal'),
                     ),
                   ],
           ),
@@ -339,7 +339,7 @@ class _SignalState extends State<Signal> {
                             child: Card(
                               color: joined ? joinedColor : watchingColor,
                               child: Center(
-                                child: EzText(
+                                child: EzText.simple(
                                   signalTitle,
                                   style: joined ? joinedTextStyle : watchingTextStyle,
                                   textAlign: TextAlign.center,
@@ -367,7 +367,7 @@ class _SignalState extends State<Signal> {
                     child: Card(
                       color: joined ? joinedColor : watchingColor,
                       child: Center(
-                        child: EzText(
+                        child: EzText.simple(
                           signalTitle,
                           style: joined ? joinedTextStyle : watchingTextStyle,
                           textAlign: TextAlign.center,
@@ -393,7 +393,7 @@ class _SignalState extends State<Signal> {
                     ? [
                         // Active: show the current count surrounded by smoke signals
                         EzImage(prefsKey: signalImageKey),
-                        EzText(
+                        EzText.simple(
                           widget.activeMembers.length.toString(),
                           style: joinedTextStyle,
                         ),
@@ -401,7 +401,7 @@ class _SignalState extends State<Signal> {
                       ]
                     : [
                         // Inactive: only show the current count
-                        EzText(
+                        EzText.simple(
                           widget.activeMembers.length.toString(),
                           style: watchingTextStyle,
                         ),
@@ -428,7 +428,7 @@ class _SignalState extends State<Signal> {
             child: Card(
               color: watchingColor,
               child: Center(
-                child: EzText(
+                child: EzText.simple(
                   'Join:\n$signalTitle?',
                   style: watchingTextStyle,
                   textAlign: TextAlign.center,

@@ -47,12 +47,12 @@ List<Widget> standardDrawerBody({
       action: () => openDialog(
         context: context,
         dialog: EzDialog(
-          title: EzText(
+          title: EzText.simple(
             'Input rules',
             style: buildTextStyle(style: dialogTitleStyleKey),
           ),
           contents: [
-            EzText(
+            EzText.simple(
               validatorRule,
               style: buildTextStyle(style: dialogContentStyleKey),
               textAlign: TextAlign.center,
@@ -60,7 +60,7 @@ List<Widget> standardDrawerBody({
           ],
         ),
       ),
-      body: EzText('Input rules'),
+      body: EzText.simple('Input rules'),
     ),
     Container(height: buttonSpacer),
   ];
@@ -90,7 +90,7 @@ Widget signalDrawerHeader({
           ),
 
           // Profile name
-          EzText(
+          EzText.simple(
             AppUser.account.displayName ?? defaultDisplayName,
             style: buildTextStyle(style: dialogTitleStyleKey),
           ),

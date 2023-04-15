@@ -62,7 +62,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
                 Container(width: EzConfig.prefs[paddingKey]),
 
                 // Display name
-                EzText(
+                EzText.simple(
                   profile.name,
                   style: buildTextStyle(style: dialogTitleStyleKey),
                   textAlign: TextAlign.start,
@@ -97,7 +97,8 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-          title: EzText('New signal', style: buildTextStyle(style: titleStyleKey))),
+          title:
+              EzText.simple('New signal', style: buildTextStyle(style: titleStyleKey))),
 
       // Body
       body: standardView(
@@ -131,7 +132,7 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                EzText(
+                EzText.simple(
                   'Currently active?',
                   style: buildTextStyle(style: dialogTitleStyleKey),
                 ),

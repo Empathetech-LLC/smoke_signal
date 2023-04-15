@@ -69,7 +69,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
                 Container(width: EzConfig.prefs[paddingKey]),
 
                 // Display name
-                EzText(
+                EzText.simple(
                   profile.name,
                   style: buildTextStyle(style: dialogTitleStyleKey),
                   textAlign: TextAlign.start,
@@ -121,7 +121,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
 
     List<Widget> viewChildren = [
       // Available members - show all pictures
-      EzText(
+      EzText.simple(
         'Available',
         style: buildTextStyle(style: titleStyleKey),
       ),
@@ -129,7 +129,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
       Container(height: buttonSpacer),
 
       // Active members - show all pictures
-      EzText(
+      EzText.simple(
         'Active',
         style: buildTextStyle(style: titleStyleKey),
       ),
@@ -171,8 +171,10 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-        title: EzText(widget.title + ' members',
-            style: buildTextStyle(style: titleStyleKey)),
+        title: EzText.simple(
+          widget.title + ' members',
+          style: buildTextStyle(style: titleStyleKey),
+        ),
       ),
 
       // Body
@@ -194,7 +196,7 @@ class _SignalMembersScreenState extends State<SignalMembersScreen> {
               default:
                 if (snapshot.hasError) {
                   return Center(
-                    child: EzText(
+                    child: EzText.simple(
                       snapshot.error.toString(),
                       style: buildTextStyle(style: errorStyleKey),
                     ),

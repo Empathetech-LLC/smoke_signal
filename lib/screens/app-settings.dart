@@ -24,7 +24,7 @@ class _AppSettingsState extends State<AppSettingsScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-          title: EzText('Settings', style: buildTextStyle(style: titleStyleKey))),
+          title: EzText.simple('Settings', style: buildTextStyle(style: titleStyleKey))),
 
       // Body
       body: standardView(
@@ -43,21 +43,21 @@ class _AppSettingsState extends State<AppSettingsScreen> {
             // Colors
             EzButton(
               action: () => pushScreen(context: context, screen: ColorSettingsScreen()),
-              body: EzText('Colors'),
+              body: EzText.simple('Colors'),
             ),
             Container(height: buttonSpacer),
 
             // Images
             EzButton(
               action: () => pushScreen(context: context, screen: ImageSettingsScreen()),
-              body: EzText('Images'),
+              body: EzText.simple('Images'),
             ),
             Container(height: buttonSpacer),
 
             // Styling
             EzButton(
               action: () => pushScreen(context: context, screen: StyleSettingsScreen()),
-              body: EzText('Styling'),
+              body: EzText.simple('Styling'),
             ),
             Container(height: 2 * buttonSpacer),
 
@@ -66,7 +66,7 @@ class _AppSettingsState extends State<AppSettingsScreen> {
               onTap: () => openDialog(
                 context: context,
                 dialog: EzDialog(
-                  title: EzText(
+                  title: EzText.simple(
                     'Reset all settings?',
                     style: buildTextStyle(style: dialogTitleStyleKey),
                   ),
@@ -91,7 +91,7 @@ class _AppSettingsState extends State<AppSettingsScreen> {
                   needsClose: false,
                 ),
               ),
-              child: EzText(
+              child: EzText.simple(
                 'Reset all',
                 style: buildTextStyle(style: subTitleStyleKey),
               ),

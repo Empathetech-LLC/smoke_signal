@@ -31,7 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-        title: EzText('Welcome!', style: buildTextStyle(style: titleStyleKey)),
+        title: EzText.simple('Welcome!', style: buildTextStyle(style: titleStyleKey)),
         trailing: EzDrawer(
           header: standardDrawerHeader(),
           body: standardDrawerBody(context: context),
@@ -93,7 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   _passwdController.text.trim(),
                 );
               },
-              body: EzText('Sign up'),
+              body: EzText.simple('Sign up'),
             ),
           ],
           centered: true,

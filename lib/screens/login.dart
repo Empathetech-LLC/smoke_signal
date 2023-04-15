@@ -32,7 +32,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-        title: EzText('Welcome back!', style: buildTextStyle(style: titleStyleKey)),
+        title:
+            EzText.simple('Welcome back!', style: buildTextStyle(style: titleStyleKey)),
         trailing: EzDrawer(
           header: standardDrawerHeader(),
           body: standardDrawerBody(context: context),
@@ -83,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 context: context,
                 screen: ResetPasswordScreen(),
               ),
-              child: EzText(
+              child: EzText.simple(
                 'Forgot your password?',
                 style: TextStyle(
                   color: contents.color,
@@ -113,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   _passwdController.text.trim(),
                 );
               },
-              body: EzText('Login'),
+              body: EzText.simple('Login'),
             ),
           ],
           centered: true,

@@ -22,7 +22,7 @@ class _AuthScreenState extends State<AuthScreen> {
     return EzScaffold(
       background: BoxDecoration(color: Color(EzConfig.prefs[backColorKey])),
       appBar: EzAppBar(
-        title: EzText(
+        title: EzText.simple(
           appTitle,
           style: buildTextStyle(style: titleStyleKey),
         ),
