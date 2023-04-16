@@ -28,7 +28,7 @@ class _AppSettingsState extends State<AppSettingsScreen> {
               EzText.simple('Settings', style: buildTextStyle(styleKey: titleStyleKey))),
 
       // Body
-      body: standardView(
+      body: ezView(
         context: context,
         background: BoxDecoration(
           image: DecorationImage(image: EzImage.getProvider(backImageKey)),

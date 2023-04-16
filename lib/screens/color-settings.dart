@@ -28,7 +28,7 @@ class _ColorSettingsState extends State<ColorSettingsScreen> {
               style: buildTextStyle(styleKey: titleStyleKey))),
 
       // Body
-      body: standardView(
+      body: ezView(
         context: context,
         background: BoxDecoration(
           image: DecorationImage(image: EzImage.getProvider(backImageKey)),

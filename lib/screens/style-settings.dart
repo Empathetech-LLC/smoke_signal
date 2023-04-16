@@ -26,7 +26,7 @@ class _StyleSettingsState extends State<StyleSettingsScreen> {
       appBar: EzAppBar(
           title: EzText.simple('Style settings',
               style: buildTextStyle(styleKey: titleStyleKey))),
-      body: standardView(
+      body: ezView(
         context: context,
         background: BoxDecoration(
           image: DecorationImage(image: EzImage.getProvider(backImageKey)),

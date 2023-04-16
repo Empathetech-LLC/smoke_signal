@@ -39,7 +39,7 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
       ),
 
       // Body
-      body: standardView(
+      body: ezView(
         context: context,
         background: BoxDecoration(
           image: DecorationImage(image: EzImage.getProvider(backImageKey)),

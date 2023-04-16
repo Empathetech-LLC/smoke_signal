@@ -25,7 +25,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           style: buildTextStyle(styleKey: titleStyleKey),
         ),
       ),
-      body: standardView(
+      body: ezView(
         context: context,
         background: BoxDecoration(
           image: DecorationImage(image: EzImage.getProvider(backImageKey)),
