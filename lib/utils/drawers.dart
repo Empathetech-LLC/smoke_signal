@@ -55,7 +55,6 @@ List<Widget> standardDrawerBody({
             EzText.simple(
               validatorRule,
               style: buildTextStyle(styleKey: dialogContentStyleKey),
-              textAlign: TextAlign.center,
             ),
           ],
         ),

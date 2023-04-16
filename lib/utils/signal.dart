@@ -342,7 +342,6 @@ class _SignalState extends State<Signal> {
                                 child: EzText.simple(
                                   signalTitle,
                                   style: joined ? joinedTextStyle : watchingTextStyle,
-                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ),
@@ -370,7 +369,6 @@ class _SignalState extends State<Signal> {
                         child: EzText.simple(
                           signalTitle,
                           style: joined ? joinedTextStyle : watchingTextStyle,
-                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
@@ -431,7 +429,6 @@ class _SignalState extends State<Signal> {
                 child: EzText.simple(
                   'Join:\n$signalTitle?',
                   style: watchingTextStyle,
-                  textAlign: TextAlign.center,
                 ),
               ),
             ),

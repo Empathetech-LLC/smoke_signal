@@ -82,7 +82,6 @@ class _SignalBoardState extends State<SignalBoard> {
                     EzText.simple(
                       validatorRule,
                       style: buildTextStyle(styleKey: dialogContentStyleKey),
-                      textAlign: TextAlign.center,
                     ),
                   ],
                 ),
