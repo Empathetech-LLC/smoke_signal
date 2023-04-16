@@ -95,7 +95,6 @@ class _ProfileSettingsState extends State<ProfileSettingsScreen> {
 
             Container(height: buttonSpacer),
           ],
-          centered: true,
         ),
       ),
     );

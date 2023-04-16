@@ -85,7 +85,6 @@ class _ResetScreenState extends State<ResetPasswordScreen> {
             ),
             Container(height: buttonSpacer),
           ],
-          centered: true,
         ),
       ),
     );

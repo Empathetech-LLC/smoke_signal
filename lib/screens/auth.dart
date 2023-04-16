@@ -59,7 +59,6 @@ class _AuthScreenState extends State<AuthScreen> {
               icon: EzIcon(PlatformIcons(context).mail),
             ),
           ],
-          centered: true,
         ),
       ),
     );

@@ -117,7 +117,6 @@ class _LoginScreenState extends State<LoginScreen> {
               body: EzText.simple('Login'),
             ),
           ],
-          centered: true,
         ),
       ),
     );

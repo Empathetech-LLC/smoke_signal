@@ -209,7 +209,6 @@ class _CreateSignalScreenState extends State<CreateSignalScreen> {
             ),
             Container(height: buttonSpacer),
           ],
-          centered: true,
         ),
       ),
     );

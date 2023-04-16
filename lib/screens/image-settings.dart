@@ -52,7 +52,6 @@ class _ImageSettingsState extends State<ImageSettingsScreen> {
             ),
             Container(height: buttonSpacer),
           ],
-          centered: true,
         ),
       ),
     );

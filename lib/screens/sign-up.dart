@@ -96,7 +96,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               body: EzText.simple('Sign up'),
             ),
           ],
-          centered: true,
         ),
       ),
     );
